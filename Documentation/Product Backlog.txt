@@ -1,0 +1,42 @@
+PRODUCT BACKLOG - 23/03/2023
+
+Sebagai pelanggan, saya ingin daftar ke website agar bisa pesan makanan tanpa harus menunggu di restoran
+- Halaman daftar/login
+
+Sebagai pelanggan, saya ingin memesan makanan dengan cepat dan mudah, karena saya lapar
+- Halaman menu
+- Tambah pesanan makanan hanya perlu 1 click
+
+Sebagai pelanggan, saya ingin mencari makanan dengan mudah, agar bisa menemukan makanan yang kusuka
+- Fitur search
+- Fitur filter berdasarkan jenis makanan
+
+Sebagai pelanggan, saya ingin tahu berapa harga dari makanan yang kupesan
+- Tampilan receipt dengan total harga pesanan
+- Harga makanan tersendiri juga ditampilkan
+
+Sebagai pelanggan, saya ingin kasih pesan tambahan untuk bagaimana makanan saya disiapkan; contoh: teh jangan terlalu banyak pakai es, nasi goreng jangan pakai bawang.
+- Opsi untuk edit detail dari pesanan (seperti kuantitas, pesan tambahan)
+
+Sebagai pelanggan, saya ingin mengubah data diri sendiri seperti email, nama, no. telp, dan password
+- Halaman detail akun
+- Fitur edit data pribadi
+
+Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa diambil
+- Halaman lihat status pesanan
+- Update status secara real-time
+Sebagai pelanggan, saya ingin lihat transaksi dan pesanan saya sebelumnya
+- Halaman lihat sejarah pesanan
+
+Sebagai koki, saya ingin tahu apa pesanan-pesanan yang ada, agar saya bisa masak
+- Halaman pesanan yang belum siap di dashboard admin
+Sebagai koki, saya ingin tahu menu apa yang perlu diprioritaskan dulu, seperti berdasarkan jumlah pelanggan yang mau memesan mereka
+- Tampilan pesanan dalam bentuk item makanan, di sortir berdasarkan tipe makanan mana yang paling banyak (agar bisa dimasak dalam batch)
+
+Sebagai anggota staf, saya ingin memberitahu pelanggan bahwa (pesanan mereka sudah siap dimasak, agar mereka bisa menerima makanan mereka / pesanan mereka sudah dibaca, koki sudah memulai memasak makanan mereka).
+- Tombol untuk set status pesanan menjadi ‘sedang dimasak’ / ‘siap’.
+
+Sebagai kasir, saya ingin melihat hasil penjualan hari ini dan hari-hari sebelumnya
+- Halaman untuk melihat transaksi-transaksi sebelumnya, dikelompokkan berdasarkan hari
+- Total pendapatan satu hari ditotalkan
+- (?) Halaman untuk melihat pendapatan dalam bentuk grafik

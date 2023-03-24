@@ -1,0 +1,67 @@
+### SPRINT PLANNING - 24/03/2023 ###
+==============================
+Peserta: Davin Tristan Ieson, Jansen Loman
+Vincent Tandera sibuk, hanya bisa kadang-kadang ikut diskusi untuk waktu singkat.
+
+==============================
+DISCUSSION:
+(23/03/2023)
+- Menentukan topik: website restoran, bisa pesan makanan tanpa harus menunggu di restoran
+* Karena waktu terbatas dan kurangnya kemampuan kami, tidak ada fitur pembayaran online, jadi pelanggan dalam skenario ini tetap harus sendiri datang ambil makanan, atau mungkin pesan Gojek.
+
+- <Davin> Membuat prototype product backlog untuk didiskusikan dalam Sprint Planning 24/03/2023
+
+- Referensi Scrum menggunakan video: https://www.youtube.com/watch?v=XU0llRltyFM
+
+(24/03/2023)
+- Membahas Product Backlog => Tidak ada modifikasi/penambahan
+
+- <Jansen> Rekomendasi Sprint Goal:
+"Membangun web untuk platform pemesanan makanan yang memungkinkan pelanggan untuk daftar, login, memesan makanan dengan cepat dan mudah, mencari makanan dengan mudah, menambahkan pesan tambahan untuk pesanan, mengubah data diri, dan melihat transaksi dan pesanan sebelumnya, sementara juga memungkinkan koki untuk melihat pesanan dan menu yang perlu diprioritaskan, anggota staf untuk mengubah status pesanan, dan kasir untuk melihat hasil penjualan harian dan total pendapatan."
+> <Davin> Terlalu verbos
+
+- <Davin> Rekomendasi Sprint Goal: menyelesaikan halaman pendaftaran + menu + akun
+- <Davin, Jansen> Membuat Sprint Backlog dari Product Backlog di Trello
+- <Davin> Menyadari bahwa Sprint Backlog mengambil terlalu banyak User Stories untuk Sprint 1; rekomendasi tidak usah kerjakan halaman akun dan fitur pengeditan informasi akun dulu
+- <Davin> Dashboard admin dan tampilan pelanggan dibuat terpisah (MPA: Multi-Page Application)
+- <Davin, Jansen> Memecahkan Sprint Backlog menjadi task-task tersendiri, diimplementasikan sebagai checklist di Trello
+- <Davin, Jansen> Memperkirakan waktu untuk developer Front-End dan Back-End untuk menyelesaikan task.
+- <Vincent> Review Project & Sprint Backlog => Tidak ada modifikasi/penambahan
+
+==============================
+SPRINT GOAL:
+1. Menyelesaikan halaman pendaftaran dan halaman menu
+2. Menyelesaikan fitur daftar dan log-in
+3. Menyelesaikan fitur pencarian dan pemesanan makanan
+
+==============================
+SPRINT BACKLOG:
+* Untuk lebih detailnya, boleh dilihat di Trello
+1. Sebagai pelanggan, saya ingin daftar ke website agar bisa pesan makanan tanpa harus menunggu di restoran
+SOLUSI: Halaman pendaftaran dimana pengguna bisa daftar akun baru atau login ke akun yang sudah dimiliki
+FRONTEND: 2h
+BACKEND: 2h
+2. Sebagai pelanggan, saya ingin memesan makanan dengan cepat dan mudah, karena saya lapar
+SOLUSI: Pemesanan makanan yang mudah dan cepat, pelanggan bisa pesan dengan hanya 1 click. Makanan ditampilkan dengan jelas.
+FRONTEND: 4h
+BACKEND: 2h
+3. Sebagai pelanggan, saya ingin mencari makanan dengan mudah, agar bisa menemukan makanan yang kusuka
+SOLUSI: Fitur search (search bar) dan fitur filter (berdasarkan tipe makanan)
+FRONTEND: 2h
+4. Sebagai pelanggan, saya ingin tahu berapa harga dari makanan yang kupesan
+SOLUSI: Tampilkan harga makanan di bagian receipt (apa yang telah dipesan); tampilkan juga total harga makanan
+FRONTEND: 1h
+5. Sebagai pelanggan, saya ingin kasih pesan ambahan untuk bagaimana makanan saya disiapkan; contoh: teh jangan pakai terlalu banyak es, nasi goreng jangan pakai bawang
+SOLUSI: Bisa melihat dan mengedit informasi makanan yang lebih detail melalui sebuah modal, seperti pesan tambahan
+FRONTEND: 1h
+6. Backend: Mempersiapkan database untuk menyimpan data menu, akun pelanggan, dan transaksi
+BACKEND: 4h
+7. Init Project
+WAKTU: 1h
+* Persiapkan folder kolaborasi, push ke GitHub, etc
+8. Design: Membuat design untuk tampilan halaman pendaftaran dan halaman menu di Figma
+WAKTU: 1h
+
+TOTAL WAKTU: 22h
+
+

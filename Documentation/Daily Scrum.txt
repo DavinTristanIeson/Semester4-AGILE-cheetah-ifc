@@ -1,0 +1,8 @@
+SPRINT 1 - 25/03/2023 - 01/04/2023
+### (24/03/2023) ###
+- <Davin, Jansen> Membuat design untuk tampilan halaman menu di Figma (1h)
+- <Davin> Mempersiapkan struktur folder, siapkan dependencies yang diperlukan, siapkan file-file dokumentasi, dan push ke Github (1h)
+SISA: 21h
+
+### 25/03/2023 ###
+
