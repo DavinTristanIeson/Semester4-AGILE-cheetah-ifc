@@ -19,7 +19,7 @@ function removeOrder(){
         <div class="text-muted">{{ item.note }}</div>
     </div>
     <IconButton
-        icon="/public/delete.svg"
+        icon="/delete.svg"
         semantic="Delete Order"
         @click="removeOrder"
         class="btn-danger"

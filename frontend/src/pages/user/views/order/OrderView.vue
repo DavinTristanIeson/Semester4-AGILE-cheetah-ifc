@@ -6,9 +6,11 @@ import OrdersOffcanvas from './OrdersOffcanvas.vue';
 import { useMenuStore } from '../../store';
 import IconButton from '@/components/IconButton.vue';
 import MenuListItem from './MenuListItem.vue';
+import SearchBar from '@/components/SearchBar.vue';
 
 const state = reactive({
     isGridView: true,
+    searchTerm: "",
 });
 const menu = useMenuStore();
 menu.menu = [
@@ -21,12 +23,12 @@ menu.menu = [
 const icon = computed(()=>{
     if (state.isGridView){
         return {
-            url: "/public/grid_view.svg",
+            url: "/grid_view.svg",
             semantic: "Grid View"
         }
     } else {
         return {
-            url: "/public/list.svg",
+            url: "/list.svg",
             semantic: "List View"
         }
     }
@@ -34,6 +36,7 @@ const icon = computed(()=>{
 </script>
 
 <template>
+    <SearchBar v-model:value="menu.searchTerm"/>
     <div class="d-flex align-items-center">
         <IconButton
             :icon="icon.url"
@@ -43,11 +46,11 @@ const icon = computed(()=>{
         />
     </div>
     <div class="menu-grid" v-if="state.isGridView">
-        <MenuCard v-for="item in menu.currentPage" :item="item" :key="item.id"/>
+        <MenuCard v-for="item in menu.current" :item="item" :key="item.id"/>
     </div>
     <div class="menu-list" v-else>
         <ul class="list-group">
-            <MenuListItem v-for="item in menu.currentPage" :item="item" :key="item.id"/>
+            <MenuListItem v-for="item in menu.current" :item="item" :key="item.id"/>
         </ul>
     </div>
     <OrdersOffcanvas/>

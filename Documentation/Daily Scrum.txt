@@ -2,7 +2,24 @@ SPRINT 1 - 25/03/2023 - 01/04/2023
 ### (24/03/2023) ###
 - <Davin, Jansen> Membuat design untuk tampilan halaman menu di Figma (1h)
 - <Davin> Mempersiapkan struktur folder, siapkan dependencies yang diperlukan, siapkan file-file dokumentasi, dan push ke Github (1h)
-SISA: 21h
+SISA: 26h - 2h = 24h
 
 ### 25/03/2023 ###
-
+SUDAH:
+- <Davin> Menyelesaikan tampilan halaman login dan kebanyakan dari halaman pemesanan (1h + 2h + 4h)
+- <Jansen> Database sudah siap dikerjakan, data dari file .json yang ditemukan sudah dipindahkan ke database, mempersiapkan server express (4h)
+AKAN:
+- <Davin> Frontend masih belum integrasi sama backend, jadi cuma tampilan belaka. Sedang menunggu backend untuk lanjut.
+- <Davin> Animasi masih kacau/belum diimplementasi, tapi itu tidak terlalu penting; nanti baru diperbaiki
+- <Davin> Besok lanjut filter, search, dan halaman detailnya
+- <Jansen> Selanjutnya mengerjakan bagian akun untuk backend, seperti rute daftar, login, sama session pengguna
+- <Vincent> Clone projek dari GitHub
+KENDALA:
+- Estimasi waktunya terlalu optimis: kalau tidak ada copas dari projek-projek lalu, seharusnya memakan waktu yang lebih lama.
+- Ada beberapa task juga yang sulit dikategorisasikan dalam bin 1h, 2h, 4h, 8h.
+- Vincent masih tidak ada peran, dan mungkin akan sulit berpartisipasi karena kesibukannya.
+- Untuk Sabtu-Minggu bisa banyak kerjakan, namun ketika hari biasa terbatas berapa kerja yang bisa dikerjakan pada satu hari. Apalagi menghitung tugas kuliah lain lagi.
+SOLUSI:
+- Vincent menjadi quality tester; ia bertugas untuk mencari bug dan cek apakah desainnya itu waras atau tidak.
+- Edit estimasi waktu di Sprint Backlog
+SISA: 24h - 11h = 13h

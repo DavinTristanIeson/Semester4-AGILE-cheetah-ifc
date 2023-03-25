@@ -29,11 +29,27 @@ export const useMenuStore = defineStore("menu", {
 	state: ()=>({
 		menu: [] as MenuItem[],
 		page: 0,
-		isMenuInitialized: false
+		isMenuInitialized: false,
+		searchTerm: "",
+		filterCategories: [] as string[],
 	}),
 	getters: {
-		currentPage: (state) => state.menu.slice(state.page*MENU_PER_PAGE, state.page*MENU_PER_PAGE+MENU_PER_PAGE),
-		totalPages: (state) => Math.ceil(state.menu.length / MENU_PER_PAGE)
+		allCategories(state): string[] {
+			let categories:string[] = [];
+			for (let item of state.menu){
+				if (categories.includes(item.category)) continue
+				else categories.push(item.category);
+			}
+			return categories;
+		},
+		filteredMenu(state): MenuItem[] {
+			// this.filterCategories.includes(item.category)
+			return state.menu.filter(item => item.name.startsWith(state.searchTerm));
+		},
+		current(state): MenuItem[] {
+			return this.filteredMenu.slice(state.page*MENU_PER_PAGE, state.page*MENU_PER_PAGE+MENU_PER_PAGE);
+		},
+		totalPages: state => Math.ceil(state.menu.length / MENU_PER_PAGE),
 	},
 	actions: {
 		async initialize(){
