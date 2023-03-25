@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
+
+:root {
+    --primary: #B99878;
+    --primary-dark: #a07e5c;
+    --secondary: #EBE6DD;
+    --dark: #523112;
+    --shadow: #805024;
+    --bs-primary: var(--primary);
+    --bs-secondary: var(--secondary);
+}
+
+/* Kenapa ga ambil dari --bs-primary!? */
+.btn-primary {
+    --bs-btn-color: var(--secondary);
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--primary-dark);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-hover-border-color: var(--dark);
+    --bs-btn-active-border-color: var(--dark);
+    --bs-btn-disabled-color: var(--secondary);
+    --bs-btn-disabled-bg: var(--primary);
+    --bs-btn-disabled-border-color: var(--primary-dark);
+}
+.btn {
+    text-shadow: 2px 2px var(--shadow);
+}
+.hide-overflow {
+    overflow: hidden;
+}
+
+body {
+    background-image: linear-gradient(
+    rgba(0, 0, 0, 0.3), 
+    rgba(0, 0, 0, 0.3)
+    ), url("./pexels-igor-starkov-1307698.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.center-screen {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 996px;
+}
