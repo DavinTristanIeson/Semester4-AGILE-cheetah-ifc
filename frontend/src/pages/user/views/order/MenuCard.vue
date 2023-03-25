@@ -20,7 +20,7 @@ function imageNotAvailable(){
 </script>
 
 <template>
-    <div class="card m-2" @click="$emit('order', item)" :title="item.description">
+    <div class="card m-2" @click="addItem" :title="item.description">
         <div class="card-img-top-wrapper">
             <img
                 v-if="state.showOriginalImage"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, reactive } from 'vue';
 import { useCurrentOrdersStore } from '../../store';
+import OrderItem from './OrderItem.vue';
 
 const state = reactive({
     isOffcanvasOpen: true
@@ -36,10 +37,13 @@ Pesanan Anda
     </div>
     <div class="offcanvas-body p-0">
         <div class="px-2 py-1">
+            <ul class="list-group">
+                <OrderItem v-for="item in currentOrders.orders" :item="item" :key="item.id"/>
+            </ul>
             <!-- TODO: List item yang dipesan -->
         </div>
         <div class="position-absolute bottom-0 w-100 mt-2 p-2 border-top tss-bg-secondary">
-            <p><b>Total: </b> {{ currentOrders.totalPrice }}</p>
+            <p><b>Total: </b> {{ currentOrders.hargaTotal }}</p>
             <div class="w-100 text-center">
                 <button class="btn btn-primary w-75" @click="sendOrder">Pesan</button>
             </div>
