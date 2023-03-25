@@ -4,6 +4,7 @@
     --primary: #B99878;
     --primary-dark: #a07e5c;
     --secondary: #EBE6DD;
+    --secondary-dark: #dac59c;
     --dark: #523112;
     --shadow: #805024;
     --bs-primary: var(--primary);
@@ -26,6 +27,17 @@
 .btn {
     text-shadow: 2px 2px var(--shadow);
 }
+.navbar {
+    --bs-navbar-color: var(--secondary);
+    --bs-navbar-hover-color: white;
+    --bs-navbar-brand-hover-color: white;
+    --bs-navbar-brand-color: var(--secondary);
+    --bs-navbar-disabled-color: white;
+    --bs-navbar-active-color: white;
+    --bs-navbar-toggler-border-color: var(--secondary);
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28203, 207, 211, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+
 .hide-overflow {
     overflow: hidden;
 }
@@ -39,6 +51,9 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
+}
+.tss-bg-secondary {
+    background-color: var(--secondary);
 }
 
 .center-screen {

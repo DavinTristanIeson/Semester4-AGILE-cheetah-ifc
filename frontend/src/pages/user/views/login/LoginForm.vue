@@ -3,6 +3,7 @@ import StatefulForm from '@/components/StatefulForm.vue';
 import { TextInputObject } from '@/helpers/inputs';
 import Alert from '@/components/Alert.vue';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
 const emit = defineEmits<{
     (e:"changemode"): void
@@ -20,10 +21,12 @@ const inputs = [
 const state = reactive({
     errMsg: ""
 });
+const router = useRouter();
 
 function onSubmit(response:{[key:string]: string}){
     // TODO: Connect with backend
     console.log(response);
+    router.replace({name: "index"});
 }
 </script>
 
