@@ -4,6 +4,7 @@ import { MenuItem, MenuOrder } from "@/helpers/classes";
 export const useCurrentOrdersStore = defineStore("currentOrders", {
 	state: () => ({
 		orders: [] as MenuOrder[],
+		viewedOrder: undefined as (MenuOrder | undefined)
 	}),
 	getters: {
 		totalPrice: state => state.orders.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0),
@@ -20,6 +21,9 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 			if (idx != -1){
 				this.orders.splice(idx, 1);
 			}
+		},
+		examineOrder(order:MenuOrder|undefined){
+			this.viewedOrder = order;
 		}
 	}
 });

@@ -36,4 +36,7 @@ export class MenuOrder extends MenuItem {
         this.quantity = quantity;
         this.note = note;
     }
+    get harga(){
+        return MenuItem.toRupiah(this.price * this.quantity);
+    }
 }

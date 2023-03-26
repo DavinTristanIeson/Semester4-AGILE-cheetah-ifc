@@ -9,10 +9,14 @@ const currentOrders = useCurrentOrdersStore()
 function removeOrder(){
     currentOrders.removeOrder(props.item);
 }
+function examineOrder(){
+    currentOrders.viewedOrder = props.item;
+}
 </script>
 
 <template>
-<li class="your-orders list-group-item d-flex justify-content-between align-items-center">
+<li class="your-orders list-group-item d-flex justify-content-between align-items-center"
+@click="examineOrder">
     <div class="w-100 me-4">
         <b>{{ item.name }}</b>
         <div>{{ item.harga }} x{{ item.quantity }}</div>
@@ -21,11 +25,19 @@ function removeOrder(){
     <IconButton
         icon="/delete.svg"
         semantic="Delete Order"
-        @click="removeOrder"
+        @click.stop="removeOrder"
         class="btn-danger"
     />
 </li>
 </template>
 
-<style>
+<style scoped>
+li {
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+}
+li:hover {
+    transform: translateX(2%);
+    background-color: var(--secondary);
+}
 </style>

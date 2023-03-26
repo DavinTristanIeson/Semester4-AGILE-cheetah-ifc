@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { MenuOrder } from '@/helpers/classes';
 import { onBeforeUnmount, onMounted, reactive } from 'vue';
 import { useCurrentOrdersStore } from '../../store';
 import OrderItem from './OrderItem.vue';
@@ -9,12 +10,12 @@ const state = reactive({
 function setOffcanvas(){
     state.isOffcanvasOpen = !window.matchMedia("(max-width: 1200px)").matches;
 }
-function sendOrder(){
-    // TODO: send pesan ke backend
-}
 onMounted(()=>{ setOffcanvas(); window.addEventListener("resize", setOffcanvas); });
 onBeforeUnmount(()=>{ window.removeEventListener("resize", setOffcanvas) });
 const currentOrders = useCurrentOrdersStore();
+function sendOrder(){
+    // TODO: send pesan ke backend
+}
 </script>
 
 <template>

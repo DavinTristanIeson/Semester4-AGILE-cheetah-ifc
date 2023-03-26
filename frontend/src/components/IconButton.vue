@@ -6,12 +6,12 @@ defineProps<{
     height?: number,
 }>();
 defineEmits<{
-    (e:"click"): void
+    (e:"click", ev:MouseEvent): void
 }>();
 </script>
 
 <template>
-    <button @click="$emit('click')" class="btn"
+    <button @click="$emit('click', $event)" class="btn"
         :style="{
             '--icon-button-width': width ? `${width}em` : '1.4em',
             '--icon-button-height': height ? `${height}em` : '1.4em',

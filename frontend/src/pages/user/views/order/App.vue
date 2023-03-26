@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
+import { useMenuStore } from '../../store';
 import OrderView from "./OrderView.vue";
 import WaitView from "./WaitView.vue";
 
 const state = reactive({
     isWaiting: false,
 });
-onMounted(()=>{
-    // TODO: GET menu item
-})
+const menu = useMenuStore();
+menu.initialize();
 </script>
 
 <template>

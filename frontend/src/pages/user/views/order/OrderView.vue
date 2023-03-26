@@ -3,18 +3,19 @@ import MenuCard from './MenuCard.vue';
 import { MenuItem } from '@/helpers/classes';
 import { computed, reactive } from 'vue';
 import OrdersOffcanvas from './OrdersOffcanvas.vue';
-import { useMenuStore } from '../../store';
+import { useCurrentOrdersStore, useMenuStore } from '../../store';
 import IconButton from '@/components/IconButton.vue';
 import MenuListItem from './MenuListItem.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import PageButtons from './PageButtons.vue';
 import FilterPopup from './FilterPopup.vue';
+import OrderDetail from './OrderDetail.vue';
 
 const state = reactive({
     isGridView: true,
 });
 const menu = useMenuStore();
-menu.initialize();
+const currentOrders = useCurrentOrdersStore();
 
 const icon = computed(()=>{
     if (state.isGridView){
@@ -37,6 +38,7 @@ function setSearchTerm(searchTerm:string){
 </script>
 
 <template>
+    <OrderDetail v-if="currentOrders.viewedOrder"/>
     <div class="d-flex align-items-center mw-70-lg">
         <SearchBar @search="setSearchTerm" class="w-100 me-5"/>
         <div class="d-flex align-items-center me-4">
