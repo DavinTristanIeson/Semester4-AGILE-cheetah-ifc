@@ -22,16 +22,22 @@ function changeMode(){
     <div class="hide-overflow position-relative vh-100">
         <div id="tsvrspn-mark">
             <div id="tsvrspn-icon">
-                <div></div>
-                <div></div>
+                <div class="shadow-thick"></div>
+                <div class="shadow-thick"></div>
             </div>
-            <p>
+            <p class="shadow-thick">
                 The Savory Spoon
             </p>
         </div>
-        <div class="decoball" id="decoball-a"></div>
-        <div class="decoball" id="decoball-b"></div>
-        <div class="decoball" id="decoball-c"></div>
+        <div class="decoball" id="decoball-a">
+            <img src="https://goldbelly.imgix.net/uploads/showcase_media_asset/image/126887/dry-aged-boneless-ribeye-steak-dinner-for-4.81c3bdc05fe6bdb2c2214709863120e0.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1" alt="Food Image #1"/>
+        </div>
+        <div class="decoball" id="decoball-b">
+            <img src="https://goldbelly.imgix.net/uploads/showcase_media_asset/image/86731/memphis-pulled-pork-shoulder-4-lbs.089448f3aebd24fe82f223151314d853.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1" alt="Food Image #2"/>
+        </div>
+        <div class="decoball" id="decoball-c">
+            <img src="https://goldbelly.imgix.net/uploads/showcase_media_asset/image/75464/carolina-pulled-pork-sandwich-pack.8e672a876d720c8471b08ffa47fbbbc1.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1" alt="Food Image #3"/>
+        </div>
     </div>
     <main>
         <LoginForm v-if="state.isLogin" @changemode="changeMode" class="center-screen"/>
@@ -73,10 +79,32 @@ function changeMode(){
     transform: rotate(-30deg);
     color: white;
 }
+#tsvrspn-mark {
+    background-image: url("https://goldbelly.imgix.net/uploads/showcase_media_asset/image/79619/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .decoball {
     position: absolute;
     border-radius: 50%;
     background-color: var(--primary);
+    padding: 0px;
+    border: 12px solid black;
+    overflow: hidden;
+    transition: border-color 0.2s ease-out;
+}
+.decoball:hover {
+    border-color: var(--dark);
+}
+.decoball img {
+    border-radius: 50%;
+    width: 100%;
+    transition: transform 0.2s ease-out;
+}
+.decoball img:hover {
+    transform: scale(105%, 105%);
+    filter: brightness(110%);
 }
 #decoball-a {
     width: 35vw; height: 35vw;
@@ -91,6 +119,6 @@ function changeMode(){
 #decoball-c {
     width: 15vw; height: 15vw;
     left: 20%; bottom: 25%;
-    z-index: -1;
+    z-index: 0;
 }
 </style>

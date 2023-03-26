@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const props = defineProps<{
+    semantic?:string,
+}>();
 const emit = defineEmits<{
     (e: "search", value:string): void,
 }>();
@@ -16,7 +19,8 @@ function onInput(event:Event){
     <div class="my-3 ms-4 search-input">
         <input type="search"
             :value="searchTerm"
-            @input="onInput"/>
+            @input="onInput"
+            :placeholder="semantic ?? 'Search'"/>
     </div>
 </template>
 <style>

@@ -29,9 +29,8 @@ function setNote(e:Event){
 </script>
 <template>
     <div class="modal d-block" tabindex="-1"
-        aria-hidden="true" role="dialog" 
-        v-if="currentOrders.viewedOrder">
-        <div class="modal-dialog">
+        aria-hidden="true" role="dialog">
+        <div class="modal-dialog" v-if="currentOrders.viewedOrder">
             <div class="modal-content">
                 <div class="modal-header tss-bg-secondary">
                     <h5 class="modal-title">{{ item.name }}</h5>
@@ -58,9 +57,6 @@ function setNote(e:Event){
                         placeholder="Pesan Tambahan"
                     ></textarea>
                 </div>
-                <!-- <div class="modal-footer bg-light-subtle">
-                    <button class="btn btn-primary" type="button" @click="$emit('close')">Simpan</button>
-                </div> -->
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ import IconButton from '@/components/IconButton.vue';
 import { CheckboxInputObject } from '@/helpers/inputs';
 import { computed, reactive } from 'vue';
 import { useMenuStore } from '../../store';
+import ScaleTransition from '@/components/ScaleTransition.vue';
 
 const menu = useMenuStore();
 const input = computed(()=>{
@@ -31,11 +32,13 @@ function updateCategories(categories:string[]){
     class="btn-secondary"
     @click="state.isOpen = !state.isOpen"
 />
-    <div class="tss-bg-secondary rounded shadow p-3 pe-5 col-1 popup position-absolute"
-        v-if="state.isOpen">
-        <h5>Filter Berdasarkan Kategori</h5>
-        <CheckboxInput :input="input" :value="menu.filterCategories" @update:value="updateCategories"/>
-    </div>
+    <ScaleTransition>
+        <div class="tss-bg-secondary rounded shadow p-3 pe-5 col-1 popup position-absolute"
+            v-if="state.isOpen">
+            <h5>Filter Berdasarkan Kategori</h5>
+            <CheckboxInput :input="input" :value="menu.filterCategories" @update:value="updateCategories"/>
+        </div>
+    </ScaleTransition>
 </div>
 </template>
 
@@ -45,5 +48,11 @@ function updateCategories(categories:string[]){
     z-index: 3;
     top: 85%;
     left: 1%;
+}
+@media screen and (max-width: 996px) {
+    .popup {
+        top: 85%;
+        left: -150%;
+    }
 }
 </style>

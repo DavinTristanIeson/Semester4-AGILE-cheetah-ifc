@@ -10,6 +10,7 @@ import SearchBar from '@/components/SearchBar.vue';
 import PageButtons from './PageButtons.vue';
 import FilterPopup from './FilterPopup.vue';
 import OrderDetail from './OrderDetail.vue';
+import ScaleTransition from '@/components/ScaleTransition.vue';
 
 const state = reactive({
     isGridView: true,
@@ -38,7 +39,9 @@ function setSearchTerm(searchTerm:string){
 </script>
 
 <template>
-    <OrderDetail v-if="currentOrders.viewedOrder"/>
+    <ScaleTransition>
+        <OrderDetail v-if="currentOrders.viewedOrder"/>
+    </ScaleTransition>
     <div class="d-flex align-items-center mw-70-lg">
         <SearchBar @search="setSearchTerm" class="w-100 me-5"/>
         <div class="d-flex align-items-center me-4">

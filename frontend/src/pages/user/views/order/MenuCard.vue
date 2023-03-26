@@ -51,7 +51,7 @@ function imageNotAvailable(){
     white-space: nowrap;
     overflow: hidden;
 }
-.card {transition: transform 0.2s ease-out, color 0.2s ease-out;}
+.card {transition: transform 0.2s ease-out, background-color 0.2s ease-out;}
 .card:hover {
     transform: scale(105%, 105%);
     background-color: var(--secondary);
