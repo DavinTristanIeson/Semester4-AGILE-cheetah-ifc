@@ -39,13 +39,11 @@ SPRINT BACKLOG:
 * Untuk lebih detailnya, boleh dilihat di Trello
 1. Sebagai pelanggan, saya ingin daftar ke website agar bisa pesan makanan tanpa harus menunggu di restoran
 SOLUSI: Halaman pendaftaran dimana pengguna bisa daftar akun baru atau login ke akun yang sudah dimiliki
-FRONTEND: 2h
-(EDIT 25/03/2023 : FRONTEND: 2h (tampilan) + 2h (connect ke backend))
+FRONTEND: 2h (tampilan) + 2h (connect ke backend) (EDIT 25/03/2023)
 BACKEND: 2h
 2. Sebagai pelanggan, saya ingin memesan makanan dengan cepat dan mudah, karena saya lapar
 SOLUSI: Pemesanan makanan yang mudah dan cepat, pelanggan bisa pesan dengan hanya 1 click. Makanan ditampilkan dengan jelas.
-FRONTEND: 4h
-(EDIT 25/03/2023 : FRONTEND: 4h (tampilan) + 2h (connect ke backend))
+FRONTEND: 4h (tampilan) + 2h (connect ke backend) (EDIT 25/03/2023)
 BACKEND: 2h
 3. Sebagai pelanggan, saya ingin mencari makanan dengan mudah, agar bisa menemukan makanan yang kusuka
 SOLUSI: Fitur search (search bar) dan fitur filter (berdasarkan tipe makanan)
@@ -63,7 +61,10 @@ WAKTU: 1h
 * Persiapkan folder kolaborasi, push ke GitHub, etc
 8. Design: Membuat design untuk tampilan halaman pendaftaran dan halaman menu di Figma
 WAKTU: 1h
+(EDIT 26/03/2023)
+9. Paginasi untuk halaman menu
+WAKTU: 1h
 
-TOTAL WAKTU: 26h
+TOTAL WAKTU: 25h
 
 

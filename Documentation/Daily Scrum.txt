@@ -2,7 +2,7 @@ SPRINT 1 - 25/03/2023 - 01/04/2023
 ### (24/03/2023) ###
 - <Davin, Jansen> Membuat design untuk tampilan halaman menu di Figma (1h)
 - <Davin> Mempersiapkan struktur folder, siapkan dependencies yang diperlukan, siapkan file-file dokumentasi, dan push ke Github (1h)
-SISA: 26h - 2h = 24h
+SISA: 25h - 2h = 23h
 
 ### 25/03/2023 ###
 SUDAH:
@@ -22,4 +22,20 @@ KENDALA:
 SOLUSI:
 - Vincent menjadi quality tester; ia bertugas untuk mencari bug dan cek apakah desainnya itu waras atau tidak.
 - Edit estimasi waktu di Sprint Backlog
-SISA: 24h - 11h = 13h
+SISA: 23h - 11h = 12h
+
+### 26/03/2023 ###
+SUDAH:
+- <Davin> Menyelesaikan fitur search, filter, dan paginasi; pengguna juga dapat melihat detail pesanan dan menambahkan pesan tambahan untuk koki (2h + 1h + 1h)
+- <Davin> Menambahkan animasi dan dekorasi tambahan untuk tampilan
+- <Jansen> Menyelesaikan rute rute untuk pendaftaran dan login; menyelesaikan fitur session bagi pengguna sehingga bisa tetap ter-login (2h)
+AKAN:
+- <Davin> Mengintegrasikan frontend dengan backend
+- <Jansen> Memperbaiki kode dan melanjutkan dengan rute menu
+KENDALA:
+- <Davin> Kelupaan fitur paginasi
+- <Davin> Backend Jansen terdapat error ketika dites di mesin saya.
+SOLUSI:
+- Jansen akan memperbaiki kodenya nanti malam
+- Tes dulu kode backend sebelum di-commit
+SISA: 12h - 6h = 6h
