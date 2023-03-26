@@ -7,18 +7,14 @@ import { useMenuStore } from '../../store';
 import IconButton from '@/components/IconButton.vue';
 import MenuListItem from './MenuListItem.vue';
 import SearchBar from '@/components/SearchBar.vue';
+import PageButtons from './PageButtons.vue';
+import FilterPopup from './FilterPopup.vue';
 
 const state = reactive({
     isGridView: true,
-    searchTerm: "",
 });
 const menu = useMenuStore();
-menu.menu = [
-    new MenuItem(1, "Makanan", "Makanan", "Makanan", "none", 10000),
-    new MenuItem(2, "Makanan B ", "Makanan B", "Makanan B", "none", 20000),
-    new MenuItem(3, "Makanan C ", "Makanan C", "Makanan C", "none", 30000),
-    new MenuItem(4, "Makanan D ", "Makanan D", "Makanan D", "none", 40000),
-];
+menu.initialize();
 
 const icon = computed(()=>{
     if (state.isGridView){
@@ -33,26 +29,35 @@ const icon = computed(()=>{
         }
     }
 });
+
+function setSearchTerm(searchTerm:string){
+    menu.searchTerm = searchTerm;
+    menu.page = 0;
+}
 </script>
 
 <template>
-    <SearchBar v-model:value="menu.searchTerm"/>
-    <div class="d-flex align-items-center">
-        <IconButton
-            :icon="icon.url"
-            :semantic="icon.semantic"
-            class="btn-primary"
-            @click="state.isGridView = !state.isGridView"
-        />
+    <div class="d-flex align-items-center mw-70-lg">
+        <SearchBar @search="setSearchTerm" class="w-100 me-5"/>
+        <div class="d-flex align-items-center me-4">
+            <FilterPopup/>
+            <IconButton
+                :icon="icon.url"
+                :semantic="icon.semantic"
+                class="btn-secondary ms-2"
+                @click="state.isGridView = !state.isGridView"
+            />
+        </div>
     </div>
-    <div class="menu-grid" v-if="state.isGridView">
+    <div class="menu-grid mw-70-lg" v-if="state.isGridView">
         <MenuCard v-for="item in menu.current" :item="item" :key="item.id"/>
     </div>
-    <div class="menu-list" v-else>
+    <div class="mw-70-lg" v-else>
         <ul class="list-group">
             <MenuListItem v-for="item in menu.current" :item="item" :key="item.id"/>
         </ul>
     </div>
+    <PageButtons/>
     <OrdersOffcanvas/>
 </template>
 
@@ -61,8 +66,12 @@ const icon = computed(()=>{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
 }
+.mw-70-lg {
+    max-width: 100%;
+}
+
 @media screen and (min-width: 996px) {
-    .menu-grid {
+    .mw-70-lg {
         max-width: 70%;
     }
 }

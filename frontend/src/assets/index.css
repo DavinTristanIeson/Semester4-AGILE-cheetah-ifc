@@ -23,9 +23,20 @@
     --bs-btn-disabled-color: var(--secondary);
     --bs-btn-disabled-bg: var(--primary);
     --bs-btn-disabled-border-color: var(--primary-dark);
-}
-.btn {
+
     text-shadow: 2px 2px var(--shadow);
+}
+.btn-secondary {
+    --bs-btn-color: var(--dark);
+    --bs-btn-bg: var(--secondary);
+    --bs-btn-border-color: var(--secondary);
+    --bs-btn-hover-bg: var(--secondary-dark);
+    --bs-btn-active-bg: var(--secondary-dark);
+    --bs-btn-hover-border-color: var(--secondary);
+    --bs-btn-active-border-color: var(--secondary);
+    --bs-btn-disabled-color: var(--secondary-dark);
+    --bs-btn-disabled-bg: var(--secondary);
+    --bs-btn-disabled-border-color: var(--secondary-dark);
 }
 .navbar {
     --bs-navbar-color: var(--secondary);

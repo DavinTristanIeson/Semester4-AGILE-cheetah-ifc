@@ -2,13 +2,13 @@
 import { ref } from 'vue';
 
 const emit = defineEmits<{
-    (e: "update:value", value:string): void,
+    (e: "search", value:string): void,
 }>();
 const searchTerm = ref("");
 function onInput(event:Event){
     const target = event.target as HTMLInputElement;
     searchTerm.value = target.value;
-    emit("update:value", searchTerm.value);
+    emit("search", searchTerm.value);
 }
 </script>
 
@@ -28,7 +28,7 @@ function onInput(event:Event){
     background-color: #fff;
     padding: 10px 15px 10px 45px;
     border-radius: 30px;
-    width: 50%;
+    width: 100%;
     box-shadow: 0px 2px 4px 0.5px rgba(0,0,0,0.2);
 }
 .search-input:before {

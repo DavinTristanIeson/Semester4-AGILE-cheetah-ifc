@@ -35,16 +35,30 @@ export class TextInputObject extends InputObject<string> {
 }
 
 
-export type RadioInputOption = {label:string, value:string}
+export type ChoiceInputOption = {label:string, value:string}
 export class RadioInputObject extends InputObject<string> {
     type: string = "radio";
-    options:RadioInputOption[];
+    options:ChoiceInputOption[];
     validate: ()=>boolean;
-    constructor(label:string, initialValue:string, options:RadioInputOption[], errorMessage:string){
+    constructor(label:string, initialValue:string, options:ChoiceInputOption[], errorMessage:string){
         super(label, initialValue);
         this.options = options;
         this.validate = function (){
             this.error = this.options.find(x => this.value == x.value) ? "" : errorMessage;
+            return this.error.length == 0;
+        }
+    }
+}
+
+export class CheckboxInputObject extends InputObject<string[]> {
+    type: string = "checkbox";
+    options: ChoiceInputOption[];
+    validate: ()=>boolean;
+    constructor(label:string, initialValue:string[], options:ChoiceInputOption[], validator:(chosen:string[])=>string){
+        super(label, initialValue);
+        this.options = options;
+        this.validate = function (){
+            this.error = validator(this.value);
             return this.error.length == 0;
         }
     }
@@ -56,5 +70,8 @@ export const TypeGuards = {
     },
     isRadio(input:InputObject): input is RadioInputObject {
         return input.type == "radio";
+    },
+    isCheckbox(input:InputObject): input is CheckboxInputObject {
+        return input.type == "checkbox";
     }
 }

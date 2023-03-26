@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import type { InputObject, RadioInputObject, TextInputObject } from "../helpers/inputs";
+import type { CheckboxInputObject, InputObject, RadioInputObject, TextInputObject } from "../helpers/inputs";
 import TextInput from "./TextInput.vue";
 import RadioInput from "./RadioInput.vue";
 import { reactive } from "vue";
+import CheckboxInput from "./CheckboxInput.vue";
 
 type HttpMethods = "get"|"post"|"put"|"delete";
 const props = defineProps<{
@@ -37,6 +38,9 @@ function isText(input:InputObject): input is TextInputObject {
 function isRadio(input:InputObject): input is RadioInputObject {
     return input.type == "radio";
 }
+function isCheckbox(input:InputObject): input is CheckboxInputObject {
+    return input.type == "checkbox";
+}
 </script>
 
 <template>
@@ -47,6 +51,7 @@ function isRadio(input:InputObject): input is RadioInputObject {
             <template v-for="input in inputs">
                 <TextInput :input="input" v-if="isText(input)" :shouldValidate="state.isValidating"/>
                 <RadioInput :input="input" v-if="isRadio(input)" :shouldValidate="state.isValidating"/>
+                <CheckboxInput :input="input" v-if="isCheckbox(input)" :shouldValidate="state.isValidating"/>
             </template>
             <slot name="after"></slot>
             <input class="btn btn-primary w-100 py-2 fs-5" type="submit" :value="purpose"/>

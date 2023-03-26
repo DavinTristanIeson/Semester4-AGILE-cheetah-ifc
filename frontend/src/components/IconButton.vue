@@ -15,7 +15,9 @@ defineEmits<{
         :style="{
             '--icon-button-width': width ? `${width}em` : '1.4em',
             '--icon-button-height': height ? `${height}em` : '1.4em',
-        }">
+        }"
+        :title="semantic ?? ''"
+    >
         <img :src="icon" :alt="semantic ?? ''">
     </button>
 </template>

@@ -61,7 +61,7 @@ Pesanan Anda
 }
 .open-offcanvas-btn {
     position: fixed;
-    top: 12%;
+    top: 17%;
     right: 5%;
 }
 </style>
