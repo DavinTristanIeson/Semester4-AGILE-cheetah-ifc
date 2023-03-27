@@ -1,4 +1,4 @@
-SPRINT 1 - 25/03/2023 - 01/04/2023
+SPRINT 1 - 25/03/2023 - 31/04/2023
 ### (24/03/2023) ###
 - <Davin, Jansen> Membuat design untuk tampilan halaman menu di Figma (1h)
 - <Davin> Mempersiapkan struktur folder, siapkan dependencies yang diperlukan, siapkan file-file dokumentasi, dan push ke Github (1h)
@@ -39,3 +39,17 @@ SOLUSI:
 - Jansen akan memperbaiki kodenya nanti malam
 - Tes dulu kode backend sebelum di-commit
 SISA: 12h - 6h = 6h
+
+### 27/03/2023 ###
+SUDAH:
+- <Davin> Tidak mengerjakan apa2 hari ini; lagi mengerjakan projek mata kuliah Kecerdasan Buatan
+- <Jansen> Tidak mengerjakan apa2 hari ini; lagi mengerjakan projek mata kuliah Kecerdasan Buatan
+AKAN:
+- <Davin> Mengintegrasikan frontend dengan backend... setelah Jansen commit
+- <Jansen> Commit dan push kode. Lanjut mengerjakan rute menu.
+- <Vincent> Git pull dari branch davin agar memulai pengecekan desain
+KENDALA:
+- <Davin> Tersisa hanya satu item di Sprint backlog saja, padahal masih ada empat hari tersisa di sprint.
+- <Davin> Sudah mulai ada projek2 lain yang perlu dikerjakan, mungkin beberapa fitur yang lebih tidak penting seperti pengeditan akun perlu diabaikan
+SOLUSI:
+- Kalau misalnya tidak ada yang perlu dikerjakan lagi, kerjakan tampilan halaman akun.
