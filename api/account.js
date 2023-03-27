@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const db = require("./db.js");
 
-const { userIsCustomer, userIsAdmin } = require("./middleware.js");
+const { userIsCustomer } = require("./middleware.js");
 
 function validateRegister(req, res, next) {
   const { email, password, name, gender, telp } = req.body;
@@ -14,7 +14,7 @@ function validateRegister(req, res, next) {
     });
     return;
   }
-  const error = [];
+  const errors = [];
   if (email.length == 0) errors.push("Email harus diisi");
   else if (
     !email.match(
@@ -91,22 +91,7 @@ router.post("/register", validateRegister, async (req, res, next) => {
   }
 });
 
-async function loginAdmin(req, res, next) {
-  const ADMIN_PASSWORD = "adminpass";
-  try {
-    const { email, password } = req.body;
-    if (email == "admin@email" && password == ADMIN_PASSWORD) {
-      req.session.user = { id: 0, email: "admin@email", isAdmin: true };
-      res.status(200).json(createAdminObject());
-    } else {
-      next();
-    }
-  } catch (err) {
-    next(err);
-  }
-}
-
-router.post("/login", loginAdmin, async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
@@ -115,7 +100,12 @@ router.post("/login", loginAdmin, async (req, res, next) => {
       return;
     }
     // set user property on session object if login is successful
-    req.session.user = { id: user.id, email: user.email, isAdmin: false };
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      isAdmin: false,
+      login: "success",
+    };
     res.status(200).json(createUserObject(user));
   } catch (err) {
     next(err);

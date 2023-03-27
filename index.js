@@ -6,10 +6,17 @@ const cors = require("cors");
 const SQLiteStore = require("connect-sqlite3")(session);
 
 const AccountsRouter = require("./api/account");
+const MenuRouter = require("./api/menu");
 
 const PORT = 3000;
+const WHITELISTED_SOURCE = "http://localhost:3000";
 
-app.use(cors());
+app.use(
+  cors({
+    origin: WHITELISTED_SOURCE,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const sessionMiddleware = session({
@@ -25,8 +32,20 @@ const sessionMiddleware = session({
     httpOnly: true,
   },
 });
-app.use(sessionMiddleware());
+app.use(sessionMiddleware);
+
 app.use("/api/accounts", AccountsRouter);
+app.use("/api/menu", MenuRouter);
+
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  if (!res.headersSent) {
+    res.status(500).json({
+      message:
+        "Terjadi kesalahan di bagian server, mohon dicoba lagi pada waktu lain",
+    });
+  }
+});
 
 app.listen(PORT, async () => {
   console.log(`Server running at http://localhost:${PORT}`);
