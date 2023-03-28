@@ -8,6 +8,10 @@ router.get("/", async (req, res) => {
   let params = [];
   if (search) {
     query += " WHERE name LIKE ?";
+    params.push(`${search}%`);
+  }
+  if (page) {
+    query += " WHERE name LIKE ?";
     params.push(limit, page * limit);
   } else if (limit) {
     query += " LIMIT ?";

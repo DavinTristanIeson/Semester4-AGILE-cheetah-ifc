@@ -113,10 +113,18 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    throw err;
-  });
-  res.status(200).end();
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to logout" });
+      } else {
+        res.status(200).json({ message: "Logged out successfully" });
+      }
+    });
+  } else {
+    res.status(400).json({ error: "Session not found" });
+  }
 });
 
 router.get("/me", (req, res) => {
