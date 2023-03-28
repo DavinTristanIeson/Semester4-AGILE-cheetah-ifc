@@ -40,3 +40,27 @@ export class MenuOrder extends MenuItem {
         return MenuItem.toRupiah(this.price * this.quantity);
     }
 }
+
+export class UserAccount {
+    readonly id:number;
+    email:string;
+    name:string;
+    gender:boolean;
+    telp:string;
+    constructor(id:number, email:string, name:string, gender:boolean, telp:string){
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.gender = gender;
+        this.telp = telp;
+    }
+    static fromJSON(json:{
+        id:number,
+        email:string,
+        name:string,
+        gender:boolean,
+        telp:string,
+    }){
+        return new UserAccount(json.id, json.email, json.name, json.gender, json.telp);
+    }
+}

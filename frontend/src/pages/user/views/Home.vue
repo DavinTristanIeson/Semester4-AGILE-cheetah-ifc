@@ -1,12 +1,30 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { API, CONNECTION_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
+
+const emit = defineEmits<{
+    (e:"loading", value:boolean): void,
+    (e:"error", value:string): void,
+    (e:"success", value:string): void,
+}>();
 
 const route = useRoute();
 const router = useRouter();
-function logout(){
+async function logout(){
     // TODO: send request ke backend untuk logout
-    router.replace({name: "login"});
+    try {
+    
+    const res = await fetch(API+"/accounts/logout", {
+        credentials: "include",
+        method: "POST",
+    });
+    if (res.ok){
+        router.replace({name: "login"});
+    }
+    
+    } catch (e) {
+        emit("error", CONNECTION_ERROR);
+    }
 }
 </script>
 
@@ -36,7 +54,11 @@ function logout(){
         </div>
     </div>
 </nav>
-<RouterView/>
+<RouterView
+    @loading="$emit('loading', $event)"
+    @error="$emit('error', $event)"
+    @success="$emit('success', $event)"
+/>
 </template>
 
 <style scoped>

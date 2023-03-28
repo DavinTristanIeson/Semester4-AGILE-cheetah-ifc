@@ -7,6 +7,7 @@ const { userIsCustomer } = require("./middleware.js");
 
 function validateRegister(req, res, next) {
   const { email, password, name, gender, telp } = req.body;
+  console.log(req.body);
   if (!email || !password || !name || !telp) {
     res.status(400).json({
       message:
@@ -69,6 +70,7 @@ router.post("/register", validateRegister, async (req, res, next) => {
       isAdmin,
     ]);
   } catch (err) {
+    console.log(err);
     res
       .status(400)
       .json({ message: "Email tersebut sudah digunakan orang lain." });
@@ -114,7 +116,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/logout", (req, res) => {
   req.session.destroy((err) => {
-    throw err;
+    if (err) throw err;
   });
   res.status(200).end();
 });

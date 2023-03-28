@@ -2,7 +2,7 @@ SPRINT 1 - 25/03/2023 - 31/04/2023
 ### (24/03/2023) ###
 - <Davin, Jansen> Membuat design untuk tampilan halaman menu di Figma (1h)
 - <Davin> Mempersiapkan struktur folder, siapkan dependencies yang diperlukan, siapkan file-file dokumentasi, dan push ke Github (1h)
-SISA: 25h - 2h = 23h
+SISA: 28h - 2h = 26h
 
 ### 25/03/2023 ###
 SUDAH:
@@ -22,7 +22,7 @@ KENDALA:
 SOLUSI:
 - Vincent menjadi quality tester; ia bertugas untuk mencari bug dan cek apakah desainnya itu waras atau tidak.
 - Edit estimasi waktu di Sprint Backlog
-SISA: 23h - 11h = 12h
+SISA: 26h - 11h = 15h
 
 ### 26/03/2023 ###
 SUDAH:
@@ -38,7 +38,7 @@ KENDALA:
 SOLUSI:
 - Jansen akan memperbaiki kodenya nanti malam
 - Tes dulu kode backend sebelum di-commit
-SISA: 12h - 6h = 6h
+SISA: 15h - 6h = 9h
 
 ### 27/03/2023 ###
 SUDAH:
@@ -53,3 +53,20 @@ KENDALA:
 - <Davin> Sudah mulai ada projek2 lain yang perlu dikerjakan, mungkin beberapa fitur yang lebih tidak penting seperti pengeditan akun perlu diabaikan
 SOLUSI:
 - Kalau misalnya tidak ada yang perlu dikerjakan lagi, kerjakan tampilan halaman akun.
+SISA: 9h
+
+### 28/03/2023 ###
+SUDAH:
+- <Davin> Mengintegrasikan backend ke frontend untuk halaman login dan menu (2h + 2h)
+- <Davin> Memperbaiki bug-bug yang ditemukan di bagian backend
+AKAN:
+- <Jansen> Melanjutkan membuat rute untuk mengambil info akun pengguna sekarang dan menghapus akun (2h)
+- <Davin> Membuat halaman akun
+KENDALA:
+- <Davin, Jansen> Sudah habis Sprint Backlog yang akan dilakukan untuk Sprint ini
+- <Davin> Projek ke-3 semester 4 sudah muncul: Pengembangan Front-End Mobil. + Kerja lagi.
+- <Davin> Waktu untuk melakukan integrasi backend ke frontend lebih cepat dari yang diduga, hanya perlu setengah dari waktu yang ditulis. Benar-benar pusing estimasi waktu.
+SOLUSI:
+- Tambah lagi halaman akun yang sebelumnya sudah dipotong dari Sprint ini. (2h + 1h)
+- Untuk fitur yang kurang penting tapi menguras waktu, seperti edit bagian2 akun tidak usah dikerjakan; fokus buat MVP saja.
+SISA: 9h - 6h = 3h

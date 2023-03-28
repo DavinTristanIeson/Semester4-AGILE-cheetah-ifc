@@ -64,7 +64,11 @@ WAKTU: 1h
 (EDIT 26/03/2023)
 9. Paginasi untuk halaman menu
 WAKTU: 1h
+(EDIT 28/03/2023)
+10. Sebagai pelanggan, saya ingin *melihat* data diri sendiri seperti email, nama, no. telp, dan password
+FRONTEND: 2h
+BACKEND: 1h
 
-TOTAL WAKTU: 25h
+TOTAL WAKTU: 28h
 
 

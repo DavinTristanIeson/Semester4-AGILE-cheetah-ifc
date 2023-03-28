@@ -13,7 +13,7 @@ import OrderDetail from './OrderDetail.vue';
 import ScaleTransition from '@/components/ScaleTransition.vue';
 
 const state = reactive({
-    isGridView: true,
+    isGridView: localStorage.getItem("isGridView") == "false" ? false : true,
 });
 const menu = useMenuStore();
 const currentOrders = useCurrentOrdersStore();
@@ -36,6 +36,10 @@ function setSearchTerm(searchTerm:string){
     menu.searchTerm = searchTerm;
     menu.page = 0;
 }
+function setViewMode(){
+    state.isGridView = !state.isGridView;
+    localStorage.setItem("isGridView", state.isGridView.toString());
+}
 </script>
 
 <template>
@@ -50,7 +54,7 @@ function setSearchTerm(searchTerm:string){
                 :icon="icon.url"
                 :semantic="icon.semantic"
                 class="btn-secondary ms-2"
-                @click="state.isGridView = !state.isGridView"
+                @click="setViewMode"
             />
         </div>
     </div>

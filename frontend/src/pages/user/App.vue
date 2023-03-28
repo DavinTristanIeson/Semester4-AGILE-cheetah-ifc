@@ -18,12 +18,15 @@ function handleAlert(message:string, isSuccess:boolean){
     state.alertMsg = "";
   }, 3000);
 }
+function setLoading(isLoading:boolean){
+  state.isLoading = isLoading;
+}
 </script>
 
 <template>
   <Spinner :loading="state.isLoading"/>
   <RouterView
-    @loading="state.isLoading = !!$event"
+    @loading="setLoading"
     @error="handleAlert($event, false)"
     @success="handleAlert($event, true)"
   />

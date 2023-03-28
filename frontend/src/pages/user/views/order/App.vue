@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { CONNECTION_ERROR } from '@/helpers/constants';
+import { IntervalExecutor } from '@/helpers/requests';
+import { onBeforeUnmount, onMounted, onUnmounted, reactive } from 'vue';
 import { useMenuStore } from '../../store';
 import OrderView from "./OrderView.vue";
 import WaitView from "./WaitView.vue";
@@ -15,7 +17,21 @@ const state = reactive({
     isWaiting: false,
 });
 const menu = useMenuStore();
-menu.initialize();
+emit("loading", true);
+const executor = new IntervalExecutor(async ()=>{
+    await menu.initialize();
+}).on("success", ()=>{
+    emit("loading", false);
+    emit("error", "");
+}).on("failure", (e)=>{
+    console.error(e);
+    emit("error", CONNECTION_ERROR);
+});
+executor.run();
+
+onBeforeUnmount(()=>{
+    executor.cleanup();
+});
 </script>
 
 <template>

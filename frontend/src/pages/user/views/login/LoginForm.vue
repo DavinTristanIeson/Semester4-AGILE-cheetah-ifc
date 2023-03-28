@@ -4,8 +4,11 @@ import { TextInputObject } from '@/helpers/inputs';
 import Alert from '@/components/Alert.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { API, CONNECTION_ERROR } from '@/helpers/constants';
+import { UserAccount } from '@/helpers/classes';
+import { useUserStore } from '../../store';
 
-const emit = defineEmits<{
+defineEmits<{
     (e:"changemode"): void
 }>();
 
@@ -22,11 +25,34 @@ const state = reactive({
     errMsg: ""
 });
 const router = useRouter();
+const user = useUserStore();
 
-function onSubmit(response:{[key:string]: string}){
-    // TODO: Connect with backend
-    console.log(response);
-    router.replace({name: "index"});
+async function onSubmit(response:{[key:string]: string}){
+    try {
+
+    const res = await fetch(API+"/accounts/login", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': "application/json",
+        },
+        body: JSON.stringify({
+            email: response["Email"],
+            password: response["Password"]
+        })
+    });
+    if (!res.ok){
+        state.errMsg = "Email atau password salah!";
+    } else {
+        const json = await res.json();
+        user.login(UserAccount.fromJSON(json));
+        router.replace({name: "index"});
+    }
+
+    } catch (e){
+        console.error(e);
+        state.errMsg = CONNECTION_ERROR;
+    }
 }
 </script>
 

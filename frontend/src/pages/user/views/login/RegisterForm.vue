@@ -5,8 +5,11 @@ import { validateEmail, validateName, validatePassword, validatePhoneNumber } fr
 import Alert from '@/components/Alert.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { UserAccount } from '@/helpers/classes';
+import { API, CONNECTION_ERROR } from '@/helpers/constants';
+import { useUserStore } from '../../store';
 
-const emit = defineEmits<{
+defineEmits<{
     (e:"changemode"): void
 }>();
 
@@ -28,11 +31,36 @@ const state = reactive({
     errMsg: ""
 });
 const router = useRouter();
+const user = useUserStore();
 
-function onSubmit(response:{[key:string]: string}){
-    // TODO: Connect with backend
-    console.log(response);
-    router.replace({name: "index"});
+async function onSubmit(response:{[key:string]: string}){
+    try {
+    const res = await fetch(API+"/accounts/register", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': "application/json",
+        },
+        body: JSON.stringify({
+            email: response["Email"],
+            password: response["Password"],
+            name: response["Nama"],
+            gender: response["Jenis Kelamin"] == "male",
+            telp: response["No. Telp"]
+        })
+    });
+    if (!res.ok){
+        state.errMsg = "Email sudah digunakan orang lain!";
+    } else {
+        const json = await res.json();
+        user.login(UserAccount.fromJSON(json));
+        router.replace({name: "index"});
+    }
+
+    } catch (e){
+        console.error(e);
+        state.errMsg = CONNECTION_ERROR;
+    }
 }
 </script>
 

@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
-import { MenuItem, MenuOrder } from "@/helpers/classes";
+import { MenuItem, MenuOrder, UserAccount } from "@/helpers/classes";
+import { API } from "@/helpers/constants";
 
 export const useCurrentOrdersStore = defineStore("currentOrders", {
 	state: () => ({
 		orders: [] as MenuOrder[],
-		viewedOrder: undefined as (MenuOrder | undefined)
+		viewedOrder: undefined as (MenuOrder | undefined),
 	}),
 	getters: {
 		totalPrice: state => state.orders.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0),
@@ -28,7 +29,7 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 	}
 });
 
-const MENU_PER_PAGE = 2;
+const MENU_PER_PAGE = 20;
 export const useMenuStore = defineStore("menu", {
 	state: ()=>({
 		menu: [] as MenuItem[],
@@ -57,7 +58,7 @@ export const useMenuStore = defineStore("menu", {
 			return this.filteredMenu.slice(state.page*MENU_PER_PAGE, state.page*MENU_PER_PAGE+MENU_PER_PAGE);
 		},
 		totalPages(state): number {
-			return Math.ceil(this.filteredMenu.length / MENU_PER_PAGE);
+			return Math.floor(this.filteredMenu.length / MENU_PER_PAGE);
 		}
 	},
 	actions: {
@@ -69,14 +70,15 @@ export const useMenuStore = defineStore("menu", {
 				this.initFilterCategories();
 				return;
 			}
-			this.menu = [
-				new MenuItem(1, "Makanan", "Makanan", "Makanan", "none", 10000),
-				new MenuItem(2, "Makanan B ", "Makanan B", "Makanan B", "none", 20000),
-				new MenuItem(3, "Makanan C ", "Makanan C", "Makanan C", "none", 30000),
-				new MenuItem(4, "Makanan D ", "Makanan D", "Makanan D", "none", 40000),
-			];
-			this.isMenuInitialized = true;
-			this.initFilterCategories();
+
+			const res = await fetch(API+"/menu/");
+			if (res.ok){
+				const json:any[] = await res.json()
+				this.menu = json.map(x => new MenuItem(x.id, x.name, x.category, x.description, x.img, x.price));
+				this.isMenuInitialized = true;
+				this.initFilterCategories();
+			}
+			
 		},
 		initFilterCategories(){
 			if (!this.isMenuInitialized) return;
@@ -87,6 +89,23 @@ export const useMenuStore = defineStore("menu", {
 		},
 		changePage(newPage:number){
 			this.page = Math.min(this.totalPages, Math.max(0, newPage));
+		}
+	}
+});
+
+export const useUserStore = defineStore("user", {
+	state: ()=>({
+		user: null as (UserAccount|null),
+	}),
+	getters: {
+		hasLogin: state => state.user !== null
+	},
+	actions: {
+		login(user:UserAccount){
+			this.user = user;
+		},
+		logout(){
+			this.user = null;
 		}
 	}
 })

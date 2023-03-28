@@ -1,5 +1,16 @@
+import { API } from '@/helpers/constants';
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from "./views/Home.vue";
+
+async function hasLogin(){
+  try {
+    const res = await fetch(API+"/accounts/me");
+    return res.ok;
+  } catch (e){
+    console.error(e);
+    return false;
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,8 +19,8 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       async beforeEnter(to, from, next){
-        // TODO: validasi apakah sudah login atau tidak
-        next();
+        if (await hasLogin()) next({name: "index"});
+        else next();
       },
       component: () => import('./views/login/App.vue'),
     },
@@ -18,8 +29,8 @@ const router = createRouter({
       name: "index",
       redirect: "/order",
       async beforeEnter(to, from, next){
-        // TODO: validasi apakah sudah login atau tidak
-        next();
+        if (await hasLogin()) next({name: "login"});
+        else next();
       },
       component: Home,
       children: [
