@@ -21,6 +21,9 @@ Sebagai pelanggan, saya ingin kasih pesan tambahan untuk bagaimana makanan saya 
 Sebagai pelanggan, saya ingin mengubah data diri sendiri seperti email, nama, no. telp, dan password
 - Halaman detail akun
 - Fitur edit data pribadi
+(EDIT 28/03/2023)
+Sebagai pelanggan, saya ingin *melihat* data diri sendiri seperti email, nama, no. telp, dan password
+- Halaman detail akun
 
 Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa diambil
 - Halaman lihat status pesanan

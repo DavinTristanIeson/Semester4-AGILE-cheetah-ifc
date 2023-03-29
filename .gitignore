@@ -3,3 +3,5 @@ pnpm-lock.yaml
 README.md
 .vscode
 dist
+backend.db
+sessions

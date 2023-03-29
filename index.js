@@ -9,7 +9,7 @@ const AccountsRouter = require("./api/account");
 const MenuRouter = require("./api/menu");
 
 const PORT = 3000;
-const WHITELISTED_SOURCE = "http://localhost:3000";
+const WHITELISTED_SOURCE = "http://localhost:5173";
 
 app.use(
   cors({

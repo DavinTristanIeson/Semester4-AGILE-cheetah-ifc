@@ -1,8 +1,72 @@
-SPRINT 1 - 25/03/2023 - 01/04/2023
+SPRINT 1 - 25/03/2023 - 31/04/2023
 ### (24/03/2023) ###
 - <Davin, Jansen> Membuat design untuk tampilan halaman menu di Figma (1h)
 - <Davin> Mempersiapkan struktur folder, siapkan dependencies yang diperlukan, siapkan file-file dokumentasi, dan push ke Github (1h)
-SISA: 21h
+SISA: 28h - 2h = 26h
 
 ### 25/03/2023 ###
+SUDAH:
+- <Davin> Menyelesaikan tampilan halaman login dan kebanyakan dari halaman pemesanan (1h + 2h + 4h)
+- <Jansen> Database sudah siap dikerjakan, data dari file .json yang ditemukan sudah dipindahkan ke database, mempersiapkan server express (4h)
+AKAN:
+- <Davin> Frontend masih belum integrasi sama backend, jadi cuma tampilan belaka. Sedang menunggu backend untuk lanjut.
+- <Davin> Animasi masih kacau/belum diimplementasi, tapi itu tidak terlalu penting; nanti baru diperbaiki
+- <Davin> Besok lanjut filter, search, dan halaman detailnya
+- <Jansen> Selanjutnya mengerjakan bagian akun untuk backend, seperti rute daftar, login, sama session pengguna
+- <Vincent> Clone projek dari GitHub
+KENDALA:
+- Estimasi waktunya terlalu optimis: kalau tidak ada copas dari projek-projek lalu, seharusnya memakan waktu yang lebih lama.
+- Ada beberapa task juga yang sulit dikategorisasikan dalam bin 1h, 2h, 4h, 8h.
+- Vincent masih tidak ada peran, dan mungkin akan sulit berpartisipasi karena kesibukannya.
+- Untuk Sabtu-Minggu bisa banyak kerjakan, namun ketika hari biasa terbatas berapa kerja yang bisa dikerjakan pada satu hari. Apalagi menghitung tugas kuliah lain lagi.
+SOLUSI:
+- Vincent menjadi quality tester; ia bertugas untuk mencari bug dan cek apakah desainnya itu waras atau tidak.
+- Edit estimasi waktu di Sprint Backlog
+SISA: 26h - 11h = 15h
 
+### 26/03/2023 ###
+SUDAH:
+- <Davin> Menyelesaikan fitur search, filter, dan paginasi; pengguna juga dapat melihat detail pesanan dan menambahkan pesan tambahan untuk koki (2h + 1h + 1h)
+- <Davin> Menambahkan animasi dan dekorasi tambahan untuk tampilan
+- <Jansen> Menyelesaikan rute rute untuk pendaftaran dan login; menyelesaikan fitur session bagi pengguna sehingga bisa tetap ter-login (2h)
+AKAN:
+- <Davin> Mengintegrasikan frontend dengan backend
+- <Jansen> Memperbaiki kode dan melanjutkan dengan rute menu
+KENDALA:
+- <Davin> Kelupaan fitur paginasi
+- <Davin> Backend Jansen terdapat error ketika dites di mesin saya.
+SOLUSI:
+- Jansen akan memperbaiki kodenya nanti malam
+- Tes dulu kode backend sebelum di-commit
+SISA: 15h - 6h = 9h
+
+### 27/03/2023 ###
+SUDAH:
+- <Davin> Tidak mengerjakan apa2 hari ini; lagi mengerjakan projek mata kuliah Kecerdasan Buatan
+- <Jansen> Tidak mengerjakan apa2 hari ini; lagi mengerjakan projek mata kuliah Kecerdasan Buatan
+AKAN:
+- <Davin> Mengintegrasikan frontend dengan backend... setelah Jansen commit
+- <Jansen> Commit dan push kode. Lanjut mengerjakan rute menu.
+- <Vincent> Git pull dari branch davin agar memulai pengecekan desain
+KENDALA:
+- <Davin> Tersisa hanya satu item di Sprint backlog saja, padahal masih ada empat hari tersisa di sprint.
+- <Davin> Sudah mulai ada projek2 lain yang perlu dikerjakan, mungkin beberapa fitur yang lebih tidak penting seperti pengeditan akun perlu diabaikan
+SOLUSI:
+- Kalau misalnya tidak ada yang perlu dikerjakan lagi, kerjakan tampilan halaman akun.
+SISA: 9h
+
+### 28/03/2023 ###
+SUDAH:
+- <Davin> Mengintegrasikan backend ke frontend untuk halaman login dan menu (2h + 2h)
+- <Davin> Memperbaiki bug-bug yang ditemukan di bagian backend
+AKAN:
+- <Jansen> Melanjutkan membuat rute untuk mengambil info akun pengguna sekarang dan menghapus akun (2h)
+- <Davin> Membuat halaman akun
+KENDALA:
+- <Davin, Jansen> Sudah habis Sprint Backlog yang akan dilakukan untuk Sprint ini
+- <Davin> Projek ke-3 semester 4 sudah muncul: Pengembangan Front-End Mobil. + Kerja lagi.
+- <Davin> Waktu untuk melakukan integrasi backend ke frontend lebih cepat dari yang diduga, hanya perlu setengah dari waktu yang ditulis. Benar-benar pusing estimasi waktu.
+SOLUSI:
+- Tambah lagi halaman akun yang sebelumnya sudah dipotong dari Sprint ini. (2h + 1h)
+- Untuk fitur yang kurang penting tapi menguras waktu, seperti edit bagian2 akun tidak usah dikerjakan; fokus buat MVP saja.
+SISA: 9h - 6h = 3h

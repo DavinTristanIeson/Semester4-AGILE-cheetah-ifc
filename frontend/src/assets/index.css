@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
+
+:root {
+    --primary: #B99878;
+    --primary-dark: #a07e5c;
+    --secondary: #EBE6DD;
+    --secondary-dark: #dac59c;
+    --dark: #523112;
+    --shadow: #805024;
+    --bs-primary: var(--primary);
+    --bs-secondary: var(--secondary);
+}
+
+/* Kenapa ga ambil dari --bs-primary!? */
+.btn-primary {
+    --bs-btn-color: var(--secondary);
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--primary-dark);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-hover-border-color: var(--dark);
+    --bs-btn-active-border-color: var(--dark);
+    --bs-btn-disabled-color: var(--secondary);
+    --bs-btn-disabled-bg: var(--primary);
+    --bs-btn-disabled-border-color: var(--primary-dark);
+
+    text-shadow: 2px 2px var(--shadow);
+}
+.btn-secondary {
+    --bs-btn-color: var(--dark);
+    --bs-btn-bg: var(--secondary);
+    --bs-btn-border-color: var(--secondary);
+    --bs-btn-hover-bg: var(--secondary-dark);
+    --bs-btn-active-bg: var(--secondary-dark);
+    --bs-btn-hover-border-color: var(--secondary);
+    --bs-btn-active-border-color: var(--secondary);
+    --bs-btn-disabled-color: var(--secondary-dark);
+    --bs-btn-disabled-bg: var(--secondary);
+    --bs-btn-disabled-border-color: var(--secondary-dark);
+}
+.navbar {
+    --bs-navbar-color: var(--secondary);
+    --bs-navbar-hover-color: white;
+    --bs-navbar-brand-hover-color: white;
+    --bs-navbar-brand-color: var(--secondary);
+    --bs-navbar-disabled-color: white;
+    --bs-navbar-active-color: white;
+    --bs-navbar-toggler-border-color: var(--secondary);
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28203, 207, 211, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+.modal {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+.shadow-thick {
+    box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    background-image: linear-gradient(
+    rgba(0, 0, 0, 0.3), 
+    rgba(0, 0, 0, 0.3)
+    ), url("./pexels-igor-starkov-1307698.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.tss-bg-secondary {
+    background-color: var(--secondary);
+}
+
+.center-screen {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 996px;
+}
