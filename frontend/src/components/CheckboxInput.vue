@@ -4,7 +4,7 @@ import { ref } from 'vue';
 
 const props = defineProps<{
     input:CheckboxInputObject,
-    shouldValidate?:boolean
+    shouldValidate?:boolean,
 }>();
 const inputRef = ref(props.input);
 const emit = defineEmits<{

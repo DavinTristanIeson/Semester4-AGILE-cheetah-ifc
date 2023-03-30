@@ -36,22 +36,21 @@ function updateCategories(categories:string[]){
         <div class="tss-bg-secondary rounded shadow p-3 pe-5 col-1 popup position-absolute"
             v-if="state.isOpen">
             <h5>Filter Berdasarkan Kategori</h5>
-            <CheckboxInput :input="input" :value="menu.filterCategories" @update:value="updateCategories"/>
+            <CheckboxInput :input="input" :value="menu.filterCategories" @update:value="updateCategories" class="capitalize"/>
         </div>
     </ScaleTransition>
 </div>
 </template>
 
-<style scoped>
+<style>
 .popup {
     width: fit-content;
     z-index: 3;
-    top: 85%;
+    top: 120%;
     left: 1%;
 }
 @media screen and (max-width: 996px) {
     .popup {
-        top: 85%;
         left: -150%;
     }
 }

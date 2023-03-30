@@ -70,3 +70,14 @@ SOLUSI:
 - Tambah lagi halaman akun yang sebelumnya sudah dipotong dari Sprint ini. (2h + 1h)
 - Untuk fitur yang kurang penting tapi menguras waktu, seperti edit bagian2 akun tidak usah dikerjakan; fokus buat MVP saja.
 SISA: 9h - 6h = 3h
+
+### 29/03/2023 ###
+SUDAH:
+- <Davin> Menyelesaikan tampilan halaman akun
+- <Vincent> Menemukan masalah2 UI/UX untuk aplikasi sejauh ini
+- <Davin> Memperbaiki masalah yang ditemukan Vincent
+AKAN:
+- <Jansen> Membuat rute2 yang berkaitan dengan akun
+KENDALA:
+SOLUSI:
+SISA: 3h - 1h = 2h

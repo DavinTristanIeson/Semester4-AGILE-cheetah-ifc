@@ -101,6 +101,11 @@ export const useUserStore = defineStore("user", {
 		hasLogin: state => state.user !== null
 	},
 	actions: {
+		async initialize(){
+			if (this.user) return;
+			this.user = new UserAccount(1, "davin@email.com", "Davin Tristan", true, "012421421421");
+			// TODO: Fetch info user dari backend
+		},
 		login(user:UserAccount){
 			this.user = user;
 		},
