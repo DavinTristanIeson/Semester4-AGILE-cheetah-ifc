@@ -8,8 +8,8 @@ import WaitView from "./WaitView.vue";
 
 const emit = defineEmits<{
     (e:"loading", value:boolean): void,
-    (e:"error", value:string): void,
-    (e:"success", value:string): void,
+    (e:"error", value:string, timeout:number|null): void,
+    (e:"success", value:string, timeout:number|null): void,
 }>();
 
 
@@ -22,10 +22,10 @@ const executor = new IntervalExecutor(async ()=>{
     await menu.initialize();
 }).on("success", ()=>{
     emit("loading", false);
-    emit("error", "");
+    emit("error", "", null);
 }).on("failure", (e)=>{
     console.error(e);
-    emit("error", CONNECTION_ERROR);
+    emit("error", CONNECTION_ERROR, null);
 });
 executor.run();
 

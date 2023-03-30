@@ -4,8 +4,8 @@ import { useRoute, useRouter } from 'vue-router';
 
 const emit = defineEmits<{
     (e:"loading", value:boolean): void,
-    (e:"error", value:string): void,
-    (e:"success", value:string): void,
+    (e:"error", value:string, timeout:number|null): void,
+    (e:"success", value:string, timeout:number|null): void,
 }>();
 
 const route = useRoute();
@@ -23,7 +23,7 @@ async function logout(){
     }
     
     } catch (e) {
-        emit("error", CONNECTION_ERROR);
+        emit("error", CONNECTION_ERROR, null);
     }
 }
 </script>

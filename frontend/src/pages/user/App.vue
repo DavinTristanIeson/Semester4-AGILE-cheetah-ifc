@@ -10,13 +10,14 @@ const state = reactive({
   isSuccess: false,
   timeout: -1,
 });
-function handleAlert(message:string, isSuccess:boolean){
+function handleAlert(message:string, timeout:number|null, isSuccess:boolean){
   state.alertMsg = message;
   state.isSuccess = isSuccess;
-  clearTimeout(state.timeout)
+  clearTimeout(state.timeout);
+  if (timeout == null) return;
   state.timeout = setTimeout(()=>{
     state.alertMsg = "";
-  }, 3000);
+  }, timeout);
 }
 function setLoading(isLoading:boolean){
   state.isLoading = isLoading;
@@ -27,12 +28,13 @@ function setLoading(isLoading:boolean){
   <Spinner :loading="state.isLoading"/>
   <RouterView
     @loading="setLoading"
-    @error="handleAlert($event, false)"
-    @success="handleAlert($event, true)"
+    @error="(msg:string, timeout:number) => handleAlert(msg, timeout, false)"
+    @success="(msg:string, timeout:number) => handleAlert(msg, timeout, true)"
   />
   <Alert
     :floating="true"
     :message="state.alertMsg"
     :success="state.isSuccess"
+    @click="state.alertMsg=''"
   />
 </template>

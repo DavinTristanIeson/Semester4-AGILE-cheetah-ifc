@@ -7,7 +7,6 @@ const { userIsCustomer } = require("./middleware.js");
 
 function validateRegister(req, res, next) {
   const { email, password, name, gender, telp } = req.body;
-  console.log(req.body);
   if (!email || !password || !name || !telp) {
     res.status(400).json({
       message:
@@ -19,7 +18,7 @@ function validateRegister(req, res, next) {
   if (email.length == 0) errors.push("Email harus diisi");
   else if (
     !email.match(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/
     )
   )
     errors.push("Format email tidak sesuai");
@@ -27,7 +26,7 @@ function validateRegister(req, res, next) {
     errors.push("Password harus terdiri dari minimal 8 karakter");
   if (name.length < 5)
     errors.push("Nama harus terdiri dari minimal 5 karakter");
-  else if (!name.match(/^[a-zA-Z0-9]+$/))
+  else if (!name.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/))
     errors.push(
       "Nama hanya boleh terdiri dari huruf alfabet dan angka 0-9 saja"
     );

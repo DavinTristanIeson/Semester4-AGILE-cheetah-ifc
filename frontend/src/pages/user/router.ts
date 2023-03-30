@@ -4,7 +4,8 @@ import Home from "./views/Home.vue";
 
 async function hasLogin(){
   try {
-    const res = await fetch(API+"/accounts/me");
+    const res = await fetch(API+"/accounts/me", {credentials: "include"});
+    console.log(res.ok);
     return res.ok;
   } catch (e){
     console.error(e);
@@ -29,7 +30,7 @@ const router = createRouter({
       name: "index",
       redirect: "/order",
       async beforeEnter(to, from, next){
-        if (await hasLogin()) next({name: "login"});
+        if (!(await hasLogin())) next({name: "login"});
         else next();
       },
       component: Home,

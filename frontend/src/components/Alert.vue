@@ -3,6 +3,7 @@ defineProps<{
     message?:string,
     success?:boolean,
     floating?:boolean
+    onClick?:()=>void,
 }>();
 </script>
 
@@ -16,6 +17,7 @@ defineProps<{
         }"
         role="alert"
         v-if="message"
+        @click="{onClick}"
     >
         <slot>{{ message }}</slot>
     </div>

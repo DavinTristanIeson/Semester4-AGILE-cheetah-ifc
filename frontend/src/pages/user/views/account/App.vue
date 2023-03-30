@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CONNECTION_ERROR } from '@/helpers/constants';
+import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { TextInputObject } from '@/helpers/inputs';
 import TextInput from '@/components/TextInput.vue';
 import { IntervalExecutor } from '@/helpers/requests';
@@ -11,7 +11,7 @@ import { useRouter } from 'vue-router';
 const user = useUserStore();
 const emit = defineEmits<{
     (e:"loading", value:boolean): void,
-    (e:"error", msg:string): void,
+    (e:"error", msg:string, timeout:number|null): void,
 }>();
 const state = reactive({
     requirePassword: false,
@@ -20,28 +20,46 @@ const state = reactive({
 const router = useRouter();
 const passwordInput = new TextInputObject("Password", "", isNotEmpty("Password harus diisi!"))
 
-function deleteAccount(){
+async function deleteAccount(){
     if (!state.requirePassword){
         state.requirePassword = true;
         return;
     }
     try {
-        // TODO: send request to backend
-        user.logout();
-        router.replace({name: "login"});
+        const res = await fetch(API+"/accounts/", {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                'Content-Type': "application/json",
+            },
+            body: JSON.stringify({password: passwordInput.value}),
+        });
+        if (res.ok){
+            user.logout();
+            await fetch(API+"/accounts/logout", {
+                method: "POST",
+                credentials: "include",
+            });
+            router.replace({name: "login"});
+        } else {
+            const {message} = await res.json();
+            emit("error", message, 3000);
+        }
     } catch (e){
         console.error(e);
-        emit("error", CONNECTION_ERROR);
+        emit("error", CONNECTION_ERROR, 3000);
     }
 }
 
 emit("loading", true);
 const executor = new IntervalExecutor(user.initialize)
-    .on("success", ()=>{
+    .on("success", (result:boolean)=>{
         emit("loading", false)
+        if (result) emit("error", "", null);
+        else emit("error", SERVER_ERROR, null);
     }).on("failure", (e)=>{
         console.error(e);
-        emit("error", CONNECTION_ERROR);
+        emit("error", CONNECTION_ERROR, null);
     });
 executor.run();
 onBeforeUnmount(()=>{
