@@ -16,11 +16,11 @@ router.get("/", async (req, res) => {
 
   try {
     const rows = await db.all(query, params);
-    
-    if (params.length == 0){
+
+    if (params.length == 0) {
       // Cache for three days if fetch all menu
       // https://stackoverflow.com/questions/25462717/cache-control-for-dynamic-data-express-js
-      res.set("Cache-Control", `public, max-age=${3*24*60*1000}`)
+      res.set("Cache-Control", `public, max-age=${3 * 24 * 60 * 1000}`);
     }
     res.status(200).json(rows);
   } catch (err) {

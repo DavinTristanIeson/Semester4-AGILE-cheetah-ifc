@@ -115,14 +115,54 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) throw err;
-  });
-  res.status(200).end();
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to logout" });
+      } else {
+        res.status(200).json({ message: "Logged out successfully" });
+      }
+    });
+  } else {
+    res.status(400).json({ error: "Session not found" });
+  }
 });
 
 router.get("/me", (req, res) => {
   if (req.session.user) res.status(200).json(req.session.user);
   else res.status(401).end();
 });
+
+router.get("/", userIsCustomer, async (req, res) => {
+  const user = await db.get("SELECT * FROM users WHERE id = ?", [
+    req.session.user.id,
+  ]);
+  if (!user)
+    res.status(404).json({
+      message: `Tidak dapat menemukan akun dengan ID ${req.session.user.id}`,
+    });
+  else res.status(200).json(createUserObject(user));
+});
+
+router.delete("/", userIsCustomer, async (req, res) => {
+  const user = await db.get("SELECT * FROM users WHERE id = ?", [
+    req.session.user.id,
+  ]);
+  if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+    res.status(401).json({ message: "Password salah!" });
+    return;
+  }
+
+  try {
+    await db.run("DELETE FROM users WHERE id = ?", [user.id]);
+    res.status(200).json({ message: "Berhasil menghapus akun" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Tidak dapat menghapus akun anda pada saat ini" });
+    next(err);
+  }
+});
+
 module.exports = router;
