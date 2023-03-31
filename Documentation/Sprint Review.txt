@@ -1,5 +1,22 @@
 SPRINT REVIEW + SPRINT RETROSPECTIVE
 
-Sprint 1 - 25/03/2023 - 01/04/2023
+Sprint 1 - 25/03/2023 - 31/04/2023
 Review:
+SUDAH:
+- <Davin> Menyelesaikan kebanyakan tampilan relevan untuk pengguna
+KENDALA:
+- <Davin> Halaman akun agak kosong, tapi pun tidak banyak info yang bisa ditampilkan
+- <Davin> Banyak menu yang duplikat
+- <Vincent> Masih banyak kekurangan di detail dari halaman2 yang sudah terselesaikan
+SOLUSI:
+- <Davin> Kalau ada waktu, bisa di filter menu yang duplikat
+==============================
 Retrospective:
+BAIK:
+- Performa bagus
+KENDALA:
+- <Davin> Planning dan estimasi waktu kacau. Kita masih tidak bisa estimasi waktu dengan benar.
+- <Davin> Ada kasus dimana lupa taruh fitur yang seharusnya ada ke dalam Sprint Backlog
+- <Vincent> Pengerjaan projek bersifat kurang terarah (bisa suka hati kerjakan apa saja)
+- <Vincent> Waktu yang diperlukan terkadang tidak tepat
+==============================

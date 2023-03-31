@@ -71,4 +71,42 @@ BACKEND: 1h
 
 TOTAL WAKTU: 28h
 
+### SPRINT PLANNING - 31/03/2023 ###
+==============================
+Peserta: Davin Tristan Ieson, Jansen Loman
 
+==============================
+DISCUSSION:
+- <Davin> Rekomendasi sprint goal => fokus ke bagian admin
+- <Davin> Menjabarkan sprint backlog sesuai dengan sprint goal
+- <Jansen> Mengestimasikan waktu dan menambahkan task utk bagian backend
+- <Davin> Untuk hal2 yang real-time dibiarkan utk sprint ke-3
+- <Jansen> Menambahkan sprint backlog utk bagian backend
+
+==============================
+SPRINT GOAL:
+1. Alihkan fokus ke bagian admin daripada pelanggan
+2. Menyelesaikan halaman pesanan ongoing dan transaksi sebelumnya (utk admin dan pelanggan)
+
+==============================
+SPRINT BACKLOG:
+* Untuk lebih detailnya, boleh dilihat di Trello
+1. Sebagai pelanggan, saya ingin lihat transaksi dan pesanan saya sebelumnya
+FRONTEND: 2h (tampilan) + 1h (backend)
+BACKEND: 1h
+2. Sebagai koki, saya ingin tahu apa pesanan-pesanan yang ada, agar saya bisa masak
+FRONTEND: 2h (tampilan) + 1h (backend)
+BACKEND: 1h
+3. Sebagai anggota staf, saya ingin memberitahu pelanggan bahwa pesanan mereka sudah siap dimasak, agar mereka bisa menerima makanan mereka ATAU pesanan mereka sudah dibaca, koki sudah memulai memasak makanan mereka
+FRONTEND: 1h
+BACKEND: 1h
+4. Sebagai kasir, saya ingin melihat hasil penjualan hari ini dan hari-hari sebelumnya
+FRONTEND: 4h
+BACKEND: 1h
+5. Sebagai anggota staf, saya ingin masuk ke dashboard admin untuk melakukan tugas saya
+FRONTEND: 1h (tampilan) + 1h (backend)
+BACKEND: 1h
+6. Desain Figma utk Sprint ke-2
+WAKTU: 1h
+
+TOTAL WAKTU: 19h 

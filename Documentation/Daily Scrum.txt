@@ -73,11 +73,27 @@ SISA: 9h - 6h = 3h
 
 ### 29/03/2023 ###
 SUDAH:
-- <Davin> Menyelesaikan tampilan halaman akun
+- <Davin> Menyelesaikan tampilan halaman akun (2h)
 - <Vincent> Menemukan masalah2 UI/UX untuk aplikasi sejauh ini
 - <Davin> Memperbaiki masalah yang ditemukan Vincent
 AKAN:
 - <Jansen> Membuat rute2 yang berkaitan dengan akun
 KENDALA:
 SOLUSI:
-SISA: 3h - 1h = 2h
+SISA: 3h - 2h = 1h
+
+### 30/03/2023 ###
+SUDAH:
+- <Davin> Mengintegrasikan backend ke halaman akun (1h)
+AKAN:
+KENDALA:
+SOLUSI:
+SISA: 1h - 1h = 0
+
+### 31/03/2023 ###
+SUDAH:
+- <Davin> Membuat desain Figma utk sprint selanjutnya (1h)
+- <All> Sprint planning utk sprint ke-2
+SISA (sprint baru): 19h - 1h = 18h
+
+SPRINT 1 - 01/04/2023 - 07/04/2023
