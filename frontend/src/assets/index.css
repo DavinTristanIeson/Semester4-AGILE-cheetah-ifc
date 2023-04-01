@@ -8,6 +8,7 @@
     --secondary-light: #fffbf4;
     --dark: #523112;
     --shadow: #805024;
+    --highlight: #d39658;
     --bs-primary: var(--primary);
     --bs-secondary: var(--secondary);
 }
@@ -70,6 +71,9 @@ body {
     background-position: center;
     background-size: cover;
 }
+.tss-bg-primary {
+    background-color: var(--primary);
+}
 .tss-bg-secondary {
     background-color: var(--secondary);
 }
@@ -108,4 +112,22 @@ body {
 .list-slide-left-leave-to {
   opacity: 0;
   transform: translateX(50%);
+}
+
+/* https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: solid 3px transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--highlight);
+    border-radius: 10px;
 }

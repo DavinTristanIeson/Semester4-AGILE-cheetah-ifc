@@ -97,3 +97,50 @@ export class MenuTransaction {
         return MenuItem.toRupiah(this.totalPrice);
     }
 }
+
+export class TransactionSummary {
+    orders: MenuOrder[];
+    date:Date;
+    totalPrice: number = 0;
+    // jumlah pesanan
+    count: number = 0;
+    // rata-rata per pesanan
+    averagePrice: number;
+    constructor(transactions:MenuTransaction[], date:Date){
+        const uniques:{[key:string]: MenuOrder} = {};
+        this.date = date;
+        for (let tsc of transactions){
+            for (let ord of tsc.orders){
+                if (!uniques.hasOwnProperty(ord.id)){
+                    uniques[ord.id] = ord;
+                } else {
+                    uniques[ord.id].quantity += ord.quantity;
+                }
+                this.totalPrice += ord.price * ord.quantity;
+                this.count += ord.quantity;
+            }
+        }
+        this.orders = [];
+        for (let ord in uniques){
+            this.orders.push(uniques[ord]);
+        }
+        this.orders.sort((a, b)=>{
+            return b.quantity - a.quantity;
+        });
+        this.averagePrice = this.totalPrice/this.count;
+    }
+    get dateString(){
+        // https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
+        return this.date.toLocaleDateString(undefined, {
+            day: "2-digit",
+            year: "numeric",
+            month: "short",
+        });
+    }
+    get hargaTotal(){
+        return MenuItem.toRupiah(this.totalPrice);
+    }
+    get hargaRata2(){
+        return MenuItem.toRupiah(this.averagePrice);
+    }
+}
