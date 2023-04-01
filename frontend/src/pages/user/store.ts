@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { MenuItem, MenuOrder, UserAccount } from "@/helpers/classes";
+import { MenuItem, MenuOrder, MenuTransaction, UserAccount } from "@/helpers/classes";
 import { API } from "@/helpers/constants";
 
 export const useCurrentOrdersStore = defineStore("currentOrders", {
@@ -120,4 +120,36 @@ export const useUserStore = defineStore("user", {
 			this.user = null;
 		}
 	}
-})
+});
+
+const HISTORY_PER_PAGE = 10;
+export const useHistoryStore = defineStore("history", {
+	state: ()=>({
+		history: [] as MenuTransaction[],
+		page: 0,
+		isHistoryInitialized: false,
+	}),
+	getters: {
+		current(state): MenuTransaction[] {
+			return state.history.slice(state.page*HISTORY_PER_PAGE, state.page*HISTORY_PER_PAGE+HISTORY_PER_PAGE);
+		},
+		totalPages(state): number {
+			return Math.floor(state.history.length / HISTORY_PER_PAGE);
+		},
+	},
+	actions: {
+		async initialize(){
+			// fetch dari backend
+			if (this.isHistoryInitialized) return;
+			this.history = Array.from({length: 10}, (_, i) => new MenuTransaction(Math.random(), "Davin", new Date(), [
+				new MenuOrder(new MenuItem(Math.random(), "a", "a", "a", "a", 1000), i, "Hallo"),
+				new MenuOrder(new MenuItem(Math.random(), "a", "a", "a", "a", 1000), i, "Hallo"),
+			], "finished"));
+			console.log(this.history);
+			this.isHistoryInitialized = true;
+		},
+		changePage(newPage:number){
+			this.page = Math.min(this.totalPages, Math.max(0, newPage));
+		}
+	}
+});

@@ -64,3 +64,36 @@ export class UserAccount {
         return new UserAccount(json.id, json.email, json.name, json.gender, json.telp);
     }
 }
+
+export type OngoingOrderPhase = "pending"|"cooking"|"finished";
+export class MenuTransaction {
+    id:number;
+    username:string;
+    time:Date;
+    orders:MenuOrder[];
+    phase:OngoingOrderPhase;
+    constructor (id:number, username:string, time:Date, orders:MenuOrder[], phase:OngoingOrderPhase){
+        this.id = id;
+        this.username = username;
+        this.time = new Date(time);
+        this.orders = orders;
+        this.phase = phase;
+    }
+    get timeString(){
+        // https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
+        return this.time.toLocaleDateString(undefined, {
+            day: "2-digit",
+            year: "numeric",
+            month: "short",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+        });
+    }
+    get totalPrice(){
+        return this.orders.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+    }
+    get hargaTotal(){
+        return MenuItem.toRupiah(this.totalPrice);
+    }
+}

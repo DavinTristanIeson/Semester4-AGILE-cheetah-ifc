@@ -14,13 +14,7 @@ async function logout(){
     // TODO: send request ke backend untuk logout
     try {
     
-    const res = await fetch(API+"/accounts/logout", {
-        credentials: "include",
-        method: "POST",
-    });
-    if (res.ok){
-        router.replace({name: "login"});
-    }
+    router.replace({name: "login"});
     
     } catch (e) {
         emit("error", CONNECTION_ERROR, null);
@@ -41,13 +35,10 @@ async function logout(){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'order'}" to="/order">Pesan Makanan</RouterLink>
+                    <RouterLink class="nav-link" :class="{active: route.name == 'ongoing'}" to="/admin/ongoing">Pesanan Sekarang</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'history'}" to="/history">Sejarah Pesanan</RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'account'}" to="/account">Akun Anda</RouterLink>
+                    <RouterLink class="nav-link" :class="{active: route.name == 'transactions'}" to="/admin/transactions">Rangkuman Transaksi</RouterLink>
                 </li>
                 <li class="nav-item" @click="logout">
                     <a href="#" class="nav-link">Logout</a>

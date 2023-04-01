@@ -5,7 +5,6 @@ import Home from "./views/Home.vue";
 async function hasLogin(){
   try {
     const res = await fetch(API+"/accounts/me", {credentials: "include"});
-    console.log(res.ok);
     return res.ok;
   } catch (e){
     console.error(e);

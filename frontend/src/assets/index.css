@@ -4,7 +4,8 @@
     --primary: #B99878;
     --primary-dark: #a07e5c;
     --secondary: #EBE6DD;
-    --secondary-dark: #dac59c;
+    --secondary-dark: #e0d1b4;
+    --secondary-light: #fffbf4;
     --dark: #523112;
     --shadow: #805024;
     --bs-primary: var(--primary);
@@ -72,6 +73,12 @@ body {
 .tss-bg-secondary {
     background-color: var(--secondary);
 }
+.tss-bg-secondary-light {
+    background-color: var(--secondary-light);
+}
+.tss-bg-secondary-dark {
+    background-color: var(--secondary-dark);
+}
 
 .center-screen {
     position: absolute;
@@ -83,4 +90,22 @@ body {
 
 .capitalize {
     text-transform: capitalize;
+}
+
+.sleek-shadow {
+    box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.list-slide-left-move,
+.list-slide-left-enter-active,
+.list-slide-left-leave-active {
+  transition: opacity 0.24s, transform 0.3s;
+}
+.list-slide-left-leave-active {
+    position: absolute;
+}
+.list-slide-left-enter-from,
+.list-slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(50%);
 }

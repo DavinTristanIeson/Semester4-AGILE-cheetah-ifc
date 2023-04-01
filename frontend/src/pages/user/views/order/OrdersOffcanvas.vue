@@ -64,17 +64,4 @@ Pesanan Anda
     top: 17%;
     right: 5%;
 }
-.list-slide-left-move,
-.list-slide-left-enter-active,
-.list-slide-left-leave-active {
-  transition: opacity 0.24s, transform 0.3s;
-}
-.list-slide-left-leave-active {
-    position: absolute;
-}
-.list-slide-left-enter-from,
-.list-slide-left-leave-to {
-  opacity: 0;
-  transform: translateX(50%);
-}
 </style>

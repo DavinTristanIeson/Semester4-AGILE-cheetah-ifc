@@ -70,6 +70,7 @@ async function onSubmit(response:{[key:string]: string}){
         method="post"
         :inputs="inputs"
         @submit="onSubmit"
+        purpose="Daftar"
     >
         <template v-slot:after>
             <p class="fw-light">Sudah ada akun? <a href="#" @click="$emit('changemode')">Login</a></p>
