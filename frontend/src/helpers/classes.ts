@@ -39,6 +39,9 @@ export class MenuOrder extends MenuItem {
     get harga(){
         return MenuItem.toRupiah(this.price * this.quantity);
     }
+    copy(){
+        return new MenuOrder(new MenuItem(this.id, this.name, this.category, this.description, this.img, this.price), this.quantity, this.note);
+    }
 }
 
 export class UserAccount {
@@ -107,7 +110,7 @@ export class TransactionSummary {
     // rata-rata per pesanan
     averagePrice: number;
     constructor(transactions:MenuTransaction[], date:Date){
-        const uniques:{[key:string]: MenuOrder} = {};
+        const uniques:{[key:number]: MenuOrder} = {};
         this.date = date;
         for (let tsc of transactions){
             for (let ord of tsc.orders){
