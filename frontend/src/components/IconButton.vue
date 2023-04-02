@@ -11,7 +11,7 @@ defineEmits<{
 </script>
 
 <template>
-    <button @click="$emit('click', $event)" class="btn"
+    <button @click="$emit('click', $event)" class="btn icon-btn"
         :style="{
             '--icon-button-width': width ? `${width}em` : '1.4em',
             '--icon-button-height': height ? `${height}em` : '1.4em',
@@ -22,8 +22,8 @@ defineEmits<{
     </button>
 </template>
 
-<style scoped>
-img {
+<style>
+.icon-btn>img {
     width: var(--icon-button-width);
     height: var(--icon-button-height);
 }

@@ -78,7 +78,7 @@ export class MenuTransaction {
     constructor (id:number, username:string, time:Date, orders:MenuOrder[], phase:OngoingOrderPhase){
         this.id = id;
         this.username = username;
-        this.time = new Date(time);
+        this.time = time;
         this.orders = orders;
         this.phase = phase;
     }
@@ -99,6 +99,27 @@ export class MenuTransaction {
     get hargaTotal(){
         return MenuItem.toRupiah(this.totalPrice);
     }
+    static parseStatus(status:number): OngoingOrderPhase {
+        switch (status){
+            case 0: return "finished";
+            case 1: return "cooking";
+            default: return "pending";
+        }
+    }
+    toStatus(){
+        switch (this.phase){
+            case "pending": return 2;
+            case "cooking": return 1;
+            case "finished": return 0;
+        }
+    }
+    static fromJSON(json:any){
+        return json.map((x:any) => new MenuTransaction(x.id, x.user, new Date(x.time),
+          x.records.map((y:any) => new MenuOrder(
+            new MenuItem(y.id, y.name, "", "", "", y.price), y.quantity, y.note
+          )), MenuTransaction.parseStatus(x.status)
+        ));
+    }
 }
 
 export class TransactionSummary {
@@ -107,13 +128,12 @@ export class TransactionSummary {
     totalPrice: number = 0;
     // jumlah pesanan
     count: number = 0;
-    // rata-rata per pesanan
-    averagePrice: number;
     constructor(transactions:MenuTransaction[], date:Date){
         const uniques:{[key:number]: MenuOrder} = {};
         this.date = date;
         for (let tsc of transactions){
             for (let ord of tsc.orders){
+                ord.note = "";
                 if (!uniques.hasOwnProperty(ord.id)){
                     uniques[ord.id] = ord;
                 } else {
@@ -130,7 +150,9 @@ export class TransactionSummary {
         this.orders.sort((a, b)=>{
             return b.quantity - a.quantity;
         });
-        this.averagePrice = this.totalPrice/this.count;
+    }
+    get averagePrice(){
+        return this.totalPrice / this.count;
     }
     get dateString(){
         // https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
@@ -145,5 +167,31 @@ export class TransactionSummary {
     }
     get hargaRata2(){
         return MenuItem.toRupiah(this.averagePrice);
+    }
+    append(transaction: MenuTransaction){
+        for (let ord of transaction.orders){
+            ord.note = "";
+            const item = this.orders.find(x => x.id == ord.id);
+            if (item) item.quantity += ord.quantity;
+            else this.orders.push(ord);
+            this.totalPrice += ord.price * ord.quantity;
+            this.count += ord.quantity;
+        }
+    }
+    private static dayOfDate(date:Date){
+        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+    }
+    static summarize(transactions: MenuTransaction[]){
+        const dates:{[key:string]: MenuTransaction[]} = {};
+        for (let transaction of transactions){
+            const key = this.dayOfDate(transaction.time);
+            if (!dates.hasOwnProperty(key)) dates[key] = [];
+            dates[key].push(transaction);
+        }
+        const summaries = [];
+        for (let date in dates){
+            summaries.push(new TransactionSummary(dates[date], new Date(date)));
+        }
+        return summaries.sort();
     }
 }

@@ -5,7 +5,7 @@ import Home from "./views/Home.vue";
 async function hasLogin(){
   try {
     const res = await fetch(API+"/accounts/me", {credentials: "include"});
-    return res.ok;
+    return res.ok && !(await res.json()).isAdmin;
   } catch (e){
     console.error(e);
     return false;

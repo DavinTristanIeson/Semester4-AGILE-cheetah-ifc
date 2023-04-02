@@ -7,13 +7,11 @@ import vue from '@vitejs/plugin-vue'
 const devServerFallbackPlugin:PluginOption = {
   name: "dev-server-fallback-plugin",
   configureServer(server){
-    const targets = ["index", "admin"];
     server.middlewares.use((req, res, next)=>{
-      if (!req.url) next();
-      if (req.url == '/'){
+      if (req.url && req.url.startsWith("/admin")){
+        req.url = "/admin.html";
+      } else if (req.url && ['/account', '/history', '/order'].includes(req.url)){
         req.url = "/index.html";
-      } else if (targets.find(x=>req.url?.endsWith(x))){
-        req.url += ".html";
       }
       next();
     });

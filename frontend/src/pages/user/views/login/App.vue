@@ -6,8 +6,8 @@ import Spinner from '@/components/Spinner.vue';
 
 const emit = defineEmits<{
     (e:"loading", value:boolean): void,
-    (e:"error", value:string): void,
-    (e:"success", value:string): void,
+    (e:"error", message:string, timeout:number|null): void
+    (e:"success", message:string, timeout:number|null): void
 }>();
 
 const state = reactive({
@@ -45,7 +45,7 @@ function changeMode(){
     </main>
 </template>
 
-<style scoped>
+<style>
 #tsvrspn-icon>div:nth-child(1) {
     border-radius: 50%;
     background-color: var(--secondary);

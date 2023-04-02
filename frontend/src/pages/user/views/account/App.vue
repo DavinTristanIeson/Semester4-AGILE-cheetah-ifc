@@ -56,7 +56,7 @@ const executor = new IntervalExecutor(user.initialize)
     .on("success", (result:boolean)=>{
         emit("loading", false)
         if (result) emit("error", "", null);
-        else emit("error", SERVER_ERROR, null);
+        else emit("error", SERVER_ERROR, 3000);
     }).on("failure", (e)=>{
         console.error(e);
         emit("error", CONNECTION_ERROR, null);

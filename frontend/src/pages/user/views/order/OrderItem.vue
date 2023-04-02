@@ -31,12 +31,12 @@ function examineOrder(){
 </li>
 </template>
 
-<style scoped>
-li {
+<style>
+.your-orders {
     transition: transform 0.2s, background-color 0.2s;
     cursor: pointer;
 }
-li:hover {
+.your-orders:hover {
     transform: translateX(2%);
     background-color: var(--secondary);
 }

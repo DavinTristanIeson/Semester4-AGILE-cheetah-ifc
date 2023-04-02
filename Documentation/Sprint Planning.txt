@@ -101,12 +101,15 @@ BACKEND: 1h
 FRONTEND: 1h
 BACKEND: 1h
 4. Sebagai kasir, saya ingin melihat hasil penjualan hari ini dan hari-hari sebelumnya
-FRONTEND: 4h
+EDIT 01/04/2023 FRONTEND: 1h (tampilan) + 1h (backend)
 BACKEND: 1h
 5. Sebagai anggota staf, saya ingin masuk ke dashboard admin untuk melakukan tugas saya
 FRONTEND: 1h (tampilan) + 1h (backend)
 BACKEND: 1h
 6. Desain Figma utk Sprint ke-2
 WAKTU: 1h
+EDIT 01/04/2023
+7. Sebagai koki, saya ingin tahu menu apa yang perlu diprioritaskan dulu, seperti berdasarkan jumlah pelanggan yang mau memesan mereka
+FRONTEND: 2h
 
-TOTAL WAKTU: 19h 
+TOTAL WAKTU: 19h

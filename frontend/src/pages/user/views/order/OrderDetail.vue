@@ -62,7 +62,7 @@ function setNote(e:Event){
     </div>
 </template>
 
-<style scoped>
+<style>
 .modal-img {
     max-width: 300px;
 }

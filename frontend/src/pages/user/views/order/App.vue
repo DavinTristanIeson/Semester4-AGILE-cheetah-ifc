@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CONNECTION_ERROR } from '@/helpers/constants';
+import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { IntervalExecutor } from '@/helpers/requests';
 import { onBeforeUnmount, onMounted, onUnmounted, reactive } from 'vue';
 import { useMenuStore } from '../../store';
@@ -18,11 +18,14 @@ const state = reactive({
 });
 const menu = useMenuStore();
 emit("loading", true);
-const executor = new IntervalExecutor(async ()=>{
-    await menu.initialize();
-}).on("success", ()=>{
-    emit("loading", false);
-    emit("error", "", null);
+const executor = new IntervalExecutor(menu.initialize)
+.on("success", ()=>{
+    if (menu.isMenuInitialized){
+        emit("loading", false);
+        emit("error", "", null);
+    } else {
+        emit("error", SERVER_ERROR, 3000);
+    }
 }).on("failure", (e)=>{
     console.error(e);
     emit("error", CONNECTION_ERROR, null);
@@ -35,6 +38,6 @@ onBeforeUnmount(()=>{
 </script>
 
 <template>
-    <WaitView v-if="state.isWaiting"/>
-    <OrderView v-else/>
+    <WaitView v-if="state.isWaiting" @changemode="state.isWaiting = !state.isWaiting"/>
+    <OrderView v-else @changemode="state.isWaiting = !state.isWaiting"/>
 </template>

@@ -141,12 +141,14 @@ export const useHistoryStore = defineStore("history", {
 		async initialize(){
 			// fetch dari backend
 			if (this.isHistoryInitialized) return;
-			this.history = Array.from({length: 10}, (_, i) => new MenuTransaction(Math.random(), "Davin", new Date(), [
-				new MenuOrder(new MenuItem(Math.random(), "a", "a", "a", "a", 1000), i, "Hallo"),
-				new MenuOrder(new MenuItem(Math.random(), "a", "a", "a", "a", 1000), i, "Hallo"),
-			], "finished"));
-			console.log(this.history);
-			this.isHistoryInitialized = true;
+			const res = await fetch(API + "/orders/history", {
+				credentials: "include"
+			});
+			if (res.ok){
+				const json = await res.json();
+				this.history = MenuTransaction.fromJSON(json);
+				this.isHistoryInitialized = true;
+			}
 		},
 		changePage(newPage:number){
 			this.page = Math.min(this.totalPages, Math.max(0, newPage));

@@ -13,7 +13,7 @@ function addItem(){
 </script>
 
 <template>
-    <li class="my-2 ms-4 list-group-item rounded" @click="addItem" :title="item.description">
+    <li class="my-2 ms-4 list-group-item rounded menu-list-item" @click="addItem" :title="item.description">
         <div class="d-flex justify-content-between">
             <h5>{{ item.name }}</h5>
             <p class="fs-6 text-muted">{{ item.harga }}</p>
@@ -22,16 +22,16 @@ function addItem(){
     </li>
 </template>
 
-<style scoped>
-li {
+<style>
+.menu-list-item {
     transition: transform 0.2s ease-out, color 0.2s ease-out;
     max-width: 90%;
 }
-li:hover {
+.menu-list-item:hover {
     transform: translateX(1%);
     background-color: var(--secondary);
 }
 @media screen and (min-width: 996px) {
-    li {max-width: 70%;}
+    .menu-list-item {max-width: 70%;}
 }
 </style>

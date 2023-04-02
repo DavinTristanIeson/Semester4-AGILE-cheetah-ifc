@@ -97,6 +97,12 @@ async function loginAdmin(req, res, next) {
   try {
     const { password } = req.body;
     if (password == ADMIN_PASSWORD) {
+      req.session.user = {
+        id: 0,
+        email: "",
+        isAdmin: true,
+        login: "success",
+      };
       res.status(200).json({ message: "Admin Berhasil masuk" });
     } else {
       next();
@@ -105,6 +111,8 @@ async function loginAdmin(req, res, next) {
     next(err);
   }
 }
+
+router.post("/login/admin", loginAdmin);
 
 router.post("/login", async (req, res, next) => {
   try {

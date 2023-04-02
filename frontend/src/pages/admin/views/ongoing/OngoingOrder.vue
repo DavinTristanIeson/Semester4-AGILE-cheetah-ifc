@@ -1,19 +1,24 @@
 <script setup lang="ts">
 import Accordion from '@/components/Accordion.vue';
-import type { MenuTransaction } from "@/helpers/classes";
+import { MenuTransaction } from "@/helpers/classes";
 import { computed, onBeforeUnmount, onMounted, reactive } from 'vue';
 import OrderListItem from '../../../../components/OrderListItem.vue';
-import { useOngoingOrdersStore } from '../../store';
+import { useOngoingOrdersStore, useTransactionsStore } from '../../store';
+import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 
 
+const emit = defineEmits<{
+    (e: "error", message: string, timeout: number|null): void,
+}>();
 const props = defineProps<{
     order: MenuTransaction
 }>();
 const state = reactive({
-    timeDiff: 0,
+    timeDiff: new Date().getTime() - props.order.time.getTime(),
     intervalID: -1,
 });
 const orders = useOngoingOrdersStore();
+const transactions = useTransactionsStore();
 onMounted(()=>{
     state.intervalID = setInterval(()=>{
         state.timeDiff = new Date().getTime() - props.order.time.getTime();
@@ -31,10 +36,30 @@ const accordionClass = computed(()=>{
     else return "";
 });
 
-function finishOrder(){
-    // TODO: hubung dengan backend
-    props.order.phase = "finished";
-    orders.removeOrder(props.order);
+async function changePhase(){
+    try {
+
+    if (props.order.phase == "cooking"){
+        orders.removeOrder(props.order);
+        transactions.addNewTransaction(props.order);
+    }
+    props.order.phase = MenuTransaction.parseStatus(props.order.toStatus()-1);
+    const res = await fetch(`${API}/orders/${props.order.id}/status`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({status: props.order.toStatus()})
+    });
+    if (!res.ok){
+        emit("error", SERVER_ERROR, 3000);
+    }
+
+    } catch (e){
+        console.error(e);
+        emit("error", CONNECTION_ERROR, 3000);
+    }
 }
 </script>
  
@@ -49,8 +74,8 @@ function finishOrder(){
             <OrderListItem :item="item" v-for="item in order.orders"/>
         </ul>
         <div class="my-2 mx-3 w-100"><b>Total: </b> {{ order.hargaTotal }}</div>
-        <button class="mx-3 btn btn-warning" v-if="order.phase == 'pending'" @click="order.phase = 'cooking'">Pesanan Sedang Dimasak</button>
-        <button class="mx-3 btn btn-info" v-if="order.phase == 'cooking'" @click="finishOrder">Pesanan Selesai</button>
+        <button class="mx-3 btn btn-warning" v-if="order.phase == 'pending'" @click="changePhase">Pesanan Sedang Dimasak</button>
+        <button class="mx-3 btn btn-info" v-if="order.phase == 'cooking'" @click="changePhase">Pesanan Selesai</button>
     </Accordion>
 </template>
 

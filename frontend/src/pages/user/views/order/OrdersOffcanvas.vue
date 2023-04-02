@@ -1,20 +1,55 @@
 <script setup lang="ts">
 import type { MenuOrder } from '@/helpers/classes';
 import { onBeforeUnmount, onMounted, reactive } from 'vue';
-import { useCurrentOrdersStore } from '../../store';
+import { useCurrentOrdersStore, useUserStore } from '../../store';
 import OrderItem from './OrderItem.vue';
+import { API, SERVER_ERROR } from '@/helpers/constants';
 
+const emit = defineEmits<{
+    (e:"loading", value:boolean): void
+    (e:"error", message:string, timeout:number|null): void
+    (e:"changemode"): void
+}>();
 const state = reactive({
     isOffcanvasOpen: true
 });
 function setOffcanvas(){
     state.isOffcanvasOpen = !window.matchMedia("(max-width: 1200px)").matches;
 }
+const user = useUserStore();
 onMounted(()=>{ setOffcanvas(); window.addEventListener("resize", setOffcanvas); });
 onBeforeUnmount(()=>{ window.removeEventListener("resize", setOffcanvas) });
 const currentOrders = useCurrentOrdersStore();
-function sendOrder(){
-    // TODO: send pesan ke backend
+async function sendOrder(){
+    emit("loading", true);
+    if (!(await user.initialize())){
+        emit("error", SERVER_ERROR, 3000);
+        return;
+    }
+
+    try {
+        const res = await fetch(API + '/orders', {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(currentOrders.orders.map(x => ({
+                name: x.name,
+                price: x.price,
+                quantity: x.quantity,
+                note: x.note,
+            })))
+        });
+        if (!res.ok){
+            emit("error", SERVER_ERROR, 3000);
+        } else {
+            emit("changemode");
+        }
+    } catch (e){
+        console.error(e);
+    }
+    emit("loading", false);
 }
 </script>
 

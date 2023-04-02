@@ -2,15 +2,38 @@
 import { MenuItem, MenuOrder, MenuTransaction } from "@/helpers/classes";
 import OngoingOrder from "./OngoingOrder.vue";
 import { useOngoingOrdersStore } from "../../store";
-import { reactive } from "vue";
+import { onBeforeUnmount, reactive } from "vue";
 import IconButton from "@/components/IconButton.vue";
 import ChefModeListItem from "./ChefModeListItem.vue";
+import { IntervalExecutor } from "@/helpers/requests";
+import { CONNECTION_ERROR, SERVER_ERROR } from "@/helpers/constants";
 
+const emit = defineEmits<{
+    (e:"loading", value: boolean): void,
+    (e:"error", message:string, timeout:number|null): void
+}>();
 const orders = useOngoingOrdersStore();
-orders.initialize();
-
 const state = reactive({
     isChefMode: false,
+});
+
+emit("loading", true);
+const executor = new IntervalExecutor(orders.initialize)
+    .on("success", () => {
+        if (!orders.areOrdersInitialized){
+            emit("error", SERVER_ERROR, 3000);
+        } else {
+            emit("loading", false)
+            emit("error", "", null);
+        }
+    })
+    .on("failure", (e) => {
+        console.error(e);
+        emit("error", CONNECTION_ERROR, null);
+    });
+executor.run();
+onBeforeUnmount(() => {
+    executor.cleanup();
 });
 </script>
 

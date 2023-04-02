@@ -46,6 +46,3 @@ function incrementPage(inc:number){
         </button>
     </div>
 </template>
-
-<style scoped>
-</style>

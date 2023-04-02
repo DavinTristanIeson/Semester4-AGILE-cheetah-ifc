@@ -96,4 +96,17 @@ SUDAH:
 - <All> Sprint planning utk sprint ke-2
 SISA (sprint baru): 19h - 1h = 18h
 
-SPRINT 1 - 01/04/2023 - 07/04/2023
+SPRINT 2 - 01/04/2023 - 07/04/2023
+### 01/04/2023 ###
+SUDAH:
+- <Davin> Menyelesaikan tampilan semua halaman yang relevan untuk sprint ini (9h *waktu tidak sesuai realita karena estimasi waktu yang tidak akurat)
+AKAN:
+- <Jansen> Menyelesaikan backend utk sejarah transaksi dan login akun admin
+KENDALA:
+- <Davin> Jika sebelumnya estimasi waktu terlalu optimis, kali ini estimasi waktu terlalu pesimis.
+> Yang 2h rupanya cuma memakan waktu 1h, yang 4h rupanya cuma memakan waktu 2h.
+> Mungkin karena sudah ada buat komponen2, jadi bisa langsung recycle/copas daripada buat dari awal.
+- <Davin> Sudah sebagian besar selesai pada hari pertama.
+SOLUSI:
+- Sekaligus tambah satu user story lagi dari Product Backlog ke Sprint Backlog untuk diselesaikan dalam sprint ini
+SISA: 18h - 9h = 9h

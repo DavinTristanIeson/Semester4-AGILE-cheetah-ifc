@@ -25,8 +25,20 @@ const router = useRouter();
 async function onSubmit(response:{[key:string]: string}){
     try {
 
-    // TODO: connect ke backend
-    router.replace({name: 'index'});
+    const res = await fetch(API + "/accounts/login/admin", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({password: response["Password"]}),
+    });
+
+    if (res.ok){
+        router.replace({name: 'index'});
+    } else {
+        state.errMsg = "Password salah";
+    }
 
     } catch (e){
         console.error(e);
@@ -43,5 +55,8 @@ async function onSubmit(response:{[key:string]: string}){
         @submit="onSubmit"
         purpose="Login"
     >
+    <template v-slot:after>
+        <Alert :message="state.errMsg"/>
+    </template>
     </StatefulForm>
 </template>

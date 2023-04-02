@@ -97,22 +97,13 @@ router.get("/", userIsAdmin, async (req, res, next) => {
   }
 });
 
-// semua order yang dibuat customer
-router.get("/transactions", userIsCustomer, async (req, res, next) => {
+// semua transaksi (YANG SUDAH SELESAI) dalam selang waktu tertentu
+router.get("/transactions", userIsAdmin, async (req, res, next) => {
+  let start = req.query.start || "1970-01-01T00:00:00.000Z";
+  let end = req.query.end || new Date().toISOString();
   try {
-    const orders = await db.all("SELECT * FROM orders WHERE account_id = ?", [
-      req.session.user.id,
-    ]);
-
-    const ordersArray = orders.map((order) => {
-      return {
-        id: order.id,
-        time: order.order_time,
-        status: order.status,
-      };
-    });
-
-    res.status(200).json(ordersArray);
+    const orders = await db.all(ORDER_QUERY + " WHERE (orders.order_time BETWEEN ? AND ?) AND orders.status = ?", [start, end, 0]);
+    res.status(200).json(createOrdersArray(orders));
   } catch (err) {
     next(err);
   }
@@ -120,7 +111,7 @@ router.get("/transactions", userIsCustomer, async (req, res, next) => {
 
 // status spesifik order
 router.get(
-  "/orders/:orderId/status",
+  "/:orderId/status",
   userIsCustomer,
   async (req, res, next) => {
     try {
@@ -142,7 +133,7 @@ router.get(
 );
 
 // ganti mode untuk admin
-router.put("/orders/:orderId/status", userIsAdmin, async (req, res, next) => {
+router.put("/:orderId/status", userIsAdmin, async (req, res, next) => {
   const { status } = req.body;
 
   try {
@@ -173,22 +164,13 @@ router.put("/orders/:orderId/status", userIsAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/orders/history", userIsCustomer, async (req, res, next) => {
+router.get("/history", userIsCustomer, async (req, res, next) => {
   try {
     const orders = await db.all(
-      "SELECT * FROM orders WHERE account_id = ? AND status = ?",
+      ORDER_QUERY + " WHERE account_id = ? AND status = ?",
       [req.session.user.id, 0] // 0 = finished status
     );
-
-    const ordersArray = orders.map((order) => {
-      return {
-        id: order.id,
-        time: order.order_time,
-        status: order.status,
-      };
-    });
-
-    res.status(200).json(ordersArray);
+    res.status(200).json(createOrdersArray(orders));
   } catch (err) {
     next(err);
   }
@@ -204,9 +186,7 @@ router.get("/chef", userIsAdmin, async (req, res, next) => {
         " WHERE orders.order_time BETWEEN ? AND ? AND (orders.status = ? OR orders.status = ?)",
       [start, end, 1, 2] // 1 = pending status, 2 = cooking status
     );
-
-    const ordersArray = createOrdersArray(orders);
-    res.json({ orders: ordersArray });
+    res.json(createOrdersArray(orders));
   } catch (err) {
     next(err);
   }

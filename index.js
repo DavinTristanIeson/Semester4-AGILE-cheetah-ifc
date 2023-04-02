@@ -7,6 +7,7 @@ const SQLiteStore = require("connect-sqlite3")(session);
 
 const AccountsRouter = require("./api/account");
 const MenuRouter = require("./api/menu");
+const OrdersRouter = require("./api/orders");
 
 const PORT = 3000;
 const WHITELISTED_SOURCE = "http://localhost:5173";
@@ -36,6 +37,7 @@ app.use(sessionMiddleware);
 
 app.use("/api/accounts", AccountsRouter);
 app.use("/api/menu", MenuRouter);
+app.use("/api/orders", OrdersRouter);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);

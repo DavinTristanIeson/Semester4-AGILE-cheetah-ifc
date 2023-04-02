@@ -1,4 +1,5 @@
 import { MenuItem, MenuOrder, MenuTransaction, TransactionSummary } from "@/helpers/classes";
+import { API } from "@/helpers/constants";
 import { defineStore } from "pinia";
 
 export const useOngoingOrdersStore = defineStore("ongoingOrders", {
@@ -47,14 +48,15 @@ export const useOngoingOrdersStore = defineStore("ongoingOrders", {
   actions: {
     async initialize(){
       if (this.areOrdersInitialized) return;
-      // TODO: fetch from backend
-      this.orders = Array.from({length: 10}, (_, i) => {
-        return new MenuTransaction(Math.random(), "Davin", new Date(), [
-          new MenuOrder(new MenuItem(0, "a", "a", "a", "a", 1000), i, "Hallo"),
-          new MenuOrder(new MenuItem(1, "a", "a", "a", "a", 1000), i, "Hallo"),
-        ], "pending");
+      const res = await fetch(API + "/orders/chef", {
+        credentials: "include",
       });
-      this.areOrdersInitialized = true;
+      if (res.ok){
+        const json = await res.json();
+        console.log(json);
+        this.orders = MenuTransaction.fromJSON(json);
+        this.areOrdersInitialized = true;
+      }
     },
     addOrder(order: MenuTransaction){
       this.orders.push(order);
@@ -86,18 +88,16 @@ export const useTransactionsStore = defineStore("transactions", {
       if (this.areTransactionsInitialized) return;
 
       const [startDate, endDate] = this.getDateRange();
-      // TODO: fetch from backend
-      this.transactions = Array.from({length:10}, (_, i) =>
-        new TransactionSummary(
-          Array.from({length: 10}, (_, i) =>
-            new MenuTransaction(Math.random(), "Davin", new Date(), [
-              new MenuOrder(new MenuItem(Math.random(), "a", "a", "a", "a", 1000), i, "Hallo"),
-              new MenuOrder(new MenuItem(Math.random(), "a", "a", "a", "a", 1000), i, "Hallo"),
-            ], "finished")
-          ), new Date()
-        )
-      );
-      this.areTransactionsInitialized = true;
+      const res = await fetch(API + `/orders/transactions?start=${startDate.toISOString()}&end=${endDate.toISOString()}`, {
+        credentials: "include",
+      });
+      if (res.ok){
+        const json = await res.json();
+        console.log(json);
+        const rawTransactions = MenuTransaction.fromJSON(json);
+        this.transactions = TransactionSummary.summarize(rawTransactions);
+        this.areTransactionsInitialized = true;
+      }
     },
     getDateRange(): [Date, Date] {
       const SEVEN_DAYS = 7*24*60*60*1000
@@ -109,6 +109,16 @@ export const useTransactionsStore = defineStore("transactions", {
       this.page = newPage;
       const [startDate, endDate] = this.getDateRange();
       // fetch from backend
+    },
+    addNewTransaction(transaction:MenuTransaction){
+      function isSameDay(x: TransactionSummary){
+        console.log(x.date.getDate(), transaction.time.getDate(), x.date.getMonth(), transaction.time.getMonth(), x.date.getFullYear(), transaction.time.getFullYear());
+        return x.date.getDate() == transaction.time.getDate() && x.date.getMonth() == transaction.time.getMonth() && x.date.getFullYear() == transaction.time.getFullYear()
+      }
+      const summary = this.transactions.find(isSameDay);
+      console.log(summary);
+      if (!summary) return;
+      summary.append(transaction);
     }
   }
 })
