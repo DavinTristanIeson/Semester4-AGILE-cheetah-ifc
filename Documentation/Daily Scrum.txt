@@ -110,3 +110,15 @@ KENDALA:
 SOLUSI:
 - Sekaligus tambah satu user story lagi dari Product Backlog ke Sprint Backlog untuk diselesaikan dalam sprint ini
 SISA: 18h - 9h = 9h
+
+### 02/04/2023 ###
+SUDAH:
+- <Jansen> Menyelesaikan backend utk transaksi yang ada dan sudah selesai, serta utk login akun admin (5h)
+- <Davin> Integrasi backend ke frontend (4h)
+AKAN:
+- <Vincent> Mengecek produk
+KENDALA:
+- <Davin> ...sudah habis sprint backlog
+SOLUSI:
+- Tunggu Vincent selesai cek dulu baru buat keputusan
+SISA: 9h - 9h = 0h
