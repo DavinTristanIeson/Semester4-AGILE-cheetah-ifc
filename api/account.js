@@ -93,6 +93,20 @@ router.post("/register", validateRegister, async (req, res, next) => {
   }
 });
 
+async function loginAdmin(req, res, next) {
+  const ADMIN_PASSWORD = "adminpass";
+  try {
+    const { password } = req.body;
+    if (password == ADMIN_PASSWORD) {
+      res.status(200).json({ message: "Admin Berhasil masuk" });
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
