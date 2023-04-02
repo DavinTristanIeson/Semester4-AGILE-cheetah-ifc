@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import LoginForm from './LoginForm.vue';
+const emit = defineEmits<{
+    (e:"loading", value:boolean): void,
+    (e:"error", message:string, timeout:number|null): void,
+    (e:"success", message:string, timeout:number|null): void,
+}>();
 </script>
 
 <template>

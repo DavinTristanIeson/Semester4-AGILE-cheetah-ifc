@@ -13,6 +13,7 @@ history.initialize();
 const emit = defineEmits<{
     (e:"loading", value: boolean): void,
     (e:"error", message:string, timeout:number|null): void
+    (e:"success", message:string, timeout:number|null): void,
 }>();
 
 const executor = new IntervalExecutor(history.initialize)

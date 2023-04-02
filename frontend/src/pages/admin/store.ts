@@ -40,7 +40,6 @@ export const useOngoingOrdersStore = defineStore("ongoingOrders", {
         else if (lateA) return -1;
         else return 1;
       });
-      console.log(priorityList);
 
       return priorityList;
     }
@@ -53,7 +52,6 @@ export const useOngoingOrdersStore = defineStore("ongoingOrders", {
       });
       if (res.ok){
         const json = await res.json();
-        console.log(json);
         this.orders = MenuTransaction.fromJSON(json);
         this.areOrdersInitialized = true;
       }
@@ -93,7 +91,6 @@ export const useTransactionsStore = defineStore("transactions", {
       });
       if (res.ok){
         const json = await res.json();
-        console.log(json);
         const rawTransactions = MenuTransaction.fromJSON(json);
         this.transactions = TransactionSummary.summarize(rawTransactions);
         this.areTransactionsInitialized = true;
@@ -112,11 +109,9 @@ export const useTransactionsStore = defineStore("transactions", {
     },
     addNewTransaction(transaction:MenuTransaction){
       function isSameDay(x: TransactionSummary){
-        console.log(x.date.getDate(), transaction.time.getDate(), x.date.getMonth(), transaction.time.getMonth(), x.date.getFullYear(), transaction.time.getFullYear());
         return x.date.getDate() == transaction.time.getDate() && x.date.getMonth() == transaction.time.getMonth() && x.date.getFullYear() == transaction.time.getFullYear()
       }
       const summary = this.transactions.find(isSameDay);
-      console.log(summary);
       if (!summary) return;
       summary.append(transaction);
     }

@@ -16,7 +16,6 @@ function setValue(payload:Event){
     const idx = inputRef.value.value.findIndex(x => x == target.value);
     if (idx == -1) inputRef.value.value.push(target.value);
     else inputRef.value.value.splice(idx, 1);
-    console.log(inputRef.value.value);
     if (props.shouldValidate)
         inputRef.value.validate();
     

@@ -11,7 +11,8 @@ import { useRouter } from 'vue-router';
 const user = useUserStore();
 const emit = defineEmits<{
     (e:"loading", value:boolean): void,
-    (e:"error", msg:string, timeout:number|null): void,
+    (e:"error", message:string, timeout:number|null): void,
+    (e:"success", message:string, timeout:number|null): void,
 }>();
 const state = reactive({
     requirePassword: false,

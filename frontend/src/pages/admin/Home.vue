@@ -32,7 +32,7 @@ async function logout(){
 <template>
 <nav class="navbar navbar-expand-lg fs-5">
     <div class="container-fluid">
-        <RouterLink class="navbar-brand fs-2" to="/order">
+        <RouterLink class="navbar-brand fs-2" to="/admin/ongoing">
             The Savory Spoon
         </RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
