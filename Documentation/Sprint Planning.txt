@@ -111,5 +111,9 @@ WAKTU: 1h
 EDIT 01/04/2023
 7. Sebagai koki, saya ingin tahu menu apa yang perlu diprioritaskan dulu, seperti berdasarkan jumlah pelanggan yang mau memesan mereka
 FRONTEND: 2h
+(EDIT 03/04/2023)
+8. Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa kuambil pulang
+FRONTEND: 4h
+BACKEND: 1h
 
-TOTAL WAKTU: 19h
+TOTAL WAKTU: 24h

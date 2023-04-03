@@ -122,3 +122,17 @@ KENDALA:
 SOLUSI:
 - Tunggu Vincent selesai cek dulu baru buat keputusan
 SISA: 9h - 9h = 0h
+
+Keputusan => selesaikan semua saja pada sprint ini
+SISA: 5h
+
+### 03/04/2023 ###
+SUDAH:
+- <Jansen> Setup server socket.io dan menyediakan beberapa event realtime untuk notifikasi frontend (1h)
+- <Davin> Membuat tampilan2 untuk memberitahu pelanggan tentang status pesanan mereka, menghubungkan frontend ke backend melalui socket.io (4h)
+- <Davin> Refaktor agar tampilan loading sama error menggunakan Pinia daripada emit-emit terus event
+AKAN:
+- <Vincent> Mengecek produk
+KENDALA:
+SOLUSI:
+SISA: 5h - 1h - 4h = 0h
