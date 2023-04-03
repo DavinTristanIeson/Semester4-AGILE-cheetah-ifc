@@ -2,10 +2,52 @@ import { MenuItem, MenuOrder, MenuTransaction, TransactionSummary } from "@/help
 import { API } from "@/helpers/constants";
 import { defineStore } from "pinia";
 
+export const usePageStateStore = defineStore("pageState", {
+	state: () => ({
+		isLoading: false,
+    isLoadingEphemeral: false,
+		errorMessage: "",
+		timeoutID: -1,
+	}),
+	actions: {
+    cleanup(){
+      this.setLoading(false);
+      this.clearError();
+    },
+    beginLoading(){
+      this.isLoadingEphemeral = true;
+      this.isLoading = true;
+    },
+		setLoading(value:boolean){
+			this.isLoading = value;
+      this.isLoadingEphemeral = false;
+		},
+    cleanEphemeralLoading(){
+      if (this.isLoadingEphemeral){
+        this.isLoading = false;
+      }
+    },
+		clearError(){
+			clearTimeout(this.timeoutID);
+			this.errorMessage = "";
+      this.cleanEphemeralLoading();
+		},
+		setError(message: string, timeout?:number){
+			this.errorMessage = message;
+			clearTimeout(this.timeoutID);
+      this.cleanEphemeralLoading();
+			if (!timeout){
+				this.timeoutID = setTimeout(()=>{
+					this.errorMessage = "";
+				}, timeout);
+			}
+		}
+	}
+});
+
 export const useOngoingOrdersStore = defineStore("ongoingOrders", {
   state: ()=>({
     orders: [] as MenuTransaction[],
-    areOrdersInitialized: false,
   }),
   getters: {
     chefMode(): {earliest:Date, order:MenuOrder}[] {
@@ -46,14 +88,12 @@ export const useOngoingOrdersStore = defineStore("ongoingOrders", {
   },
   actions: {
     async initialize(){
-      if (this.areOrdersInitialized) return;
       const res = await fetch(API + "/orders/chef", {
         credentials: "include",
       });
       if (res.ok){
         const json = await res.json();
-        this.orders = MenuTransaction.fromJSON(json);
-        this.areOrdersInitialized = true;
+        this.orders = MenuTransaction.fromJSONArray(json);
       }
     },
     addOrder(order: MenuTransaction){
@@ -91,7 +131,7 @@ export const useTransactionsStore = defineStore("transactions", {
       });
       if (res.ok){
         const json = await res.json();
-        const rawTransactions = MenuTransaction.fromJSON(json);
+        const rawTransactions = MenuTransaction.fromJSONArray(json);
         this.transactions = TransactionSummary.summarize(rawTransactions);
         this.areTransactionsInitialized = true;
       }

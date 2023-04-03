@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
-
-const emit = defineEmits<{
-    (e:"loading", value:boolean): void,
-    (e:"error", message:string, timeout:number|null): void,
-    (e:"success", message:string, timeout:number|null): void,
-}>();
+import { usePageStateStore } from '../store';
 
 const route = useRoute();
 const router = useRouter();
+const pageState = usePageStateStore();
 async function logout(){
     // TODO: send request ke backend untuk logout
     try {
@@ -23,7 +19,7 @@ async function logout(){
     }
     
     } catch (e) {
-        emit("error", CONNECTION_ERROR, null);
+        pageState.setError(CONNECTION_ERROR)
     }
 }
 </script>
@@ -56,11 +52,7 @@ async function logout(){
         </div>
     </div>
 </nav>
-<RouterView
-    @loading="$emit('loading', $event)"
-    @error="$emit('error', $event)"
-    @success="$emit('success', $event)"
-/>
+<RouterView/>
 </template>
 
 <style>

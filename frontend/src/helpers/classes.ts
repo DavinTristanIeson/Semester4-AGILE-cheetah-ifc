@@ -114,11 +114,14 @@ export class MenuTransaction {
         }
     }
     static fromJSON(json:any){
-        return json.map((x:any) => new MenuTransaction(x.id, x.user, new Date(x.time),
-          x.records.map((y:any) => new MenuOrder(
+        return new MenuTransaction(json.id, json.user, new Date(json.time),
+            json.records.map((y:any) => new MenuOrder(
             new MenuItem(y.id, y.name, "", "", "", y.price), y.quantity, y.note
-          )), MenuTransaction.parseStatus(x.status)
-        ));
+            )), MenuTransaction.parseStatus(json.status)
+        );
+    }
+    static fromJSONArray(json:any){
+        return json.map((x:any) => MenuTransaction.fromJSON(x));
     }
 }
 

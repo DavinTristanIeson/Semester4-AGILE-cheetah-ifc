@@ -12,10 +12,6 @@ import FilterPopup from './FilterPopup.vue';
 import OrderDetail from './OrderDetail.vue';
 import ScaleTransition from '@/components/ScaleTransition.vue';
 
-defineEmits<{
-    (e:"changemode"): void
-}>();
-
 const state = reactive({
     isGridView: localStorage.getItem("isGridView") == "false" ? false : true,
 });
@@ -71,7 +67,7 @@ function setViewMode(){
         </ul>
     </div>
     <PageButtons/>
-    <OrdersOffcanvas @changemode="$emit('changemode')"/>
+    <OrdersOffcanvas/>
 </template>
 
 <style>

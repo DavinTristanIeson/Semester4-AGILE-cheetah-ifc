@@ -37,19 +37,3 @@ defineProps<{
         </div>
     </div>
 </template>
-
-<style>
-.transaction-summary-stats tr>td:nth-child(2) {
-    padding: 0px 10px;
-}
-.transaction-summary-list {
-    max-height: 60vh;
-    overflow-y: auto;
-}
-.transaction-summary>div:nth-child(1){
-    border-radius: 20px 20px 0px 0px;
-}
-.transaction-summary>div:nth-child(2){
-    border-radius: 0px 0px 20px 20px;
-}
-</style>

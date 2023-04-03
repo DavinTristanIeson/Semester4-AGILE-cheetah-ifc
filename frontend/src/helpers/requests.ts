@@ -44,3 +44,8 @@ export class IntervalExecutor<T> {
         this.finished = true;
     }
 }
+
+// https://stackoverflow.com/questions/71466297/how-to-use-vue-3-socket-io-with-composition-api-in-vue-js
+import { io } from "socket.io-client";
+import { BACKEND } from "./constants";
+export const socket = io(BACKEND, {withCredentials: true, transports: ['websocket', 'polling', 'flashsocket']});

@@ -36,6 +36,7 @@ async function loadMenu(db) {
 }
 
 async function main(db) {
+  await db.run("PRAGMA foreign_keys = ON");
   await db.run(
     "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL, name TEXT NOT NULL, gender INTEGER NOT NULL, telp TEXT NOT NULL, isAdmin INT DEFAULT 0)"
   );

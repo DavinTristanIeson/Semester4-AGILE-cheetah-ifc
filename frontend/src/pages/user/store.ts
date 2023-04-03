@@ -2,8 +2,52 @@ import { defineStore } from "pinia";
 import { MenuItem, MenuOrder, MenuTransaction, UserAccount } from "@/helpers/classes";
 import { API } from "@/helpers/constants";
 
+export const usePageStateStore = defineStore("pageState", {
+	state: () => ({
+		isLoading: false,
+    	isLoadingEphemeral: false,
+		errorMessage: "",
+		timeoutID: -1,
+	}),
+	actions: {
+		beginLoading(){
+			this.isLoadingEphemeral = true;
+			this.isLoading = true;
+		},
+		cleanup(){
+			this.isLoading = false;
+			this.clearError();
+		},
+		setLoading(value:boolean){
+			this.isLoading = value;
+			this.isLoadingEphemeral = false;
+		},
+		cleanEphemeralLoading(){
+			if (this.isLoadingEphemeral){
+				this.isLoading = false;
+			}
+		},
+		clearError(){
+			clearTimeout(this.timeoutID);
+			this.errorMessage = "";
+			this.cleanEphemeralLoading();
+		},
+		setError(message: string, timeout?:number){
+			this.errorMessage = message;
+			clearTimeout(this.timeoutID);
+			this.cleanEphemeralLoading();
+			if (timeout){
+				this.timeoutID = setTimeout(()=>{
+					this.errorMessage = "";
+				}, timeout);
+			}
+		}
+	}
+});
+
 export const useCurrentOrdersStore = defineStore("currentOrders", {
 	state: () => ({
+		current: null as MenuTransaction|null,
 		orders: [] as MenuOrder[],
 		viewedOrder: undefined as (MenuOrder | undefined),
 	}),
@@ -12,6 +56,13 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 		hargaTotal: state => MenuItem.toRupiah(state.orders.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0)),
 	},
 	actions: {
+		async initialize(){
+			const res = await fetch(API + "/orders/ongoing", {credentials: "include"});
+			if (res.ok){
+				const json = await res.json();
+				this.current = MenuTransaction.fromJSON(json);
+			}
+		},
 		addOrder(item:MenuItem){
 			let findme = this.orders.find(order => order.id == item.id);
 			if (findme) findme.quantity++;
@@ -25,6 +76,30 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 		},
 		examineOrder(order:MenuOrder|undefined){
 			this.viewedOrder = order;
+		},
+		async createTransaction(){
+			this.viewedOrder = undefined;
+			const res = await fetch(API + '/orders', {
+				method: "POST",
+				headers: {
+					'Content-Type': "application/json",
+				},
+				credentials: "include",
+				body: JSON.stringify(this.orders.map(x => ({
+					name: x.name,
+					price: x.price,
+					quantity: x.quantity,
+					note: x.note,
+				})))
+			});
+			if (res.ok){
+				const json = await res.json();
+				this.current = MenuTransaction.fromJSON(json);
+				this.orders = [];
+			}
+		},
+		finishTransaction(){
+			this.current = null;
 		}
 	}
 });
@@ -73,7 +148,7 @@ export const useMenuStore = defineStore("menu", {
 
 			const res = await fetch(API+"/menu/");
 			if (res.ok){
-				const json:any[] = await res.json()
+				const json:any[] = await res.json();
 				this.menu = json.map(x => new MenuItem(x.id, x.name, x.category, x.description, x.img, x.price));
 				this.isMenuInitialized = true;
 				this.initFilterCategories();
@@ -146,7 +221,7 @@ export const useHistoryStore = defineStore("history", {
 			});
 			if (res.ok){
 				const json = await res.json();
-				this.history = MenuTransaction.fromJSON(json);
+				this.history = MenuTransaction.fromJSONArray(json);
 				this.isHistoryInitialized = true;
 			}
 		},

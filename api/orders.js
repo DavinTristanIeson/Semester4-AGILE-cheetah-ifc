@@ -28,7 +28,6 @@ function createOrdersArray(orders) {
 }
 
 function createOrderObject(order) {
-  if (order.length == 0) return {};
   return {
     id: order[0].order_id,
     time: order[0].order_time,
@@ -71,9 +70,12 @@ router.post("/", userIsCustomer, async (req, res, next) => {
     }
     await stmt.finalize();
 
-    const order = createOrderObject(
-      await db.all(ORDER_QUERY + " WHERE orders.id = ?", [changed.lastID])
-    );
+    const raw = await db.all(ORDER_QUERY + " WHERE order_id = ?", [changed.lastID]);
+    const order = createOrderObject(raw);
+    if (!order){
+      res.status(404).end();
+      return;
+    }
     res.status(200).json(order);
     dispatch((io) => {
       io.to("admin").emit("newOrder", order);
@@ -190,6 +192,22 @@ router.get("/history", userIsCustomer, async (req, res, next) => {
   }
 });
 
+router.get("/ongoing", userIsCustomer, async (req, res, next) => {
+  try {
+    const order = await db.all(
+      ORDER_QUERY + " WHERE account_id = ? AND (status = 1 OR status = 2)",
+      [req.session.user.id]
+    );
+    if (order.length == 0) res.status(404).end();
+    else {
+      const orderObj = createOrderObject(order);
+      res.status(200).json(orderObj);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/chef", userIsAdmin, async (req, res, next) => {
   try {
     let start = req.query.start || "1970-01-01T00:00:00.000Z";
@@ -200,7 +218,7 @@ router.get("/chef", userIsAdmin, async (req, res, next) => {
         " WHERE orders.order_time BETWEEN ? AND ? AND (orders.status = ? OR orders.status = ?)",
       [start, end, 1, 2] // 1 = pending status, 2 = cooking status
     );
-    res.json(createOrdersArray(orders));
+    res.status(200).json(createOrdersArray(orders));
   } catch (err) {
     next(err);
   }

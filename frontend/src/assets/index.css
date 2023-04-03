@@ -131,3 +131,21 @@ body {
     background: var(--highlight);
     border-radius: 10px;
 }
+
+
+.transaction-summary-stats tr>td:nth-child(2) {
+    padding: 0px 10px;
+}
+.transaction-summary-list {
+    height: 60vh;
+    overflow-y: auto;
+}
+.transaction-summary>div:nth-child(1){
+    border-radius: 20px 20px 0px 0px;
+}
+.transaction-summary>div:nth-child(2){
+    border-radius: 0px 0px 20px 20px;
+}
+.text-success {
+    color: #77ff77;
+}

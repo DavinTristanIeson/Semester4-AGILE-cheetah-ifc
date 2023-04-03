@@ -21,7 +21,8 @@ function initialize(httpServer, options, sessionMiddleware) {
     if (isAdmin) socket.join("admin");
     else socket.join("customer");
     socket.on("disconnect", () => {
-      socket.leave("customer") || socket.leave("admin");
+      socket.leave("customer");
+      socket.leave("admin");
     });
   });
 }

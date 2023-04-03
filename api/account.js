@@ -69,10 +69,10 @@ router.post("/register", validateRegister, async (req, res, next) => {
       isAdmin,
     ]);
   } catch (err) {
-    console.log(err);
     res
-      .status(400)
-      .json({ message: "Email tersebut sudah digunakan orang lain." });
+    .status(400)
+    .json({ message: "Email tersebut sudah digunakan orang lain." });
+    next(err);
     return;
   }
 

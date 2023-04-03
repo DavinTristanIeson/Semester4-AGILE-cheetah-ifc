@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
-
-const emit = defineEmits<{
-    (e:"loading", value:boolean): void,
-    (e:"error", message:string, timeout:number|null): void,
-    (e:"success", message:string, timeout:number|null): void,
-}>();
+import { usePageStateStore } from './store';
 
 const route = useRoute();
 const router = useRouter();
+const pageState = usePageStateStore();
 async function logout(){
     try {
     
@@ -20,11 +16,11 @@ async function logout(){
     if (res.ok){
         router.replace({name: "login"});
     } else {
-        emit('error', SERVER_ERROR, 3000);
+        pageState.setError(SERVER_ERROR, 3000);
     }
     
     } catch (e) {
-        emit("error", CONNECTION_ERROR, 3000);
+        pageState.setError(CONNECTION_ERROR, 3000);
     }
 }
 </script>
@@ -54,11 +50,7 @@ async function logout(){
         </div>
     </div>
 </nav>
-<RouterView
-    @loading="$emit('loading', $event)"
-    @error="$emit('error', $event)"
-    @success="$emit('success', $event)"
-/>
+<RouterView/>
 </template>
 
 <style>

@@ -2,33 +2,29 @@
 import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { IntervalExecutor } from '@/helpers/requests';
 import { onBeforeUnmount, onMounted, onUnmounted, reactive } from 'vue';
-import { useMenuStore } from '../../store';
+import { useCurrentOrdersStore, useMenuStore, usePageStateStore } from '../../store';
 import OrderView from "./OrderView.vue";
 import WaitView from "./WaitView.vue";
 
-const emit = defineEmits<{
-    (e:"loading", value:boolean): void,
-    (e:"error", value:string, timeout:number|null): void,
-    (e:"success", value:string, timeout:number|null): void,
-}>();
 
-
-const state = reactive({
-    isWaiting: false,
-});
 const menu = useMenuStore();
-emit("loading", true);
+const currentOrders = useCurrentOrdersStore();
+onMounted(async ()=>{
+    await currentOrders.initialize();
+});
+
+const pageState = usePageStateStore();
+pageState.setLoading(true)
 const executor = new IntervalExecutor(menu.initialize)
 .on("success", ()=>{
-    if (menu.isMenuInitialized){
-        emit("loading", false);
-        emit("error", "", null);
-    } else {
-        emit("error", SERVER_ERROR, 3000);
+    pageState.cleanup();
+    if (!menu.isMenuInitialized){
+        pageState.setError(SERVER_ERROR, 3000);
     }
 }).on("failure", (e)=>{
     console.error(e);
-    emit("error", CONNECTION_ERROR, null);
+    pageState.setLoading(false);
+    pageState.setError(CONNECTION_ERROR)
 });
 executor.run();
 
@@ -38,6 +34,6 @@ onBeforeUnmount(()=>{
 </script>
 
 <template>
-    <WaitView v-if="state.isWaiting" @changemode="state.isWaiting = !state.isWaiting"/>
-    <OrderView v-else @changemode="state.isWaiting = !state.isWaiting"/>
+    <WaitView v-if="currentOrders.current"/>
+    <OrderView v-else/>
 </template>

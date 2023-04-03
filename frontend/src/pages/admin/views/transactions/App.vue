@@ -1,29 +1,24 @@
 <script setup lang="ts">
 import { IntervalExecutor } from '@/helpers/requests';
-import { useTransactionsStore } from '../../store';
+import { usePageStateStore, useTransactionsStore } from '../../store';
 import Summary from './Summary.vue';
 import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { onBeforeUnmount } from 'vue';
 
-const emit = defineEmits<{
-    (e:"loading", value:boolean): void,
-    (e:"error", message:string, timeout:number|null): void,
-    (e:"success", message:string, timeout:number|null): void,
-}>();
 const transactions = useTransactionsStore();
+const pageState = usePageStateStore();
 
-emit("loading", true);
+pageState.setLoading(true);
 const executor = new IntervalExecutor(transactions.initialize)
     .on("success", () => {
-        if (transactions.areTransactionsInitialized){
-            emit("error", "", null);
-            emit("loading", false);
-        } else {
-            emit("error", SERVER_ERROR, 3000);
+        pageState.cleanup();
+        if (!transactions.areTransactionsInitialized){
+            pageState.setError(SERVER_ERROR, 3000);
         }
     }).on("failure", (e) => {
         console.error(e);
-        emit("error", CONNECTION_ERROR, null);
+        pageState.setLoading(false);
+        pageState.setError(CONNECTION_ERROR)
     });
 executor.run();
 onBeforeUnmount(() => {

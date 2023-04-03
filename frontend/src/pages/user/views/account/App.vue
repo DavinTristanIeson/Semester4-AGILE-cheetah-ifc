@@ -4,22 +4,18 @@ import { TextInputObject } from '@/helpers/inputs';
 import TextInput from '@/components/TextInput.vue';
 import { IntervalExecutor } from '@/helpers/requests';
 import { onBeforeUnmount, reactive } from 'vue';
-import { useUserStore } from '../../store';
+import { usePageStateStore, useUserStore } from '../../store';
 import { isNotEmpty } from '@/helpers/inputValidators';
 import { useRouter } from 'vue-router';
 
 const user = useUserStore();
-const emit = defineEmits<{
-    (e:"loading", value:boolean): void,
-    (e:"error", message:string, timeout:number|null): void,
-    (e:"success", message:string, timeout:number|null): void,
-}>();
 const state = reactive({
     requirePassword: false,
 });
 
 const router = useRouter();
-const passwordInput = new TextInputObject("Password", "", isNotEmpty("Password harus diisi!"))
+const passwordInput = new TextInputObject("Password", "", isNotEmpty("Password harus diisi!"));
+const pageState = usePageStateStore();
 
 async function deleteAccount(){
     if (!state.requirePassword){
@@ -44,23 +40,24 @@ async function deleteAccount(){
             router.replace({name: "login"});
         } else {
             const {message} = await res.json();
-            emit("error", message, 3000);
+            pageState.setError(message, 3000);
         }
     } catch (e){
         console.error(e);
-        emit("error", CONNECTION_ERROR, 3000);
+        pageState.setError(CONNECTION_ERROR, 3000);
     }
 }
 
-emit("loading", true);
+pageState.setLoading(true)
 const executor = new IntervalExecutor(user.initialize)
     .on("success", (result:boolean)=>{
-        emit("loading", false)
-        if (result) emit("error", "", null);
-        else emit("error", SERVER_ERROR, 3000);
+        pageState.cleanup();
+        if (!result){
+            pageState.setError(SERVER_ERROR, 3000);
+        }
     }).on("failure", (e)=>{
         console.error(e);
-        emit("error", CONNECTION_ERROR, null);
+        pageState.setError(CONNECTION_ERROR)
     });
 executor.run();
 onBeforeUnmount(()=>{

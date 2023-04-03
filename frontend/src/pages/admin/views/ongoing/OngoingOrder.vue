@@ -3,13 +3,10 @@ import Accordion from '@/components/Accordion.vue';
 import { MenuTransaction } from "@/helpers/classes";
 import { computed, onBeforeUnmount, onMounted, reactive } from 'vue';
 import OrderListItem from '../../../../components/OrderListItem.vue';
-import { useOngoingOrdersStore, useTransactionsStore } from '../../store';
+import { useOngoingOrdersStore, usePageStateStore, useTransactionsStore } from '../../store';
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 
 
-const emit = defineEmits<{
-    (e: "error", message: string, timeout: number|null): void,
-}>();
 const props = defineProps<{
     order: MenuTransaction
 }>();
@@ -35,6 +32,7 @@ const accordionClass = computed(()=>{
     else if (state.timeDiff <= 1*60*1000) return "flashing";
     else return "";
 });
+const pageState = usePageStateStore();
 
 async function changePhase(){
     try {
@@ -53,12 +51,12 @@ async function changePhase(){
         body: JSON.stringify({status: props.order.toStatus()})
     });
     if (!res.ok){
-        emit("error", SERVER_ERROR, 3000);
+        pageState.setError(SERVER_ERROR, 3000);
     }
 
     } catch (e){
         console.error(e);
-        emit("error", CONNECTION_ERROR, 3000);
+        pageState.setError(CONNECTION_ERROR, 3000);
     }
 }
 </script>
