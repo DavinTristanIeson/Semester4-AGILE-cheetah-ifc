@@ -8,6 +8,7 @@ const SQLiteStore = require("connect-sqlite3")(session);
 const AccountsRouter = require("./api/account");
 const MenuRouter = require("./api/menu");
 const OrdersRouter = require("./api/orders");
+const { initialize } = require("./api/io");
 
 const PORT = 3000;
 const WHITELISTED_SOURCE = "http://localhost:5173";
@@ -49,6 +50,11 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+initialize(
+  server,
+  { cors: WHITELISTED_SOURCE, credentials: true },
+  sessionMiddleware
+);

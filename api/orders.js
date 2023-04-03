@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("./db");
 const { userIsAdmin, userIsCustomer } = require("./middleware");
+const { dispatch } = require("./io");
 
 function createOrdersArray(orders) {
   const collection = {};
@@ -74,6 +75,9 @@ router.post("/", userIsCustomer, async (req, res, next) => {
       await db.all(ORDER_QUERY + " WHERE orders.id = ?", [changed.lastID])
     );
     res.status(200).json(order);
+    dispatch((io) => {
+      io.to("admin").emit("newOrder", order);
+    });
   } catch (err) {
     next(err);
   }
@@ -102,7 +106,11 @@ router.get("/transactions", userIsAdmin, async (req, res, next) => {
   let start = req.query.start || "1970-01-01T00:00:00.000Z";
   let end = req.query.end || new Date().toISOString();
   try {
-    const orders = await db.all(ORDER_QUERY + " WHERE (orders.order_time BETWEEN ? AND ?) AND orders.status = ?", [start, end, 0]);
+    const orders = await db.all(
+      ORDER_QUERY +
+        " WHERE (orders.order_time BETWEEN ? AND ?) AND orders.status = ?",
+      [start, end, 0]
+    );
     res.status(200).json(createOrdersArray(orders));
   } catch (err) {
     next(err);
@@ -110,27 +118,23 @@ router.get("/transactions", userIsAdmin, async (req, res, next) => {
 });
 
 // status spesifik order
-router.get(
-  "/:orderId/status",
-  userIsCustomer,
-  async (req, res, next) => {
-    try {
-      const order = await db.get(
-        "SELECT * FROM orders WHERE id = ? AND account_id = ?",
-        [req.params.orderId, req.session.user.id]
-      );
+router.get("/:orderId/status", userIsCustomer, async (req, res, next) => {
+  try {
+    const order = await db.get(
+      "SELECT * FROM orders WHERE id = ? AND account_id = ?",
+      [req.params.orderId, req.session.user.id]
+    );
 
-      if (!order) {
-        res.status(404).json({ error: "Order not found" });
-        return;
-      }
-
-      res.status(200).json({ status: order.status });
-    } catch (err) {
-      next(err);
+    if (!order) {
+      res.status(404).json({ error: "Order not found" });
+      return;
     }
+
+    res.status(200).json({ status: order.status });
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 // ganti mode untuk admin
 router.put("/:orderId/status", userIsAdmin, async (req, res, next) => {
@@ -157,6 +161,16 @@ router.put("/:orderId/status", userIsAdmin, async (req, res, next) => {
       status,
       req.params.orderId,
     ]);
+
+    if (status == 0) {
+      dispatch((io) => {
+        io.to("customer").emit("finishOrder", req.params.orderId);
+      });
+    } else if (status == 1) {
+      dispatch((io) => {
+        io.to("customer").emit("cookOrder", req.params.orderId);
+      });
+    }
 
     res.status(200).json({ message: "Order status updated successfully" });
   } catch (err) {
