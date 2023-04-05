@@ -7,10 +7,6 @@ import OrderListItem from '@/components/OrderListItem.vue';
 const props = defineProps<{
     order: MenuTransaction
 }>();
-
-function finishOrder(){
-    // TODO: hubung dengan backend
-}
 </script>
  
 <template>

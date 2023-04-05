@@ -63,7 +63,6 @@ Pesanan Anda
                 <TransitionGroup name="list-slide-left" tag="ul" class="list-group">
                     <OrderItem v-for="item in currentOrders.orders" :item="item" :key="item.id"/>
                 </TransitionGroup>
-                <!-- TODO: List item yang dipesan -->
             </div>
             <div class="position-absolute bottom-0 w-100 mt-2 p-2 border-top tss-bg-secondary">
                 <p><b>Total: </b> {{ currentOrders.hargaTotal }}</p>

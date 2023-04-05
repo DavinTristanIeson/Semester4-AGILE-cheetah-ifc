@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
-import { usePageStateStore } from '../store';
+import { useCurrentOrdersStore, usePageStateStore } from '../store';
 
 const route = useRoute();
 const router = useRouter();
 const pageState = usePageStateStore();
+const currentOrders = useCurrentOrdersStore();
 async function logout(){
-    // TODO: send request ke backend untuk logout
     try {
     
     const res = await fetch(API+"/accounts/logout", {
@@ -15,6 +15,7 @@ async function logout(){
         method: "POST",
     });
     if (res.ok){
+        currentOrders.cleanup();
         router.replace({name: "login"});
     }
     

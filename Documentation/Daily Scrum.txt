@@ -136,3 +136,12 @@ AKAN:
 KENDALA:
 SOLUSI:
 SISA: 5h - 1h - 4h = 0h
+
+### 04/04/2023 ###
+SUDAH:
+- <Vincent> Mengecek produk
+- <Davin> Memperbaiki masalah yang ditemukan
+AKAN:
+KENDALA:
+SOLUSI:
+SISA: 0h

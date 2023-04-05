@@ -100,6 +100,11 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 		},
 		finishTransaction(){
 			this.current = null;
+		},
+		cleanup(){
+			this.current = null;
+			this.orders = [];
+			console.log(this.current, this.orders);
 		}
 	}
 });
@@ -138,7 +143,6 @@ export const useMenuStore = defineStore("menu", {
 	},
 	actions: {
 		async initialize(){
-			// TODO: fetch menu data from backend
 			this.page = 0;
 			this.searchTerm = "";
 			if (this.isMenuInitialized){
