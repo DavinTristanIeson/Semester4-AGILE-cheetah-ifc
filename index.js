@@ -4,6 +4,7 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 const SQLiteStore = require("connect-sqlite3")(session);
+const path = require("path");
 
 const AccountsRouter = require("./api/account");
 const MenuRouter = require("./api/menu");
@@ -11,7 +12,7 @@ const OrdersRouter = require("./api/orders");
 const { initialize } = require("./api/io");
 
 const PORT = 3000;
-const WHITELISTED_SOURCE = "http://localhost:5173";
+const WHITELISTED_SOURCE = "http://localhost:3000";
 
 app.use(
   cors({
@@ -39,6 +40,18 @@ app.use(sessionMiddleware);
 app.use("/api/accounts", AccountsRouter);
 app.use("/api/menu", MenuRouter);
 app.use("/api/orders", OrdersRouter);
+
+app.get("/admin/:route?", (req, res, next)=>{
+  if (["ongoing", "transactions", "login"].includes(req.params.route)){
+    res.sendFile("./frontend/dist/admin.html", {root: __dirname});
+  } else next();
+});
+app.get("/:route?", (req, res, next)=>{
+  if (["order", "account", "history"].includes(req.params.route)){
+    res.sendFile("./frontend/dist/index.html", {root: __dirname});
+  } else next();
+});
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 app.use((err, req, res, next) => {
   console.log(err.stack);

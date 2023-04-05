@@ -145,3 +145,12 @@ AKAN:
 KENDALA:
 SOLUSI:
 SISA: 0h
+
+### 05/04/2023 ###
+SUDAH:
+- <Davin> Membuat index.js sekaligus serve file frontend
+AKAN:
+KENDALA:
+- <Vincent> Bagaimana akses halaman admin?
+SOLUSI:
+- Lewat rute /admin
