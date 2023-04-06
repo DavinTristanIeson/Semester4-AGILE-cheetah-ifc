@@ -42,12 +42,12 @@ app.use("/api/menu", MenuRouter);
 app.use("/api/orders", OrdersRouter);
 
 app.get("/admin/:route?", (req, res, next)=>{
-  if (["ongoing", "transactions", "login"].includes(req.params.route)){
+  if (!req.params.route || ["ongoing", "transactions", "login"].includes(req.params.route)){
     res.sendFile("./frontend/dist/admin.html", {root: __dirname});
   } else next();
 });
 app.get("/:route?", (req, res, next)=>{
-  if (["order", "account", "history"].includes(req.params.route)){
+  if (!req.params.route || ["order", "account", "history"].includes(req.params.route)){
     res.sendFile("./frontend/dist/index.html", {root: __dirname});
   } else next();
 });

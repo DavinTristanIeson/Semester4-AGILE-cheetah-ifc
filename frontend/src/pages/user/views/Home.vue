@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
-import { useCurrentOrdersStore, usePageStateStore } from '../store';
+import { useCurrentOrdersStore, useHistoryStore, usePageStateStore } from '../store';
+import { useUserStore } from '../store';
 
 const route = useRoute();
 const router = useRouter();
 const pageState = usePageStateStore();
 const currentOrders = useCurrentOrdersStore();
+const history = useHistoryStore();
+const user = useUserStore();
 async function logout(){
     try {
     
@@ -16,6 +19,8 @@ async function logout(){
     });
     if (res.ok){
         currentOrders.cleanup();
+        history.cleanup();
+        user.logout();
         router.replace({name: "login"});
     }
     

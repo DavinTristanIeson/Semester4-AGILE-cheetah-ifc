@@ -231,6 +231,10 @@ export const useHistoryStore = defineStore("history", {
 		},
 		changePage(newPage:number){
 			this.page = Math.min(this.totalPages, Math.max(0, newPage));
+		},
+		cleanup(){
+			this.isHistoryInitialized = false;
+			this.history = [];
 		}
 	}
 });
