@@ -1,6 +1,6 @@
 SPRINT REVIEW + SPRINT RETROSPECTIVE
 
-Sprint 1 - 25/03/2023 - 31/04/2023
+Sprint 1: 25/03/2023 - 31/04/2023
 Review:
 SUDAH:
 - <Davin> Menyelesaikan kebanyakan tampilan relevan untuk pengguna
@@ -8,6 +8,7 @@ KENDALA:
 - <Davin> Halaman akun agak kosong, tapi pun tidak banyak info yang bisa ditampilkan
 - <Davin> Banyak menu yang duplikat
 - <Vincent> Masih banyak kekurangan di detail dari halaman2 yang sudah terselesaikan
+(KLARIFIKASI 10/04/2023: Masih banyak kekurangan, TAPI sudah diselesaikan)
 SOLUSI:
 - <Davin> Kalau ada waktu, bisa di filter menu yang duplikat
 ==============================
@@ -20,3 +21,33 @@ KENDALA:
 - <Vincent> Pengerjaan projek bersifat kurang terarah (bisa suka hati kerjakan apa saja)
 - <Vincent> Waktu yang diperlukan terkadang tidak tepat
 ==============================
+
+Sprint 2: 01/04/2023 - 07/04/2023
+Review:
+SUDAH:
+- <Davin> Menyelesaikan semua tampilan yang direncanakan untuk projek ini
+- <Jansen> Menyelesaikan endpoint-endpoint yang diperlukan
+KENDALA:
+- Ada beberapa fitur yang terpotong, walaupun mereka kurang relevan. Kami hanya fokus membuat MVP saja.
+- Terdapat masalah ketika mengganti ke akun lain, tetap menggunakan data dari akun sebelumnya (sudah diperbaiki)
+BAGUS:
+- Situs load dengan lancar, tidak ada masalah pada loading
+==============================
+Retrospective
+WHAT WENT WELL?
+- Pekerjaan Front-end dan Back-end diusahakan saling tidak dependen. Back-end mengerjakan endpoint-endpointnya, Front-end mengerjakan tampilannya. Setelah itu baru digabungkan.
+Ini membuat pengembangan lebih cepat.
+- Penggunaan waktu efektif (diusahakan diselesaikan pada akhir minggu) jika mempertimbangkan waktu untuk mengerjakan projek lain.
+WHAT COULD BE IMPROVED
+- Estimasi waktu perlu lebih tepat
+- Sprint Planning perlu lebih mendalam, agar tidak muncul banyak kebutuhan yang tidak diduga di tengah sprint
+- Kurangnya komunikasi antar anggota karena jadwal yang sering bertabrakan di luar jam perkuliahan
+- Daily Scrum sering tidak sesuai jadwal yang ditentukan
+WHAT TO STOP DOING?
+-
+WHAT TO KEEP DOING?
+- Front-end dan back-end diusahakan tidak saling menunggu
+- Menggunakan akhir minggu untuk mengerjakan sebagian besar projek
+WHAT TO START DOING?
+- Diskusikan dan jelaskan jadwal masing-masing
+- Membaut reminder untuk Daily Scrum

@@ -154,3 +154,19 @@ KENDALA:
 - <Vincent> Bagaimana akses halaman admin?
 SOLUSI:
 - Lewat rute /admin
+
+### 06/07/2023 ###
+SUDAH:
+- <Vincent> Mengecek halaman admin
+- <Davin> Memperbaiki masalah yang ditemukan Vincent
+AKAN:
+KENDALA:
+SOLUSI:
+
+### 07/07/2023 ###
+SUDAH:
+AKAN:
+KENDALA:
+- Tidak ada waktu untuk melakukan Sprint Review/Retrospective
+SOLUSI:
+- Dipindahkan ke hari Senin tanggal 10 April, biar sekaligus diskusi secara tatap muka
