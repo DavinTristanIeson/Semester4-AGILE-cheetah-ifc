@@ -1,26 +1,24 @@
 <script setup lang="ts">
 import type { MenuItem } from '@/helpers/classes';
 import { reactive } from 'vue';
-import { useCurrentOrdersStore } from '../../store';
 
 const props = defineProps<{
     item: MenuItem
+}>();
+const emit = defineEmits<{
+    (e: "click"): void
 }>();
 const state = reactive({
     showOriginalImage: true
 });
 
-const currentOrder = useCurrentOrdersStore();
-function addItem(){
-    currentOrder.addOrder(props.item);
-}
 function imageNotAvailable(){
     state.showOriginalImage = false;
 }
 </script>
 
 <template>
-    <div class="card m-2" @click="addItem" :title="item.description">
+    <div class="card m-2" @click="emit('click')" :title="item.description">
         <div class="card-img-top-wrapper">
             <img
                 v-if="state.showOriginalImage"

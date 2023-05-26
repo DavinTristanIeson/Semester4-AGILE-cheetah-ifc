@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { IntervalExecutor } from '@/helpers/requests';
-import { onBeforeUnmount, onMounted, onUnmounted, reactive } from 'vue';
+import { onBeforeUnmount, onMounted, onUnmounted, provide, reactive } from 'vue';
 import { useCurrentOrdersStore, useMenuStore, usePageStateStore } from '../../store';
 import OrderView from "./OrderView.vue";
 import WaitView from "./WaitView.vue";

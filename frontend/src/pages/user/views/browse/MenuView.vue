@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import { MenuItem } from '@/helpers/classes';
 import { computed, reactive } from 'vue';
-import OrdersOffcanvas from './OrdersOffcanvas.vue';
-import { useCurrentOrdersStore, useMenuStore } from '../../store';
+import { useMenuStore } from '../../store';
 import IconButton from '@/components/IconButton.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import PageButtons from './PageButtons.vue';
-import FilterPopup from './FilterPopup.vue';
-import OrderDetail from './OrderDetail.vue';
-import ScaleTransition from '@/components/ScaleTransition.vue';
+import PageButtons from '../order/PageButtons.vue';
+import FilterPopup from '../order/FilterPopup.vue';
+import MenuCard from '@/components/MenuCard.vue';
+import MenuListItem from '@/components/MenuListItem.vue';
 
 const state = reactive({
     isGridView: localStorage.getItem("isGridView") == "false" ? false : true,
 });
 const menu = useMenuStore();
-const currentOrders = useCurrentOrdersStore();
 
 const icon = computed(()=>{
     if (state.isGridView){
@@ -41,9 +39,6 @@ function setViewMode(){
 </script>
 
 <template>
-    <ScaleTransition>
-        <OrderDetail v-if="currentOrders.viewedOrder"/>
-    </ScaleTransition>
     <div class="d-flex align-items-center mw-70-lg">
         <SearchBar @search="setSearchTerm" class="w-100 me-5"/>
         <div class="d-flex align-items-center me-4">
@@ -56,30 +51,20 @@ function setViewMode(){
             />
         </div>
     </div>
-    <div class="menu-grid mw-70-lg" v-if="state.isGridView">
-        <MenuItem v-for="item in menu.current" :item="item" :key="item.id"/>
+    <div class="menu-grid" v-if="state.isGridView">
+        <MenuCard v-for="item in menu.current" :item="item" :key="item.id"/>
     </div>
-    <div class="mw-70-lg" v-else>
+    <div v-else>
         <ul class="list-group">
-            <MenuItem v-for="item in menu.current" :item="item" :key="item.id"/>
+            <MenuListItem v-for="item in menu.current" :item="item" :key="item.id"/>
         </ul>
     </div>
     <PageButtons/>
-    <OrdersOffcanvas/>
 </template>
 
 <style>
 .menu-grid {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-}
-.mw-70-lg {
-    max-width: 100%;
-}
-
-@media screen and (min-width: 996px) {
-    .mw-70-lg {
-        max-width: 70%;
-    }
+    grid-template-columns: 20% 20% 20% 20% 20%;
 }
 </style>

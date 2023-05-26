@@ -107,17 +107,17 @@ function changeMode(){
     filter: brightness(110%);
 }
 #decoball-a {
-    width: 35vw; height: 35vw;
+    width: 25vw; height: 25vw;
     right: -10%; top: -10%;
     z-index: 3;
 }
 #decoball-b {
-    width: 25vw; height: 25vw;
+    width: 15vw; height: 15vw;
     left: -5%; bottom: -5%;
     z-index: 2;
 }
 #decoball-c {
-    width: 15vw; height: 15vw;
+    width: 5vw; height: 5vw;
     left: 20%; bottom: 25%;
     z-index: 0;
 }

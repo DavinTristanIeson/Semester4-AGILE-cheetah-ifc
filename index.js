@@ -12,7 +12,7 @@ const OrdersRouter = require("./api/orders");
 const { initialize } = require("./api/io");
 
 const PORT = 3000;
-const WHITELISTED_SOURCE = "http://localhost:3000";
+const WHITELISTED_SOURCE = "http://localhost:5173";
 
 app.use(
   cors({

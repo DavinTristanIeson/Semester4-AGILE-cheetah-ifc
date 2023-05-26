@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import type { MenuItem } from '@/helpers/classes';
-import { useCurrentOrdersStore } from '../../store';
 
 const props = defineProps<{
-    item: MenuItem
+    item: MenuItem,
 }>();
-
-const currentOrder = useCurrentOrdersStore();
-function addItem(){
-    currentOrder.addOrder(props.item);
-}
+const emit = defineEmits<{
+    (e: "click"): void
+}>();
 </script>
 
 <template>
-    <li class="my-2 ms-4 list-group-item rounded menu-list-item" @click="addItem" :title="item.description">
+    <li class="my-2 ms-4 list-group-item rounded menu-list-item" @click="emit('click')" :title="item.description">
         <div class="d-flex justify-content-between">
             <h5>{{ item.name }}</h5>
             <p class="fs-6 text-muted">{{ item.harga }}</p>

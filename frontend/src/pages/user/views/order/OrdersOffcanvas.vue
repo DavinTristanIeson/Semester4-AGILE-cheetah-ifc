@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { MenuOrder } from '@/helpers/classes';
 import { onBeforeUnmount, onMounted, reactive } from 'vue';
 import { useCurrentOrdersStore, usePageStateStore, useUserStore } from '../../store';
 import OrderItem from './OrderItem.vue';
-import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
+import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 
 const state = reactive({
     isOffcanvasOpen: true
@@ -14,23 +13,26 @@ function setOffcanvas(){
 const user = useUserStore();
 onMounted(()=>{ setOffcanvas(); window.addEventListener("resize", setOffcanvas); });
 onBeforeUnmount(()=>{ window.removeEventListener("resize", setOffcanvas) });
-const currentOrders = useCurrentOrdersStore();
+
+const current = useCurrentOrdersStore();
 const pageState = usePageStateStore();
 async function sendOrder(){
+    if (!current) return;
+
     pageState.beginLoading();
     if (!(await user.initialize())){
         pageState.setError(SERVER_ERROR, 3000);
         return;
     }
 
-    if (currentOrders.orders.length == 0){
+    if (current.orders.length == 0){
         pageState.setError("Minimal harus ada satu pesanan!", 3000);
         return;
     }
 
     try {
-        await currentOrders.createTransaction();
-        if (!currentOrders.current){
+        await current.createTransaction();
+        if (!current.orders){
             pageState.setError(SERVER_ERROR, 3000);
         }
         pageState.setLoading(false);
@@ -61,11 +63,11 @@ Pesanan Anda
         <div class="offcanvas-body p-0">
             <div class="px-2 py-1">
                 <TransitionGroup name="list-slide-left" tag="ul" class="list-group">
-                    <OrderItem v-for="item in currentOrders.orders" :item="item" :key="item.id"/>
+                    <OrderItem v-for="item in current!.orders" :item="item" :key="item.id"/>
                 </TransitionGroup>
             </div>
             <div class="position-absolute bottom-0 w-100 mt-2 p-2 border-top tss-bg-secondary">
-                <p><b>Total: </b> {{ currentOrders.hargaTotal }}</p>
+                <p><b>Total: </b> {{ current!.hargaTotal }}</p>
                 <div class="w-100 text-center">
                     <button class="btn btn-primary w-75" @click="sendOrder">Pesan</button>
                 </div>

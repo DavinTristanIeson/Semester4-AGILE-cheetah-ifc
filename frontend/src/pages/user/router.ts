@@ -25,6 +25,11 @@ const router = createRouter({
       component: () => import('./views/login/App.vue'),
     },
     {
+      path: "/browse",
+      name: 'browse',
+      component: () => import("./views/browse/App.vue"),
+    },
+    {
       path: '/',
       name: "index",
       redirect: "/order",
