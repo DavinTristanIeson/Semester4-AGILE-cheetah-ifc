@@ -15,6 +15,7 @@ const state = reactive({
 function imageNotAvailable(){
     state.showOriginalImage = false;
 }
+console.log(props.item);
 </script>
 
 <template>

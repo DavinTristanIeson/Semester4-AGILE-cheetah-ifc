@@ -3,8 +3,8 @@ import { API, CONNECTION_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
 import { useCurrentOrdersStore, useHistoryStore, usePageStateStore } from '../store';
 import { useUserStore } from '../store';
+import NavBar from '@/components/display/NavBar.vue';
 
-const route = useRoute();
 const router = useRouter();
 const pageState = usePageStateStore();
 const currentOrders = useCurrentOrdersStore();
@@ -28,36 +28,16 @@ async function logout(){
         pageState.setError(CONNECTION_ERROR)
     }
 }
+const links = [
+    {name: "Pesan Makanan", dest: "order"},
+    {name: "Sejarah Pesanan", dest: "history"},
+    {name: "Akun Anda", dest: "account"},
+    {name: "Logout", action: logout}
+];
 </script>
 
 <template>
-<nav class="navbar navbar-expand-lg fs-5">
-    <div class="container-fluid">
-        <RouterLink class="navbar-brand fs-2" to="/order">
-            The Savory Spoon
-        </RouterLink>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'order'}" to="/order">Pesan Makanan</RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'history'}" to="/history">Sejarah Pesanan</RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'account'}" to="/account">Akun Anda</RouterLink>
-                </li>
-                <li class="nav-item" @click="logout">
-                    <a href="#" class="nav-link">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<NavBar brandDest="order" :links="links"/>
 <RouterView/>
 </template>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import StatefulForm from '@/components/StatefulForm.vue';
+import StatefulForm from '@/components/input/StatefulForm.vue';
 import { RadioInputObject, TextInputObject } from '@/helpers/inputs';
 import { validateEmail, validateName, validatePassword, validatePhoneNumber } from "@/helpers/inputValidators"
-import Alert from '@/components/Alert.vue';
+import Alert from '@/components/display/Alert.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { UserAccount } from '@/helpers/classes';

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import CheckboxInput from '@/components/CheckboxInput.vue';
-import IconButton from '@/components/IconButton.vue';
+import CheckboxInput from '@/components/input/CheckboxInput.vue';
+import IconButton from '@/components/display/IconButton.vue';
 import { CheckboxInputObject } from '@/helpers/inputs';
 import { computed, reactive } from 'vue';
 import { useMenuStore } from '../../store';
-import ScaleTransition from '@/components/ScaleTransition.vue';
+import ScaleTransition from '@/components/display/ScaleTransition.vue';
 
 const menu = useMenuStore();
 const input = computed(()=>{

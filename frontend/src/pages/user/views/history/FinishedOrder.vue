@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Accordion from '@/components/Accordion.vue';
+import Accordion from '@/components/display/Accordion.vue';
 import type { MenuTransaction } from "@/helpers/classes";
 import { computed, onBeforeUnmount, onMounted, reactive } from 'vue';
-import OrderListItem from '@/components/OrderListItem.vue';
+import OrderListItem from '@/components/display/OrderListItem.vue';
 
 const props = defineProps<{
     order: MenuTransaction

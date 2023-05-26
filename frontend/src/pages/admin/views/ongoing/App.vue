@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { MenuItem, MenuOrder, MenuTransaction } from "@/helpers/classes";
+import { MenuTransaction } from "@/helpers/classes";
 import OngoingOrder from "./OngoingOrder.vue";
 import { useOngoingOrdersStore, usePageStateStore } from "../../store";
 import { onBeforeUnmount, reactive } from "vue";
-import IconButton from "@/components/IconButton.vue";
+import IconButton from "@/components/display/IconButton.vue";
 import ChefModeListItem from "./ChefModeListItem.vue";
 import { IntervalExecutor, socket } from "@/helpers/requests";
-import { CONNECTION_ERROR, SERVER_ERROR } from "@/helpers/constants";
+import { CONNECTION_ERROR } from "@/helpers/constants";
 
 
 const orders = useOngoingOrdersStore();

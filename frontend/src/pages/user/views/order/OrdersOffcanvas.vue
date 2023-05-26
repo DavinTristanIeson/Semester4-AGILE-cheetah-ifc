@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, reactive } from 'vue';
 import { useCurrentOrdersStore, usePageStateStore, useUserStore } from '../../store';
-import OrderItem from './OrderItem.vue';
+import OrderItem from './components/OrderItem.vue';
 import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 
 const state = reactive({

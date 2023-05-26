@@ -2,6 +2,7 @@
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
 import { usePageStateStore } from './store';
+import NavBar from '@/components/display/NavBar.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -23,33 +24,17 @@ async function logout(){
         pageState.setError(CONNECTION_ERROR, 3000);
     }
 }
+
+const links = [
+    {name: "Pesanan Sekarang", dest: "ongoing"},
+    {name: "Rangkuman Transaksi", dest: "transactions"},
+    {name: "Modifikasi Menu", dest: "menu"},
+    {name: "Logout", action: logout},
+]
 </script>
 
 <template>
-<nav class="navbar navbar-expand-lg fs-5">
-    <div class="container-fluid">
-        <RouterLink class="navbar-brand fs-2" to="/admin/ongoing">
-            The Savory Spoon
-        </RouterLink>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'ongoing'}" to="/admin/ongoing">Pesanan Sekarang</RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink class="nav-link" :class="{active: route.name == 'transactions'}" to="/admin/transactions">Rangkuman Transaksi</RouterLink>
-                </li>
-                <li class="nav-item" @click="logout">
-                    <a href="#" class="nav-link">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<NavBar :links="links" brandDest="ongoing" />
 <RouterView/>
 </template>
 

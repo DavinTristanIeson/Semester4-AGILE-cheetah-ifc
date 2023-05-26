@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { MenuTransaction, MenuOrder, MenuItem } from '@/helpers/classes';
 import FinishedOrder from './FinishedOrder.vue';
 import { useHistoryStore, usePageStateStore } from '../../store';
 import PageButtons from './PageButtons.vue';

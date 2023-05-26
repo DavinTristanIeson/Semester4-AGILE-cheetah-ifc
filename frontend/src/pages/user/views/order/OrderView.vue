@@ -3,12 +3,13 @@ import { MenuItem } from '@/helpers/classes';
 import { computed, reactive } from 'vue';
 import OrdersOffcanvas from './OrdersOffcanvas.vue';
 import { useCurrentOrdersStore, useMenuStore } from '../../store';
-import IconButton from '@/components/IconButton.vue';
-import SearchBar from '@/components/SearchBar.vue';
-import PageButtons from './PageButtons.vue';
+import IconButton from '@/components/display/IconButton.vue';
+import SearchBar from '@/components/display/SearchBar.vue';
+import PageButtons from './components/PageButtons.vue';
 import FilterPopup from './FilterPopup.vue';
-import OrderDetail from './OrderDetail.vue';
-import ScaleTransition from '@/components/ScaleTransition.vue';
+import OrderDetail from './components/OrderDetail.vue';
+import ScaleTransition from '@/components/display/ScaleTransition.vue';
+import MenuItemComponent from './MenuItemComponent.vue';
 
 const state = reactive({
     isGridView: localStorage.getItem("isGridView") == "false" ? false : true,
@@ -57,11 +58,11 @@ function setViewMode(){
         </div>
     </div>
     <div class="menu-grid mw-70-lg" v-if="state.isGridView">
-        <MenuItem v-for="item in menu.current" :item="item" :key="item.id"/>
+        <MenuItemComponent v-for="item in menu.current" :item="item" :isGridView="state.isGridView" :key="item.id"/>
     </div>
     <div class="mw-70-lg" v-else>
         <ul class="list-group">
-            <MenuItem v-for="item in menu.current" :item="item" :key="item.id"/>
+            <MenuItemComponent v-for="item in menu.current" :item="item" :isGridView="state.isGridView" :key="item.id"/>
         </ul>
     </div>
     <PageButtons/>

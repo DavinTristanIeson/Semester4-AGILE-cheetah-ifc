@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Accordion from '@/components/Accordion.vue';
+import Accordion from '@/components/display/Accordion.vue';
 import { MenuTransaction } from "@/helpers/classes";
 import { computed, onBeforeUnmount, onMounted, reactive } from 'vue';
-import OrderListItem from '../../../../components/OrderListItem.vue';
+import OrderListItem from '@/components/display/OrderListItem.vue';
 import { useOngoingOrdersStore, usePageStateStore, useTransactionsStore } from '../../store';
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 

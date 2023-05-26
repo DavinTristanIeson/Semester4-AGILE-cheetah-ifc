@@ -6,7 +6,7 @@ export function timeout(millis:number){
 
 export class IntervalExecutor<T> {
     private timeoutID?:number;
-    private fn:()=>Promise<T>;
+    private fn:()=>Promise<T | Error>;
     private onSuccess?:(payload:T)=>void;
     private onFailure?:(e:unknown)=>void;
     readonly interval:number;
@@ -25,13 +25,19 @@ export class IntervalExecutor<T> {
     }
     run(){
         this.finished = false;
-        return new Promise<T>(async (resolve, reject)=>{
+        return new Promise<void>(async (resolve, reject)=>{
             while (!this.finished){
                 try {
-                    let response:T = await this.fn();
-                    this.onSuccess?.(response);
-                    this.finished = true;
-                    resolve(response);
+                    let response:T | Error= await this.fn();
+                    if (response instanceof Error){
+                        this.onFailure?.(response);
+                        this.finished = true;
+                        reject(response);
+                    } else {
+                        this.onSuccess?.(response);
+                        this.finished = true;
+                        resolve();
+                    }
                 } catch (e) {
                     this.onFailure?.(e);
                     await timeout(this.interval);

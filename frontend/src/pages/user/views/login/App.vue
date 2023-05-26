@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import LoginForm from "./LoginForm.vue";
 import RegisterForm from "./RegisterForm.vue";
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/display/Spinner.vue';
 
 const emit = defineEmits<{
     (e:"loading", value:boolean): void,

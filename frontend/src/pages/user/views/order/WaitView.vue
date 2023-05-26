@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCurrentOrdersStore } from '../../store';
-import OrderListItem from '@/components/OrderListItem.vue';
+import OrderListItem from '@/components/display/OrderListItem.vue';
 import { MenuTransaction } from '@/helpers/classes';
 import { socket } from '@/helpers/requests';
 import { computed, onBeforeUnmount } from 'vue';

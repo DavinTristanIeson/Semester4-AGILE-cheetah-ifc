@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
-import { useCurrentOrdersStore } from '../../store';
+import { useCurrentOrdersStore } from '../../../store';
 
 const currentOrders = useCurrentOrdersStore();
 const state = reactive({

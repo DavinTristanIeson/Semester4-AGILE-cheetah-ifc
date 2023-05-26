@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { inject } from 'vue';
-import type { MenuItem } from '@/helpers/classes';
-import MenuListItem from '@/components/MenuListItem.vue';
-import MenuCard from '@/components/MenuCard.vue';
+import MenuListItem from '@/components/display/MenuListItem.vue';
+import MenuCard from '@/components/display/MenuCard.vue';
 import { useCurrentOrdersStore } from '../../store';
+import type { MenuItem } from '@/helpers/classes';
 
 const current = useCurrentOrdersStore();
 const props = defineProps<{

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import IconButton from '@/components/IconButton.vue';
+import IconButton from '@/components/display/IconButton.vue';
 import type { MenuOrder } from '@/helpers/classes';
-import { useCurrentOrdersStore } from '../../store';
+import { useCurrentOrdersStore } from '@/pages/user/store';
 const props = defineProps<{
     item:MenuOrder
 }>();

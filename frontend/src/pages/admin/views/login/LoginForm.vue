@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import StatefulForm from '@/components/StatefulForm.vue';
+import StatefulForm from '@/components/input/StatefulForm.vue';
 import { TextInputObject } from '@/helpers/inputs';
-import Alert from '@/components/Alert.vue';
+import Alert from '@/components/display/Alert.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { API, CONNECTION_ERROR } from '@/helpers/constants';
-import { UserAccount } from '@/helpers/classes';
 
 defineEmits<{
     (e:"changemode"): void

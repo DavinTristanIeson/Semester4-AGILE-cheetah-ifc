@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OrderListItem from '@/components/OrderListItem.vue';
+import OrderListItem from '@/components/display/OrderListItem.vue';
 import type { TransactionSummary } from '@/helpers/classes';
 
 defineProps<{

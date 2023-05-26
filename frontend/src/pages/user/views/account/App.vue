@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { TextInputObject } from '@/helpers/inputs';
-import TextInput from '@/components/TextInput.vue';
+import TextInput from '@/components/input/TextInput.vue';
 import { IntervalExecutor } from '@/helpers/requests';
 import { onBeforeUnmount, reactive } from 'vue';
 import { usePageStateStore, useUserStore } from '../../store';

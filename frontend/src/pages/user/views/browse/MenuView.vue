@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { MenuItem } from '@/helpers/classes';
 import { computed, reactive } from 'vue';
 import { useMenuStore } from '../../store';
-import IconButton from '@/components/IconButton.vue';
-import SearchBar from '@/components/SearchBar.vue';
-import PageButtons from '../order/PageButtons.vue';
+import IconButton from '@/components/display/IconButton.vue';
+import SearchBar from '@/components/display/SearchBar.vue';
+import PageButtons from '../order/components/PageButtons.vue';
 import FilterPopup from '../order/FilterPopup.vue';
-import MenuCard from '@/components/MenuCard.vue';
-import MenuListItem from '@/components/MenuListItem.vue';
+import MenuCard from '@/components/display/MenuCard.vue';
+import MenuListItem from '@/components/display/MenuListItem.vue';
 
 const state = reactive({
     isGridView: localStorage.getItem("isGridView") == "false" ? false : true,

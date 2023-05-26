@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { TextInputObject } from '../helpers/inputs';
+import type { TextInputObject } from '@/helpers/inputs';
 const props = defineProps<{
     input:TextInputObject,
     shouldValidate?:boolean
