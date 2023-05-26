@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useMenuStore } from '../../../store';
+import { useMenuStore } from '@/helpers/menuStore';
 
 const menu = useMenuStore();
 function changePage(e:Event){

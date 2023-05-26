@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CheckboxInputObject } from '../helpers/inputs';
+import type { CheckboxInputObject } from '@/helpers/inputs';
 import { ref } from 'vue';
 
 const props = defineProps<{

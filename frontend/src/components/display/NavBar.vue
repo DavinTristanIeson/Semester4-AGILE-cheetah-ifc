@@ -10,7 +10,6 @@ const props = defineProps<{
     }[];
 }>();
 const route = useRoute();
-console.log(props.links, route.name);
 
 </script>
 

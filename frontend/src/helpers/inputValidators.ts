@@ -23,3 +23,15 @@ export function isNotEmpty(errMsg:string){
         return value.length > 0 ? "" : errMsg;
     }
 }
+export function isNotFalsey(errMsg: string){
+    return function (data: any){
+        return !data ? errMsg : "";
+    }
+}
+export function validatePrice(price: number){
+    if (price < 0) return "Harga harus merupakan angka lebih besar dari 0";
+    else return "";
+}
+export function noValidate(){
+    return undefined;
+}

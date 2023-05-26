@@ -9,7 +9,7 @@ function changePage(e:Event){
     }
     const target = e.target as HTMLInputElement;
     const newPage = parseInt(target.value);
-    transactions.changePage(isNaN(newPage) ? 0 : newPage-1);
+    transactions.page = (isNaN(newPage) ? 0 : newPage-1);
 }
 const hasNextPage = computed(()=>transactions.page < transactions.totalPages);
 const hasPrevPage = computed(()=>transactions.page > 0);

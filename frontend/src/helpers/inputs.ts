@@ -16,6 +16,7 @@ export abstract class InputObject<T = any> {
 interface TextInputObjectOptions {
     placeholder:string,
     semanticType:"email"|"password"|"text",
+    isTextarea: boolean;
 }
 export class TextInputObject extends InputObject<string> {
     type: string = "text";
@@ -30,7 +31,27 @@ export class TextInputObject extends InputObject<string> {
         this.options = {
             placeholder: options.placeholder ?? label,
             semanticType: options.semanticType ?? "text",
+            isTextarea: !!options.isTextarea,
         }
+    }
+}
+
+interface NumberInputObjectOptions {
+    isInteger: boolean;
+}
+export class NumberInputObject extends InputObject<number>{
+    type: string = "number";
+    validate: () => boolean;
+    options: NumberInputObjectOptions;
+    constructor(label: string, initialValue: number, validator: (value: number) => string|undefined, options?: Partial<NumberInputObjectOptions>){
+        super(label, initialValue);
+        this.validate = function (){
+            this.error = validator(this.value) ?? "";
+            return this.error.length == 0;
+        }
+        this.options = {
+            isInteger: options?.isInteger ?? false,
+        };
     }
 }
 
@@ -54,13 +75,53 @@ export class CheckboxInputObject extends InputObject<string[]> {
     type: string = "checkbox";
     options: ChoiceInputOption[];
     validate: ()=>boolean;
-    constructor(label:string, initialValue:string[], options:ChoiceInputOption[], validator:(chosen:string[])=>string){
+    constructor(label:string, initialValue:string[], options:ChoiceInputOption[], validator:(chosen:string[])=>string|undefined){
         super(label, initialValue);
         this.options = options;
         this.validate = function (){
-            this.error = validator(this.value);
+            this.error = validator(this.value) ?? "";
             return this.error.length == 0;
         }
+    }
+}
+
+interface FileInputObjectOptions {
+    accept:string,
+}
+export class FileInputObject extends InputObject<File|undefined> {
+    type:string = "file"
+    options:FileInputObjectOptions
+    validate: () => boolean;
+    constructor(label:string, validator: (file?:File) => string|undefined, options?:Partial<FileInputObjectOptions>){
+        super(label, undefined);
+        this.options = {
+            accept: options?.accept ?? "*",
+        }
+        this.validate = function () {
+            this.error = validator(this.value) ?? "";
+            return this.error.length == 0;
+        }
+    }
+}
+export class SelectInputObject<T> extends InputObject<T|undefined> {
+    type = "select"
+    validate: () => boolean;
+    selection: {
+        [key: string]: T;
+    }
+    constructor(label: string, initialValue: T|undefined, selection: T[], extractor: (option: T) => string, validator: (data: T|undefined) => string | undefined){
+        super(label, initialValue);
+        this.selection = {};
+        for (let select of selection){
+            this.selection[extractor(select)] = select;
+        }
+        this.validate = function (){
+            this.error = validator(this.value) ?? "";
+            return this.error.length == 0;
+        }
+    }
+    select(name: string){
+        this.value = this.selection[name];
     }
 }
 

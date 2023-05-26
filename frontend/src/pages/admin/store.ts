@@ -124,9 +124,7 @@ export const useTransactionsStore = defineStore("transactions", {
   actions: {
     async initialize(){
       if (this.areTransactionsInitialized) return;
-
-      const [startDate, endDate] = this.getDateRange();
-      const res = await fetch(API + `/orders/transactions?start=${startDate.toISOString()}&end=${endDate.toISOString()}`, {
+      const res = await fetch(API + `/orders/transactions`, {
         credentials: "include",
       });
       if (res.ok){
@@ -135,17 +133,6 @@ export const useTransactionsStore = defineStore("transactions", {
         this.transactions = TransactionSummary.summarize(rawTransactions);
         this.areTransactionsInitialized = true;
       }
-    },
-    getDateRange(): [Date, Date] {
-      const SEVEN_DAYS = 7*24*60*60*1000
-      const endDate = new Date(new Date().getTime() - (SEVEN_DAYS * this.page));
-      const startDate = new Date(endDate.getTime() - SEVEN_DAYS);
-      return [startDate, endDate];
-    },
-    changePage(newPage:number){
-      this.page = newPage;
-      const [startDate, endDate] = this.getDateRange();
-      // fetch from backend
     },
     addNewTransaction(transaction:MenuTransaction){
       function isSameDay(x: TransactionSummary){

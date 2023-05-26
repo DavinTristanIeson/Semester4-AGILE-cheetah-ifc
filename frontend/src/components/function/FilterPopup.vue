@@ -3,15 +3,16 @@ import CheckboxInput from '@/components/input/CheckboxInput.vue';
 import IconButton from '@/components/display/IconButton.vue';
 import { CheckboxInputObject } from '@/helpers/inputs';
 import { computed, reactive } from 'vue';
-import { useMenuStore } from '../../store';
+import { useMenuStore } from '@/helpers/menuStore';
 import ScaleTransition from '@/components/display/ScaleTransition.vue';
+import { formatFilterCategory } from '@/helpers/format';
 
 const menu = useMenuStore();
 const input = computed(()=>{
     return new CheckboxInputObject(
         "",
         menu.filterCategories,
-        menu.allCategories.map(category => ({label: category, value: category})),
+        menu.allCategories.map(category => ({label: formatFilterCategory(category), value: category})),
         ()=>"",
     );
 });

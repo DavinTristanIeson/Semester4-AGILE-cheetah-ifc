@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMenuStore } from '../../store';
+import { useMenuStore } from '@/helpers/menuStore';
 import MenuView from './MenuView.vue';
 import NavBar from '@/components/display/NavBar.vue';
 import FetchWrapper from '@/components/function/FetchWrapper.vue';

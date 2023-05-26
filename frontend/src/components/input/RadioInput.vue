@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { RadioInputObject } from '../helpers/inputs';
+import type { RadioInputObject } from '@/helpers/inputs';
 import { ref } from 'vue';
 
 const props = defineProps<{

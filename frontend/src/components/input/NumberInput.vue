@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { TextInputObject } from '@/helpers/inputs';
+import type { NumberInputObject, TextInputObject } from '@/helpers/inputs';
 const props = defineProps<{
-    input:TextInputObject,
+    input:NumberInputObject,
     shouldValidate?:boolean
 }>();
 const emit = defineEmits<{
-    (e: "update:value", value:string): void,
+    (e: "update:value", value:number): void,
 }>();
 const inputRef = ref(props.input);
 function setValue(payload:Event){
     const target = payload.target as HTMLInputElement;
-    inputRef.value.value = target.value;
+    if (inputRef.value.options.isInteger) inputRef.value.value = parseFloat(target.value);
+    else inputRef.value.value = parseInt(target.value);
     if (props.shouldValidate){
         inputRef.value.validate();
     }
@@ -20,25 +21,14 @@ function setValue(payload:Event){
 </script>
 
 <template>
-<div class="form-floating my-3" v-if="!inputRef.options.isTextarea">
+<div class="form-floating my-3">
     <input
         class="form-control"
-        :type="inputRef.options.semanticType ?? 'text'"
-        :placeholder="inputRef.options.placeholder"
         :value="inputRef.value"
         :id="inputRef.id"
         @input="setValue"
     />
     <label :for="inputRef.id">{{ inputRef.label }}</label>
-    <div v-if="inputRef.error" class="text-danger">{{ inputRef.error }}</div>
-</div>
-<div class="my-3" v-else>
-    <label :for="inputRef.id">{{ inputRef.label }}</label>
-    <textarea
-        class="form-control"
-        :value="inputRef.value"
-        :placeholder="inputRef.options.placeholder">
-    </textarea>
     <div v-if="inputRef.error" class="text-danger">{{ inputRef.error }}</div>
 </div>
 </template>

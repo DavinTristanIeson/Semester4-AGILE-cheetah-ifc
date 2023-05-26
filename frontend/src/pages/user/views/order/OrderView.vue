@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { MenuItem } from '@/helpers/classes';
 import { computed, reactive } from 'vue';
 import OrdersOffcanvas from './OrdersOffcanvas.vue';
-import { useCurrentOrdersStore, useMenuStore } from '../../store';
+import { useCurrentOrdersStore } from '../../store';
+import { useMenuStore } from '@/helpers/menuStore';
 import IconButton from '@/components/display/IconButton.vue';
 import SearchBar from '@/components/display/SearchBar.vue';
-import PageButtons from './components/PageButtons.vue';
-import FilterPopup from './FilterPopup.vue';
+import PageButtons from '@/components/function/PageButtons.vue';
+import FilterPopup from '@/components/function/FilterPopup.vue';
 import OrderDetail from './components/OrderDetail.vue';
 import ScaleTransition from '@/components/display/ScaleTransition.vue';
 import MenuItemComponent from './MenuItemComponent.vue';

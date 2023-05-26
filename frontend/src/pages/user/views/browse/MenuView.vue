@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
-import { useMenuStore } from '../../store';
+import { useMenuStore } from '@/helpers/menuStore';
 import IconButton from '@/components/display/IconButton.vue';
 import SearchBar from '@/components/display/SearchBar.vue';
-import PageButtons from '../order/components/PageButtons.vue';
-import FilterPopup from '../order/FilterPopup.vue';
+import PageButtons from '@/components/function/PageButtons.vue';
+import FilterPopup from '@/components/function/FilterPopup.vue';
 import MenuCard from '@/components/display/MenuCard.vue';
 import MenuListItem from '@/components/display/MenuListItem.vue';
 

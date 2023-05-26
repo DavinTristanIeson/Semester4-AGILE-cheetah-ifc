@@ -43,6 +43,11 @@ const router = createRouter({
           path: "/admin/transactions",
           name: "transactions",
           component: () => import("./views/transactions/App.vue")
+        },
+        {
+          path: "/admin/menu",
+          name: "menu",
+          component: () => import("./views/menu/App.vue")
         }
       ]
     },
