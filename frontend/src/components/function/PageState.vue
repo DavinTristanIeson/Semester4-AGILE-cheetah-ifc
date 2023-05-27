@@ -23,14 +23,19 @@ function clearError(){
     clearTimeout(state.errorTimeout);
     state.errorTimeout = -1;
 }
+function clear(){
+    state.loading = false;
+    clearError();
+}
 async function run<T>(fn: () => Promise<T>): Promise<T| null> {
     let result: T|null = null;
     state.loading = true;
     try {
         result = await fn();
-        clearError();
+        clear();
     } catch (e: any){
         state.loading = false;
+        console.error(e);
         if (e instanceof Error) setError(e.message);
         else setError(e.toString());
     } finally {
@@ -46,6 +51,7 @@ provide(PAGE_STATE_KEY, {
     error: state.error,
     setError,
     run,
+    clear,
 })
 </script>
 

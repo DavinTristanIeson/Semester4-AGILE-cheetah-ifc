@@ -15,21 +15,25 @@ defineEmits<{
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header tss-bg-secondary">
-                    <h5 class="modal-title">{{ item.name }}</h5>
+                    <slot name="header">
+                        <h5 class="modal-title">{{ item.name }}</h5>
+                    </slot>
                     <button class="btn-close" @click="$emit('close')"></button>
                 </div>
                 <div class="modal-body">
                     <div class="d-flex mb-3">
-                        <MaybeImage :src="item.img" :alt="item.name" class="modal-img"/>
-                        <slot name="side">
+                        <slot name="left">
+                            <MaybeImage :src="item.img" :alt="item.name" class="modal-img"/>
+                        </slot>
+                        <slot name="right">
                             <div class="mx-3">
                                 <p class="fs-6 mb-2">{{ item.description }}</p>
                                 <p class="fs-6 mb-0"><i>{{ item.harga }}</i></p>
-                                <slot name="side-under"></slot>
+                                <slot name="right-bottom"></slot>
                             </div>
                         </slot>
                     </div>
-                    <slot name="under"></slot>
+                    <slot name="bottom"></slot>
                 </div>
                 <div class="modal-footer">
                     <slot name="footer"></slot>

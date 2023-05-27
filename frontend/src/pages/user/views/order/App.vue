@@ -15,8 +15,8 @@ onMounted(async ()=>{
 </script>
 
 <template>
-    <FetchWrapper :fn="currentOrders.initialize" floating>
-        <FetchWrapper :fn="menu.initialize" floating>
+    <FetchWrapper :fn="currentOrders.initialize">
+        <FetchWrapper :fn="menu.initialize">
             <WaitView v-if="currentOrders.current"/>
             <OrderView v-else/>
         </FetchWrapper>

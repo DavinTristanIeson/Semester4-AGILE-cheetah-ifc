@@ -37,7 +37,9 @@ function setValue(payload:Event){
     <textarea
         class="form-control"
         :value="inputRef.value"
-        :placeholder="inputRef.options.placeholder">
+        :placeholder="inputRef.options.placeholder"
+        @input="setValue"
+        >
     </textarea>
     <div v-if="inputRef.error" class="text-danger">{{ inputRef.error }}</div>
 </div>

@@ -11,8 +11,14 @@ const emit = defineEmits<{
 const inputRef = ref(props.input);
 function setValue(payload:Event){
     const target = payload.target as HTMLInputElement;
-    if (inputRef.value.options.isInteger) inputRef.value.value = parseFloat(target.value);
-    else inputRef.value.value = parseInt(target.value);
+    let temp;
+    if (inputRef.value.options.isInteger) temp = parseFloat(target.value);
+    else temp = parseInt(target.value);
+    if (isNaN(temp)){
+        inputRef.value.value = inputRef.value.value;
+    } else {
+        inputRef.value.value = temp;
+    }
     if (props.shouldValidate){
         inputRef.value.validate();
     }
@@ -24,6 +30,7 @@ function setValue(payload:Event){
 <div class="form-floating my-3">
     <input
         class="form-control"
+        type="number"
         :value="inputRef.value"
         :id="inputRef.id"
         @input="setValue"

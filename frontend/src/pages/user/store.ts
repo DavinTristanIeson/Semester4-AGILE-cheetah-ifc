@@ -61,7 +61,6 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 		cleanup() {
 			this.current = null;
 			this.orders = [];
-			console.log(this.current, this.orders);
 		}
 	}
 });

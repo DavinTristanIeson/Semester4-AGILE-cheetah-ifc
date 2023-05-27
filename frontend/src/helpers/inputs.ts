@@ -46,6 +46,9 @@ export class NumberInputObject extends InputObject<number>{
     constructor(label: string, initialValue: number, validator: (value: number) => string|undefined, options?: Partial<NumberInputObjectOptions>){
         super(label, initialValue);
         this.validate = function (){
+            if (isNaN(this.value)){
+                this.value = 0;
+            }
             this.error = validator(this.value) ?? "";
             return this.error.length == 0;
         }

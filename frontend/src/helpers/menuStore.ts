@@ -50,7 +50,6 @@ export const useMenuStore = defineStore("menu", {
 				this.isMenuInitialized = true;
 				this.initFilterCategories();
 			}
-			
 		},
 		initFilterCategories(){
 			if (!this.isMenuInitialized) return;
@@ -61,6 +60,14 @@ export const useMenuStore = defineStore("menu", {
 		},
 		changePage(newPage:number){
 			this.page = Math.min(this.totalPages, Math.max(0, newPage));
+		},
+		remove(id: number){
+			const idx = this.menu.findIndex(x => x.id == id);
+			if (idx == -1) return;
+			this.menu.splice(idx, 1);
+		},
+		add(item: MenuItem){
+			this.menu.push(item);
 		}
 	}
 });

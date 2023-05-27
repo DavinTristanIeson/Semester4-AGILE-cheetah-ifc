@@ -26,6 +26,9 @@ export class MenuItem {
     static toRupiah(rupiah:number){
         return new Intl.NumberFormat("id", {style:"currency", currency: "IDR"}).format(rupiah);
     }
+    static fromJSON(raw: any){
+        return new MenuItem(raw.id, raw.name, raw.category, raw.description, raw.img, raw.price);
+    }
 }
 
 export class MenuOrder extends MenuItem {

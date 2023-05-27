@@ -8,7 +8,7 @@ const transactions = useTransactionsStore();
 </script>
 
 <template>
-    <FetchWrapper floating :fn="transactions.initialize">
+    <FetchWrapper :fn="transactions.initialize">
         <div class="horizontal-scroll mt-4">
             <Summary :summary="summary" v-for="summary in transactions.transactions"/>
         </div>

@@ -23,14 +23,14 @@ function setNote(e:Event){
 </script>
 <template>
     <MenuItemModal :item="item" @close="closeModal">
-        <template v-slot:side-under>
+        <template v-slot:right-bottom>
             <div class="d-flex align-items-center w-100 my-3">
                 <button class="btn btn-secondary" @click="changeQuantity(-1)">-</button>
                 <span class="mx-2">{{ item.quantity }}</span>
                 <button class="btn btn-secondary" @click="changeQuantity(1)">+</button>
             </div>
         </template>
-        <template v-slot:under>
+        <template v-slot:bottom>
             <textarea
                 rows="3" class="w-100 p-3 rounded"
                 :value="item.note" @input="setNote"

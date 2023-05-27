@@ -35,3 +35,17 @@ export function validatePrice(price: number){
 export function noValidate(){
     return undefined;
 }
+export function validateImageURL(rawURL: string){
+    let url: URL;
+    try {
+        url = new URL(rawURL);
+    } catch (e){
+        return "Bukan URL valid";
+    }
+    if (
+        (url.protocol != "http:" && url.protocol != "https:") ||
+        (url.username.length > 0 || url.password.length > 0)
+    ){
+        return "Bukan URL gambar valid. URL harus dimulai dengan protokol http atau https"
+    }
+}

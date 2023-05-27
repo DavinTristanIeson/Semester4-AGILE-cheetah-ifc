@@ -20,7 +20,7 @@ socket.on("newOrder", (order) => {
 </script>
 
 <template>
-    <FetchWrapper :fn="orders.initialize" floating>
+    <FetchWrapper :fn="orders.initialize">
         <div class="mx-3 mx-lg-5 mt-4">
             <div class="mb-4 ms-2">
                 <IconButton
