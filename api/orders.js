@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("./db");
 const { userIsAdmin, userIsCustomer } = require("./middleware");
-const { dispatch } = require("./io");
+const { dispatch, emitToUser } = require("./io");
 
 function createOrdersArray(orders) {
   const collection = {};
@@ -70,9 +70,11 @@ router.post("/", userIsCustomer, async (req, res, next) => {
     }
     await stmt.finalize();
 
-    const raw = await db.all(ORDER_QUERY + " WHERE order_id = ?", [changed.lastID]);
+    const raw = await db.all(ORDER_QUERY + " WHERE order_id = ?", [
+      changed.lastID,
+    ]);
     const order = createOrderObject(raw);
-    if (!order){
+    if (!order) {
       res.status(404).end();
       return;
     }
@@ -219,6 +221,31 @@ router.get("/chef", userIsAdmin, async (req, res, next) => {
       [start, end, 1, 2] // 1 = pending status, 2 = cooking status
     );
     res.status(200).json(createOrdersArray(orders));
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Menghapus pesanan pelanggan dan mengirimkan notif ke customer
+router.delete("/:id", userIsAdmin, async (req, res, next) => {
+  const orderId = req.params.id;
+
+  try {
+    const order = await db.get("SELECT * FROM orders WHERE id = ?", orderId);
+    if (!order) {
+      res.status(404).json({ message: "Order not found" });
+      return;
+    }
+
+    await db.run("DELETE FROM orders WHERE id = ?", orderId);
+    await db.run("DELETE FROM orders_records WHERE order_id = ?", orderId);
+
+    // Mengirim notifikasi ke pelanggan
+    const message =
+      "Pesanan Anda dengan ID " + orderId + " telah dibatalkan oleh admin.";
+    emitToUser(order.account_id, "orderCanceled", { orderId, message });
+
+    res.status(200).json({ message: "Order canceled" });
   } catch (err) {
     next(err);
   }
