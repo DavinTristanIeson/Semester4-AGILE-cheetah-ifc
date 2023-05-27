@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("./db");
 const { userIsAdmin, userIsCustomer } = require("./middleware");
-const { dispatch, emitToUser } = require("./io");
+const { dispatch } = require("./io");
 
 function createOrdersArray(orders) {
   const collection = {};
@@ -229,6 +229,7 @@ router.get("/chef", userIsAdmin, async (req, res, next) => {
 // Menghapus pesanan pelanggan dan mengirimkan notif ke customer
 router.delete("/:id", userIsAdmin, async (req, res, next) => {
   const orderId = req.params.id;
+  const { reason } = req.body;
 
   try {
     const order = await db.get("SELECT * FROM orders WHERE id = ?", orderId);
@@ -242,8 +243,8 @@ router.delete("/:id", userIsAdmin, async (req, res, next) => {
 
     // Mengirim notifikasi ke pelanggan
     const message =
-      "Pesanan Anda dengan ID " + orderId + " telah dibatalkan oleh admin.";
-    emitToUser(order.account_id, "orderCanceled", { orderId, message });
+      reason || "Pesanan Anda dengan ID " + orderId + " telah dibatalkan oleh admin.";
+    dispatch(io => io.to("customer").emit("cancelOrder", orderId, message));
 
     res.status(200).json({ message: "Order canceled" });
   } catch (err) {

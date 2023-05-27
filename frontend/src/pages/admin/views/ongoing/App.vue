@@ -2,7 +2,7 @@
 import { MenuTransaction } from "@/helpers/classes";
 import OngoingOrder from "./OngoingOrder.vue";
 import { useOngoingOrdersStore } from "../../store";
-import { reactive } from "vue";
+import { onBeforeUnmount, reactive } from "vue";
 import IconButton from "@/components/display/IconButton.vue";
 import ChefModeListItem from "./ChefModeListItem.vue";
 import { socket } from "@/helpers/requests";
@@ -16,6 +16,9 @@ const state = reactive({
 
 socket.on("newOrder", (order) => {
     orders.addOrder(MenuTransaction.fromJSON(order));
+});
+onBeforeUnmount(() => {
+    socket.off("newOrder");
 });
 </script>
 

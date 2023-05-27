@@ -58,6 +58,11 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 		finishTransaction() {
 			this.current = null;
 		},
+		cancelTransaction(){
+			if (!this.current) return;
+			this.orders = this.current.orders;
+			this.current = null;
+		},
 		cleanup() {
 			this.current = null;
 			this.orders = [];

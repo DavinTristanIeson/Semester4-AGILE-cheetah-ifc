@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useCurrentOrdersStore } from '../../store';
 import OrderListItem from '@/components/display/OrderListItem.vue';
-import { MenuTransaction } from '@/helpers/classes';
 import { socket } from '@/helpers/requests';
-import { computed, onBeforeUnmount } from 'vue';
-import { useRouter } from 'vue-router';
+import { onBeforeUnmount } from 'vue';
 
 const currentOrders = useCurrentOrdersStore();
+const state = {
+    cancelReason: ""
+}
+
 socket.on("cookOrder", (id:number) => {
     if (id != currentOrders.current!.id) return;
     currentOrders.current!.phase = "cooking";
@@ -15,14 +17,15 @@ socket.on("finishOrder", (id:number) => {
     if (id != currentOrders.current!.id) return;
     currentOrders.current!.phase = "finished";
 });
+socket.on("cancelOrder", (id: number, reason: string) => {
+    if (id != currentOrders.current!.id) return;
+    currentOrders.current!.phase = "canceled";
+    state.cancelReason = reason;
+})
 onBeforeUnmount(() => {
     socket.off("cookOrder");
     socket.off("finishOrder");
 });
-
-function finishWait(){
-    currentOrders.finishTransaction();
-}
 </script>
 
 <template>
@@ -41,26 +44,50 @@ function finishWait(){
                 </div>
             </div>
         </div>
-        <div class="col-6 d-flex flex-column align-items-center">
-            <div class="text-capitalize fs-2 p-3 rounded fw-bold shadow-lg"
+        <div class="col-6 d-flex flex-column align-items-center darkened-bg p-3">
+            <div class="text-capitalize fs-2 p-3 rounded fw-bold"
             :class="{
                 'text-warning': currentOrders.current!.phase == 'pending',
                 'text-info': currentOrders.current!.phase == 'cooking',
                 'text-success': currentOrders.current!.phase == 'finished',
+                'text-danger': currentOrders.current!.phase == 'canceled',
                 'fw-bold': currentOrders.current!.phase == 'finished',
             }">{{ currentOrders.current!.phase }}</div>
-            <a class="text-success fw-bold" v-if="currentOrders.current!.phase == 'finished'" href="#" @click.prevent="finishWait">Click untuk kembali ke halaman sebelumnya!</a>
-            <div id="waiting-logo" class="status-logo mt-3" v-if="currentOrders.current!.phase !== 'finished'">
+            <div v-if="currentOrders.current!.phase == 'finished'">
+                <a class="text-success fw-bold" href="#" @click.prevent="currentOrders.finishTransaction">
+                    Click untuk kembali ke halaman sebelumnya!
+                </a>
+            </div>
+            <div v-if="currentOrders.current!.phase == 'canceled'">
+                <p class="text-danger">Pesan anda telah dibatalkan karena:</p>
+                <blockquote class="alert alert-danger">
+                    {{ state.cancelReason }}
+                </blockquote>
+                <a class="text-danger fw-bold" href="#" @click.prevent="currentOrders.cancelTransaction">
+                    Click untuk kembali ke halaman sebelumnya!
+                </a>
+            </div>
+
+            <div id="waiting-logo" class="status-logo mt-3" v-if="currentOrders.current!.phase == 'cooking' || currentOrders.current!.phase == 'pending'">
                 <img src="@/assets/schedule.svg" alt="Waiting..."/>
             </div>
-            <div id="success-logo" class="status-logo mt-3" v-else>
-                <img src="@/assets/check.svg" alt="Success" @click="finishWait"/>
+            <div id="success-logo" class="status-logo mt-3" v-if="currentOrders.current!.phase == 'finished'">
+                <img src="@/assets/check.svg" alt="Success"
+                @click="currentOrders.finishTransaction"/>
+            </div>
+            <div id="cancel-logo" class="status-logo mt-3" v-if="currentOrders.current!.phase == 'canceled'">
+                <img src="@/assets/cancel.svg" alt="Success"
+                @click="currentOrders.cancelTransaction"/>
             </div>
         </div>
     </div>
 </template>
 
 <style>
+.darkened-bg {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 24px;
+}
 .status-logo img {
     width: 200px;
     height: 200px;
@@ -76,6 +103,10 @@ function finishWait(){
 }
 #success-logo {
     background-color: #77ff77;
+    animation: slowpulse 1.5s ease-out 1s infinite;
+}
+#cancel-logo {
+    background-color: #ff7777;
     animation: slowpulse 1.5s ease-out 1s infinite;
 }
 @keyframes slowpulse {

@@ -71,7 +71,7 @@ export class UserAccount {
     }
 }
 
-export type OngoingOrderPhase = "pending"|"cooking"|"finished";
+export type OngoingOrderPhase = "pending"|"cooking"|"finished"|'canceled';
 export class MenuTransaction {
     id:number;
     username:string;
@@ -106,6 +106,7 @@ export class MenuTransaction {
         switch (status){
             case 0: return "finished";
             case 1: return "cooking";
+            case -1: return "canceled";
             default: return "pending";
         }
     }
@@ -114,6 +115,7 @@ export class MenuTransaction {
             case "pending": return 2;
             case "cooking": return 1;
             case "finished": return 0;
+            case "canceled": return -1;
         }
     }
     static fromJSON(json:any){

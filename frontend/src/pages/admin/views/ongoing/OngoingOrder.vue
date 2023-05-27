@@ -50,9 +50,25 @@ async function changePhase(){
             credentials: "include",
             body: JSON.stringify({status: props.order.toStatus()})
         });
-        if (!res.ok){
-            pageState.setError(SERVER_ERROR, 3000);
-        }
+        if (!res.ok) return new Error(SERVER_ERROR);
+    });
+}
+async function cancelOrder(){
+    const reason = prompt("Apa alasan dari pembatalan pesanan ini?");
+    pageState.run(async () => {
+        const res = await fetch(`${API}/orders/${props.order.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                reason,
+            })
+        });
+        if (!res.ok) return new Error(SERVER_ERROR);
+        orders.removeOrder(props.order);
+        transactions.addNewTransaction(props.order);
     });
 }
 </script>
@@ -70,6 +86,7 @@ async function changePhase(){
         <div class="my-2 mx-3 w-100"><b>Total: </b> {{ order.hargaTotal }}</div>
         <button class="mx-3 btn btn-warning" v-if="order.phase == 'pending'" @click="changePhase">Pesanan Sedang Dimasak</button>
         <button class="mx-3 btn btn-info" v-if="order.phase == 'cooking'" @click="changePhase">Pesanan Selesai</button>
+        <button class="mx-3 btn btn-danger" @click="cancelOrder">Batal Pesanan</button>
     </Accordion>
 </template>
 
