@@ -2,52 +2,9 @@ import { defineStore } from "pinia";
 import { MenuItem, MenuOrder, MenuTransaction, UserAccount } from "@/helpers/classes";
 import { API } from "@/helpers/constants";
 
-export const usePageStateStore = defineStore("pageState", {
-	state: () => ({
-		isLoading: false,
-    	isLoadingEphemeral: false,
-		errorMessage: "",
-		timeoutID: -1,
-	}),
-	actions: {
-		beginLoading(){
-			this.isLoadingEphemeral = true;
-			this.isLoading = true;
-		},
-		cleanup(){
-			this.isLoading = false;
-			this.clearError();
-		},
-		setLoading(value:boolean){
-			this.isLoading = value;
-			this.isLoadingEphemeral = false;
-		},
-		cleanEphemeralLoading(){
-			if (this.isLoadingEphemeral){
-				this.isLoading = false;
-			}
-		},
-		clearError(){
-			clearTimeout(this.timeoutID);
-			this.errorMessage = "";
-			this.cleanEphemeralLoading();
-		},
-		setError(message: string, timeout?:number){
-			this.errorMessage = message;
-			clearTimeout(this.timeoutID);
-			this.cleanEphemeralLoading();
-			if (timeout){
-				this.timeoutID = setTimeout(()=>{
-					this.errorMessage = "";
-				}, timeout);
-			}
-		}
-	}
-});
-
 export const useCurrentOrdersStore = defineStore("currentOrders", {
 	state: () => ({
-		current: null as MenuTransaction|null,
+		current: null as MenuTransaction | null,
 		orders: [] as MenuOrder[],
 		viewedOrder: undefined as (MenuOrder | undefined),
 	}),
@@ -56,28 +13,28 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 		hargaTotal: state => MenuItem.toRupiah(state.orders.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0)),
 	},
 	actions: {
-		async initialize(){
-			const res = await fetch(API + "/orders/ongoing", {credentials: "include"});
-			if (res.ok){
+		async initialize() {
+			const res = await fetch(API + "/orders/ongoing", { credentials: "include" });
+			if (res.ok) {
 				const json = await res.json();
 				this.current = MenuTransaction.fromJSON(json);
 			}
 		},
-		addOrder(item:MenuItem){
+		addOrder(item: MenuItem) {
 			let findme = this.orders.find(order => order.id == item.id);
 			if (findme) findme.quantity++;
 			else this.orders.push(new MenuOrder(item));
 		},
-		removeOrder(order:MenuOrder){
+		removeOrder(order: MenuOrder) {
 			let idx = this.orders.indexOf(order);
-			if (idx != -1){
+			if (idx != -1) {
 				this.orders.splice(idx, 1);
 			}
 		},
-		examineOrder(order:MenuOrder|undefined){
+		examineOrder(order: MenuOrder | undefined) {
 			this.viewedOrder = order;
 		},
-		async createTransaction(){
+		async createTransaction() {
 			this.viewedOrder = undefined;
 			const res = await fetch(API + '/orders', {
 				method: "POST",
@@ -92,16 +49,16 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 					note: x.note,
 				})))
 			});
-			if (res.ok){
+			if (res.ok) {
 				const json = await res.json();
 				this.current = MenuTransaction.fromJSON(json);
 				this.orders = [];
 			}
 		},
-		finishTransaction(){
+		finishTransaction() {
 			this.current = null;
 		},
-		cleanup(){
+		cleanup() {
 			this.current = null;
 			this.orders = [];
 			console.log(this.current, this.orders);
@@ -110,29 +67,29 @@ export const useCurrentOrdersStore = defineStore("currentOrders", {
 });
 
 export const useUserStore = defineStore("user", {
-	state: ()=>({
-		user: null as (UserAccount|null),
+	state: () => ({
+		user: null as (UserAccount | null),
 	}),
 	getters: {
 		hasLogin: state => state.user !== null
 	},
 	actions: {
-		async initialize(){
+		async initialize() {
 			if (this.user) return true;
-			const res = await fetch(API+"/accounts/", {
+			const res = await fetch(API + "/accounts/", {
 				credentials: "include"
 			});
-			if (!res.ok){
+			if (!res.ok) {
 				return false;
 			}
 			const json = await res.json();
 			this.user = new UserAccount(json.id, json.email, json.name, json.gender, json.telp);
 			return true;
 		},
-		login(user:UserAccount){
+		login(user: UserAccount) {
 			this.user = user;
 		},
-		logout(){
+		logout() {
 			this.user = null;
 		}
 	}
@@ -140,36 +97,36 @@ export const useUserStore = defineStore("user", {
 
 const HISTORY_PER_PAGE = 10;
 export const useHistoryStore = defineStore("history", {
-	state: ()=>({
+	state: () => ({
 		history: [] as MenuTransaction[],
 		page: 0,
 		isHistoryInitialized: false,
 	}),
 	getters: {
 		current(state): MenuTransaction[] {
-			return state.history.slice(state.page*HISTORY_PER_PAGE, state.page*HISTORY_PER_PAGE+HISTORY_PER_PAGE);
+			return state.history.slice(state.page * HISTORY_PER_PAGE, state.page * HISTORY_PER_PAGE + HISTORY_PER_PAGE);
 		},
 		totalPages(state): number {
 			return Math.floor(state.history.length / HISTORY_PER_PAGE);
 		},
 	},
 	actions: {
-		async initialize(){
+		async initialize() {
 			// fetch dari backend
 			if (this.isHistoryInitialized) return;
 			const res = await fetch(API + "/orders/history", {
 				credentials: "include"
 			});
-			if (res.ok){
+			if (res.ok) {
 				const json = await res.json();
 				this.history = MenuTransaction.fromJSONArray(json);
 				this.isHistoryInitialized = true;
 			}
 		},
-		changePage(newPage:number){
+		changePage(newPage: number) {
 			this.page = Math.min(this.totalPages, Math.max(0, newPage));
 		},
-		cleanup(){
+		cleanup() {
 			this.isHistoryInitialized = false;
 			this.history = [];
 		}

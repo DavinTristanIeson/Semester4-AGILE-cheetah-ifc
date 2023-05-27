@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { API, CONNECTION_ERROR } from '@/helpers/constants';
-import { useRoute, useRouter } from 'vue-router';
-import { useCurrentOrdersStore, useHistoryStore, usePageStateStore } from '../store';
+import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
+import { useRouter } from 'vue-router';
+import { useCurrentOrdersStore, useHistoryStore } from '../store';
 import { useUserStore } from '../store';
 import NavBar from '@/components/display/NavBar.vue';
+import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { inject } from 'vue';
 
 const router = useRouter();
-const pageState = usePageStateStore();
+const pageState = inject(PAGE_STATE_KEY)!;
 const currentOrders = useCurrentOrdersStore();
 const history = useHistoryStore();
 const user = useUserStore();
 async function logout(){
-    try {
-    
-    const res = await fetch(API+"/accounts/logout", {
-        credentials: "include",
-        method: "POST",
+    pageState.run(async () => {
+        const res = await fetch(API+"/accounts/logout", {
+            credentials: "include",
+            method: "POST",
+        });
+        if (res.ok){
+            currentOrders.cleanup();
+            history.cleanup();
+            user.logout();
+            router.replace({name: "login"});
+        } else {
+            throw new Error(SERVER_ERROR);
+        }
     });
-    if (res.ok){
-        currentOrders.cleanup();
-        history.cleanup();
-        user.logout();
-        router.replace({name: "login"});
-    }
-    
-    } catch (e) {
-        pageState.setError(CONNECTION_ERROR)
-    }
 }
 const links = [
     {name: "Pesan Makanan", dest: "order"},

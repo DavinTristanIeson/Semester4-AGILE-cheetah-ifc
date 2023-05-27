@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { IntervalExecutor } from '@/helpers/requests';
-import { usePageStateStore, useTransactionsStore } from '../../store';
+import { useTransactionsStore } from '../../store';
 import Summary from './Summary.vue';
 import FetchWrapper from '@/components/function/FetchWrapper.vue';
 import PageButtons from './PageButtons.vue';

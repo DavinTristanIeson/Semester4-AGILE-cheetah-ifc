@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, reactive } from 'vue';
-import { useCurrentOrdersStore, usePageStateStore, useUserStore } from '../../store';
+import { inject, onBeforeUnmount, onMounted, reactive } from 'vue';
+import { useCurrentOrdersStore, useUserStore } from '../../store';
 import OrderItem from './components/OrderItem.vue';
 import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
+import { PAGE_STATE_KEY } from '@/components/function/keys';
 
 const state = reactive({
     isOffcanvasOpen: true
@@ -15,31 +16,22 @@ onMounted(()=>{ setOffcanvas(); window.addEventListener("resize", setOffcanvas);
 onBeforeUnmount(()=>{ window.removeEventListener("resize", setOffcanvas) });
 
 const current = useCurrentOrdersStore();
-const pageState = usePageStateStore();
+const pageState = inject(PAGE_STATE_KEY)!;
 async function sendOrder(){
     if (!current) return;
 
-    pageState.beginLoading();
-    if (!(await user.initialize())){
-        pageState.setError(SERVER_ERROR, 3000);
-        return;
-    }
-
-    if (current.orders.length == 0){
-        pageState.setError("Minimal harus ada satu pesanan!", 3000);
-        return;
-    }
-
-    try {
+    pageState.run(async () => {
+        if (!(await user.initialize())){
+            return new Error(SERVER_ERROR);
+        }
+        if (current.orders.length == 0){
+            return new Error("Minimal harus ada satu pesanan!")
+        }
         await current.createTransaction();
         if (!current.orders){
-            pageState.setError(SERVER_ERROR, 3000);
+            return new Error(SERVER_ERROR);
         }
-        pageState.setLoading(false);
-    } catch (e){
-        console.error(e);
-        pageState.setError(CONNECTION_ERROR, 3000);
-    }
+    });
 }
 </script>
 

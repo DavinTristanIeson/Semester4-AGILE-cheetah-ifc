@@ -90,7 +90,7 @@ function changeMode(){
     border-radius: 50%;
     background-color: var(--primary);
     padding: 0px;
-    border: 12px solid black;
+    border: 6px solid black;
     overflow: hidden;
     transition: border-color 0.2s ease-out;
 }
@@ -107,18 +107,32 @@ function changeMode(){
     filter: brightness(110%);
 }
 #decoball-a {
-    width: 25vw; height: 25vw;
+    width: 30vw; height: 30vw;
     right: -10%; top: -10%;
     z-index: 3;
 }
 #decoball-b {
-    width: 15vw; height: 15vw;
+    width: 20vw; height: 20vw;
     left: -5%; bottom: -5%;
     z-index: 2;
 }
 #decoball-c {
-    width: 5vw; height: 5vw;
+    width: 10vw; height: 10vw;
     left: 20%; bottom: 25%;
     z-index: 0;
+}
+@media screen and (min-width: 1200px){
+    .decoball {
+        border: 12px solid black;
+    }
+    #decoball-a {
+        width: 35vw; height: 35vw;
+    }
+    #decoball-b {
+        width: 25vw; height: 25vw;
+    }
+    #decoball-c {
+        width: 10vw; height: 10vw;
+    }   
 }
 </style>

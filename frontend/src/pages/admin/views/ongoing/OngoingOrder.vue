@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Accordion from '@/components/display/Accordion.vue';
 import { MenuTransaction } from "@/helpers/classes";
-import { computed, onBeforeUnmount, onMounted, reactive } from 'vue';
+import { computed, inject, onBeforeUnmount, onMounted, reactive } from 'vue';
 import OrderListItem from '@/components/display/OrderListItem.vue';
-import { useOngoingOrdersStore, usePageStateStore, useTransactionsStore } from '../../store';
-import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
+import { useOngoingOrdersStore, useTransactionsStore } from '../../store';
+import { API, SERVER_ERROR } from '@/helpers/constants';
+import { PAGE_STATE_KEY } from '@/components/function/keys';
 
 
 const props = defineProps<{
@@ -32,32 +33,27 @@ const accordionClass = computed(()=>{
     else if (state.timeDiff <= 1*60*1000) return "flashing";
     else return "";
 });
-const pageState = usePageStateStore();
+const pageState = inject(PAGE_STATE_KEY)!;
 
 async function changePhase(){
-    try {
-
-    if (props.order.phase == "cooking"){
-        orders.removeOrder(props.order);
-        transactions.addNewTransaction(props.order);
-    }
-    props.order.phase = MenuTransaction.parseStatus(props.order.toStatus()-1);
-    const res = await fetch(`${API}/orders/${props.order.id}/status`, {
-        method: "PUT",
-        headers: {
-            'Content-Type': "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({status: props.order.toStatus()})
+    pageState.run(async () => {
+        if (props.order.phase == "cooking"){
+            orders.removeOrder(props.order);
+            transactions.addNewTransaction(props.order);
+        }
+        props.order.phase = MenuTransaction.parseStatus(props.order.toStatus()-1);
+        const res = await fetch(`${API}/orders/${props.order.id}/status`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({status: props.order.toStatus()})
+        });
+        if (!res.ok){
+            pageState.setError(SERVER_ERROR, 3000);
+        }
     });
-    if (!res.ok){
-        pageState.setError(SERVER_ERROR, 3000);
-    }
-
-    } catch (e){
-        console.error(e);
-        pageState.setError(CONNECTION_ERROR, 3000);
-    }
 }
 </script>
  

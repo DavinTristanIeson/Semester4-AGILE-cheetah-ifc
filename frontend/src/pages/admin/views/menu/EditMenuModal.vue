@@ -45,7 +45,6 @@ function onSubmit(){
         img: inputs.img.value,
         price: inputs.price.value,
     });
-    emit("close");
 }
 </script>
 

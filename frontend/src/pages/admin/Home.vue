@@ -1,28 +1,21 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
-import { usePageStateStore } from './store';
 import NavBar from '@/components/display/NavBar.vue';
+import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { inject } from 'vue';
 
-const route = useRoute();
 const router = useRouter();
-const pageState = usePageStateStore();
+const pageState = inject(PAGE_STATE_KEY)!;
 async function logout(){
-    try {
-    
-    const res = await fetch(API + "/accounts/logout", {
-        method: "POST",
-        credentials: "include"
+    pageState.run(async () => {
+        const res = await fetch(API + "/accounts/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+        if (res.ok) router.replace({name: "login"});
+        else throw Error(SERVER_ERROR);
     });
-    if (res.ok){
-        router.replace({name: "login"});
-    } else {
-        pageState.setError(SERVER_ERROR, 3000);
-    }
-    
-    } catch (e) {
-        pageState.setError(CONNECTION_ERROR, 3000);
-    }
 }
 
 const links = [
