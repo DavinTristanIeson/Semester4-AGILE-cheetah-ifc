@@ -47,7 +47,7 @@ function isCheckbox(input:InputObject): input is CheckboxInputObject {
 function isNumber(input: InputObject): input is NumberInputObject {
     return input.type == "number"
 }
-function isSelect(input: InputObject): input is SelectInputObject<unknown> {
+function isSelect(input: InputObject): input is SelectInputObject {
     return input.type == "select"
 }
 function isFile(input: InputObject): input is FileInputObject {

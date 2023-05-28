@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onBeforeUnmount, onMounted, reactive } from 'vue';
-import { useUserStore } from '../../store';
 import OrderItem from './components/OrderItem.vue';
-import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
+import { SERVER_ERROR } from '@/helpers/constants';
 import { CURRENT_ORDERS_KEY, PAGE_STATE_KEY } from '@/helpers/keys';
 
 const state = reactive({
@@ -11,7 +10,6 @@ const state = reactive({
 function setOffcanvas(){
     state.isOffcanvasOpen = !window.matchMedia("(max-width: 1200px)").matches;
 }
-const user = useUserStore();
 onMounted(()=>{ setOffcanvas(); window.addEventListener("resize", setOffcanvas); });
 onBeforeUnmount(()=>{ window.removeEventListener("resize", setOffcanvas) });
 
@@ -21,9 +19,6 @@ async function sendOrder(){
     if (!current) return;
 
     pageState.run(async () => {
-        if (!(await user.initialize())){
-            throw new Error(SERVER_ERROR);
-        }
         if (current.orders.length == 0){
             throw new Error("Minimal harus ada satu pesanan!")
         }

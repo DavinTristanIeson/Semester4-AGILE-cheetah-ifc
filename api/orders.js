@@ -50,7 +50,7 @@ const ORDER_QUERY =
 "SELECT \
 orders.id as oid, \
 orders.order_time, \
-orders.status as status \
+orders.status as status, \
 users.name as username, \
 orders_records.id as record_id,\
 orders_records.name as record_name, \
@@ -132,9 +132,9 @@ router.get("/", userIsAdmin, async (req, res, next) => {
     const limit = 25;
     const offset = (page - 1) * limit;
 
-    const { _total: count } = await db.get(COUNT_QUERY + " WHERE orders.status = ?", [0]);
+    const { _total: count } = await db.get(COUNT_QUERY);
     const orders = await db.all(
-      paginatedOrderQuery("WHERE orders.status = ?"),
+      paginatedOrderQuery(""),
       [limit, offset]
     );
 

@@ -6,7 +6,6 @@ import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { API, CONNECTION_ERROR } from '@/helpers/constants';
 import { UserAccount } from '@/helpers/classes';
-import { useUserStore } from '../../store';
 
 defineEmits<{
     (e:"changemode"): void
@@ -25,7 +24,6 @@ const state = reactive({
     errMsg: ""
 });
 const router = useRouter();
-const user = useUserStore();
 
 async function onSubmit(response:{[key:string]: string}){
     try {
@@ -44,8 +42,6 @@ async function onSubmit(response:{[key:string]: string}){
     if (!res.ok){
         state.errMsg = "Email atau password salah!";
     } else {
-        const json = await res.json();
-        user.login(UserAccount.fromJSON(json));
         router.replace({name: "index"});
     }
 

@@ -5,14 +5,12 @@ import SelectInput from '@/components/input/SelectInput.vue';
 import type { MenuItem } from '@/helpers/classes';
 import { isNotEmpty, isNotFalsey, noValidate, validateImageURL, validatePrice } from '@/helpers/inputValidators';
 import { NumberInputObject, SelectInputObject, TextInputObject } from '@/helpers/inputs';
-import { useMenuStore } from '@/helpers/menuStore';
 import type { EditMenuPayload } from './types';
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 import { formatFilterCategory } from '@/helpers/format';
 import MaybeImage from '@/components/display/MaybeImage.vue';
-import Alert from '@/components/display/Alert.vue';
+import { MENU_CATEGORIES_KEY } from '@/helpers/keys';
 
-const menu = useMenuStore();
 const props = defineProps<{
     item: MenuItem|null
 }>();
@@ -25,9 +23,15 @@ const emit = defineEmits<{
 const state = {
     isValidating: false,
 }
+const categories = inject(MENU_CATEGORIES_KEY)!;
+
 const inputs = {
     name: new TextInputObject("Nama", props.item?.name ?? "", isNotEmpty("Nama menu tidak boleh kosong!")),
-    category: new SelectInputObject("Kategori", props.item?.category ?? undefined, menu.filterCategories, formatFilterCategory, isNotFalsey("Kategori menu tidak boleh kosong")),
+    category: new SelectInputObject(
+        "Kategori", props.item?.category ?? "",
+        (categories.value || []).map(x => ({label: formatFilterCategory(x), value: x})),
+        isNotFalsey("Kategori menu tidak boleh kosong")
+    ),
     description: new TextInputObject("Deskripsi", props.item?.description ?? "", noValidate, {
         isTextarea: true,
     }),
@@ -80,7 +84,7 @@ function onSubmit(){
                 </div>
                 <div class="modal-footer">
                     <button @click="onSubmit" class="float-end btn btn-primary">Simpan</button>
-                    <button v-if="item" @click="emit('delete', item.id)" class="float-end btn btn-danger">Hapus</button>
+                    <button v-if="item" @click="emit('delete', item!.id)" class="float-end btn btn-danger">Hapus</button>
                 </div>
             </div>
         </div>

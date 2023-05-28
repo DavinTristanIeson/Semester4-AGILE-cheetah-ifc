@@ -1,56 +1,77 @@
 <script setup lang="ts">
-import { MenuTransaction } from "@/helpers/classes";
-import OngoingOrder from "./OngoingOrder.vue";
-import { useOngoingOrdersStore } from "../../store";
-import { onBeforeUnmount, reactive } from "vue";
-import IconButton from "@/components/display/IconButton.vue";
-import ChefModeListItem from "./ChefModeListItem.vue";
-import { socket } from "@/helpers/requests";
+import { MenuOrder, MenuTransaction } from "@/helpers/classes";
 import FetchWrapper from "@/components/function/FetchWrapper.vue";
+import { API } from "@/helpers/constants";
+import View from "./View.vue";
+import { CHEF_MODE_KEY, ONGOING_ORDERS_KEY, PAGE_STATE_KEY } from "@/helpers/keys";
+import { computed, inject, provide, reactive } from 'vue';
 
-
-const orders = useOngoingOrdersStore();
 const state = reactive({
-    isChefMode: false,
+    data: [] as MenuTransaction[],
+    add, remove
+});
+const pageState = inject(PAGE_STATE_KEY)!;
+
+function add(order: MenuTransaction){
+    state.data.push(order);
+}
+function remove(order: MenuTransaction){
+    const idx = state.data.findIndex(x => x.id == order.id);
+    if (idx == -1) return;
+    state.data.splice(idx, 1);
+}
+
+function initialize() {
+    pageState.run(async () => {
+        const res = await fetch(API + "/orders/chef", {
+            credentials: "include",
+        });
+        if (!res.ok) throw res;
+        const json = await res.json();
+        state.data = MenuTransaction.fromJSONArray(json);
+    });
+}
+
+function isOverAnHour(time: Date) {
+    return new Date().getTime() - time.getDate() > 1 * 60 * 60 * 1000;
+}
+const chefMode = computed(() => {
+    const uniques: { [key: number]: { earliest: Date, order: MenuOrder } } = {};
+    for (let ord of state.data) {
+        for (let item of ord.orders) {
+            if (uniques.hasOwnProperty(item.id)) {
+                uniques[item.id].order.quantity += item.quantity;
+                uniques[item.id].order.note += '\n' + `(oleh: ${ord.username}) ${item.note}`;
+                uniques[item.id].earliest = (uniques[item.id].earliest.getTime() <= ord.time.getTime() ? uniques[item.id].earliest : ord.time);
+            } else {
+                uniques[item.id] = {
+                    order: item.copy(),
+                    earliest: ord.time,
+                };
+                uniques[item.id].order.note = `(oleh: ${ord.username}) ${item.note}`;
+            }
+        }
+    }
+    const priorityList: { earliest: Date, order: MenuOrder }[] = [];
+    for (let uniq in uniques) {
+        priorityList.push(uniques[uniq]);
+    }
+
+    priorityList.sort((a, b) => {
+        const lateA = isOverAnHour(a.earliest);
+        const lateB = isOverAnHour(b.earliest);
+        if (lateA == lateB) return b.order.quantity - a.order.quantity;
+        else if (lateA) return -1;
+        else return 1;
+    });
+    return priorityList;
 });
 
-socket.on("newOrder", (order) => {
-    orders.addOrder(MenuTransaction.fromJSON(order));
-});
-onBeforeUnmount(() => {
-    socket.off("newOrder");
-});
+initialize();
+provide(ONGOING_ORDERS_KEY, state);
+provide(CHEF_MODE_KEY, chefMode);
 </script>
 
 <template>
-    <FetchWrapper :fn="orders.initialize">
-        <div class="mx-3 mx-lg-5 mt-4">
-            <div class="mb-4 ms-2">
-                <IconButton
-                    icon="/restaurant.svg" 
-                    semantic="Chef Mode"
-                    class="btn-primary"
-                    @click="state.isChefMode = true"
-                    v-if="!state.isChefMode"
-                />
-                <IconButton
-                    icon="/storefront.svg" 
-                    semantic="Store Mode"
-                    class="btn-primary"
-                    @click="state.isChefMode = false"
-                    v-else
-                />
-            </div>
-            <div v-if="state.isChefMode">
-                <TransitionGroup name="list-slide-left" tag="ul" class="list-group">
-                    <ChefModeListItem :item="order.order" :earliest="order.earliest" :key="order.order.id" v-for="order in orders.chefMode"/>
-                </TransitionGroup>
-            </div>
-            <div v-else>
-                <TransitionGroup name="list-slide-left">
-                    <OngoingOrder :order="order" :key="order.id" v-for="order in orders.orders"/>
-                </TransitionGroup>
-            </div>
-        </div>
-    </FetchWrapper>
+    <View />
 </template>

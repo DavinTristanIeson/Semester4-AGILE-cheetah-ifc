@@ -3,37 +3,37 @@ import { API, SERVER_ERROR } from '@/helpers/constants';
 import { RadioInputObject, TextInputObject } from '@/helpers/inputs';
 import TextInput from '@/components/input/TextInput.vue';
 import { inject, onBeforeUnmount, reactive } from 'vue';
-import { useUserStore } from '../../store';
 import { isNotEmpty, validateEmail, validateName, validatePassword, validatePhoneNumber } from '@/helpers/inputValidators';
 import { useRouter } from 'vue-router';
-import { PAGE_STATE_KEY } from '@/helpers/keys';
+import { PAGE_STATE_KEY, USER_KEY } from '@/helpers/keys';
 import StatefulForm from '@/components/input/StatefulForm.vue';
 import Alert from '@/components/display/Alert.vue';
 
-const user = useUserStore();
+const user = inject(USER_KEY)!;
+console.log(user.value);
+const pageState = inject(PAGE_STATE_KEY)!;
+
 const state = reactive({
     requirePassword: false,
     success: "",
     successTimeout: -1,
 });
 
-const pageState = inject(PAGE_STATE_KEY)!;
 const router = useRouter();
-
 
 function validateNewPassword(password: string){
     return password.length > 0 ? validatePassword(password) : "";
 }
 
 const inputs = [
-    new TextInputObject("Email", user.user?.email ?? "", validateEmail, {semanticType: 'email'}),
+    new TextInputObject("Email", user.value!.email ?? "", validateEmail, {semanticType: 'email'}),
     new TextInputObject("Password Baru", "", validateNewPassword, {semanticType: 'password'}),
-    new TextInputObject("Nama", user.user?.name ?? "", validateName),
-    new RadioInputObject("Jenis Kelamin", user.user?.gender ? "male" : "female", [
+    new TextInputObject("Nama", user.value!.name ?? "", validateName),
+    new RadioInputObject("Jenis Kelamin", user.value!.gender ? "male" : "female", [
         { label: "Pria", value:"male" },
         { label: "Wanita", value:"female" }
     ], "Pilih salah satu jenis kelamin"),
-    new TextInputObject("No. Telp", user.user?.telp ?? "", validatePhoneNumber),
+    new TextInputObject("No. Telp", user.value!.telp ?? "", validatePhoneNumber),
 ]
 const passwordInput = new TextInputObject("Password", "", isNotEmpty("Password harus diisi!"), {semanticType: 'password'});
 
@@ -87,11 +87,10 @@ function editAccount(payload: any){
         inputs[1].error = "";
         inputs[1].value = "";
         
-        if (!user.user) return;
-        user.user.email = sent.email;
-        user.user.name = sent.name;
-        user.user.gender = sent.gender;
-        user.user.telp = sent.telp;
+        user.value!.email = sent.email;
+        user.value!.name = sent.name;
+        user.value!.gender = sent.gender;
+        user.value!.telp = sent.telp;
     });
 }
 
@@ -113,7 +112,6 @@ async function deleteAccount(){
             body: JSON.stringify({password: passwordInput.value}),
         });
         if (res.ok){
-            user.logout();
             await fetch(API+"/accounts/logout", {
                 method: "POST",
                 credentials: "include",

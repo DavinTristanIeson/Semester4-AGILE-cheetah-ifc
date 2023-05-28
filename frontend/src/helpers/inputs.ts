@@ -106,25 +106,17 @@ export class FileInputObject extends InputObject<File|undefined> {
         }
     }
 }
-export class SelectInputObject<T> extends InputObject<T|undefined> {
+export class SelectInputObject extends InputObject<string> {
     type = "select"
     validate: () => boolean;
-    selection: {
-        [key: string]: T;
-    }
-    constructor(label: string, initialValue: T|undefined, selection: T[], extractor: (option: T) => string, validator: (data: T|undefined) => string | undefined){
+    selection: ChoiceInputOption[];
+    constructor(label: string, initialValue: string, selection: ChoiceInputOption[], validator: (data: string) => string | undefined){
         super(label, initialValue);
-        this.selection = {};
-        for (let select of selection){
-            this.selection[extractor(select)] = select;
-        }
+        this.selection = selection;
         this.validate = function (){
             this.error = validator(this.value) ?? "";
             return this.error.length == 0;
         }
-    }
-    select(name: string){
-        this.value = this.selection[name];
     }
 }
 

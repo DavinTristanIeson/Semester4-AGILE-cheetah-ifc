@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { API, SERVER_ERROR } from '@/helpers/constants';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../store';
 import NavBar from '@/components/display/NavBar.vue';
 import { PAGE_STATE_KEY } from '@/helpers/keys';
 import { inject } from 'vue';
 
 const router = useRouter();
 const pageState = inject(PAGE_STATE_KEY)!;
-const user = useUserStore();
 async function logout(){
     pageState.run(async () => {
         const res = await fetch(API+"/accounts/logout", {
@@ -16,7 +14,6 @@ async function logout(){
             method: "POST",
         });
         if (res.ok){
-            user.logout();
             router.replace({name: "login"});
         } else {
             throw new Error(SERVER_ERROR);

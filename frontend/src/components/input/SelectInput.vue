@@ -3,16 +3,16 @@ import type { FileInputObject, RadioInputObject, SelectInputObject } from '@/hel
 import { ref } from 'vue';
 
 const props = defineProps<{
-    input: SelectInputObject<unknown>,
+    input: SelectInputObject,
     shouldValidate?:boolean
 }>();
 const inputRef = ref(props.input);
 const emit = defineEmits<{
     (e: "update:value", value:unknown|undefined): void,
 }>();
-function setValue(payload:Event){
-    const target = payload.target as HTMLInputElement;
-    inputRef.value.select(target.value);
+function setValue(e: Event){
+    const target = e.target as HTMLInputElement;
+    inputRef.value.value = target.value;
     if (props.shouldValidate)
         inputRef.value.validate();
     emit("update:value", inputRef.value.value);
@@ -23,9 +23,9 @@ function setValue(payload:Event){
 <template>
     <div class="form-group">
     <label :for="inputRef.id">{{ inputRef.label }}</label>
-    <select class="form-control" :id="inputRef.id" @change="setValue">
-        <option v-for="(_, key) of inputRef.selection" :key="key">
-            {{ key }}
+    <select class="form-control" :id="inputRef.id" @change="setValue" :value="inputRef.value">
+        <option v-for="opt in inputRef.selection" :value="opt.value">
+            {{ opt.label }}
         </option>
     </select>
     </div>
