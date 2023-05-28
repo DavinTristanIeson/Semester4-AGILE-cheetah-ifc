@@ -41,4 +41,24 @@ AKAN: Mengecek produk
 KENDALA: Lagi diluar, tidak bisa mengakses laptop
 
 ### Sisa
-25 - 8 - 8 + 4 = 13
+21 - 8 - 8 + 4 = 9
+
+## 28/05/2023
+
+### Davin Tristan Ieson
+SUDAH: Mengerjakan fitur pengeditan akun serta fitur untuk membatalkan pesanan, pengguna juga diinformasikan ketika pesanan dibatalkan [2 + 5]
+AKAN: Refaktor kode lama agar menggunakan paginasi
+KENDALA: -
+
+### Jansen Loman
+SUDAH: menyelesaikan fitur edit akun, menambahkan paginasi backend [2]
+AKAN: ??
+KENDALA: -
+
+### Vincent Tandera
+SUDAH: Mengecek fitur fitur yang sudah dibuat
+AKAN: Melanjutkan pengecekan pada update berikutnya
+KENDALA: -
+
+### Sisa
+9 - 7 - 2 = 0

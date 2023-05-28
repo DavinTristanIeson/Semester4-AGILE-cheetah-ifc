@@ -41,4 +41,4 @@
 - Tampilan form pengeditan akun
 - Rute untuk edit akun
 
-TOTAL: 25 + 2
+TOTAL: 25 + 4
