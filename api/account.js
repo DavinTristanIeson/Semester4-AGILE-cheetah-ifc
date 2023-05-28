@@ -70,8 +70,8 @@ router.post("/register", validateRegister, async (req, res, next) => {
     ]);
   } catch (err) {
     res
-    .status(400)
-    .json({ message: "Email tersebut sudah digunakan orang lain." });
+      .status(400)
+      .json({ message: "Email tersebut sudah digunakan orang lain." });
     next(err);
     return;
   }
@@ -185,5 +185,82 @@ router.delete("/", userIsCustomer, async (req, res) => {
     next(err);
   }
 });
+
+router.put(
+  "/account",
+  userIsCustomer,
+  validateRegister,
+  async (req, res, next) => {
+    const { email, name, gender, telp, password, verify } = req.body;
+    const userId = req.session.user.id;
+
+    try {
+      let isPasswordMatch = true;
+      if (password) {
+        if (!verify) {
+          res
+            .status(400)
+            .json({ message: "Harap masukkan password lama untuk verifikasi" });
+          return;
+        }
+
+        const user = await db.get("SELECT * FROM users WHERE id = ?", [userId]);
+        if (!user) {
+          res.status(404).json({ message: "User not found" });
+          return;
+        }
+
+        isPasswordMatch = await bcrypt.compare(verify, user.password);
+        if (!isPasswordMatch) {
+          res.status(400).json({ message: "Password lama tidak sesuai" });
+          return;
+        }
+      }
+
+      let updatedEmail = email;
+      let updatedName = name;
+      let updatedGender = gender;
+      let updatedTelp = telp;
+
+      if (!updatedEmail) {
+        updatedEmail = user.email;
+      }
+      if (!updatedName) {
+        updatedName = user.name;
+      }
+      if (updatedGender === undefined || updatedGender === null) {
+        updatedGender = user.gender;
+      }
+      if (!updatedTelp) {
+        updatedTelp = user.telp;
+      }
+
+      if (password && isPasswordMatch) {
+        const saltRounds = 10;
+        const hashedNewPassword = await bcrypt.hash(password, saltRounds);
+        await db.run(
+          "UPDATE users SET email = ?, name = ?, gender = ?, telp = ?, password = ? WHERE id = ?",
+          [
+            updatedEmail,
+            updatedName,
+            !!updatedGender,
+            updatedTelp,
+            hashedNewPassword,
+            userId,
+          ]
+        );
+      } else {
+        await db.run(
+          "UPDATE users SET email = ?, name = ?, gender = ?, telp = ? WHERE id = ?",
+          [updatedEmail, updatedName, !!updatedGender, updatedTelp, userId]
+        );
+      }
+
+      res.status(200).json({ message: "Akun berhasil diperbarui" });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 module.exports = router;
