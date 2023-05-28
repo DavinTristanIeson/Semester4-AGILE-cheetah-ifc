@@ -18,8 +18,10 @@ function changePage(e:Event){
         return;
     }
     const target = e.target as HTMLInputElement;
-    const newPage = parseInt(target.value);
-    pagination.setPage(isNaN(newPage) ? 0 : clampPage(newPage), props.params);
+    const parsedPage = parseInt(target.value);
+    const newPage = isNaN(parsedPage) ? 0 : clampPage(parsedPage);
+    pagination.setPage(newPage, props.params);
+    target.value = (newPage + 1).toString();
 }
 const hasNextPage = computed(() => pagination.page < pagination.totalPages-1 && pagination.totalPages != 0);
 const hasPrevPage = computed(() => pagination.page > 0);

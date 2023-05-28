@@ -1,24 +1,28 @@
 <script setup lang="ts">
-import { useTransactionsStore } from '../../store';
-import Summary from './Summary.vue';
-import FetchWrapper from '@/components/function/FetchWrapper.vue';
-import PageButtons from './PageButtons.vue';
+import View from './View.vue';
+import Pagination from '@/components/function/Pagination.vue';
+import { MenuTransaction, TransactionSummary } from '@/helpers/classes';
+import { API } from '@/helpers/constants';
+import { ADMIN_TRANSACTION_HISTORY_KEY } from '@/helpers/keys';
 
-const transactions = useTransactionsStore();
+async function fetchHistory(page: number) {
+    const params = new URLSearchParams();
+    params.append("page", page.toString());
+    // fetch dari backend
+    const res = await fetch(`${API}/orders/transactions?${params.toString()}`, {
+        credentials: "include"
+    });
+    if (!res.ok) throw res;
+    const json = await res.json();
+    return {
+        pages: json.pages,
+        data: TransactionSummary.summarize(MenuTransaction.fromJSONArray(json.data)),
+    }
+}
 </script>
 
 <template>
-    <FetchWrapper :fn="transactions.initialize">
-        <div class="horizontal-scroll mt-4">
-            <Summary :summary="summary" v-for="summary in transactions.transactions"/>
-        </div>
-        <PageButtons/>
-    </FetchWrapper>
+    <Pagination :fn="fetchHistory" :injectKey="ADMIN_TRANSACTION_HISTORY_KEY">
+        <View/>
+    </Pagination>
 </template>
-
-<style>
-.horizontal-scroll {
-    display: flex;
-    overflow-x: auto;
-}
-</style>

@@ -1,5 +1,5 @@
 import type { InjectionKey } from "vue";
-import type { MenuItem, MenuOrder, MenuTransaction } from "./classes";
+import type { MenuItem, MenuOrder, MenuTransaction, TransactionSummary } from "./classes";
 
 export interface PageState {
     loading: boolean;
@@ -51,3 +51,6 @@ export interface CurrentOrdersProps {
     finishTransaction: () => void;
 }
 export const CURRENT_ORDERS_KEY: InjectionKey<CurrentOrdersProps> = Symbol("Current Orders");
+
+export const TRANSACTION_HISTORY_KEY: InjectionKey<PaginationProps<MenuTransaction, never>> = Symbol("Transaction History");
+export const ADMIN_TRANSACTION_HISTORY_KEY:  InjectionKey<PaginationProps<TransactionSummary, never>> = Symbol("Admin Transaction History");

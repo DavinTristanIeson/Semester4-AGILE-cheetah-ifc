@@ -1,17 +1,28 @@
 <script setup lang="ts">
-import FinishedOrder from './FinishedOrder.vue';
-import { useHistoryStore } from '../../store';
-import PageButtons from './PageButtons.vue';
-import FetchWrapper from '@/components/function/FetchWrapper.vue';
+import View from './View.vue';
+import Pagination from '@/components/function/Pagination.vue';
+import { MenuTransaction } from '@/helpers/classes';
+import { TRANSACTION_HISTORY_KEY } from '@/helpers/keys';
+import { API } from '@/helpers/constants';
 
-const history = useHistoryStore();
+async function fetchHistory(page: number) {
+    const params = new URLSearchParams();
+    params.append("page", page.toString());
+    // fetch dari backend
+    const res = await fetch(`${API}/orders/history?${params.toString()}`, {
+        credentials: "include"
+    });
+    if (!res.ok) throw res;
+    const json = await res.json();
+    return {
+        pages: json.pages,
+        data: MenuTransaction.fromJSONArray(json.data),
+    }
+}
 </script>
 
 <template>
-    <FetchWrapper :fn="history.initialize">
-        <div class="my-4 mx-3">
-            <FinishedOrder :order="order" v-for="order in history.current"/>
-        </div>
-        <PageButtons/>
-    </FetchWrapper>
+    <Pagination :fn="fetchHistory" :injectKey="TRANSACTION_HISTORY_KEY">
+        <View />
+    </Pagination>
 </template>

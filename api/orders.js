@@ -7,16 +7,16 @@ const { dispatch } = require("./io");
 function createOrdersArray(orders) {
   const collection = {};
   for (let order of orders) {
-    if (!collection.hasOwnProperty(order.order_id)) {
-      collection[order.order_id] = {
-        id: order.order_id,
+    if (!collection.hasOwnProperty(order.oid)) {
+      collection[order.oid] = {
+        id: order.oid,
         time: order.order_time,
         user: order.username,
         records: [],
         status: order.status,
       };
     }
-    collection[order.order_id].records.push({
+    collection[order.oid].records.push({
       id: order.record_id,
       name: order.record_name,
       price: order.record_price,
@@ -29,7 +29,7 @@ function createOrdersArray(orders) {
 
 function createOrderObject(order) {
   return {
-    id: order[0].order_id,
+    id: order[0].oid,
     time: order[0].order_time,
     user: order[0].username,
     records: order.map((record) => {
@@ -45,10 +45,48 @@ function createOrderObject(order) {
   };
 }
 
+
 const ORDER_QUERY =
-  "SELECT orders.id as order_id, users.name as username, orders.order_time, orders_records.id as record_id,\
-orders_records.name as record_name, orders_records.price as record_price, orders_records.note as record_note, orders_records.quantity as record_quantity, orders.status as status \
-FROM orders JOIN orders_records ON orders.id = orders_records.order_id JOIN users ON orders.account_id = users.id";
+"SELECT \
+orders.id as oid, \
+orders.order_time, \
+orders.status as status \
+users.name as username, \
+orders_records.id as record_id,\
+orders_records.name as record_name, \
+orders_records.price as record_price, \
+orders_records.note as record_note, \
+orders_records.quantity as record_quantity \
+FROM orders \
+JOIN orders_records \
+ON orders.id = orders_records.order_id \
+JOIN users \
+ON orders.account_id = users.id";
+
+function paginatedOrderQuery(condition){
+  return `SELECT \
+orders_records.id as record_id,\
+orders_records.name as record_name, \
+orders_records.price as record_price, \
+orders_records.note as record_note, \
+orders_records.quantity as record_quantity, \
+* \
+FROM (SELECT \
+orders.id AS oid, \
+orders.order_time, \
+orders.status AS status, \
+users.name AS username \
+FROM orders \
+JOIN users \
+ON orders.account_id = users.id \
+${condition} \
+ORDER BY order_time DESC \
+LIMIT ? OFFSET ?) \
+JOIN orders_records \
+ON oid = orders_records.order_id`;
+}
+
+const COUNT_QUERY = "SELECT COUNT(*) AS _total FROM orders";
 
 router.post("/", userIsCustomer, async (req, res, next) => {
   try {
@@ -94,13 +132,16 @@ router.get("/", userIsAdmin, async (req, res, next) => {
     const limit = 25;
     const offset = (page - 1) * limit;
 
+    const { _total: count } = await db.get(COUNT_QUERY + " WHERE orders.status = ?", [0]);
     const orders = await db.all(
-      ORDER_QUERY + " WHERE orders.order_time BETWEEN ? AND ? LIMIT ? OFFSET ?",
-      [start, end, limit, offset]
+      paginatedOrderQuery("WHERE orders.status = ?"),
+      [limit, offset]
     );
 
-    const ordersArray = createOrdersArray(orders);
-    res.status(200).json(ordersArray);
+    res.status(200).json({
+      pages: Math.ceil(count / limit),
+      data: createOrdersArray(orders),
+    });
   } catch (err) {
     next(err);
   }
@@ -112,12 +153,15 @@ router.get("/transactions", userIsAdmin, async (req, res, next) => {
   const limit = 25;
   const offset = (page - 1) * limit;
   try {
+    const { _total: count } = await db.get(COUNT_QUERY + " WHERE orders.status = ?", [0]);
     const orders = await db.all(
-      ORDER_QUERY +
-        " WHERE (orders.order_time BETWEEN ? AND ?) AND orders.status = ? LIMIT ? OFFSET ?",
-      [start, end, 0, limit, offset]
+      paginatedOrderQuery("WHERE orders.status = ?"),
+      [0, limit, offset]
     );
-    res.status(200).json(createOrdersArray(orders));
+    res.status(200).json({
+      pages: Math.ceil(count / limit),
+      data: createOrdersArray(orders),
+    });
   } catch (err) {
     next(err);
   }
@@ -190,12 +234,16 @@ router.get("/history", userIsCustomer, async (req, res, next) => {
     const limit = 25;
     const offset = (page - 1) * limit;
 
+    const { _total: count } = await db.get(COUNT_QUERY + " WHERE account_id = ?", [req.session.user.id]);
     const orders = await db.all(
-      ORDER_QUERY + " WHERE account_id = ? AND status = ? LIMIT ? OFFSET ?",
+      paginatedOrderQuery("WHERE account_id = ? AND status = ?"),
       [req.session.user.id, 0, limit, offset] // 0 = finished status
     );
 
-    res.status(200).json(createOrdersArray(orders));
+    res.status(200).json({
+      pages: Math.ceil(count/limit),
+      data: createOrdersArray(orders)
+    });
   } catch (err) {
     next(err);
   }

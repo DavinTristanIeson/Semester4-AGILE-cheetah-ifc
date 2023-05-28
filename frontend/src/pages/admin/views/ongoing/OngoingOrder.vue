@@ -3,7 +3,7 @@ import Accordion from '@/components/display/Accordion.vue';
 import { MenuTransaction } from "@/helpers/classes";
 import { computed, inject, onBeforeUnmount, onMounted, reactive } from 'vue';
 import OrderListItem from '@/components/display/OrderListItem.vue';
-import { useOngoingOrdersStore, useTransactionsStore } from '../../store';
+import { useOngoingOrdersStore } from '../../store';
 import { API, SERVER_ERROR } from '@/helpers/constants';
 import { PAGE_STATE_KEY } from '@/helpers/keys';
 
@@ -16,7 +16,6 @@ const state = reactive({
     intervalID: -1,
 });
 const orders = useOngoingOrdersStore();
-const transactions = useTransactionsStore();
 onMounted(()=>{
     state.intervalID = setInterval(()=>{
         state.timeDiff = new Date().getTime() - props.order.time.getTime();
@@ -39,7 +38,6 @@ async function changePhase(){
     pageState.run(async () => {
         if (props.order.phase == "cooking"){
             orders.removeOrder(props.order);
-            transactions.addNewTransaction(props.order);
         }
         props.order.phase = MenuTransaction.parseStatus(props.order.toStatus()-1);
         const res = await fetch(`${API}/orders/${props.order.id}/status`, {
@@ -68,7 +66,6 @@ async function cancelOrder(){
         });
         if (!res.ok) throw new Error(SERVER_ERROR);
         orders.removeOrder(props.order);
-        transactions.addNewTransaction(props.order);
     });
 }
 </script>
