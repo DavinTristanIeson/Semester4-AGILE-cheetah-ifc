@@ -22,14 +22,14 @@ async function sendOrder(){
 
     pageState.run(async () => {
         if (!(await user.initialize())){
-            return new Error(SERVER_ERROR);
+            throw new Error(SERVER_ERROR);
         }
         if (current.orders.length == 0){
-            return new Error("Minimal harus ada satu pesanan!")
+            throw new Error("Minimal harus ada satu pesanan!")
         }
         await current.createTransaction();
         if (!current.orders){
-            return new Error(SERVER_ERROR);
+            throw new Error(SERVER_ERROR);
         }
     });
 }

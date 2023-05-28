@@ -50,7 +50,7 @@ async function changePhase(){
             credentials: "include",
             body: JSON.stringify({status: props.order.toStatus()})
         });
-        if (!res.ok) return new Error(SERVER_ERROR);
+        if (!res.ok) throw new Error(SERVER_ERROR);
     });
 }
 async function cancelOrder(){
@@ -66,7 +66,7 @@ async function cancelOrder(){
                 reason,
             })
         });
-        if (!res.ok) return new Error(SERVER_ERROR);
+        if (!res.ok) throw new Error(SERVER_ERROR);
         orders.removeOrder(props.order);
         transactions.addNewTransaction(props.order);
     });

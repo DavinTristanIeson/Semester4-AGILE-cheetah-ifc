@@ -12,6 +12,7 @@ const state = reactive({
 function setError(error: string, timeout?: number | null){
     state.error = error;
     if (timeout !== null){
+        clearTimeout(state.errorTimeout);
         state.errorTimeout = setTimeout(() => {
             state.error = "";
             state.errorTimeout = -1;

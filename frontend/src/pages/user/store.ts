@@ -80,7 +80,7 @@ export const useUserStore = defineStore("user", {
 	actions: {
 		async initialize() {
 			if (this.user) return true;
-			const res = await fetch(API + "/accounts/", {
+			const res = await fetch(API + "/accounts", {
 				credentials: "include"
 			});
 			if (!res.ok) {

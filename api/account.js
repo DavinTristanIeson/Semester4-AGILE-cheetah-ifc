@@ -5,42 +5,60 @@ const db = require("./db.js");
 
 const { userIsCustomer } = require("./middleware.js");
 
-function validateRegister(req, res, next) {
-  const { email, password, name, gender, telp } = req.body;
-  if (!email || !password || !name || !telp) {
-    res.status(400).json({
-      message:
-        "Expecting the following fields: email, password, name, gender, telp",
-    });
-    return;
-  }
-  const errors = [];
-  if (email.length == 0) errors.push("Email harus diisi");
-  else if (
-    !email.match(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/
-    )
-  )
-    errors.push("Format email tidak sesuai");
-  if (password.length < 8)
-    errors.push("Password harus terdiri dari minimal 8 karakter");
-  if (name.length < 5)
-    errors.push("Nama harus terdiri dari minimal 5 karakter");
-  else if (!name.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/))
-    errors.push(
-      "Nama hanya boleh terdiri dari huruf alfabet dan angka 0-9 saja"
-    );
-  if (gender === null || gender === undefined)
-    errors.push("Jenis kelamin harus diisi");
-  if (telp.length == 0) errors.push("No. telp harus diisi");
-  else if (!telp.match(/^[0-9]{10,12}$/))
-    errors.push("No. telp harus terdiri dari 10-12 angka");
+function validateAccountPayload(requireAllFields){
+  return function validateAccountPayload(req, res, next) {
+    const { email, password, name, gender, telp } = req.body;
+    if (requireAllFields){
+      if (!email || !password || !name || !telp) {
+        res.status(400).json({
+          message:
+            "Expecting the following fields: email, password, name, gender, telp",
+        });
+        return;
+      }
+    }
+    const errors = [];
+    if (requireAllFields || email){
+      if (email.length == 0) errors.push("Email harus diisi");
+      else if (
+        !email.match(
+          /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/
+        )
+      )
+        errors.push("Format email tidak sesuai");
+    }
 
-  if (errors.length > 0) {
-    res.status(400).json({ message: errors.join(". ") });
-    return;
-  } else {
-    next();
+    if (requireAllFields || password){
+      if (password.length < 8)
+        errors.push("Password harus terdiri dari minimal 8 karakter");
+    }
+
+    if (requireAllFields || name){
+      if (name.length < 5)
+        errors.push("Nama harus terdiri dari minimal 5 karakter");
+      else if (!name.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/))
+        errors.push(
+          "Nama hanya boleh terdiri dari huruf alfabet dan angka 0-9 saja"
+        );
+    }
+
+    if (requireAllFields || gender){
+      if (gender === null || gender === undefined)
+        errors.push("Jenis kelamin harus diisi");
+    }
+
+    if (requireAllFields || telp){
+      if (telp.length == 0) errors.push("No. telp harus diisi");
+      else if (!telp.match(/^[0-9]{10,12}$/))
+        errors.push("No. telp harus terdiri dari 10-12 angka");
+    }
+  
+    if (errors.length > 0) {
+      res.status(400).json({ message: errors.join(". ") });
+      return;
+    } else {
+      next();
+    }
   }
 }
 
@@ -55,7 +73,7 @@ function createUserObject(user) {
   };
 }
 
-router.post("/register", validateRegister, async (req, res, next) => {
+router.post("/register", validateAccountPayload(true), async (req, res, next) => {
   const { email, password, name, gender, telp, isAdmin = 0 } = req.body;
   try {
     const saltRounds = 10;
@@ -155,7 +173,7 @@ router.get("/me", (req, res) => {
   else res.status(401).end();
 });
 
-router.get("/", userIsCustomer, async (req, res) => {
+router.get("", userIsCustomer, async (req, res) => {
   const user = await db.get("SELECT * FROM users WHERE id = ?", [
     req.session.user.id,
   ]);
@@ -166,7 +184,7 @@ router.get("/", userIsCustomer, async (req, res) => {
   else res.status(200).json(createUserObject(user));
 });
 
-router.delete("/", userIsCustomer, async (req, res) => {
+router.delete("", userIsCustomer, async (req, res) => {
   const user = await db.get("SELECT * FROM users WHERE id = ?", [
     req.session.user.id,
   ]);
@@ -187,9 +205,9 @@ router.delete("/", userIsCustomer, async (req, res) => {
 });
 
 router.put(
-  "/account",
+  "",
   userIsCustomer,
-  validateRegister,
+  validateAccountPayload(false),
   async (req, res, next) => {
     const { email, name, gender, telp, password, verify } = req.body;
     const userId = req.session.user.id;

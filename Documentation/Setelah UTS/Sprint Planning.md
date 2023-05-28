@@ -35,3 +35,10 @@
 5. Sebagai guest, saya ingin bisa memfiltrasi menu agar mempermudah pencarian. [1/-/4]
 - Popup filter dan search bar
 - Ambil data menu berdasarkan filter dan search
+
+(EDIT: 28/05/2023)
+6. Sebagai pengguna, saya ingin memodifikasi informasi akun saya [2/2/5]
+- Tampilan form pengeditan akun
+- Rute untuk edit akun
+
+TOTAL: 25 + 2

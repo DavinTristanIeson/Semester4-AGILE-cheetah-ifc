@@ -10,8 +10,8 @@ import CheckboxInput from "./CheckboxInput.vue";
 
 type HttpMethods = "get"|"post"|"put"|"delete";
 const props = defineProps<{
-    action:string
-    method: HttpMethods | Uppercase<HttpMethods>,
+    action?:string
+    method?: HttpMethods | Uppercase<HttpMethods>,
     inputs: InputObject[],
     validateFromStart?:boolean,
     purpose?:string,

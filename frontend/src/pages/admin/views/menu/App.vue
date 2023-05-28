@@ -33,7 +33,7 @@ function editItem(payload: EditMenuPayload, original: MenuItem | null){
                     'Content-Type': "application/json",
                 },
             });
-            if (!res.ok) return new Error(SERVER_ERROR);
+            if (!res.ok) throw new Error(SERVER_ERROR);
             original.name = payload.name;
             original.description = payload.description;
             original.price = payload.price;
@@ -48,7 +48,7 @@ function editItem(payload: EditMenuPayload, original: MenuItem | null){
                     'Content-Type': "application/json",
                 },
             });
-            if (!res.ok) return new Error(SERVER_ERROR);
+            if (!res.ok) throw new Error(SERVER_ERROR);
             const raw = await res.json();
             menu.add(MenuItem.fromJSON(raw));
         }
@@ -65,7 +65,7 @@ function deleteItem(id: number){
             },
             credentials: "include"
         });
-        if (!res.ok) return new Error(SERVER_ERROR);
+        if (!res.ok) throw new Error(SERVER_ERROR);
         menu.remove(id);
         state.viewedItem = undefined;
     });
