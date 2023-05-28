@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { inject, onBeforeUnmount, onMounted, reactive } from 'vue';
-import { useCurrentOrdersStore, useUserStore } from '../../store';
+import { computed, inject, onBeforeUnmount, onMounted, reactive } from 'vue';
+import { useUserStore } from '../../store';
 import OrderItem from './components/OrderItem.vue';
 import { CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
-import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { CURRENT_ORDERS_KEY, PAGE_STATE_KEY } from '@/helpers/keys';
 
 const state = reactive({
     isOffcanvasOpen: true
@@ -15,7 +15,7 @@ const user = useUserStore();
 onMounted(()=>{ setOffcanvas(); window.addEventListener("resize", setOffcanvas); });
 onBeforeUnmount(()=>{ window.removeEventListener("resize", setOffcanvas) });
 
-const current = useCurrentOrdersStore();
+const current = inject(CURRENT_ORDERS_KEY)!;
 const pageState = inject(PAGE_STATE_KEY)!;
 async function sendOrder(){
     if (!current) return;
@@ -33,6 +33,11 @@ async function sendOrder(){
         }
     });
 }
+const rupiahFmt = Intl.NumberFormat(undefined, {currency: "IDR"});
+const hargaTotal = computed(() => {
+    const price = current.orders.reduce((acc, cur) => acc + cur.price, 0);
+    return rupiahFmt.format(price);
+});
 </script>
 
 <template>
@@ -59,7 +64,7 @@ Pesanan Anda
                 </TransitionGroup>
             </div>
             <div class="position-absolute bottom-0 w-100 mt-2 p-2 border-top tss-bg-secondary">
-                <p><b>Total: </b> {{ current!.hargaTotal }}</p>
+                <p><b>Total: </b> {{ hargaTotal }}</p>
                 <div class="w-100 text-center">
                     <button class="btn btn-primary w-75" @click="sendOrder">Pesan</button>
                 </div>

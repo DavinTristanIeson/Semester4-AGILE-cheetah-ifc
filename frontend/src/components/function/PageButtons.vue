@@ -1,26 +1,35 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useMenuStore } from '@/helpers/menuStore';
+import { computed, inject, type InjectionKey } from 'vue';
+import { PAGINATION_KEY, type PaginationProps } from '@/helpers/keys';
 
-const menu = useMenuStore();
+const props = defineProps<{
+    injectKey?: InjectionKey<PaginationProps>
+    params?: any
+}>();
+const pagination = inject(props.injectKey || PAGINATION_KEY)!;
+
+function clampPage(page: number){
+    return  Math.max(0, Math.min(
+        pagination.totalPages-1, page
+    ));
+}
 function changePage(e:Event){
     if (e instanceof KeyboardEvent && e.key != "Enter"){
         return;
     }
     const target = e.target as HTMLInputElement;
     const newPage = parseInt(target.value);
-    menu.changePage(isNaN(newPage) ? 0 : newPage-1);
+    pagination.setPage(isNaN(newPage) ? 0 : clampPage(newPage), props.params);
 }
-const hasNextPage = computed(()=>menu.page < menu.totalPages);
-const hasPrevPage = computed(()=>menu.page > 0);
+const hasNextPage = computed(() => pagination.page < pagination.totalPages-1 && pagination.totalPages != 0);
+const hasPrevPage = computed(() => pagination.page > 0);
 function incrementPage(inc:number){
-    menu.page = Math.max(0, Math.min(menu.totalPages, menu.page + inc));
+    pagination.setPage(clampPage(pagination.page + inc), props.params);
 }
 </script>
 
 <template>
     <div class="mb-3">
-
         <button
             v-if="hasPrevPage"
             class="btn btn-secondary"
@@ -32,10 +41,10 @@ function incrementPage(inc:number){
             type="number"
             title="Page Number"
             min="1"
+            :max="pagination.totalPages"
             @keypress="changePage"
             @focusout="changePage"
-            :value="menu.page+1"
-            :max="menu.totalPages"
+            :value="pagination.page+1"
         />
         <button
             v-if="hasNextPage"

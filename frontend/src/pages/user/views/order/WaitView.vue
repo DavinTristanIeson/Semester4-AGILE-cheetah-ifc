@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useCurrentOrdersStore } from '../../store';
 import OrderListItem from '@/components/display/OrderListItem.vue';
+import { CURRENT_ORDERS_KEY } from '@/helpers/keys';
 import { socket } from '@/helpers/requests';
-import { onBeforeUnmount } from 'vue';
+import { inject, onBeforeUnmount } from 'vue';
 
-const currentOrders = useCurrentOrdersStore();
+const currentOrders = inject(CURRENT_ORDERS_KEY)!;
 const state = {
     cancelReason: ""
 }

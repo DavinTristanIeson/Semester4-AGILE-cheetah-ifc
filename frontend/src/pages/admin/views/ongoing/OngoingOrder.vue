@@ -5,7 +5,7 @@ import { computed, inject, onBeforeUnmount, onMounted, reactive } from 'vue';
 import OrderListItem from '@/components/display/OrderListItem.vue';
 import { useOngoingOrdersStore, useTransactionsStore } from '../../store';
 import { API, SERVER_ERROR } from '@/helpers/constants';
-import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { PAGE_STATE_KEY } from '@/helpers/keys';
 
 
 const props = defineProps<{

@@ -2,7 +2,7 @@
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { useRoute, useRouter } from 'vue-router';
 import NavBar from '@/components/display/NavBar.vue';
-import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { PAGE_STATE_KEY } from '@/helpers/keys';
 import { inject } from 'vue';
 
 const router = useRouter();

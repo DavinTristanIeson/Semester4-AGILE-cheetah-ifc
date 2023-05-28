@@ -1,30 +1,45 @@
 const express = require("express");
 const router = express.Router();
 const db = require("./db.js");
-const { userIsAdmin } = require("./middleware");
+const { userIsAdmin, getPaginationQuery, paginate } = require("./middleware");
 
-router.get("/", async (req, res) => {
-  const { search, page, limit } = req.query;
-  let query = "SELECT * FROM menu";
+router.get("/categories", async (req, res, next) => {
+  try {
+    const categories = await db.all("SELECT DISTINCT category FROM menu");
+    res.setHeader("Cache-Control", `max-age=${24*60*60*1000}`);
+    res.status(200).json(categories.map(x => x.category));
+  } catch (e) {
+    next(e);
+  }
+});
+
+const MENU_LIMIT = 25;
+router.get("", async (req, res) => {
+  const { search, page: rawPage, category } = req.query;
+
+  let page = parseInt(rawPage);
+  if (isNaN(page)){
+    res.status(400).json({message: "Page harus merupakan angka"});
+    return;
+  }
+
   let params = [];
-
+  let query = "* FROM menu";
   if (search) {
     query += " WHERE name LIKE ?";
-    params.push(search);
+    params.push(`%${search}%`);
   }
-
-  if (page && limit) {
-    const offset = (page - 1) * limit;
-    query += " LIMIT ? OFFSET ?";
-    params.push(limit, offset);
-  } else {
-    query += " LIMIT 25"; // Set default limit to 25
+  if (category){
+    const condition = "category = ?"
+    query += `${params.length > 0 ? ' AND ' : ' WHERE '}${condition}`;
+    params.push(category);
   }
+  params.push(MENU_LIMIT, page * MENU_LIMIT);
 
   try {
-    const rows = await db.all(query, params);
+    const rows = await db.all(getPaginationQuery(query), params);
     
-    res.status(200).json(rows);
+    res.status(200).json(paginate(rows, MENU_LIMIT));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -44,7 +59,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", userIsAdmin, async (req, res) => {
+router.post("", userIsAdmin, async (req, res) => {
   const { name, category, description, img, price } = req.body;
 
   try {
@@ -90,15 +105,6 @@ router.put("/:id", userIsAdmin, async (req, res) => {
     const updatedDescription = description || existingMenu.description;
     const updatedImg = img || existingMenu.img;
     const updatedPrice = price || existingMenu.price;
-
-    console.log([
-      updatedName,
-      updatedCategory,
-      updatedDescription,
-      updatedImg,
-      updatedPrice,
-      menuId,
-    ]);
 
     await db.run(
       "UPDATE menu SET name = ?, category = ?, description = ?, img = ?, price = ? WHERE id = ?",

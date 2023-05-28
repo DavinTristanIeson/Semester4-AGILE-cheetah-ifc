@@ -9,7 +9,7 @@ import { reactive, type InjectionKey, inject } from 'vue';
 import { MenuItem } from '@/helpers/classes';
 import EditMenuModal from './EditMenuModal.vue';
 import type { EditMenuPayload } from './types';
-import { PAGE_STATE_KEY, type PageState } from '@/components/function/keys';
+import { PAGE_STATE_KEY, type PageState } from '@/helpers/keys';
 import { API, SERVER_ERROR } from '@/helpers/constants';
 
 const menu = useMenuStore();
@@ -89,7 +89,7 @@ function deleteItem(id: number){
                     @click="state.viewedItem = item"/>
             </ul>
         </div>
-        <PageButtons/>
+        <PageButtons />
         <FAB src="/add.svg" @click="state.viewedItem = null"/>
     </FetchWrapper>
 </template>

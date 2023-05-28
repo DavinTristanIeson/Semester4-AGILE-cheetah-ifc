@@ -8,7 +8,8 @@ const emit = defineEmits<{
     (e: "search", value:string): void,
 }>();
 const searchTerm = ref("");
-function onInput(event:Event){
+function onPressEnter(event:KeyboardEvent){
+    if (event.key != 'Enter') return;
     const target = event.target as HTMLInputElement;
     searchTerm.value = target.value;
     emit("search", searchTerm.value);
@@ -19,7 +20,7 @@ function onInput(event:Event){
     <div class="my-3 ms-4 search-input">
         <input type="search"
             :value="searchTerm"
-            @input="onInput"
+            @keypress="onPressEnter"
             :placeholder="semantic ?? 'Search'"/>
     </div>
 </template>

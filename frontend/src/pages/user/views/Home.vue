@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { API, CONNECTION_ERROR, SERVER_ERROR } from '@/helpers/constants';
 import { useRouter } from 'vue-router';
-import { useCurrentOrdersStore, useHistoryStore } from '../store';
+import { useHistoryStore } from '../store';
 import { useUserStore } from '../store';
 import NavBar from '@/components/display/NavBar.vue';
-import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { CURRENT_ORDERS_KEY, PAGE_STATE_KEY } from '@/helpers/keys';
 import { inject } from 'vue';
 
 const router = useRouter();
 const pageState = inject(PAGE_STATE_KEY)!;
-const currentOrders = useCurrentOrdersStore();
 const history = useHistoryStore();
 const user = useUserStore();
 async function logout(){
@@ -19,7 +18,6 @@ async function logout(){
             method: "POST",
         });
         if (res.ok){
-            currentOrders.cleanup();
             history.cleanup();
             user.logout();
             router.replace({name: "login"});

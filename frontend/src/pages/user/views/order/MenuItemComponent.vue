@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import MenuListItem from '@/components/display/MenuListItem.vue';
 import MenuCard from '@/components/display/MenuCard.vue';
-import { useCurrentOrdersStore } from '../../store';
 import type { MenuItem } from '@/helpers/classes';
+import { CURRENT_ORDERS_KEY } from '@/helpers/keys';
+import { inject } from 'vue';
 
-const current = useCurrentOrdersStore();
+const current = inject(CURRENT_ORDERS_KEY)!;
 const props = defineProps<{
     isGridView: boolean;
     item: MenuItem;
 }>();
 function addItem(){
-    current.addOrder(props.item);
+    current.add(props.item);
 }
 </script>
 

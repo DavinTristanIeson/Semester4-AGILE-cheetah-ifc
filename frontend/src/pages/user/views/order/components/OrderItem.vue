@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import IconButton from '@/components/display/IconButton.vue';
 import type { MenuOrder } from '@/helpers/classes';
-import { useCurrentOrdersStore } from '@/pages/user/store';
+import { CURRENT_ORDERS_KEY } from '@/helpers/keys';
+import { inject } from 'vue';
 const props = defineProps<{
     item:MenuOrder
 }>();
-const currentOrders = useCurrentOrdersStore()
+const currentOrders = inject(CURRENT_ORDERS_KEY)!;
 function removeOrder(){
-    currentOrders.removeOrder(props.item);
+    currentOrders.remove(props.item);
 }
 function examineOrder(){
     currentOrders.viewedOrder = props.item;

@@ -219,14 +219,10 @@ router.get("/ongoing", userIsCustomer, async (req, res, next) => {
 
 router.get("/chef", userIsAdmin, async (req, res, next) => {
   try {
-    let page = req.query.page || 1;
-    const limit = 25;
-    const offset = (page - 1) * limit;
-
     const orders = await db.all(
       ORDER_QUERY +
-        " WHERE orders.order_time BETWEEN ? AND ? AND (orders.status = ? OR orders.status = ?) LIMIT ? OFFSET ?",
-      [start, end, 1, 2, limit, offset] // 1 = pending status, 2 = cooking status
+        " WHERE orders.status = ? OR orders.status = ?",
+      [1, 2] // 1 = pending status, 2 = cooking status
     );
 
     res.status(200).json(createOrdersArray(orders));

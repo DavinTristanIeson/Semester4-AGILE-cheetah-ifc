@@ -55,3 +55,8 @@ export class IntervalExecutor<T> {
 import { io } from "socket.io-client";
 import { BACKEND } from "./constants";
 export const socket = io(BACKEND, {withCredentials: true, transports: ['websocket', 'polling', 'flashsocket']});
+
+export interface PaginatedApiResult<T = object> {
+    pages: number;
+    data: T[];
+}

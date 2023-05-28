@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, provide, reactive } from 'vue';
-import { PAGE_STATE_KEY } from './keys';
+import { PAGE_STATE_KEY } from '../../helpers/keys';
 import Spinner from '../display/Spinner.vue';
 import Alert from '../display/Alert.vue';
 
@@ -38,6 +38,14 @@ async function run<T>(fn: () => Promise<T>): Promise<T| null> {
         state.loading = false;
         console.error(e);
         if (e instanceof Error) setError(e.message);
+        else if (e instanceof Response) {
+            try {
+                const json = await e.json();
+                if (json.message){
+                    setError(json.message);
+                }
+            } catch {}
+        }
         else setError(e.toString());
     } finally {
         state.loading = false;

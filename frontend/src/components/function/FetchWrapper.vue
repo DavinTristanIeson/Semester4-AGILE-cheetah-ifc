@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { IntervalExecutor } from '@/helpers/requests';
-import { reactive, type InjectionKey, provide, inject, onBeforeUnmount } from 'vue';
-import Spinner from '../display/Spinner.vue';
-import Alert from '../display/Alert.vue';
+import { reactive, type InjectionKey, provide, inject, onBeforeUnmount, ref } from 'vue';
 import { CONNECTION_ERROR } from '@/helpers/constants';
-import { PAGE_STATE_KEY } from "./keys";
+import { PAGE_STATE_KEY, FETCH_KEY } from "../../helpers/keys";
 
 const pageState = inject(PAGE_STATE_KEY);
 const props = defineProps<{
@@ -19,14 +17,16 @@ const emit = defineEmits<{
 }>();
 
 const state = reactive({
-    show: !!props.alwaysShow
+    show: !!props.alwaysShow,
 });
+const data = ref(null as any);
 
 const executor = new IntervalExecutor(props.fn, props.retryInterval)
     .on("success", (response) => {
         state.show = true;
         pageState?.clear();
         emit("success", response);
+        data.value = response;
     }).on("failure", (e) => {
         let error;
         if (e instanceof Error) error = e.message;
@@ -35,6 +35,8 @@ const executor = new IntervalExecutor(props.fn, props.retryInterval)
         emit("failure", e);
     });
 executor.run();
+
+provide(props.injectKey || FETCH_KEY, data);
 
 onBeforeUnmount(()=>{
     executor.cleanup();

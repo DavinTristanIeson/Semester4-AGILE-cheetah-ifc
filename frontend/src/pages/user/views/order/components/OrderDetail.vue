@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useCurrentOrdersStore } from '../../../store';
+import { computed, inject } from 'vue';
 import MenuItemModal from '@/components/display/MenuItemModal.vue';
+import { CURRENT_ORDERS_KEY } from '@/helpers/keys';
 
-const currentOrders = useCurrentOrdersStore();
+const currentOrders = inject(CURRENT_ORDERS_KEY)!;
 const item = computed(()=>{
     return currentOrders.viewedOrder!;
 });
 function closeModal(){
     if (item.value.quantity == 0){
-        currentOrders.removeOrder(currentOrders.viewedOrder!);
+        currentOrders.remove(currentOrders.viewedOrder!);
     }
-    currentOrders.examineOrder(undefined);
+    currentOrders.examine(undefined);
 }
 function changeQuantity(inc:number){
     item.value.quantity = Math.max(0, Math.min(9, item.value.quantity + inc));

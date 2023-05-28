@@ -6,7 +6,7 @@ import { inject, onBeforeUnmount, reactive } from 'vue';
 import { useUserStore } from '../../store';
 import { isNotEmpty, validateEmail, validateName, validatePassword, validatePhoneNumber } from '@/helpers/inputValidators';
 import { useRouter } from 'vue-router';
-import { PAGE_STATE_KEY } from '@/components/function/keys';
+import { PAGE_STATE_KEY } from '@/helpers/keys';
 import StatefulForm from '@/components/input/StatefulForm.vue';
 import Alert from '@/components/display/Alert.vue';
 

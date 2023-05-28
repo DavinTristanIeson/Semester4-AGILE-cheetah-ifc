@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
+import { computed, inject, reactive, ref, watch } from 'vue';
 import OrdersOffcanvas from './OrdersOffcanvas.vue';
-import { useCurrentOrdersStore } from '../../store';
-import { useMenuStore } from '@/helpers/menuStore';
 import IconButton from '@/components/display/IconButton.vue';
 import SearchBar from '@/components/display/SearchBar.vue';
 import PageButtons from '@/components/function/PageButtons.vue';
@@ -10,15 +8,20 @@ import FilterPopup from '@/components/function/FilterPopup.vue';
 import OrderDetail from './components/OrderDetail.vue';
 import ScaleTransition from '@/components/display/ScaleTransition.vue';
 import MenuItemComponent from './MenuItemComponent.vue';
+import { CURRENT_ORDERS_KEY, MENU_CATEGORIES_KEY, MENU_PAGINATION_KEY } from '@/helpers/keys';
 
-const state = reactive({
-    isGridView: localStorage.getItem("isGridView") == "false" ? false : true,
+const isGridView = ref(localStorage.getItem("isGridView") == "false" ? false : true);
+
+const params = reactive({
+    search: "",
+    category: ""
 });
-const menu = useMenuStore();
-const currentOrders = useCurrentOrdersStore();
 
+const menu = inject(MENU_PAGINATION_KEY)!;
+const menuCategories = inject(MENU_CATEGORIES_KEY)!;
+const currentOrders = inject(CURRENT_ORDERS_KEY)!;
 const icon = computed(()=>{
-    if (state.isGridView){
+    if (isGridView.value){
         return {
             url: "/grid_view.svg",
             semantic: "Grid View"
@@ -31,14 +34,14 @@ const icon = computed(()=>{
     }
 });
 
-function setSearchTerm(searchTerm:string){
-    menu.searchTerm = searchTerm;
-    menu.page = 0;
-}
 function setViewMode(){
-    state.isGridView = !state.isGridView;
-    localStorage.setItem("isGridView", state.isGridView.toString());
+    isGridView.value = !isGridView.value;
+    localStorage.setItem("isGridView", isGridView.value.toString());
 }
+function refetch(){
+    menu.refetch(params);
+}
+watch(params, refetch);
 </script>
 
 <template>
@@ -46,9 +49,9 @@ function setViewMode(){
         <OrderDetail v-if="currentOrders.viewedOrder"/>
     </ScaleTransition>
     <div class="d-flex align-items-center mw-70-lg">
-        <SearchBar @search="setSearchTerm" class="w-100 me-5"/>
+        <SearchBar @search="params.search = $event" class="w-100 me-5"/>
         <div class="d-flex align-items-center me-4">
-            <FilterPopup/>
+            <FilterPopup :options="menuCategories || []" @selected="params.category = $event"/>
             <IconButton
                 :icon="icon.url"
                 :semantic="icon.semantic"
@@ -57,15 +60,15 @@ function setViewMode(){
             />
         </div>
     </div>
-    <div class="menu-grid mw-70-lg" v-if="state.isGridView">
-        <MenuItemComponent v-for="item in menu.current" :item="item" :isGridView="state.isGridView" :key="item.id"/>
+    <div class="menu-grid mw-70-lg" v-if="isGridView">
+        <MenuItemComponent v-for="item in menu.data" :item="item" :isGridView="isGridView" :key="item.id"/>
     </div>
     <div class="mw-70-lg" v-else>
         <ul class="list-group">
-            <MenuItemComponent v-for="item in menu.current" :item="item" :isGridView="state.isGridView" :key="item.id"/>
+            <MenuItemComponent v-for="item in menu.data" :item="item" :isGridView="isGridView" :key="item.id"/>
         </ul>
     </div>
-    <PageButtons/>
+    <PageButtons :injectKey="MENU_PAGINATION_KEY" :params="params"/>
     <OrdersOffcanvas/>
 </template>
 
