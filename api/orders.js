@@ -90,12 +90,13 @@ router.post("/", userIsCustomer, async (req, res, next) => {
 // semua orderan
 router.get("/", userIsAdmin, async (req, res, next) => {
   try {
-    let start = req.query.start || "1970-01-01T00:00:00.000Z";
-    let end = req.query.end || new Date().toISOString();
+    let page = req.query.page || 1;
+    const limit = 25;
+    const offset = (page - 1) * limit;
 
     const orders = await db.all(
-      ORDER_QUERY + " WHERE orders.order_time BETWEEN ? AND ?",
-      [start, end]
+      ORDER_QUERY + " WHERE orders.order_time BETWEEN ? AND ? LIMIT ? OFFSET ?",
+      [start, end, limit, offset]
     );
 
     const ordersArray = createOrdersArray(orders);
@@ -107,13 +108,14 @@ router.get("/", userIsAdmin, async (req, res, next) => {
 
 // semua transaksi (YANG SUDAH SELESAI) dalam selang waktu tertentu
 router.get("/transactions", userIsAdmin, async (req, res, next) => {
-  let start = req.query.start || "1970-01-01T00:00:00.000Z";
-  let end = req.query.end || new Date().toISOString();
+  let page = req.query.page || 1;
+  const limit = 25;
+  const offset = (page - 1) * limit;
   try {
     const orders = await db.all(
       ORDER_QUERY +
-        " WHERE (orders.order_time BETWEEN ? AND ?) AND orders.status = ?",
-      [start, end, 0]
+        " WHERE (orders.order_time BETWEEN ? AND ?) AND orders.status = ? LIMIT ? OFFSET ?",
+      [start, end, 0, limit, offset]
     );
     res.status(200).json(createOrdersArray(orders));
   } catch (err) {
@@ -184,10 +186,15 @@ router.put("/:orderId/status", userIsAdmin, async (req, res, next) => {
 
 router.get("/history", userIsCustomer, async (req, res, next) => {
   try {
+    let page = req.query.page || 1;
+    const limit = 25;
+    const offset = (page - 1) * limit;
+
     const orders = await db.all(
-      ORDER_QUERY + " WHERE account_id = ? AND status = ?",
-      [req.session.user.id, 0] // 0 = finished status
+      ORDER_QUERY + " WHERE account_id = ? AND status = ? LIMIT ? OFFSET ?",
+      [req.session.user.id, 0, limit, offset] // 0 = finished status
     );
+
     res.status(200).json(createOrdersArray(orders));
   } catch (err) {
     next(err);
@@ -212,14 +219,16 @@ router.get("/ongoing", userIsCustomer, async (req, res, next) => {
 
 router.get("/chef", userIsAdmin, async (req, res, next) => {
   try {
-    let start = req.query.start || "1970-01-01T00:00:00.000Z";
-    let end = req.query.end || new Date().toISOString();
+    let page = req.query.page || 1;
+    const limit = 25;
+    const offset = (page - 1) * limit;
 
     const orders = await db.all(
       ORDER_QUERY +
-        " WHERE orders.order_time BETWEEN ? AND ? AND (orders.status = ? OR orders.status = ?)",
-      [start, end, 1, 2] // 1 = pending status, 2 = cooking status
+        " WHERE orders.order_time BETWEEN ? AND ? AND (orders.status = ? OR orders.status = ?) LIMIT ? OFFSET ?",
+      [start, end, 1, 2, limit, offset] // 1 = pending status, 2 = cooking status
     );
+
     res.status(200).json(createOrdersArray(orders));
   } catch (err) {
     next(err);

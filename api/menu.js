@@ -4,15 +4,21 @@ const db = require("./db.js");
 const { userIsAdmin } = require("./middleware");
 
 router.get("/", async (req, res) => {
-  const { search, limit } = req.query;
+  const { search, page, limit } = req.query;
   let query = "SELECT * FROM menu";
   let params = [];
+
   if (search) {
     query += " WHERE name LIKE ?";
     params.push(search);
-  } else if (limit) {
-    query += " LIMIT ?";
-    params.push(limit);
+  }
+
+  if (page && limit) {
+    const offset = (page - 1) * limit;
+    query += " LIMIT ? OFFSET ?";
+    params.push(limit, offset);
+  } else {
+    query += " LIMIT 25"; // Set default limit to 25
   }
 
   try {
