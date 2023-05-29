@@ -62,3 +62,64 @@ KENDALA: -
 
 ### Sisa
 9 - 7 - 2 = 0
+
+## 29/05/2023
+
+### Davin Tristan Ieson
+SUDAH: Refaktor kode lama agar menggunakan paginasi, dan tidak lagi memakai Pinia
+AKAN: Persiapkan projek Flutter utk sprint 2
+KENDALA: -
+
+### Jansen Loman
+SUDAH; -
+AKAN: Mencoba membuat session admin dan customer berbeda
+KENDALA: hari ini sibuk, tidak bisa mengerjakan
+
+### Vincent Tandera
+SUDAH: -
+AKAN: -
+KENDALA: -
+
+### Sisa
+0 - 0 = 0
+
+## 30/05/2023
+
+### Davin Tristan Ieson
+SUDAH: -
+AKAN: -
+KENDALA: -
+
+### Jansen Loman
+SUDAH: -
+AKAN:-
+KENDALA: tidak menemukan solusi untuk memakai session berbeda pada admin dan user
+
+### Vincent Tandera
+SUDAH : Mengecek update lanjutan
+AKAN : -
+KENDALA : -
+
+### Sisa
+0 - 0 = 0
+
+### 31/05/2023
+
+### Davin Tristan Ieson
+SUDAH: -
+AKAN: -
+KENDALA: Besok libur dan kita sudah selesaikan semua task sprint ini. Mau skip ke sprint 2?
+SOLUSI: Tunggu sampai sprint selesai saja.
+
+### Jansen Loman
+SUDAH: -
+AKAN:-
+KENDALA: -
+
+### Vincent Tandera
+SUDAH : -
+AKAN : -
+KENDALA : -
+
+### Sisa
+0 - 0 = 0
