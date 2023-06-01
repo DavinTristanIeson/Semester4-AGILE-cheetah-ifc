@@ -1,19 +1,20 @@
 
 import 'package:flutter/material.dart';
 
+import '../components/display/background.dart';
 import '../helpers/constants.dart';
 import 'account/main.dart';
 import 'history/main.dart';
 import 'order/main.dart';
 
-class MainAppScaffold extends StatefulWidget {
-  const MainAppScaffold({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<MainAppScaffold> createState() => _MainAppScaffoldState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MainAppScaffoldState extends State<MainAppScaffold> {
+class _MainPageState extends State<MainPage> {
   int _view = 0;
 
   AppBar buildAppBar(){
@@ -62,25 +63,14 @@ class _MainAppScaffoldState extends State<MainAppScaffold> {
     );
   }
 
-  Widget wrapBackground(Widget widget){
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-          fit: BoxFit.cover,
-          image: AssetImage(BACKGROUND_IMAGE_PATH)
-        )
-      ),
-      child: widget,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: wrapBackground(buildView()),
+      body: BackgroundImage(
+        asset: BACKGROUND_IMAGE_PATH,
+        child: buildView(),
+      ),
       bottomNavigationBar: buildBottomNavBar(context)
     );
   }

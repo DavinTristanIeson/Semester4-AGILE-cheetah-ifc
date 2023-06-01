@@ -1,4 +1,4 @@
-# Sprint 1 (26/05/2023 s/d 02/06/2023)
+# Sprint 1 (26/05/2023 s/d 01/06/2023)
 
 ## 26/05/2023
 
@@ -114,6 +114,26 @@ SOLUSI: Tunggu sampai sprint selesai saja.
 ### Jansen Loman
 SUDAH: -
 AKAN:-
+KENDALA: -
+
+### Vincent Tandera
+SUDAH : -
+AKAN : -
+KENDALA : -
+
+### Sisa
+0 - 0 = 0
+
+### 01/06/2023
+
+### Davin Tristan Ieson
+SUDAH: Mempersiapkan dan mengetes library yang akan diperlukan untuk projek flutter
+AKAN: Mulai mengerjakan sprint 2
+KENDALA: -
+
+### Jansen Loman
+SUDAH: -
+AKAN: Mulai mengerjakan sprint 2
 KENDALA: -
 
 ### Vincent Tandera

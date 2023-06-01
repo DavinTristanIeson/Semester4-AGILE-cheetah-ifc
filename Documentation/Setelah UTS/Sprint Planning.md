@@ -1,4 +1,4 @@
-# Sprint 1 (26/05/2023 s/d 02/06/2023)
+# Sprint 1 (26/05/2023 s/d 01/06/2023)
 
 ### Sprint Goal:
 - Agar admin dapat mengelola menu
@@ -7,6 +7,7 @@
 
 ### Sprint Backlog
 *Note: [FRONTEND/BACKEND/PRIORITY]*
+
 1. Sebagai admin, saya ingin memiliki fitur add,edit,delete makanan dalam menu [5/5/1]
 - Halaman di /admin untuk modifikasi menu
 - Ambil data menu dari backend untuk ditampilkan
@@ -41,4 +42,32 @@
 - Tampilan form pengeditan akun
 - Rute untuk edit akun
 
-TOTAL: 25 + 4
+TOTAL: 25 + 4 = 29
+
+# Sprint 2 (02/06/2023 s/d 08/06/2023)
+
+### Sprint Backlog
+*Note: [STORY POINT/PRIORITY]*
+
+1. Sebagai pelanggan, saya ingin daftar ke website agar bisa pesan makanan tanpa harus menunggu di restoran [3/1]
+- Tampilan form login/daftar
+- Send request ke backend untuk login/daftar
+- Cek apakah pengguna sudah login atau tidak, kalau tidak redirect ke halaman login, kalau sudah ke halaman menu
+
+2. Sebagai pelanggan, saya ingin memesan makanan dengan cepat dan mudah, karena saya lapar [8/2]
+- Tampilan halaman pemesanan
+- Komponen untuk item menu
+- Infinite scrolling untuk memuat item menu baru
+- Bisa view dalam bentuk grid/list
+- Tampilan AppBar yang berbeda untuk halaman pemesanan
+
+3. Sebagai pelanggan, saya ingin tahu berapa harga dari makanan yang kupesan [5/3]
+- Bottom modal untuk buka list pesanan di halaman pemesanan
+- Tampilan BottomNavBar yang berbeda untuk halaman pemesanan
+- Bisa send request untuk buat pesanan baru
+- Bisa menghapus/mengedit item di list pesanan
+
+4. Sebagai pelanggan, saya ingin kasih pesan tambahan untuk bagaimana makanan saya disiapkan; contoh: teh jangan terlalu banyak pakai es, nasi goreng jangan pakai bawang. [3/3]
+- Modal untuk edit informasi pesanan seperti kuantitas dan pesan tambahan
+
+TOTAL: 19
