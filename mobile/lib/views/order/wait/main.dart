@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AccountView extends StatelessWidget {
-  const AccountView({super.key});
+class WaitView extends StatelessWidget {
+  const WaitView({super.key});
 
   @override
   Widget build(BuildContext context) {
