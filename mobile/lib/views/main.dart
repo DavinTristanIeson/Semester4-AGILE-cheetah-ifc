@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-import '../components/display/background.dart';
+import '../components/display/image.dart';
 import '../helpers/constants.dart';
 import 'account/main.dart';
 import 'history/main.dart';
@@ -17,18 +16,18 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _view = 0;
 
-  AppBar buildAppBar(){
+  AppBar buildAppBar() {
     return AppBar(
-      title: const Text("The Savory Spoon", style: TextStyle(
-        fontFamily: "JosefinSans",
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ))
-    );
+        title: const Text("The Savory Spoon",
+            style: TextStyle(
+              fontFamily: "JosefinSans",
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            )));
   }
 
-  Widget buildView(){
-    switch (_view){
+  Widget buildView() {
+    switch (_view) {
       case 1:
         return const HistoryView();
       case 2:
@@ -39,7 +38,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  Widget buildBottomNavBar(BuildContext context){
+  Widget buildBottomNavBar(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).colorScheme.surface,
       selectedItemColor: Theme.of(context).colorScheme.secondary,
@@ -48,17 +47,14 @@ class _MainPageState extends State<MainPage> {
       onTap: (selected) => setState(() => _view = selected),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(_view == 0 ? Icons.menu_book : Icons.menu_book_outlined),
-          label: "Pesan"
-        ),
+            icon: Icon(_view == 0 ? Icons.menu_book : Icons.menu_book_outlined),
+            label: "Pesan"),
         BottomNavigationBarItem(
-          icon: Icon(_view == 1 ? Icons.money : Icons.money_outlined),
-          label: "Sejarah"
-        ),
+            icon: Icon(_view == 1 ? Icons.money : Icons.money_outlined),
+            label: "Sejarah"),
         BottomNavigationBarItem(
-          icon: Icon(_view == 2 ? Icons.person : Icons.person_outlined),
-          label: "Akun"
-        )
+            icon: Icon(_view == 2 ? Icons.person : Icons.person_outlined),
+            label: "Akun")
       ],
     );
   }
@@ -66,12 +62,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
-      body: BackgroundImage(
-        asset: BACKGROUND_IMAGE_PATH,
-        child: buildView(),
-      ),
-      bottomNavigationBar: buildBottomNavBar(context)
-    );
+        appBar: buildAppBar(),
+        body: BackgroundImage(
+          asset: BACKGROUND_IMAGE_PATH,
+          child: buildView(),
+        ),
+        bottomNavigationBar: buildBottomNavBar(context));
   }
 }

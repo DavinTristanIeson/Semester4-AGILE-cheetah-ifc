@@ -1,12 +1,14 @@
 import 'package:cheetah_mobile/components/function/fetch_wrapper.dart';
 import 'package:cheetah_mobile/helpers/constants.dart';
+import 'package:cheetah_mobile/helpers/providers.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
 import 'package:cheetah_mobile/requests/setup.dart';
 import 'package:cheetah_mobile/views/login/main.dart';
 import 'package:cheetah_mobile/views/main.dart';
 import 'package:flutter/material.dart';
 
-import 'components/display/background.dart';
+import 'components/display/image.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,45 +22,52 @@ class CheetahApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: "Josefin Sans",
-        primaryColor: const Color(0xFFB99878),
-        scaffoldBackgroundColor: const Color(0xFF523112),
-        colorScheme: const ColorScheme(
-          primary: Color(0xFFB99878),
-          secondary: Color(0xFFEBE6DD),
-          secondaryContainer: Color(0xFFFFFBF4),
-          tertiary: Colors.grey,
-
-          background: Color(0xFF523112),
-          brightness: Brightness.dark,
-
-          error: Color(0xFFDC3545),
-          errorContainer: Color.fromARGB(255, 217, 83, 96),
-          surface: Color(0xFF523112),
-          
-          onBackground: Color(0xFF805024),
-          onPrimary: Colors.black,
-          onSecondary: Color(0xFF523112),
-          onError: Colors.black,
-          onSurface: Color(0xFFB99878),
-        )
-      ),
-      home: BackgroundImage(
-        asset: BACKGROUND_IMAGE_PATH,
-        child: FutureBuilder(
-          future: getMe(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData){
-              return const MainPage();
-            } else if (snapshot.hasError){
-              return const LoginPage();
-            } else {
-              return const LoadingComponent();
-            }
-          },
-        ),
-      )
-    );
+        theme: ThemeData(
+            cardTheme: const CardTheme(
+              color: COLOR_SECONDARY,
+            ),
+            listTileTheme: const ListTileThemeData(
+              tileColor: COLOR_SECONDARY,
+              textColor: Colors.black,
+            ),
+            fontFamily: "Josefin Sans",
+            primaryColor: COLOR_PRIMARY,
+            scaffoldBackgroundColor: COLOR_DARK,
+            colorScheme: const ColorScheme(
+              primary: COLOR_PRIMARY,
+              secondary: COLOR_SECONDARY,
+              secondaryContainer: COLOR_SECONDARY,
+              tertiary: COLOR_TERTIARY,
+              background: COLOR_DARK,
+              brightness: Brightness.dark,
+              error: COLOR_ERROR,
+              errorContainer: COLOR_ERROR_CONTAINER,
+              surface: COLOR_DARK,
+              onBackground: COLOR_BRIGHT,
+              onPrimary: Colors.black,
+              onSecondary: COLOR_DARK,
+              onError: Colors.black,
+              onSurface: COLOR_PRIMARY,
+            )),
+        home: BackgroundImage(
+          asset: BACKGROUND_IMAGE_PATH,
+          child: FutureBuilder(
+            future: getMe(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return MultiProvider(providers: [
+                  Provider(create: (_) => MenuItemProvider()),
+                  Provider(create: (_) => OrdersProvider()),
+                  Provider(create: (_) => HistoryTransactionProvider()),
+                  Provider(create: (_) => AccountProvider()),
+                ], child: const MainPage());
+              } else if (snapshot.hasError) {
+                return const LoginPage();
+              } else {
+                return const LoadingComponent();
+              }
+            },
+          ),
+        ));
   }
 }

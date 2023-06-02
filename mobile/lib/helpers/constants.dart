@@ -1,9 +1,28 @@
+import 'package:flutter/material.dart';
+
 const String BACKEND = "http://localhost:3000";
 const String API = "http://localhost:3000/api";
-const String BACKGROUND_IMAGE_PATH = "assets/images/pexels-igor-starkov-1307698.jpg";
+const String BACKGROUND_IMAGE_PATH =
+    "assets/images/pexels-igor-starkov-1307698.jpg";
+const String FALLBACK_IMAGE_PATH = "assets/images/image-not-available.jpg";
 
 // Errors
-const String CONNECTION_ERROR = "Maaf, kita tidak dapat berhubung dengan server pada saat ini. Mohon dicoba pada waktu lain.";
-const String SERVER_ERROR = "Maaf, terjadi kesalahan di bagian server. Mohon dicoba di waktu lain.";
-const String UNEXPECTED_ERROR = "Maaf, terjadi kesalahan yang tidak diduga. Mohon dicoba di waktu lain";
+const String CONNECTION_ERROR =
+    "Maaf, kita tidak dapat berhubung dengan server pada saat ini. Mohon dicoba pada waktu lain.";
+const String SERVER_ERROR =
+    "Maaf, terjadi kesalahan di bagian server. Mohon dicoba di waktu lain.";
+const String UNEXPECTED_ERROR =
+    "Maaf, terjadi kesalahan yang tidak diduga. Mohon dicoba di waktu lain";
 const String NO_DATA = "Kami tidak dapat menemukan data apapun";
+
+const Color COLOR_PRIMARY = Color(0xFFB99878);
+const Color COLOR_SECONDARY = Color(0xFFEBE6DD);
+const Color COLOR_TERTIARY = Colors.grey;
+const Color COLOR_DARK = Color(0xFF523112);
+const Color COLOR_BRIGHT = Color(0xFFFFFBF4);
+const Color COLOR_ERROR = Color(0xFFDC3545);
+const Color COLOR_ERROR_CONTAINER = Color.fromARGB(255, 217, 83, 96);
+
+const double GAP_SM = 4.0;
+const double GAP = 8.0;
+const double GAP_LG = 16.0;
