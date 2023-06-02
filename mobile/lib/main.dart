@@ -1,4 +1,3 @@
-import 'package:cheetah_mobile/components/function/fetch_wrapper.dart';
 import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/providers.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
@@ -9,6 +8,8 @@ import 'package:flutter/material.dart';
 
 import 'components/display/image.dart';
 import 'package:provider/provider.dart';
+
+import 'components/display/info.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,12 +56,10 @@ class CheetahApp extends StatelessWidget {
             future: getMe(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return MultiProvider(providers: [
-                  Provider(create: (_) => MenuItemProvider()),
-                  Provider(create: (_) => OrdersProvider()),
-                  Provider(create: (_) => HistoryTransactionProvider()),
-                  Provider(create: (_) => AccountProvider()),
-                ], child: const MainPage());
+                return ChangeNotifierProvider(
+                  child: const MainPage(),
+                  create: (_) => OrdersProvider()
+                );
               } else if (snapshot.hasError) {
                 return const LoginPage();
               } else {

@@ -3,19 +3,19 @@
 ## 26/05/2023
 
 ### Davin Tristan Ieson
-SUDAH: Membuat halaman browse untuk guest [3 + 1]
-AKAN: Refaktor dan perbaiki kode lama, mulai mengerjakan halaman edit menu
-KENDALA: -
+- SUDAH: Membuat halaman browse untuk guest [3 + 1]
+- AKAN: Refaktor dan perbaiki kode lama, mulai mengerjakan halaman edit menu
+- KENDALA: -
 
 ### Jansen Loman
-SUDAH : -
-AKAN : menyelesaikan fitur menambahkan menu
-KENDALA: hari ini sibuk dan baru akan dikerjakan malam ini
+- SUDAH : -
+- AKAN : menyelesaikan fitur menambahkan menu
+- KENDALA: hari ini sibuk dan baru akan dikerjakan malam ini
 
 ### Vincent Tandera
-SUDAH: -
-AKAN: -
-KENDALA: -
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
 
 ### Sisa
 25 - 4 = 21
@@ -23,22 +23,22 @@ KENDALA: -
 ## 27/05/2023
 
 ### Davin Tristan Ieson
-SUDAH: Membuat halaman tambah/edit/hapus menu dan fitur-fitur yang berkaitan [5 + 3]
-AKAN: Menambahkan tampilan pesan di-cancel
-KENDALA: ...backlog sisa 1 item
-SOLUSI: Tambah "6. Sebagai pengguna, saya ingin memodifikasi informasi akun saya" sebagai user story baru.
+- SUDAH: Membuat halaman tambah/edit/hapus menu dan fitur-fitur yang berkaitan [5 + 3]
+- AKAN: Menambahkan tampilan pesan di-cancel
+- KENDALA: ...backlog sisa 1 item
+- SOLUSI: Tambah "6. Sebagai pengguna, saya ingin memodifikasi informasi akun saya" sebagai user story baru.
 
 ### Jansen Loman
-SUDAH:
-- menyelesaikan fitur add menu, edit menu dan hapus menu [5 + 1]
-- mengirim pesan ke pengguna pesanan di-cancel [2]
-AKAN: membuat edit akun ???
-KENDALA: sibuk diluar rumah
+- SUDAH:
+    - menyelesaikan fitur add menu, edit menu dan hapus menu [5 + 1]
+    - mengirim pesan ke pengguna pesanan di-cancel [2]
+- AKAN: membuat edit akun ???
+- KENDALA: sibuk diluar rumah
 
 ### Vincent Tandera
-SUDAH: -
-AKAN: Mengecek produk
-KENDALA: Lagi diluar, tidak bisa mengakses laptop
+- SUDAH: -
+- AKAN: Mengecek produk
+- KENDALA: Lagi diluar, tidak bisa mengakses laptop
 
 ### Sisa
 21 - 8 - 8 + 4 = 9
@@ -46,19 +46,19 @@ KENDALA: Lagi diluar, tidak bisa mengakses laptop
 ## 28/05/2023
 
 ### Davin Tristan Ieson
-SUDAH: Mengerjakan fitur pengeditan akun serta fitur untuk membatalkan pesanan, pengguna juga diinformasikan ketika pesanan dibatalkan [2 + 5]
-AKAN: Refaktor kode lama agar menggunakan paginasi
-KENDALA: -
+- SUDAH: Mengerjakan fitur pengeditan akun serta fitur untuk membatalkan pesanan, pengguna juga diinformasikan ketika pesanan dibatalkan [2 + 5]
+- AKAN: Refaktor kode lama agar menggunakan paginasi
+- KENDALA: -
 
 ### Jansen Loman
-SUDAH: menyelesaikan fitur edit akun, menambahkan paginasi backend [2]
-AKAN: ??
-KENDALA: -
+- SUDAH: menyelesaikan fitur edit akun, menambahkan paginasi backend [2]
+- AKAN: ??
+- KENDALA: -
 
 ### Vincent Tandera
-SUDAH: Mengecek fitur fitur yang sudah dibuat
-AKAN: Melanjutkan pengecekan pada update berikutnya
-KENDALA: -
+- SUDAH: Mengecek fitur fitur yang sudah dibuat
+- AKAN: Melanjutkan pengecekan pada update berikutnya
+- KENDALA: -
 
 ### Sisa
 9 - 7 - 2 = 0
@@ -66,19 +66,19 @@ KENDALA: -
 ## 29/05/2023
 
 ### Davin Tristan Ieson
-SUDAH: Refaktor kode lama agar menggunakan paginasi, dan tidak lagi memakai Pinia
-AKAN: Persiapkan projek Flutter utk sprint 2
-KENDALA: -
+- SUDAH: Refaktor kode lama agar menggunakan paginasi, dan tidak lagi memakai Pinia
+- AKAN: Persiapkan projek Flutter utk sprint 2
+- KENDALA: -
 
 ### Jansen Loman
-SUDAH; -
-AKAN: Mencoba membuat session admin dan customer berbeda
-KENDALA: hari ini sibuk, tidak bisa mengerjakan
+- SUDAH; -
+- AKAN: Mencoba membuat session admin dan customer berbeda
+- KENDALA: hari ini sibuk, tidak bisa mengerjakan
 
 ### Vincent Tandera
-SUDAH: -
-AKAN: -
-KENDALA: -
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
 
 ### Sisa
 0 - 0 = 0
@@ -86,19 +86,19 @@ KENDALA: -
 ## 30/05/2023
 
 ### Davin Tristan Ieson
-SUDAH: -
-AKAN: -
-KENDALA: -
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
 
 ### Jansen Loman
-SUDAH: -
-AKAN:-
-KENDALA: tidak menemukan solusi untuk memakai session berbeda pada admin dan user
+- SUDAH: -
+- AKAN:-
+- KENDALA: tidak menemukan solusi untuk memakai session berbeda pada admin dan user
 
 ### Vincent Tandera
-SUDAH : Mengecek update lanjutan
-AKAN : -
-KENDALA : -
+- SUDAH : Mengecek update lanjutan
+- AKAN : -
+- KENDALA : -
 
 ### Sisa
 0 - 0 = 0
@@ -106,20 +106,20 @@ KENDALA : -
 ### 31/05/2023
 
 ### Davin Tristan Ieson
-SUDAH: -
-AKAN: -
-KENDALA: Besok libur dan kita sudah selesaikan semua task sprint ini. Mau skip ke sprint 2?
-SOLUSI: Tunggu sampai sprint selesai saja.
+- SUDAH: -
+- AKAN: -
+- KENDALA: Besok libur dan kita sudah selesaikan semua task sprint ini. Mau skip ke sprint 2?
+- SOLUSI: Tunggu sampai sprint selesai saja.
 
 ### Jansen Loman
-SUDAH: -
-AKAN:-
-KENDALA: -
+- SUDAH: -
+- AKAN:-
+- KENDALA: -
 
 ### Vincent Tandera
-SUDAH : -
-AKAN : -
-KENDALA : -
+- SUDAH : -
+- AKAN : -
+- KENDALA : -
 
 ### Sisa
 0 - 0 = 0
@@ -127,19 +127,38 @@ KENDALA : -
 ### 01/06/2023
 
 ### Davin Tristan Ieson
-SUDAH: Mempersiapkan dan mengetes library yang akan diperlukan untuk projek flutter
-AKAN: Mulai mengerjakan sprint 2
-KENDALA: -
+- SUDAH: Mempersiapkan dan mengetes library yang akan diperlukan untuk projek flutter
+- AKAN: Mulai mengerjakan sprint 2
+- KENDALA: -
 
 ### Jansen Loman
-SUDAH: -
-AKAN: Mulai mengerjakan sprint 2
-KENDALA: -
+- SUDAH: -
+- AKAN: Mulai mengerjakan sprint 2
+- KENDALA: -
 
 ### Vincent Tandera
-SUDAH : -
-AKAN : -
-KENDALA : -
+- SUDAH : -
+- AKAN : -
+- KENDALA : -
 
 ### Sisa
 0 - 0 = 0
+
+# Sprint 2 (02/06/2023 s/d 08/06/2023)
+
+## 02/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Membuat beberapa komponen dan request yang berhubungan dengan halaman pemesanan
+- AKAN: Membuat sistem paginasi dan manajemen state
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: Membuat tampilan login/daftar
+- KENDALA: hari ini tidak sempat mengerjakan
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -

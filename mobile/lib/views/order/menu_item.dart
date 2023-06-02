@@ -7,7 +7,8 @@ import '../../helpers/model.dart';
 
 class MenuItemComponent extends StatelessWidget {
   final MenuItem item;
-  const MenuItemComponent({super.key, required this.item});
+  final bool isGridView;
+  const MenuItemComponent({super.key, required this.item, this.isGridView = true});
 
   onTap(BuildContext context, MenuItem item) {
     context.read<OrdersProvider>().add(item);
@@ -15,7 +16,6 @@ class MenuItemComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isGridView = context.watch<PreferencesProvider>().isGridView;
     return isGridView
         ? MenuCard(item: item, onTap: () => onTap(context, item))
         : MenuListItem(item: item, onTap: () => onTap(context, item));

@@ -9,26 +9,33 @@ class MenuCard extends StatelessWidget {
   const MenuCard({super.key, required this.item, this.onTap});
 
   Widget buildCardBody(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(item.name,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSecondary,
-                fontWeight: FontWeight.bold,
-              )),
-          Text(item.harga,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSecondary,
-              ))
-        ],
-      ),
-      Text(item.description,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start, 
+      children: [
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          children: [
+            Text(item.name,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.bold,
+                )),
+            Text(item.harga,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ))
+          ],
+        ),
+        Text(
+          item.description,
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSecondary,
-          )),
+          )
+        ),
     ]);
   }
 
@@ -40,11 +47,22 @@ class MenuCard extends StatelessWidget {
         splashColor: Theme.of(context).colorScheme.primary,
         onTap: onTap,
         child: Column(children: [
-          MaybeImage(url: item.img),
+          SizedBox(
+            width: 360,
+            height: 360,
+            child: MaybeImage(
+              url: item.img,
+              width: 360,
+              fit: BoxFit.fitHeight,
+            ),
+          ),
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-            child: buildCardBody(context),
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 60.0, maxHeight: 80.0),
+              child: buildCardBody(context)
+            )
           )
         ]),
       ),

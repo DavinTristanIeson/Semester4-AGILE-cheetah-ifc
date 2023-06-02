@@ -26,7 +26,10 @@ class BackgroundImage extends StatelessWidget {
 
 class MaybeImage extends StatelessWidget {
   final String url;
-  const MaybeImage({super.key, required this.url});
+  final BoxFit? fit;
+  final double? width;
+  final double? height;
+  const MaybeImage({super.key, required this.url, this.fit, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +39,10 @@ class MaybeImage extends StatelessWidget {
       imageErrorBuilder: (context, error, stackTrace) {
         return Image.asset(
           FALLBACK_IMAGE_PATH,
-          fit: BoxFit.fitWidth,
+          fit: fit ?? BoxFit.cover,
         );
       },
-      fit: BoxFit.fitWidth,
+      fit: fit ?? BoxFit.cover,
     );
   }
 }

@@ -1,6 +1,19 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'model.g.dart';
 
+class PaginatedApiResult<T> {
+  List<T> data;
+  int pages;
+  PaginatedApiResult(this.data, this.pages);
+
+  factory PaginatedApiResult.fromJson(Map<String, dynamic> json, T Function(dynamic) converter){
+    return PaginatedApiResult(
+      (json["data"] as List<dynamic>).map<T>((x) => converter(x)).toList(),
+      json["pages"]
+    );
+  }
+}
+
 String formatRupiah(int price) {
   List<int> pieces = [];
   while (price > 0) {

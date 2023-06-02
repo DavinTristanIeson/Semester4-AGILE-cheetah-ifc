@@ -41,6 +41,7 @@ dependencies:
   dio_cookie_manager: ^3.0.0
   path_provider: ^2.0.15
   cookie_jar: ^4.0.3
+  infinite_scroll_pagination: ^3.2.0
 
 dev_dependencies:
   flutter_test:
