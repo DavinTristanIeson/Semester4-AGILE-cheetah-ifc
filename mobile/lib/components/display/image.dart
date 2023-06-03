@@ -24,6 +24,7 @@ class BackgroundImage extends StatelessWidget {
   }
 }
 
+
 class MaybeImage extends StatelessWidget {
   final String url;
   final BoxFit? fit;
@@ -34,6 +35,8 @@ class MaybeImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeInImage(
+      width: width,
+      height: height,
       image: NetworkImage(url),
       placeholder: const AssetImage(FALLBACK_IMAGE_PATH),
       imageErrorBuilder: (context, error, stackTrace) {

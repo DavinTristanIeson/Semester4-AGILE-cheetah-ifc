@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class FutureButton extends StatefulWidget {
   final Widget child;
-  final Future<void> Function() onPressed;
-  const FutureButton({super.key, required this.child, required this.onPressed});
+  final Future<void> Function()? onPressed;
+  final ButtonStyle? style;
+  const FutureButton({super.key, required this.child, this.onPressed, this.style});
 
   @override
   State<FutureButton> createState() => _FutureButtonState();
@@ -20,14 +21,18 @@ class _FutureButtonState extends State<FutureButton> with SnackbarMessenger {
             icon: Transform.scale(
                 scale: 0.5, child: const CircularProgressIndicator()),
             label: widget.child,
+            style: widget.style,
           )
         : ElevatedButton(
-            onPressed: () {
+            onPressed: widget.onPressed != null ?
+            () {
               setState(() => _isLoading = true);
-              widget.onPressed().onError((err, stackTrace) {
+              widget.onPressed!().onError((err, stackTrace) {
                 sendError(context, err.toString());
               }).whenComplete(() => setState(() => _isLoading = false));
-            },
+            } :
+            null,
+            style: widget.style,
             child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),

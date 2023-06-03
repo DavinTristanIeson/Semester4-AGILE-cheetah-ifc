@@ -6,28 +6,42 @@ class OrdersProvider extends ChangeNotifier {
   bool isGridView = true;
   MenuTransaction? current;
   List<MenuOrder> orders = [];
-  MenuOrder add(MenuItem item) {
-    MenuOrder order = MenuOrder.from(item: item);
-    orders.add(order);
+
+  List<String> filterCategories = [];
+  String? category = "";
+  String search = "";
+  void add(MenuItem item) {
+    int idx = orders.indexWhere((element) => element.id == item.id);
+    if (idx == -1){
+      MenuOrder order = MenuOrder.from(item: item);
+      orders.add(order);
+    } else {
+      orders[idx].quantity++;
+    }
     notifyListeners();
-    return order;
   }
 
-  replace(List<MenuOrder> orders) {
+  void remove(MenuOrder order){
+    orders.remove(order);
+    notifyListeners();
+  }
+
+  void replace(List<MenuOrder> orders) {
     this.orders = orders;
     notifyListeners();
   }
-
+  
   void toggleGridView() {
     isGridView = !isGridView;
     notifyListeners();
   }
+
+  void setSearch(String search){
+    this.search = search;
+    notifyListeners();
+  }
+  void setCategory(String? category){
+    this.category = category;
+    notifyListeners();
+  }
 }
-
-class OngoingTransactionProvider extends ChangeNotifier {
-  late final MenuTransaction current;
-}
-
-class HistoryTransactionProvider extends ChangeNotifier {}
-
-class AccountProvider extends ChangeNotifier {}

@@ -149,7 +149,7 @@
 ## 02/06/2023
 
 ### Davin Tristan Ieson
-- SUDAH: Membuat beberapa komponen dan request yang berhubungan dengan halaman pemesanan
+- SUDAH: Membuat beberapa komponen dan request yang berhubungan dengan halaman pemesanan [4]
 - AKAN: Membuat sistem paginasi dan manajemen state
 - KENDALA: -
 
@@ -162,3 +162,16 @@
 - SUDAH: -
 - AKAN: -
 - KENDALA: -
+
+### Sisa
+19 - 4 = 15
+
+## 03/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Mempersiapkan paginasi untuk halaman menu, membuat bottom sheet untuk menampilkan pesanan sekarang, membuat tampilan app bar khusus untuk halaman pemesanan [4 + 3]
+- AKAN: Menghubungkan interaksi ke backend, membuat fitur filter/search berfungsi
+- KENDALA: -
+
+### Sisa
+15 - 7 = 8

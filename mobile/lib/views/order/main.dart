@@ -1,7 +1,7 @@
 import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/providers.dart';
 import 'package:cheetah_mobile/views/order/menu_item.dart';
-import 'package:cheetah_mobile/views/order/ongoing_orders.dart';
+import 'package:cheetah_mobile/views/order/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
@@ -9,14 +9,30 @@ import 'package:provider/provider.dart';
 import '../../helpers/model.dart';
 import '../../requests/menu.dart';
 
-class OrderView extends StatefulWidget {
+class OrderView extends StatelessWidget {
+  // Wrapper agar MainView tidak akan bertanggungjawab atas state management, dan karena tidak bisa watch
+  // nilai provider dalam initState
   const OrderView({super.key});
 
   @override
-  State<OrderView> createState() => _OrderViewState();
+  Widget build(BuildContext context) {
+    final provider = context.watch<OrdersProvider>();
+    return _OrderView(search: provider.search, category: provider.category,);
+  }
 }
 
-class _OrderViewState extends State<OrderView> {
+class _OrderView extends StatefulWidget {
+  final String search;
+  final String? category;
+
+  const _OrderView({super.key, required this.search, required this.category});
+
+  @override
+  State<_OrderView> createState() => _OrderViewState();
+}
+
+class _OrderViewState extends State<_OrderView> {
+
   final PagingController<int, MenuItem> _pagination =
       PagingController(firstPageKey: 0);
 
@@ -28,7 +44,9 @@ class _OrderViewState extends State<OrderView> {
 
   Future<void> fetchMenu(int page) async {
     try {
-      final result = await getMenu(page);
+      print(widget.search);
+      print(widget.category);
+      final result = await getMenu(page, search: widget.search, category: widget.category);
       final isLastPage = page >= result.pages;
       _pagination.appendPage(result.data, isLastPage ? null : page + 1);
     } catch (error) {
@@ -49,11 +67,14 @@ class _OrderViewState extends State<OrderView> {
                 ))));
   }
 
-  Widget buildGrid() {
+  Widget buildGrid(BuildContext context) {
+    MediaQueryData screen = MediaQuery.of(context);
     return PagedGridView<int, MenuItem>(
         pagingController: _pagination,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 360.0, mainAxisExtent: 480.0),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: screen.size.width <= 375.0 ? 400.0 : 300.0,
+            mainAxisExtent: 332.0
+          ),
         builderDelegate: PagedChildBuilderDelegate(
           itemBuilder: (context, item, index) => Padding(
               padding: const EdgeInsets.all(GAP_SM),
@@ -67,23 +88,21 @@ class _OrderViewState extends State<OrderView> {
   @override
   Widget build(BuildContext context) {
     bool isGridView = context.watch<OrdersProvider>().isGridView;
-    return Material(
-      type: MaterialType.transparency,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 60.0,
-            width: 100.0,
-            child: ElevatedButton(
-              child: const Text("Test"),
-              onPressed: () => showBottomSheet(
-                  context: context,
-                  builder: (context) => const OngoingOrdersBottomSheet()),
-            ),
-          ),
-          Expanded(child: isGridView ? buildGrid() : buildList()),
-        ],
-      ),
+    return Stack(
+      children: [
+        Material(
+          type: MaterialType.transparency,
+          child: isGridView ? buildGrid(context) : buildList(),
+        ),
+        const Positioned(
+          bottom: 0.0,
+          right: 0.0,
+          child: Padding(
+            padding: EdgeInsets.all(GAP_LG),
+            child: OrderViewFAB()
+          )
+        ),
+      ],
     );
   }
 }

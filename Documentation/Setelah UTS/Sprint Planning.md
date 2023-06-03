@@ -63,7 +63,7 @@ TOTAL: 25 + 4 = 29
 
 3. Sebagai pelanggan, saya ingin tahu berapa harga dari makanan yang kupesan [5/3]
 - Bottom modal untuk buka list pesanan di halaman pemesanan
-- Tampilan BottomNavBar yang berbeda untuk halaman pemesanan
+- Metode untuk membuka bottom modal
 - Bisa send request untuk buat pesanan baru
 - Bisa menghapus/mengedit item di list pesanan
 

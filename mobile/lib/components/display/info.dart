@@ -57,6 +57,41 @@ class LoadingComponent extends StatelessWidget {
   }
 }
 
+class ErrorMessage extends StatelessWidget {
+  final String reason;
+  final Widget? child;
+  const ErrorMessage({super.key, required this.reason, this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(GAP_LG),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.7),
+        ),
+        alignment: Alignment.center,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(
+            Icons.error,
+            color: Theme.of(context).colorScheme.error,
+            size: 48,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: GAP_LG),
+            child: Text(reason,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                    fontFamily: "Josefin Sans",
+                    fontSize: 16)),
+          ),
+          if (child != null) child!
+        ]),
+      ),
+    );
+  }
+}
+
 class ErrorComponent extends StatelessWidget {
   final String? reason;
   final Widget? child;

@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/views/order/scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../components/display/image.dart';
@@ -16,7 +17,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _view = 0;
 
-  AppBar buildAppBar() {
+  PreferredSizeWidget buildAppBar() {
+    if (_view == 0){
+      return const OrderViewAppBar();
+    }
     return AppBar(
         title: const Text("The Savory Spoon",
             style: TextStyle(
@@ -62,11 +66,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(),
-        body: BackgroundImage(
-          asset: BACKGROUND_IMAGE_PATH,
-          child: buildView(),
-        ),
-        bottomNavigationBar: buildBottomNavBar(context));
+      appBar: buildAppBar(),
+      body: BackgroundImage(
+        asset: BACKGROUND_IMAGE_PATH,
+        child: buildView(),
+      ),
+      bottomNavigationBar: buildBottomNavBar(context)
+    );
   }
 }

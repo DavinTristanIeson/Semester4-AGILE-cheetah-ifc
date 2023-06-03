@@ -31,5 +31,7 @@ const double GAP_LG = 16.0;
 const BoxShadow SOLID_SHADOW = BoxShadow(
     spreadRadius: GAP_SM, offset: Offset(0.2, 0.2), color: COLOR_SHADOW);
 
+const double FS_SMALL = 10.0;
 const double FS_DEFAULT = 13.0;
 const double FS_EMPHASIS = 16.0;
+const double FS_LARGE = 20.0;

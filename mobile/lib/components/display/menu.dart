@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../helpers/model.dart';
 import 'image.dart';
+import 'interaction.dart';
 
 class MenuCard extends StatelessWidget {
   final MenuItem item;
@@ -11,57 +12,50 @@ class MenuCard extends StatelessWidget {
 
   Widget buildCardBody(BuildContext context) {
     return Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            children: [
-              Text(item.name,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                    fontWeight: FontWeight.bold,
-                  )),
-              Text(item.harga,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ))
-            ],
-          ),
-          Text(item.description,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(item.name,
+                style: Theme.of(context).textTheme.titleMedium),
+        Text(item.harga,
+            style: Theme.of(context).textTheme.labelSmall),
+        Expanded(
+          child: Text(item.description,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSecondary,
-              )),
-        ]);
+              style: Theme.of(context).textTheme.bodyMedium),
+        ),
+      ]
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).colorScheme.secondary,
-      child: InkWell(
-        splashColor: Theme.of(context).colorScheme.primary,
+      child: OverInkwell(
+        splashColor: Theme.of(context).colorScheme.onBackground,
         onTap: onTap,
-        child: Column(children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           SizedBox(
-            width: 360,
-            height: 360,
+            width: double.infinity,
+            height: 200,
             child: MaybeImage(
               url: item.img,
-              width: 360,
-              fit: BoxFit.fitHeight,
+              width: double.infinity,
+              height: 200,
+              fit: BoxFit.cover,
             ),
           ),
           Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-              child: Container(
-                  constraints:
-                      const BoxConstraints(minHeight: 60.0, maxHeight: 80.0),
-                  child: buildCardBody(context)))
+            padding: const EdgeInsets.all(16.0),
+            child:  Container(
+              constraints: const BoxConstraints.tightFor(height: 84.0),
+              child: buildCardBody(context)
+            )
+          )
         ]),
       ),
     );
@@ -86,14 +80,10 @@ class MenuListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(item.name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: FS_EMPHASIS)),
+                    style: Theme.of(context).textTheme.titleMedium),
                 Text(
                   item.harga,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: FS_DEFAULT,
-                  ),
+                  style: Theme.of(context).textTheme.labelMedium,
                 )
               ],
             ),
