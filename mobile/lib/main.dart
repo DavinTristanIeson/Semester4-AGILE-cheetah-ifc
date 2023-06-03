@@ -57,11 +57,9 @@ class CheetahApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ChangeNotifierProvider(
-                  child: const MainPage(),
-                  create: (_) => OrdersProvider()
-                );
+                    child: const MainPage(), create: (_) => OrdersProvider());
               } else if (snapshot.hasError) {
-                return const LoginPage();
+                return LoginPage();
               } else {
                 return const LoadingComponent();
               }
