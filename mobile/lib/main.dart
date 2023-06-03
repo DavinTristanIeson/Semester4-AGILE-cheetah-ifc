@@ -34,8 +34,11 @@ class CheetahApp extends StatelessWidget {
             fontFamily: "Josefin Sans",
             primaryColor: COLOR_PRIMARY,
             scaffoldBackgroundColor: COLOR_DARK,
-            colorScheme: const ColorScheme(
+            buttonTheme: const ButtonThemeData(
+                buttonColor: COLOR_PRIMARY, textTheme: ButtonTextTheme.normal),
+            colorScheme: ColorScheme(
               primary: COLOR_PRIMARY,
+              primaryContainer: Color.lerp(COLOR_PRIMARY, COLOR_DARK, 0.5),
               secondary: COLOR_SECONDARY,
               secondaryContainer: COLOR_SECONDARY,
               tertiary: COLOR_TERTIARY,
@@ -57,9 +60,7 @@ class CheetahApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ChangeNotifierProvider(
-                  child: const MainPage(),
-                  create: (_) => OrdersProvider()
-                );
+                    child: const MainPage(), create: (_) => OrdersProvider());
               } else if (snapshot.hasError) {
                 return const LoginPage();
               } else {

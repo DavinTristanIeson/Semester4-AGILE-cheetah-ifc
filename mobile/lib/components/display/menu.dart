@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../helpers/model.dart';
@@ -10,33 +11,31 @@ class MenuCard extends StatelessWidget {
 
   Widget buildCardBody(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start, 
-      children: [
-        Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          children: [
-            Text(item.name,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  fontWeight: FontWeight.bold,
-                )),
-            Text(item.harga,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ))
-          ],
-        ),
-        Text(
-          item.description,
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onSecondary,
-          )
-        ),
-    ]);
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              Text(item.name,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                    fontWeight: FontWeight.bold,
+                  )),
+              Text(item.harga,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ))
+            ],
+          ),
+          Text(item.description,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondary,
+              )),
+        ]);
   }
 
   @override
@@ -57,13 +56,12 @@ class MenuCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-            child: Container(
-              constraints: const BoxConstraints(minHeight: 60.0, maxHeight: 80.0),
-              child: buildCardBody(context)
-            )
-          )
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              child: Container(
+                  constraints:
+                      const BoxConstraints(minHeight: 60.0, maxHeight: 80.0),
+                  child: buildCardBody(context)))
         ]),
       ),
     );
@@ -78,6 +76,7 @@ class MenuListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+        splashColor: COLOR_BRIGHT,
         titleAlignment: ListTileTitleAlignment.top,
         onTap: onTap,
         title: Column(
@@ -87,11 +86,13 @@ class MenuListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(item.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: FS_EMPHASIS)),
                 Text(
                   item.harga,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
+                    fontSize: FS_DEFAULT,
                   ),
                 )
               ],

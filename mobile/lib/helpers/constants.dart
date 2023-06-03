@@ -22,7 +22,14 @@ const Color COLOR_DARK = Color(0xFF523112);
 const Color COLOR_BRIGHT = Color(0xFFFFFBF4);
 const Color COLOR_ERROR = Color(0xFFDC3545);
 const Color COLOR_ERROR_CONTAINER = Color.fromARGB(255, 217, 83, 96);
+const Color COLOR_SHADOW = Color.fromRGBO(0, 0, 0, 0.1);
 
 const double GAP_SM = 4.0;
 const double GAP = 8.0;
 const double GAP_LG = 16.0;
+
+const BoxShadow SOLID_SHADOW = BoxShadow(
+    spreadRadius: GAP_SM, offset: Offset(0.2, 0.2), color: COLOR_SHADOW);
+
+const double FS_DEFAULT = 13.0;
+const double FS_EMPHASIS = 16.0;

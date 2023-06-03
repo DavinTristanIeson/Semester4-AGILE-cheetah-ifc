@@ -14,22 +14,24 @@ class _FutureButtonState extends State<FutureButton> with SnackbarMessenger {
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return _isLoading ?
-    ElevatedButton.icon(
-      onPressed: null,
-      icon: const CircularProgressIndicator(),
-      label: widget.child,
-    ) :
-    ElevatedButton(
-      onPressed: () {
-        setState(() => _isLoading = true);
-        widget.onPressed()
-          .onError((err, stackTrace) {
-            sendError(context, err.toString());
-          })
-          .whenComplete(() => _isLoading = false);
-      },
-      child: widget.child,
-    );
+    return _isLoading
+        ? ElevatedButton.icon(
+            onPressed: null,
+            icon: Transform.scale(
+                scale: 0.5, child: const CircularProgressIndicator()),
+            label: widget.child,
+          )
+        : ElevatedButton(
+            onPressed: () {
+              setState(() => _isLoading = true);
+              widget.onPressed().onError((err, stackTrace) {
+                sendError(context, err.toString());
+              }).whenComplete(() => setState(() => _isLoading = false));
+            },
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: widget.child),
+          );
   }
 }
