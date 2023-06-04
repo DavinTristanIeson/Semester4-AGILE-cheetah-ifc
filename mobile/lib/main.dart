@@ -24,6 +24,7 @@ class CheetahApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+            unselectedWidgetColor: COLOR_TERTIARY,
             cardTheme: const CardTheme(
               color: COLOR_SECONDARY,
             ),
@@ -114,7 +115,7 @@ class CheetahApp extends StatelessWidget {
                   child: const MainPage(),
                 );
               } else if (snapshot.hasError) {
-                return LoginPage();
+                return const LoginPage();
               } else {
                 return const LoadingComponent();
               }

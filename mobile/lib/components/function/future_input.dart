@@ -1,4 +1,5 @@
 import 'package:cheetah_mobile/helpers/mixins.dart';
+import 'package:cheetah_mobile/helpers/styles.dart';
 import 'package:flutter/material.dart';
 
 class FutureButton extends StatefulWidget {
@@ -21,7 +22,7 @@ class _FutureButtonState extends State<FutureButton> with SnackbarMessenger {
             icon: Transform.scale(
                 scale: 0.5, child: const CircularProgressIndicator()),
             label: widget.child,
-            style: widget.style,
+            style: widget.style ?? BUTTON_PRIMARY,
           )
         : ElevatedButton(
             onPressed: widget.onPressed != null ?
@@ -30,13 +31,14 @@ class _FutureButtonState extends State<FutureButton> with SnackbarMessenger {
               widget.onPressed!().onError((err, stackTrace) {
                 sendError(context, err.toString());
               }).whenComplete(() => setState(() => _isLoading = false));
-            } :
-            null,
-            style: widget.style,
+            } : null,
+            style: widget.style ?? BUTTON_PRIMARY,
             child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: widget.child),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0, horizontal: 16.0
+                ),
+              child: widget.child
+            ),
           );
   }
 }

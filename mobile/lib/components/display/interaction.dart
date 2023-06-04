@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 class OverInkwell extends StatelessWidget {
@@ -54,6 +55,33 @@ class DialogHeader extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           )
         ],
+      ),
+    );
+  }
+}
+
+class TextLink extends StatelessWidget {
+  final void Function() onPressed;
+  final String label;
+  final double fontSize;
+  const TextLink({
+    super.key,
+    required this.onPressed,
+    required this.label,
+    this.fontSize = FS_EMPHASIS});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        label,
+        style: TextStyle(
+          color: Colors.blue,
+          decoration: TextDecoration.underline,
+          fontSize: fontSize,
+          fontFamily: FONT,
+        ),
       ),
     );
   }

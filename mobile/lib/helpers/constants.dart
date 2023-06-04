@@ -16,6 +16,7 @@ const String UNEXPECTED_ERROR =
 const String NO_DATA = "Kami tidak dapat menemukan data apapun";
 
 const Color COLOR_PRIMARY = Color(0xFFB99878);
+const Color COLOR_PRIMARY_DARK = Color.fromARGB(255, 133, 105, 78);
 const Color COLOR_SECONDARY = Color(0xFFEBE6DD);
 const Color COLOR_TERTIARY = Colors.grey;
 const Color COLOR_DARK = Color(0xFF523112);
@@ -35,3 +36,5 @@ const double FS_SMALL = 10.0;
 const double FS_DEFAULT = 13.0;
 const double FS_EMPHASIS = 16.0;
 const double FS_LARGE = 20.0;
+
+const String FONT = "Josefin Sans";
