@@ -174,9 +174,34 @@
 - KENDALA: -
 
 ### Jansen Loman
-SUDAH: Menyelesaikan tampilan login [3]
+SUDAH: Menyelesaikan tampilan login [2]
 AKAN: Memeriksa kode daftar
 KENDALA: -
 
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
 ### Sisa
-15 - 7 - 3 = 5
+15 - 7 - 2 = 6
+
+## 04/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Menyelesaikan fitur search/filter, dan bottom sheet untuk edit/tambah/hapus pesanan sekarang [2 + 3]
+- AKAN: Refaktor halaman login untuk menggunakan package flutter_form_builder agar lebih mudah menangani form
+- KENDALA: -
+
+### Jansen Loman
+SUDAH: Fitur login dan daftar [1]
+AKAN: -
+KENDALA: Hari tidak sempat mengerjakan karena ada kerjaan
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Sisa
+6 - 5 - 1 = 0

@@ -83,6 +83,8 @@ flutter:
     - family: JosefinSans
       fonts:
         - asset: assets/fonts/JosefinSans-Regular.ttf
+          weight: 300
+        - asset: assets/fonts/JosefinSans-Regular.ttf
         - asset: assets/fonts/JosefinSans-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/JosefinSans-Bold.ttf

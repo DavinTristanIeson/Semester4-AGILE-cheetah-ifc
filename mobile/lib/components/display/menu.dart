@@ -2,6 +2,7 @@ import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../helpers/model.dart';
+import '../../helpers/styles.dart';
 import 'image.dart';
 import 'interaction.dart';
 
@@ -14,16 +15,15 @@ class MenuCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(item.name,
-                style: Theme.of(context).textTheme.displayMedium),
-        Text(item.harga,
-            style: Theme.of(context).textTheme.labelSmall),
+        Text(item.name, style: TEXT_ITEM_TITLE),
+        Text(item.harga, style: TEXT_DETAIL),
         Expanded(
           child: Text(item.description,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.bodyMedium),
+              style: TEXT_DEFAULT,
+          )
         ),
       ]
     );
@@ -80,10 +80,10 @@ class MenuListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(item.name,
-                    style: Theme.of(context).textTheme.displayMedium),
+                    style: TEXT_ITEM_TITLE),
                 Text(
                   item.harga,
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: TEXT_SMALL_DETAIL
                 )
               ],
             ),

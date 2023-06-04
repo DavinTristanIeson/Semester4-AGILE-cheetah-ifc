@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/model.dart';
+import '../../helpers/styles.dart';
 import '../../requests/orders.dart';
 
 class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
@@ -32,17 +33,20 @@ class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
       decoration: BoxDecoration(color: theme.colorScheme.primary),
       padding: const EdgeInsets.all(GAP),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
-              Text("Total: ", style: theme.textTheme.displayMedium),
-              Text(formatRupiah(total), style: theme.textTheme.labelLarge?.copyWith(
+              const Text("Total: ", style: TEXT_ITEM_TITLE),
+              Text(formatRupiah(total), style: TEXT_ITEM_TITLE.copyWith(
                 color: theme.colorScheme.secondary,
               ))
             ],
           ),
+          const SizedBox(height: GAP_LG),
           FutureButton(
             onPressed: () => createNewTransaction(context),
+            style: BUTTON_SECONDARY,
             child: const Text("Pesan"),
           )
         ],
@@ -125,16 +129,15 @@ class OrderItemListTile extends StatelessWidget {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(item.name,
-                  style: Theme.of(context).textTheme.displayMedium),
+              Text(item.name, style: TEXT_ITEM_TITLE),
               Text(
                 "${item.harga}   x${item.quantity}",
-                style: Theme.of(context).textTheme.labelMedium,
+                style: TEXT_DETAIL,
               ),
               if (item.note.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: GAP),
-                  child: Text(item.note, style: Theme.of(context).textTheme.bodyMedium)
+                  child: Text(item.note, style: TEXT_DEFAULT),
                 )
             ],
           ),

@@ -1,6 +1,8 @@
 import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../helpers/styles.dart';
+
 class OverInkwell extends StatelessWidget {
   final Widget child;
   final Color? splashColor;
@@ -49,7 +51,7 @@ class DialogHeader extends StatelessWidget {
           MainAxisAlignment.end,
         children: [
           if (title != null)
-            Text(title!, style: Theme.of(context).textTheme.displayMedium),
+            Text(title!, style: TEXT_ITEM_TITLE),
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),

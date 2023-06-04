@@ -18,6 +18,7 @@ const String NO_DATA = "Kami tidak dapat menemukan data apapun";
 const Color COLOR_PRIMARY = Color(0xFFB99878);
 const Color COLOR_PRIMARY_DARK = Color.fromARGB(255, 133, 105, 78);
 const Color COLOR_SECONDARY = Color(0xFFEBE6DD);
+const Color COLOR_SECONDARY_DARK = Color.fromARGB(255, 210, 198, 176);
 const Color COLOR_TERTIARY = Colors.grey;
 const Color COLOR_DARK = Color(0xFF523112);
 const Color COLOR_BRIGHT = Color(0xFFFFFBF4);

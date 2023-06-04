@@ -18,8 +18,8 @@ class OrderViewAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenger {
-  bool _isSearching = false;
   final FocusNode _focusSearch = FocusNode(canRequestFocus: true);
+  bool _isSearching = false;
   final TextEditingController _search = TextEditingController(text: "");
 
   bool get isSearching {
@@ -39,25 +39,30 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
     final provider = context.watch<MenuParamsProvider>();
     _search.text = provider.search;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: GAP, horizontal: GAP_SM),
-      child: TextField(
-        controller: _search,
-        focusNode: _focusSearch,
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.only(left: GAP_LG, right: GAP),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(40.0)),
-            borderSide: BorderSide.none,
-          ),
-          fillColor: COLOR_SECONDARY,
-          filled: true,
-          hintText: 'Cari dengan nama',
-        ),
-        onSubmitted: (value) {
-          setState(() => _isSearching = false);
-          context.read<MenuParamsProvider>().setSearch(value);
+      padding: const EdgeInsets.all(GAP),
+      child: Focus(
+        onFocusChange: (hasFocus) {
+          if (!hasFocus)
+            setState(() => _isSearching = false);
         },
-        onTapOutside: (_) => setState(() => _isSearching = false),
+        child: TextField(
+          controller: _search,
+          focusNode: _focusSearch,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.only(left: GAP_LG, right: GAP),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(40.0)),
+              borderSide: BorderSide.none,
+            ),
+            fillColor: COLOR_SECONDARY,
+            filled: true,
+            hintText: 'Cari dengan nama',
+          ),
+          onSubmitted: (value) {
+            setState(() => _isSearching = false);
+            context.read<MenuParamsProvider>().setSearch(value);
+          },
+        ),
       ),
     );
   }

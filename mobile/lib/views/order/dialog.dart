@@ -9,6 +9,7 @@ import '../../components/display/interaction.dart';
 import '../../helpers/constants.dart';
 import '../../helpers/model.dart';
 import '../../helpers/providers.dart';
+import '../../helpers/styles.dart';
 
 class OrderFilterPopup extends StatelessWidget {
   final String? category;
@@ -37,7 +38,7 @@ class OrderFilterPopup extends StatelessWidget {
                   activeColor: COLOR_DARK,
                   groupValue: provider.category,
                   value: category,
-                  title: Text(formatCategory(category), style: Theme.of(context).textTheme.displayMedium),
+                  title: Text(formatCategory(category), style: TEXT_ITEM_TITLE),
                   onChanged: (String? value) {
                     if (onSelected != null)
                       onSelected!(value);
@@ -89,9 +90,9 @@ class _OrderEditDialogState extends State<OrderEditDialog> {
           children: [
             const DialogHeader(),
             MaybeImage(url: widget.item.img, height: 300),
-            Text(widget.item.name, style: Theme.of(context).textTheme.titleLarge),
-            Text(widget.item.harga, style: Theme.of(context).textTheme.labelSmall),
-            Text(widget.item.description, style: Theme.of(context).textTheme.bodyMedium),
+            Text(widget.item.name, style: TEXT_TITLE),
+            Text(widget.item.harga, style: TEXT_SMALL_DETAIL),
+            Text(widget.item.description, style: TEXT_DEFAULT),
             const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +103,7 @@ class _OrderEditDialogState extends State<OrderEditDialog> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: GAP),
-                  child: Text(quantity.toString(), style: Theme.of(context).textTheme.titleLarge)
+                  child: Text(quantity.toString(), style: TEXT_TITLE)
                 ),
                 IconButton(
                   onPressed: () => changeQuantity(1),
@@ -132,7 +133,8 @@ class _OrderEditDialogState extends State<OrderEditDialog> {
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.save),
-              label: const Text("Simpan")
+              label: const Text("Simpan"),
+              style: BUTTON_SECONDARY,
             )
           ],
         ),
