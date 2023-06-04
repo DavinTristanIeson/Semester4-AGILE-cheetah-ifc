@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage> {
             label: "Pesan"),
         BottomNavigationBarItem(
             icon: Icon(_view == 1 ? Icons.money : Icons.money_outlined),
-            label: "Sejarah"),
+            label: "Riwayat"),
         BottomNavigationBarItem(
             icon: Icon(_view == 2 ? Icons.person : Icons.person_outlined),
             label: "Akun")

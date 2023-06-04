@@ -31,3 +31,30 @@ class OverInkwell extends StatelessWidget {
     );
   }
 }
+
+class DialogHeader extends StatelessWidget {
+  final String? title;
+  const DialogHeader({super.key, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+      ),
+      child: Row(
+        mainAxisAlignment: title != null ?
+          MainAxisAlignment.spaceBetween :
+          MainAxisAlignment.end,
+        children: [
+          if (title != null)
+            Text(title!, style: Theme.of(context).textTheme.displayMedium),
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+      ),
+    );
+  }
+}

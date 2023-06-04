@@ -38,6 +38,7 @@ class CheetahApp extends StatelessWidget {
               buttonColor: COLOR_PRIMARY,
               textTheme: ButtonTextTheme.primary,
             ),
+            splashColor: COLOR_BRIGHT,
             textTheme: const TextTheme(
               bodySmall: TextStyle(
                 fontSize: FS_SMALL,
@@ -48,12 +49,13 @@ class CheetahApp extends StatelessWidget {
               bodyLarge: TextStyle(
                 fontSize: FS_EMPHASIS,
               ),
+              // Karena TextField pakai titleMedium
               titleMedium:  TextStyle(
-                fontSize: FS_EMPHASIS,
-                fontWeight: FontWeight.bold,
+                fontSize: FS_DEFAULT,
               ),
-              titleLarge:  TextStyle(
-                fontSize: FS_LARGE,
+              displayMedium:  TextStyle(
+                color: Colors.black,
+                fontSize: FS_EMPHASIS,
                 fontWeight: FontWeight.bold,
               ),
               labelSmall: TextStyle(

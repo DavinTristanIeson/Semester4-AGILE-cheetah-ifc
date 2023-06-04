@@ -137,18 +137,36 @@ extension on OngoingOrderPhase {
 }
 
 @JsonSerializable()
+class MenuTransactionRecord {
+  int id;
+  String name;
+  int price;
+  int quantity;
+  String note;
+  MenuTransactionRecord(
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.quantity,
+      required this.note});
+  factory MenuTransactionRecord.fromJson(Map<String, dynamic> json) =>
+      _$MenuTransactionRecordFromJson(json);
+  Map<String, dynamic> toJson() => _$MenuTransactionRecordToJson(this);
+}
+
+@JsonSerializable()
 class MenuTransaction {
   final int id;
-  String username;
+  String user;
   DateTime time;
-  List<MenuOrder> orders;
-  OngoingOrderPhase phase;
+  List<MenuTransactionRecord> records;
+  OngoingOrderPhase status;
   MenuTransaction({
     required this.id,
-    required this.username,
+    required this.user,
     required this.time,
-    required this.orders,
-    required this.phase,
+    required this.records,
+    required this.status,
   });
   String _pad0(int num) {
     return num.toString().padLeft(2, '0');
@@ -159,7 +177,7 @@ class MenuTransaction {
   }
 
   int get totalPrice {
-    return orders
+    return records
         .map((x) => x.price)
         .reduce((value, element) => value + element);
   }

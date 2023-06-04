@@ -46,24 +46,44 @@ Map<String, dynamic> _$MenuOrderToJson(MenuOrder instance) => <String, dynamic>{
       'note': instance.note,
     };
 
+MenuTransactionRecord _$MenuTransactionRecordFromJson(
+        Map<String, dynamic> json) =>
+    MenuTransactionRecord(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      price: json['price'] as int,
+      quantity: json['quantity'] as int,
+      note: json['note'] as String,
+    );
+
+Map<String, dynamic> _$MenuTransactionRecordToJson(
+        MenuTransactionRecord instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'price': instance.price,
+      'quantity': instance.quantity,
+      'note': instance.note,
+    };
+
 MenuTransaction _$MenuTransactionFromJson(Map<String, dynamic> json) =>
     MenuTransaction(
       id: json['id'] as int,
-      username: json['username'] as String,
+      user: json['user'] as String,
       time: DateTime.parse(json['time'] as String),
-      orders: (json['orders'] as List<dynamic>)
-          .map((e) => MenuOrder.fromJson(e as Map<String, dynamic>))
+      records: (json['records'] as List<dynamic>)
+          .map((e) => MenuTransactionRecord.fromJson(e as Map<String, dynamic>))
           .toList(),
-      phase: $enumDecode(_$OngoingOrderPhaseEnumMap, json['phase']),
+      status: $enumDecode(_$OngoingOrderPhaseEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$MenuTransactionToJson(MenuTransaction instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'username': instance.username,
+      'user': instance.user,
       'time': instance.time.toIso8601String(),
-      'orders': instance.orders,
-      'phase': _$OngoingOrderPhaseEnumMap[instance.phase]!,
+      'records': instance.records,
+      'status': _$OngoingOrderPhaseEnumMap[instance.status]!,
     };
 
 const _$OngoingOrderPhaseEnumMap = {

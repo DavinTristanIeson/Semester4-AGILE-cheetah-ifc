@@ -15,7 +15,7 @@ class MenuCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(item.name,
-                style: Theme.of(context).textTheme.titleMedium),
+                style: Theme.of(context).textTheme.displayMedium),
         Text(item.harga,
             style: Theme.of(context).textTheme.labelSmall),
         Expanded(
@@ -80,7 +80,7 @@ class MenuListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(item.name,
-                    style: Theme.of(context).textTheme.titleMedium),
+                    style: Theme.of(context).textTheme.displayMedium),
                 Text(
                   item.harga,
                   style: Theme.of(context).textTheme.labelMedium,

@@ -5,6 +5,7 @@ import 'package:cheetah_mobile/requests/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'dialog.dart';
 import 'ongoing_orders.dart';
 
 class OrderViewAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -21,6 +22,9 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
   final FocusNode _focusSearch = FocusNode(canRequestFocus: true);
   final TextEditingController _search = TextEditingController(text: "");
 
+  bool get isSearching {
+    return _isSearching || _search.text.isNotEmpty;
+  }
 
   Widget buildRegularTitle(){
     return const Text("The Savory Spoon",
@@ -34,17 +38,17 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
   Widget buildSearchTitle(BuildContext context){
     final provider = context.watch<MenuParamsProvider>();
     _search.text = provider.search;
-    return Theme(
-      data: ThemeData(
-        textTheme: TextTheme(
-          titleMedium: Theme.of(context).textTheme.bodyMedium,
-        )
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: GAP, horizontal: GAP_SM),
       child: TextField(
         controller: _search,
         focusNode: _focusSearch,
         decoration: const InputDecoration(
-          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(left: GAP_LG, right: GAP),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(40.0)),
+            borderSide: BorderSide.none,
+          ),
           fillColor: COLOR_SECONDARY,
           filled: true,
           hintText: 'Cari dengan nama',
@@ -103,15 +107,16 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
   Widget build(BuildContext context) {
     final provider = context.watch<MenuParamsProvider>();
     return AppBar(
-      title: _isSearching ? buildSearchTitle(context) : buildRegularTitle(),
-      actions: _isSearching ? [] : [
-        IconButton(
-          icon: const Icon(Icons.search, color: COLOR_SECONDARY),
-          onPressed: (){
-            setState(() => _isSearching = true);
-            _focusSearch.requestFocus();
-          },
-        ),
+      title: isSearching ? buildSearchTitle(context) : buildRegularTitle(),
+      actions: [
+        if (!isSearching)
+          IconButton(
+            icon: const Icon(Icons.search, color: COLOR_SECONDARY),
+            onPressed: (){
+              setState(() => _isSearching = true);
+              _focusSearch.requestFocus();
+            },
+          ),
         buildFilterButton(context),
         IconButton(
           icon: provider.isGridView ?
@@ -139,66 +144,6 @@ class OrderViewFAB extends StatelessWidget {
           )
         );
       }
-    );
-  }
-}
-
-class OrderFilterPopup extends StatelessWidget {
-  final String? category;
-  final List<String> filterCategories;
-  final void Function(String?)? onSelected;
-  const OrderFilterPopup({super.key, required this.category, required this.filterCategories, this.onSelected});
-
-  Widget buildDialogHeader(BuildContext context){
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () => Navigator.of(context).pop(),
-          )
-        ],
-      ),
-    );
-  }
-
-  String formatCategory(String category){
-    return (category[0].toUpperCase() + category.substring(1))
-      .split('-').join(' ');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final provider = context.watch<MenuParamsProvider>();
-    return Material(
-      child: Column(
-        children: [
-          buildDialogHeader(context),
-          Expanded(
-            child: ListView.builder(
-              itemCount: provider.filterCategories.length,
-              itemBuilder: (context, idx) {
-                String category = provider.filterCategories[idx];
-                return RadioListTile(
-                  activeColor: COLOR_DARK,
-                  groupValue: provider.category,
-                  value: category,
-                  title: Text(formatCategory(category), style: Theme.of(context).textTheme.titleMedium),
-                  onChanged: (String? value) {
-                    if (onSelected != null)
-                      onSelected!(value);
-                    Navigator.of(context).pop();
-                  },
-                );
-              }
-            ),
-          )
-        ],
-      ),
     );
   }
 }
