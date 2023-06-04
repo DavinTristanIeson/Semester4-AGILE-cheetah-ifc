@@ -19,6 +19,7 @@ class OrderViewAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenger {
   bool _isSearching = false;
   final FocusNode _focusSearch = FocusNode(canRequestFocus: true);
+  final TextEditingController _search = TextEditingController(text: "");
 
 
   Widget buildRegularTitle(){
@@ -31,6 +32,8 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
   }
   
   Widget buildSearchTitle(BuildContext context){
+    final provider = context.watch<MenuParamsProvider>();
+    _search.text = provider.search;
     return Theme(
       data: ThemeData(
         textTheme: TextTheme(
@@ -38,6 +41,7 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
         )
       ),
       child: TextField(
+        controller: _search,
         focusNode: _focusSearch,
         decoration: const InputDecoration(
           border: InputBorder.none,
@@ -45,26 +49,28 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
           filled: true,
           hintText: 'Cari dengan nama',
         ),
-        onSubmitted: (_) => setState(() => _isSearching = false),
+        onSubmitted: (value) {
+          setState(() => _isSearching = false);
+          context.read<MenuParamsProvider>().setSearch(value);
+        },
         onTapOutside: (_) => setState(() => _isSearching = false),
-        onChanged: (value) => context.read<OrdersProvider>().setSearch(value),
       ),
     );
   }
 
   Widget buildFilterButton(BuildContext context){
-    OrdersProvider provider = context.watch<OrdersProvider>();
+    final provider = context.watch<MenuParamsProvider>();
     final IconButton button = IconButton(
       icon: const Icon(Icons.filter_alt, color: COLOR_SECONDARY),
       onPressed: (){
         showDialog(
           context: context,
-          builder: (context) => ChangeNotifierProvider<OrdersProvider>.value(
+          builder: (context) => ChangeNotifierProvider<MenuParamsProvider>.value(
             value: provider,
             builder: (context, _) => OrderFilterPopup(
               filterCategories: provider.filterCategories,
               category: provider.category,
-              onSelected: (category) => context.read<OrdersProvider>().setCategory(category),
+              onSelected: (category) => context.read<MenuParamsProvider>().setCategory(category),
             ),
           ));
       },
@@ -95,8 +101,7 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
 
   @override
   Widget build(BuildContext context) {
-    OrdersProvider provider = context.watch<OrdersProvider>();
-    bool isGridView = provider.isGridView;
+    final provider = context.watch<MenuParamsProvider>();
     return AppBar(
       title: _isSearching ? buildSearchTitle(context) : buildRegularTitle(),
       actions: _isSearching ? [] : [
@@ -109,7 +114,7 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
         ),
         buildFilterButton(context),
         IconButton(
-          icon: isGridView ?
+          icon: provider.isGridView ?
             const Icon(Icons.grid_3x3, color: COLOR_SECONDARY) :
             const Icon(Icons.list, color: COLOR_SECONDARY),
           onPressed: provider.toggleGridView,
@@ -168,7 +173,7 @@ class OrderFilterPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrdersProvider provider = context.watch<OrdersProvider>();
+    final provider = context.watch<MenuParamsProvider>();
     return Material(
       child: Column(
         children: [

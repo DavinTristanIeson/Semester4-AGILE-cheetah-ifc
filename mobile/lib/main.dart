@@ -104,8 +104,13 @@ class CheetahApp extends StatelessWidget {
             future: getMe(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ChangeNotifierProvider(
-                    child: const MainPage(), create: (_) => OrdersProvider());
+                return MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(create: (context) => OrdersProvider()),
+                    ChangeNotifierProvider(create: (context) => MenuParamsProvider()),
+                  ],
+                  child: const MainPage(),
+                );
               } else if (snapshot.hasError) {
                 return const LoginPage();
               } else {

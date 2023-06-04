@@ -173,5 +173,10 @@
 - AKAN: Menghubungkan interaksi ke backend, membuat fitur filter/search berfungsi
 - KENDALA: -
 
+### Jansen Loman
+SUDAH: Menyelesaikan tampilan login [3]
+AKAN: Memeriksa kode daftar
+KENDALA: -
+
 ### Sisa
-15 - 7 = 8
+15 - 7 - 3 = 5

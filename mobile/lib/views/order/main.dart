@@ -9,44 +9,40 @@ import 'package:provider/provider.dart';
 import '../../helpers/model.dart';
 import '../../requests/menu.dart';
 
-class OrderView extends StatelessWidget {
-  // Wrapper agar MainView tidak akan bertanggungjawab atas state management, dan karena tidak bisa watch
-  // nilai provider dalam initState
+class OrderView extends StatefulWidget {
   const OrderView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final provider = context.watch<OrdersProvider>();
-    return _OrderView(search: provider.search, category: provider.category,);
-  }
+  State<OrderView> createState() => _OrderViewState();
 }
 
-class _OrderView extends StatefulWidget {
-  final String search;
-  final String? category;
-
-  const _OrderView({super.key, required this.search, required this.category});
-
-  @override
-  State<_OrderView> createState() => _OrderViewState();
-}
-
-class _OrderViewState extends State<_OrderView> {
-
+class _OrderViewState extends State<OrderView> {
+  String search = "";
+  String? category;
   final PagingController<int, MenuItem> _pagination =
       PagingController(firstPageKey: 0);
 
   @override
   void initState() {
+    final provider = context.read<MenuParamsProvider>();
+    search = provider.search;
+    category = provider.category;
     _pagination.addPageRequestListener(fetchMenu);
     super.initState();
   }
 
+  @override
+  void didChangeDependencies(){
+    final provider = context.read<MenuParamsProvider>();
+    search = provider.search;
+    category = provider.category;
+    _pagination.refresh();
+    super.didChangeDependencies();
+  }
+
   Future<void> fetchMenu(int page) async {
     try {
-      print(widget.search);
-      print(widget.category);
-      final result = await getMenu(page, search: widget.search, category: widget.category);
+      final result = await getMenu(page, search: search, category: category);
       final isLastPage = page >= result.pages;
       _pagination.appendPage(result.data, isLastPage ? null : page + 1);
     } catch (error) {
@@ -87,12 +83,12 @@ class _OrderViewState extends State<_OrderView> {
 
   @override
   Widget build(BuildContext context) {
-    bool isGridView = context.watch<OrdersProvider>().isGridView;
+    final provider = context.watch<MenuParamsProvider>();
     return Stack(
       children: [
         Material(
           type: MaterialType.transparency,
-          child: isGridView ? buildGrid(context) : buildList(),
+          child: provider.isGridView ? buildGrid(context) : buildList(),
         ),
         const Positioned(
           bottom: 0.0,

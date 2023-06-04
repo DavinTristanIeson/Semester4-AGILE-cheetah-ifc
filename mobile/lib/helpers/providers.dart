@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 
 import 'model.dart';
 
-class OrdersProvider extends ChangeNotifier {
+class MenuParamsProvider extends ChangeNotifier {
+  List<String> filterCategories = [];
   bool isGridView = true;
+  String? category = "";
+  String search = "";
+  
+  void setSearch(String search){
+    this.search = search;
+    notifyListeners();
+  }
+  void setCategory(String? category){
+    this.category = category;
+    notifyListeners();
+  }
+  void toggleGridView() {
+    isGridView = !isGridView;
+    notifyListeners();
+  }
+}
+
+
+class OrdersProvider extends ChangeNotifier {
   MenuTransaction? current;
   List<MenuOrder> orders = [];
 
-  List<String> filterCategories = [];
-  String? category = "";
-  String search = "";
   void add(MenuItem item) {
     int idx = orders.indexWhere((element) => element.id == item.id);
     if (idx == -1){
@@ -30,18 +47,5 @@ class OrdersProvider extends ChangeNotifier {
     this.orders = orders;
     notifyListeners();
   }
-  
-  void toggleGridView() {
-    isGridView = !isGridView;
-    notifyListeners();
-  }
 
-  void setSearch(String search){
-    this.search = search;
-    notifyListeners();
-  }
-  void setCategory(String? category){
-    this.category = category;
-    notifyListeners();
-  }
 }
