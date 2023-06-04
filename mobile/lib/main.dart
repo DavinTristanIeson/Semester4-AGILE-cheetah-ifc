@@ -114,7 +114,7 @@ class CheetahApp extends StatelessWidget {
                   child: const MainPage(),
                 );
               } else if (snapshot.hasError) {
-                return const LoginPage();
+                return LoginPage();
               } else {
                 return const LoadingComponent();
               }
