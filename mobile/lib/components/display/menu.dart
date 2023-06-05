@@ -32,9 +32,9 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.secondary,
+      color: COLOR_SECONDARY,
       child: OverInkwell(
-        splashColor: Theme.of(context).colorScheme.onBackground,
+        splashColor: COLOR_BRIGHT,
         onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

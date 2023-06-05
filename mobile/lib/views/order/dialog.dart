@@ -83,8 +83,8 @@ class _OrderEditDialogState extends State<OrderEditDialog> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+        decoration: const BoxDecoration(
+          color: COLOR_PRIMARY,
         ),
         child: Column(
           children: [
@@ -114,12 +114,12 @@ class _OrderEditDialogState extends State<OrderEditDialog> {
             Padding(
               padding: const EdgeInsets.only(left: GAP, right: GAP, top: GAP, bottom: GAP_LG),
               child: TextField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
                   hintText: "Pesan tambahan kepada koki",
-                  fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                  fillColor: COLOR_BRIGHT,
                   filled: true,
                 ),
                 controller: _notes,

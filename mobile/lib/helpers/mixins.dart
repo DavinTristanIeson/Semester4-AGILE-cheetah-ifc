@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -13,12 +14,12 @@ mixin SnackbarMessenger {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       messenger.showSnackBar(SnackBar(
         content: Text(message,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onError,
+          style: const TextStyle(
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           )
         ),
-        backgroundColor: Theme.of(context).colorScheme.errorContainer,
+        backgroundColor: COLOR_ERROR_CONTAINER,
       ));
     });
   }

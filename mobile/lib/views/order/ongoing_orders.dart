@@ -28,9 +28,8 @@ class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
   }
 
   Widget buildBottomest(BuildContext context, int total){
-    final theme = Theme.of(context);
     return Container(
-      decoration: BoxDecoration(color: theme.colorScheme.primary),
+      decoration: const BoxDecoration(color: COLOR_PRIMARY),
       padding: const EdgeInsets.all(GAP),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,7 +38,7 @@ class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
             children: [
               const Text("Total: ", style: TEXT_ITEM_TITLE),
               Text(formatRupiah(total), style: TEXT_ITEM_TITLE.copyWith(
-                color: theme.colorScheme.secondary,
+                color: COLOR_SECONDARY,
               ))
             ],
           ),
@@ -70,8 +69,8 @@ class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
         ? orders.map((ord) => ord.price).reduce((acc, cur) => acc + cur)
         : 0;
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
+      decoration: const BoxDecoration(
+        color: COLOR_PRIMARY_DARK,
       ),
       child: Column(
         children: [
@@ -109,7 +108,7 @@ class OrderItemListTile extends StatelessWidget {
   Widget buildDeleteButton(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.delete),
-      color: Theme.of(context).colorScheme.error,
+      color: COLOR_ERROR,
       onPressed: () {
         context.read<OrdersProvider>().remove(item);
       }

@@ -18,13 +18,7 @@ class OrderViewAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenger {
-  final FocusNode _focusSearch = FocusNode(canRequestFocus: true);
-  bool _isSearching = false;
   final TextEditingController _search = TextEditingController(text: "");
-
-  bool get isSearching {
-    return _isSearching || _search.text.isNotEmpty;
-  }
 
   Widget buildRegularTitle(){
     return const Text("The Savory Spoon",
@@ -40,29 +34,21 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
     _search.text = provider.search;
     return Padding(
       padding: const EdgeInsets.all(GAP),
-      child: Focus(
-        onFocusChange: (hasFocus) {
-          if (!hasFocus)
-            setState(() => _isSearching = false);
-        },
-        child: TextField(
-          controller: _search,
-          focusNode: _focusSearch,
-          decoration: const InputDecoration(
-            contentPadding: EdgeInsets.only(left: GAP_LG, right: GAP),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(40.0)),
-              borderSide: BorderSide.none,
-            ),
-            fillColor: COLOR_SECONDARY,
-            filled: true,
-            hintText: 'Cari dengan nama',
+      child: TextField(
+        controller: _search,
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.only(left: GAP_LG, right: GAP),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(40.0)),
+            borderSide: BorderSide.none,
           ),
-          onSubmitted: (value) {
-            setState(() => _isSearching = false);
-            context.read<MenuParamsProvider>().setSearch(value);
-          },
+          fillColor: COLOR_SECONDARY,
+          filled: true,
+          hintText: 'Cari dengan nama',
         ),
+        onSubmitted: (value) {
+          context.read<MenuParamsProvider>().setSearch(value);
+        },
       ),
     );
   }
@@ -93,7 +79,6 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
     }
     return FutureBuilder(
       future: getFilterCategories(),
-
       builder: (context, data) {
         if (data.hasData){
           provider.filterCategories = data.data!;
@@ -112,16 +97,18 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
   Widget build(BuildContext context) {
     final provider = context.watch<MenuParamsProvider>();
     return AppBar(
-      title: isSearching ? buildSearchTitle(context) : buildRegularTitle(),
+      automaticallyImplyLeading: false,
+      title: Row(
+        children: [
+          if (MediaQuery.of(context).size.width > 768)
+            Padding(
+              padding: const EdgeInsets.only(right: GAP_LG),
+              child: buildRegularTitle()
+            ),
+          Expanded(child: buildSearchTitle(context))
+        ]
+      ),
       actions: [
-        if (!isSearching)
-          IconButton(
-            icon: const Icon(Icons.search, color: COLOR_SECONDARY),
-            onPressed: (){
-              setState(() => _isSearching = true);
-              _focusSearch.requestFocus();
-            },
-          ),
         buildFilterButton(context),
         IconButton(
           icon: provider.isGridView ?

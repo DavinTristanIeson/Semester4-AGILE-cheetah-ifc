@@ -25,7 +25,7 @@ class OverInkwell extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor: splashColor ?? Theme.of(context).colorScheme.onBackground,
+              splashColor: splashColor ?? COLOR_BRIGHT,
               onTap: onTap,
             ),
           ),
@@ -42,8 +42,8 @@ class DialogHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+      decoration: const BoxDecoration(
+        color: COLOR_DARK,
       ),
       child: Row(
         mainAxisAlignment: title != null ?
@@ -53,7 +53,7 @@ class DialogHeader extends StatelessWidget {
           if (title != null)
             Text(title!, style: TEXT_ITEM_TITLE),
           IconButton(
-            icon: const Icon(Icons.close),
+            icon: const Icon(Icons.close, color: COLOR_SECONDARY),
             onPressed: () => Navigator.of(context).pop(),
           )
         ],

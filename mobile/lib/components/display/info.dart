@@ -17,15 +17,15 @@ class EmptyComponent extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(
+          const Icon(
             Icons.warning,
-            color: Theme.of(context).colorScheme.tertiary,
+            color: COLOR_TERTIARY,
             size: 48,
           ),
-          Text(NO_DATA,
+          const Text(NO_DATA,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Theme.of(context).colorScheme.tertiary,
+                color: COLOR_TERTIARY,
                 fontWeight: FontWeight.bold,
                 fontFamily: "Josefin Sans",
                 fontSize: 18,
@@ -72,16 +72,16 @@ class ErrorMessage extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(
+          const Icon(
             Icons.error,
-            color: Theme.of(context).colorScheme.error,
+            color: COLOR_ERROR,
             size: 48,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: GAP_LG),
             child: Text(reason,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
+                style: const TextStyle(
+                    color: COLOR_ERROR,
                     fontFamily: "Josefin Sans",
                     fontSize: 16)),
           ),
@@ -108,14 +108,14 @@ class ErrorComponent extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(
+          const Icon(
             Icons.error,
-            color: Theme.of(context).colorScheme.error,
+            color: COLOR_ERROR,
             size: 48,
           ),
-          Text(UNEXPECTED_ERROR,
+          const Text(UNEXPECTED_ERROR,
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.error,
+                  color: COLOR_ERROR,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Josefin Sans",
                   fontSize: 18)),
@@ -123,8 +123,8 @@ class ErrorComponent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: GAP_LG),
               child: Text(reason!,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
+                  style: const TextStyle(
+                      color: COLOR_ERROR,
                       fontFamily: "Josefin Sans",
                       fontSize: 16)),
             ),

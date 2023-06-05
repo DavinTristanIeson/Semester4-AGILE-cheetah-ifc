@@ -44,9 +44,9 @@ class _MainPageState extends State<MainPage> {
 
   Widget buildBottomNavBar(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      selectedItemColor: Theme.of(context).colorScheme.secondary,
-      unselectedItemColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: COLOR_DARK,
+      selectedItemColor: COLOR_SECONDARY,
+      unselectedItemColor: COLOR_PRIMARY,
       currentIndex: _view,
       onTap: (selected) => setState(() => _view = selected),
       items: [

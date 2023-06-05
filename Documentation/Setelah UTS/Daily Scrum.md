@@ -205,3 +205,23 @@ KENDALA: Hari tidak sempat mengerjakan karena ada kerjaan
 
 ### Sisa
 6 - 5 - 1 = 0
+
+## 05/06/2023
+
+### Davin Tristan Ieson
+SUDAH: Refaktor halaman login untuk menggunakan package flutter_form_builder, refaktor style
+AKAN: Mencari dan mengetes package socket.io di flutter untuk sprint selanjutnya
+KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: Mulai quality checking pada aplikasi
+- KENDALA: -
+
+### Sisa
+0
