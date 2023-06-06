@@ -225,3 +225,23 @@ KENDALA: -
 
 ### Sisa
 0
+
+## 06/06/2023
+
+### Davin Tristan Ieson
+SUDAH: -
+AKAN: Mencari dan mengetes package socket.io di flutter untuk sprint selanjutnya
+KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: Mulai quality checking pada aplikasi
+- KENDALA: -
+
+### Sisa
+0

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const String BACKEND_HOST = "localhost:3000";
 const String BACKEND = "http://localhost:3000";
 const String API = "http://localhost:3000/api";
 const String BACKGROUND_IMAGE_PATH =
