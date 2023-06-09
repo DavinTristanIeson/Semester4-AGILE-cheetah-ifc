@@ -129,8 +129,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
       backgroundColor:Colors.transparent,
       body: Align(
         alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
             const SizedBox(
               height: 50,
@@ -141,14 +140,12 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
             const SizedBox(height: 20),
             FormBuilder(
               key: loginFormKey,
-              child: Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.64),
-                  ),
-                  child: buildForm(context),
+              child: Container(
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.64),
                 ),
+                child: buildForm(context),
               ),
             ),
           ],
