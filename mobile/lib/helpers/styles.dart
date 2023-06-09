@@ -25,6 +25,11 @@ const TEXT_DEFAULT = TextStyle(
   fontSize: FS_DEFAULT,
 );
 
+const TEXT_SEMIBOLD = TextStyle(
+  fontSize: FS_DEFAULT,
+  fontWeight: FontWeight.w500
+);
+
 const TEXT_IMPORTANT = TextStyle(
   color: Colors.black,
   fontSize: FS_EMPHASIS,

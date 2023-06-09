@@ -37,6 +37,7 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
       child: TextField(
         controller: _search,
         decoration: const InputDecoration(
+          prefixIcon: Icon(Icons.search),
           contentPadding: EdgeInsets.only(left: GAP_LG, right: GAP),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(40.0)),

@@ -15,10 +15,13 @@ class PaginatedApiResult<T> {
 }
 
 String formatRupiah(int price) {
-  List<int> pieces = [];
+  List<String> pieces = [];
   while (price > 0) {
-    pieces.add(price % 1000);
+    int current = price % 1000;
     price = (price / 1000).round();
+    String rupiahPiece = current.toString();
+    if (price > 0) rupiahPiece = rupiahPiece.padLeft(3, '0');
+    pieces.add(rupiahPiece);
   }
   return "Rp. ${pieces.reversed.join('.')}";
 }
@@ -149,6 +152,9 @@ class MenuTransactionRecord {
       required this.price,
       required this.quantity,
       required this.note});
+  String get harga {
+    return formatRupiah(price);
+  }
   factory MenuTransactionRecord.fromJson(Map<String, dynamic> json) =>
       _$MenuTransactionRecordFromJson(json);
   Map<String, dynamic> toJson() => _$MenuTransactionRecordToJson(this);

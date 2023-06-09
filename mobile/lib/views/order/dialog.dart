@@ -24,31 +24,37 @@ class OrderFilterPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Dialog(
+      child: Material(
+        child: Column(
+          children: [
+            const DialogHeader(),
+            buildFilterList(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Expanded buildFilterList(BuildContext context) {
     final provider = context.watch<MenuParamsProvider>();
-    return Material(
-      child: Column(
-        children: [
-          const DialogHeader(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: provider.filterCategories.length,
-              itemBuilder: (context, idx) {
-                String category = provider.filterCategories[idx];
-                return RadioListTile(
-                  activeColor: COLOR_DARK,
-                  groupValue: provider.category,
-                  value: category,
-                  title: Text(formatCategory(category), style: TEXT_ITEM_TITLE),
-                  onChanged: (String? value) {
-                    if (onSelected != null)
-                      onSelected!(value);
-                    Navigator.of(context).pop();
-                  },
-                );
-              }
-            ),
-          )
-        ],
+    return Expanded(
+      child: ListView.builder(
+        itemCount: provider.filterCategories.length,
+        itemBuilder: (context, idx) {
+          String category = provider.filterCategories[idx];
+          return RadioListTile(
+            activeColor: COLOR_DARK,
+            groupValue: provider.category,
+            value: category,
+            title: Text(formatCategory(category)),
+            onChanged: (String? value) {
+              if (onSelected != null)
+                onSelected!(value);
+              Navigator.of(context).pop();
+            },
+          );
+        }
       ),
     );
   }
@@ -81,63 +87,82 @@ class _OrderEditDialogState extends State<OrderEditDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        decoration: const BoxDecoration(
-          color: COLOR_PRIMARY,
-        ),
-        child: Column(
-          children: [
-            const DialogHeader(),
-            MaybeImage(url: widget.item.img, height: 300),
-            Text(widget.item.name, style: TEXT_TITLE),
-            Text(widget.item.harga, style: TEXT_SMALL_DETAIL),
-            Text(widget.item.description, style: TEXT_DEFAULT),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () => changeQuantity(-1),
-                  icon: const Icon(Icons.remove)
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: GAP),
-                  child: Text(quantity.toString(), style: TEXT_TITLE)
-                ),
-                IconButton(
-                  onPressed: () => changeQuantity(1),
-                  icon: const Icon(Icons.add)
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: GAP, right: GAP, top: GAP, bottom: GAP_LG),
-              child: TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+    return Dialog(
+      child: Material(
+        child: Container(
+          decoration: const BoxDecoration(
+            color: COLOR_SECONDARY,
+          ),
+          child: ListView(
+            children: [
+              const DialogHeader(),
+              MaybeImage(url: widget.item.img, height: 300),
+              buildMenuInfo(),
+              const Divider(),
+              buildQuantityChanger(),
+              Padding(
+                padding: const EdgeInsets.only(left: GAP, right: GAP, top: GAP, bottom: GAP_LG),
+                child: TextField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: "Pesan tambahan kepada koki",
+                    fillColor: COLOR_BRIGHT,
+                    filled: true,
                   ),
-                  hintText: "Pesan tambahan kepada koki",
-                  fillColor: COLOR_BRIGHT,
-                  filled: true,
+                  controller: _notes,
+                  minLines: 4,
+                  maxLines: 8,
                 ),
-                controller: _notes,
-                minLines: 4,
-                maxLines: 8,
               ),
-            ),
-            ElevatedButton.icon(
-              onPressed: (){
-                context.read<OrdersProvider>().edit(widget.item, note: _notes.text, quantity: quantity);
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.save),
-              label: const Text("Simpan"),
-              style: BUTTON_SECONDARY,
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: GAP_LG, vertical: GAP_LG),
+                child: ElevatedButton.icon(
+                  onPressed: (){
+                    context.read<OrdersProvider>().edit(widget.item, note: _notes.text, quantity: quantity);
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.save),
+                  label: const Text("Simpan"),
+                ),
+              )
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Row buildQuantityChanger() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: () => changeQuantity(-1),
+          icon: const Icon(Icons.remove)
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: GAP),
+          child: Text(quantity.toString(), style: TEXT_TITLE)
+        ),
+        IconButton(
+          onPressed: () => changeQuantity(1),
+          icon: const Icon(Icons.add)
+        )
+      ],
+    );
+  }
+
+  Widget buildMenuInfo() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: GAP),
+      child: Column(
+        children: [
+          Text(widget.item.name, style: TEXT_TITLE),
+          Text(widget.item.harga, style: TEXT_SMALL_DETAIL),
+          Text(widget.item.description, style: TEXT_DEFAULT),
+        ],
       ),
     );
   }

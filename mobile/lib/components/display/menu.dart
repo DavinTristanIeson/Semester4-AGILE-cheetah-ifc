@@ -70,25 +70,25 @@ class MenuListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        splashColor: COLOR_BRIGHT,
-        titleAlignment: ListTileTitleAlignment.top,
-        onTap: onTap,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(item.name,
-                    style: TEXT_ITEM_TITLE),
-                Text(
-                  item.harga,
-                  style: TEXT_SMALL_DETAIL
-                )
-              ],
-            ),
-            Text(item.description),
-          ],
-        ));
+      splashColor: COLOR_BRIGHT,
+      titleAlignment: ListTileTitleAlignment.top,
+      onTap: onTap,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(item.name,
+                  style: TEXT_ITEM_TITLE),
+              Text(
+                item.harga,
+                style: TEXT_SMALL_DETAIL
+              )
+            ],
+          ),
+          Text(item.description),
+        ],
+      ));
   }
 }
