@@ -70,4 +70,33 @@ TOTAL: 25 + 4 = 29
 4. Sebagai pelanggan, saya ingin kasih pesan tambahan untuk bagaimana makanan saya disiapkan; contoh: teh jangan terlalu banyak pakai es, nasi goreng jangan pakai bawang. [3/3]
 - Modal untuk edit informasi pesanan seperti kuantitas dan pesan tambahan
 
-TOTAL: 19
+(EDIT 08/06/2023: Lupa dimasukkan di Trello, dan tidak sengaja sudah dikerjakan oleh Davin padahal dijadwalkan untuk sprint selanjutnya)
+5. Sebagai pelanggan, saya ingin mencari makanan dengan mudah, agar bisa menemukan makanan yang kusuka. [3/5]
+
+TOTAL: 22
+
+# Sprint 3 (09/06/2023 s/d 15/06/2023)
+
+### Sprint Backlog
+*Note: [STORY POINT/PRIORITY]*
+
+1.Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa diambil [5/4]
+- Tampilan halaman menunggu ketika loading
+- Tampilan halaman menunggu ketika sudah selesai
+- Komunikasi realtime dengan server melalui socket.io untuk menerima status pesanan
+- Request ke backend untuk mengambil pesanan sekarang
+
+2. Sebagai pelanggan, saya ingin lihat transaksi dan pesanan saya sebelumnya. [3/6]
+- Komponen untuk riwayat transaksi/pesanan
+- Tampilan halaman riwayat pemesanan
+- Infinite scrolling untuk halaman riwayat pemesanan
+- Request ke backend untuk mengambil riwayat pemesanan
+
+3. Sebagai pelanggan, saya ingin mengubah dan melihat data diri sendiri seperti email, nama, no. telp, dan password. [3/7]
+- Tampilan halaman akun
+- Request ke backend untuk mengambil informasi akun
+- Fitur menghapus akun
+- Fitur mengedit informasi akun
+- Request ke backend untuk menghapus/mengedit informasi akun
+
+TOTAL: 11

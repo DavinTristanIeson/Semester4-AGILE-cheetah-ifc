@@ -19,7 +19,7 @@ Future<void> setupDio() async {
 
   OptionBuilder options = OptionBuilder().setTransports(['websocket']);
   List<Cookie> cookies = await jar.loadForRequest(Uri.http(BACKEND_HOST));
-  if (cookies.length > 0){
+  if (cookies.isNotEmpty){
     options.setExtraHeaders({
       "Cookie": cookies[0].toString(),
     });

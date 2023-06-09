@@ -42,7 +42,7 @@ class MenuTransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: COLOR_SECONDARY,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 500.0),
         child: ExpansionTile(
@@ -58,17 +58,21 @@ class MenuTransactionItem extends StatelessWidget {
               Text(item.timeString, style: TEXT_DETAIL),
             ]
           ),
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
           children: [
             for (MenuTransactionRecord record in item.records)
               OrderRecordListTile(item: record),
-            const Divider(),
-            Text.rich(
-              TextSpan(
-                children: [
-                  const TextSpan(text: "Total: ", style: TEXT_SEMIBOLD),
-                  TextSpan(text: item.hargaTotal, style: TEXT_DETAIL),
-                ]
-              )
+            const Divider(thickness: 0.1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: GAP_LG, vertical: GAP),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(text: "Total: ", style: TEXT_SEMIBOLD),
+                    TextSpan(text: item.hargaTotal, style: TEXT_DETAIL),
+                  ]
+                )
+              ),
             )
           ],
         ),

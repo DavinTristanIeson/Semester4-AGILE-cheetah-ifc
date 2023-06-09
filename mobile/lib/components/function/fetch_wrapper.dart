@@ -21,10 +21,10 @@ class FetchWrapper<T> extends StatefulWidget {
   });
 
   @override
-  State<FetchWrapper<T>> createState() => _FetchWrapperState<T>();
+  State<FetchWrapper<T>> createState() => FetchWrapperState<T>();
 }
 
-class _FetchWrapperState<T> extends State<FetchWrapper<T>> {
+class FetchWrapperState<T> extends State<FetchWrapper<T>> {
   late Future<T> future;
 
   @override

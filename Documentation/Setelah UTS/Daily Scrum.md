@@ -164,7 +164,7 @@
 - KENDALA: -
 
 ### Sisa
-19 - 4 = 15
+22 - 4 = 18
 
 ## 03/06/2023
 
@@ -184,12 +184,12 @@ KENDALA: -
 - KENDALA: -
 
 ### Sisa
-15 - 7 - 2 = 6
+18 - 7 - 2 = 9
 
 ## 04/06/2023
 
 ### Davin Tristan Ieson
-- SUDAH: Menyelesaikan fitur search/filter, dan bottom sheet untuk edit/tambah/hapus pesanan sekarang [2 + 3]
+- SUDAH: Menyelesaikan fitur search/filter, dan bottom sheet untuk edit/tambah/hapus pesanan sekarang [2 + 3 + 3]
 - AKAN: Refaktor halaman login untuk menggunakan package flutter_form_builder agar lebih mudah menangani form
 - KENDALA: -
 
@@ -204,7 +204,7 @@ KENDALA: Hari tidak sempat mengerjakan karena ada kerjaan
 - KENDALA: -
 
 ### Sisa
-6 - 5 - 1 = 0
+9 - 8 - 1 = 0
 
 ## 05/06/2023
 
@@ -245,3 +245,65 @@ KENDALA: -
 
 ### Sisa
 0
+
+## 07/06/2023
+
+### Davin Tristan Ieson
+SUDAH: Mencari dan mengetes package socket.io di flutter untuk sprint selanjutnya
+AKAN: -
+KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: Mencoba melakukan pengecekan aplikasi
+- AKAN: -
+- KENDALA: Tidak dapat menggunakan emulator android
+- SOLUSI: Compile projek Flutter ke web, baru screennya di-resize ke ukuran mobile
+
+### Sisa
+0
+
+## 08/06/2023
+
+### Davin Tristan Ieson
+SUDAH: -
+AKAN: Mencari dan mengetes package socket.io di flutter untuk sprint selanjutnya
+KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: Mencoba melakukan pengecekan aplikasi
+- AKAN: -
+- KENDALA: Gagal melakukan pengecekan aplikasi karena versi flutter yang tidak compatible
+- SOLUSI: Kalau perlu, pakai laptop Davin untuk mengetesnya
+
+### Sisa
+0
+
+# Sprint 3 (09/06/2023 s/d 15/06/2023)
+
+## Davin Tristan Ieson
+- SUDAH: Memperbaiki dialog filter dan detail pesanan agar tidak menutupi layar, membuat halaman transaksi [3]
+- AKAN: Lanjut membuat halaman menunggu pesanan
+- KENDALA: Query transaksi tidak benar-benar terurut, perlu diperbaiki
+
+## Jansen Loman
+- SUDAH: -
+- AKAN: membuat tampilan akun
+- KENDALA:- hari ini belum sempat rencananya malam ini
+
+## Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Sisa
+11 - 3 = 8

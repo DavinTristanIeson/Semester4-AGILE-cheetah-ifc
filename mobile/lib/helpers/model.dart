@@ -95,18 +95,17 @@ enum OngoingOrderPhase {
   Canceled,
 }
 
-extension on OngoingOrderPhase {
-  // ignore: unused_element
+extension Indonesia on OngoingOrderPhase {
   String stringify() {
     switch (this) {
       case OngoingOrderPhase.Pending:
-        return "Pending";
+        return "Menunggu";
       case OngoingOrderPhase.Cooking:
-        return "Cooking";
+        return "Sedang Dimasak";
       case OngoingOrderPhase.Finished:
-        return "Finished";
+        return "Selesai";
       case OngoingOrderPhase.Canceled:
-        return "Canceled";
+        return "Dibatalkan";
     }
   }
 

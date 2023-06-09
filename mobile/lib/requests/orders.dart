@@ -25,3 +25,15 @@ Future<MenuTransaction?> getOngoing() async {
     return null;
   }
 }
+
+Future<PaginatedApiResult<MenuTransaction>> getHistory(int page) async {
+  const String HISTORY_ROUTE = "$API/orders/history";
+  try {
+    final Response res = await dio.get(HISTORY_ROUTE, queryParameters: <String, dynamic>{
+      "page": page,
+    });
+    return PaginatedApiResult.fromJson(res.data, (data) => MenuTransaction.fromJson(data));
+  } catch (e){
+    throw Exception("Gagal mengambil riwayat pemesanan. Mohon dicoba ulang pada waktu lain.");
+  }
+}

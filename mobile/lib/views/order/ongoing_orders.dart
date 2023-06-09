@@ -2,6 +2,7 @@ import 'package:cheetah_mobile/components/display/info.dart';
 import 'package:cheetah_mobile/components/display/interaction.dart';
 import 'package:cheetah_mobile/components/function/future_input.dart';
 import 'package:cheetah_mobile/helpers/constants.dart';
+import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
 import 'package:cheetah_mobile/helpers/providers.dart';
 import 'package:cheetah_mobile/views/order/dialog.dart';
@@ -22,6 +23,7 @@ class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
       provider.startTransaction(transaction);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
+      currentTransactionKey.currentState!.refetch();
     } on Exception catch (e){
       sendError(context, e.toString());
     }

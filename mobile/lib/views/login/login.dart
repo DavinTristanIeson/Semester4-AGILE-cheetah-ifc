@@ -9,14 +9,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/function/future_input.dart';
+import '../../helpers/keys.dart';
 import '../../helpers/providers.dart';
 import '../../helpers/styles.dart';
 
-final loginFormKey = GlobalKey<FormBuilderState>();
+
 
 class LoginForm extends StatelessWidget with SnackbarMessenger {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
   final void Function() onSwitch;
 
   LoginForm({Key? key, required this.onSwitch}) : super(key: key);
