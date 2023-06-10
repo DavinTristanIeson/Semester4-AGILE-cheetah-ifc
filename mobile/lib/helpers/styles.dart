@@ -37,6 +37,13 @@ const TEXT_IMPORTANT = TextStyle(
   fontFamily: 'Josefin Sans',
 );
 
+const TEXT_LINK = TextStyle(
+  color: Colors.black,
+  fontSize: FS_EMPHASIS,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Josefin Sans',
+);
+
 const TEXT_TITLE = TextStyle(
   color: Colors.black,
   fontSize: FS_LARGE,

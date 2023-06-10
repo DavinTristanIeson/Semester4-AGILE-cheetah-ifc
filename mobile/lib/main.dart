@@ -1,4 +1,5 @@
 import 'package:cheetah_mobile/helpers/constants.dart';
+import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/helpers/providers.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
 import 'package:cheetah_mobile/requests/setup.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'components/display/image.dart';
 import 'package:provider/provider.dart';
 
-import 'components/display/info.dart';
+import 'components/function/fetch_wrapper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,23 +71,20 @@ class CheetahApp extends StatelessWidget {
           )),
         home: BackgroundImage(
           asset: BACKGROUND_IMAGE_PATH,
-          child: FutureBuilder(
-            future: getMe(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(create: (context) => OrdersProvider()),
-                    ChangeNotifierProvider(create: (context) => MenuParamsProvider()),
-                  ],
-                  child: const MainPage(),
-                );
-              } else if (snapshot.hasError) {
-                return const LoginPage();
-              } else {
-                return const LoadingComponent();
-              }
-            },
+          child: FetchWrapper(
+            key: loginKey,
+            fetch: getMe,
+            errorComponent: const LoginPage(),
+            emptyComponent: const LoginPage(),
+            builder: (context, data) {
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(create: (context) => OrdersProvider()),
+                  ChangeNotifierProvider(create: (context) => MenuParamsProvider()),
+                ],
+                child: const MainPage(),
+              );
+            }
           ),
         ));
   }

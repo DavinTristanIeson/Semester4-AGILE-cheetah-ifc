@@ -6,4 +6,6 @@ import '../components/function/fetch_wrapper.dart';
 import 'model.dart';
 
 final GlobalKey<FetchWrapperState<MenuTransaction?>> currentTransactionKey = GlobalKey();
+final GlobalKey<FetchWrapperState<String>> loginKey = GlobalKey();
 final GlobalKey<FormBuilderState> loginFormKey = GlobalKey();
+final GlobalKey<dynamic> ongoingOrdersBottomSheetKey = GlobalKey();

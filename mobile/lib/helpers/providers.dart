@@ -24,8 +24,9 @@ class MenuParamsProvider extends ChangeNotifier {
 
 
 class OrdersProvider extends ChangeNotifier {
-  MenuTransaction? current;
   List<MenuOrder> orders = [];
+
+  OrdersProvider();
 
   void add(MenuItem item) {
     int idx = orders.indexWhere((element) => element.id == item.id);
@@ -51,14 +52,13 @@ class OrdersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void replace(List<MenuOrder> orders) {
-    this.orders = orders;
+  void clearOrders(){
+    orders.clear();
     notifyListeners();
   }
 
-  void startTransaction(MenuTransaction transaction){
-    orders.clear();
-    current = transaction;
+  void replace(List<MenuOrder> orders) {
+    this.orders = orders;
     notifyListeners();
   }
 }

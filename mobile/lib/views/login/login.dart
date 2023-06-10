@@ -2,15 +2,12 @@ import 'package:cheetah_mobile/components/display/fields.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
 import 'package:cheetah_mobile/helpers/validators.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
-import 'package:cheetah_mobile/views/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 import '../../components/function/future_input.dart';
 import '../../helpers/keys.dart';
-import '../../helpers/providers.dart';
 import '../../helpers/styles.dart';
 
 
@@ -29,14 +26,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
         form?["email"]?.value as String,
         form?["password"]?.value as String
       );
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => OrdersProvider()),
-          ChangeNotifierProvider(create: (context) => MenuParamsProvider()),
-        ],
-        child: const MainPage(),
-      )));
+      loginKey.currentState!.refetch();
     } catch (e){
       sendError(context, e.toString());
     }

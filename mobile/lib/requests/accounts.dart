@@ -46,7 +46,8 @@ Future<Response> register(
   }
 }
 
-Future<Response> getMe() {
+Future<int> getMe() async {
   const String route = "$ACCOUNT_ROUTE/me";
-  return dio.get(route);
+  final Response res = await dio.get(route);
+  return res.data!["id"];
 }

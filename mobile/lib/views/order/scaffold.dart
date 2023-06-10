@@ -1,4 +1,5 @@
 import 'package:cheetah_mobile/helpers/constants.dart';
+import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
 import 'package:cheetah_mobile/helpers/providers.dart';
 import 'package:cheetah_mobile/requests/menu.dart';
@@ -133,7 +134,7 @@ class OrderViewFAB extends StatelessWidget {
           context: context,
           builder: (context) => ChangeNotifierProvider.value(
             value: context.read<OrdersProvider>(),
-            child: const OngoingOrdersBottomSheet()
+            child: OngoingOrdersBottomSheet(key: ongoingOrdersBottomSheetKey)
           )
         );
       }

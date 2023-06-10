@@ -26,6 +26,8 @@ const Color COLOR_BRIGHT = Color(0xFFFFFBF4);
 const Color COLOR_ERROR = Color(0xFFDC3545);
 const Color COLOR_ERROR_CONTAINER = Color.fromARGB(255, 217, 83, 96);
 const Color COLOR_SHADOW = Color.fromRGBO(0, 0, 0, 0.1);
+const Color COLOR_SUCCESS = Colors.green;
+const Color COLOR_SUCCESS_CONTAINER = Color.fromARGB(255, 163, 223, 165);
 
 const double GAP_SM = 4.0;
 const double GAP = 8.0;

@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/views/order/scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _view = 0;
 
-  PreferredSizeWidget buildAppBar() {
+  PreferredSizeWidget? buildAppBar() {
     if (_view == 0){
       return const OrderViewAppBar();
     }
@@ -48,7 +49,12 @@ class _MainPageState extends State<MainPage> {
       selectedItemColor: COLOR_SECONDARY,
       unselectedItemColor: COLOR_PRIMARY,
       currentIndex: _view,
-      onTap: (selected) => setState(() => _view = selected),
+      onTap: (selected) {
+        if (ongoingOrdersBottomSheetKey.currentContext != null){
+          Navigator.of(ongoingOrdersBottomSheetKey.currentContext!).pop();
+        }
+        setState(() => _view = selected);
+      },
       items: [
         BottomNavigationBarItem(
             icon: Icon(_view == 0 ? Icons.menu_book : Icons.menu_book_outlined),

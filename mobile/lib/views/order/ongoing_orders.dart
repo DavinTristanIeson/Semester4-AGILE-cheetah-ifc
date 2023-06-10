@@ -5,13 +5,13 @@ import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
 import 'package:cheetah_mobile/helpers/providers.dart';
+import 'package:cheetah_mobile/requests/orders.dart';
 import 'package:cheetah_mobile/views/order/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/model.dart';
 import '../../helpers/styles.dart';
-import '../../requests/orders.dart';
 
 class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
   const OngoingOrdersBottomSheet({super.key});
@@ -19,11 +19,12 @@ class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
   Future<void> createNewTransaction(BuildContext context) async {
     final provider = context.read<OrdersProvider>();
     try {
-      MenuTransaction transaction = await postOrder(provider.orders);
-      provider.startTransaction(transaction);
+      await postOrder(provider.orders);
+      await currentTransactionKey.currentState!.refetch();
+      // ignore: use_build_context_synchronously
+      provider.clearOrders();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
-      currentTransactionKey.currentState!.refetch();
     } on Exception catch (e){
       sendError(context, e.toString());
     }

@@ -17,7 +17,7 @@ Future<void> setupDio() async {
       PersistCookieJar(storage: FileStorage("${directory.path}/.cookies/"));
   dio.interceptors.add(CookieManager(jar));
 
-  OptionBuilder options = OptionBuilder().setTransports(['websocket']);
+  OptionBuilder options = OptionBuilder().setTransports(['websocket']).enableForceNew().enableReconnection();
   List<Cookie> cookies = await jar.loadForRequest(Uri.http(BACKEND_HOST));
   if (cookies.isNotEmpty){
     options.setExtraHeaders({
