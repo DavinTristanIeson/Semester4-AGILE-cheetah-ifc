@@ -24,7 +24,7 @@ function createOrdersArray(orders) {
       note: order.record_note,
     });
   }
-  return Object.values(collection);
+  return Object.values(collection).reverse();
 }
 
 function createOrderObject(order) {
@@ -64,26 +64,25 @@ JOIN users \
 ON orders.account_id = users.id";
 
 function paginatedOrderQuery(condition){
-  return `SELECT \
-orders_records.id as record_id,\
+  return `SELECT
+users.name AS username, order_time, oid, status, \
+orders_records.id as record_id, \
 orders_records.name as record_name, \
 orders_records.price as record_price, \
 orders_records.note as record_note, \
-orders_records.quantity as record_quantity, \
-* \
-FROM (SELECT \
-orders.id AS oid, \
-orders.order_time, \
-orders.status AS status, \
-users.name AS username \
+orders_records.quantity as record_quantity \
+FROM ( \
+SELECT order_time, account_id, status, orders.id AS oid \
 FROM orders \
+ORDER BY orders.id DESC \
+LIMIT ? OFFSET ? \
+) \
 JOIN users \
-ON orders.account_id = users.id \
-${condition} \
-ORDER BY order_time DESC \
-LIMIT ? OFFSET ?) \
+ON account_id = users.id \
 JOIN orders_records \
-ON oid = orders_records.order_id`;
+ON oid = orders_records.order_id \
+${condition} \
+ORDER BY order_time DESC`;
 }
 
 const COUNT_QUERY = "SELECT COUNT(*) AS _total FROM orders";
@@ -130,7 +129,7 @@ router.get("/", userIsAdmin, async (req, res, next) => {
   try {
     let page = req.query.page || 1;
     const limit = 25;
-    const offset = (page - 1) * limit;
+    const offset = page * limit;
 
     const { _total: count } = await db.get(COUNT_QUERY);
     const orders = await db.all(
@@ -151,12 +150,12 @@ router.get("/", userIsAdmin, async (req, res, next) => {
 router.get("/transactions", userIsAdmin, async (req, res, next) => {
   let page = req.query.page || 1;
   const limit = 25;
-  const offset = (page - 1) * limit;
+  const offset = page * limit;
   try {
     const { _total: count } = await db.get(COUNT_QUERY + " WHERE orders.status = ?", [0]);
     const orders = await db.all(
       paginatedOrderQuery("WHERE orders.status = ?"),
-      [0, limit, offset]
+      [limit, offset, 0]
     );
     res.status(200).json({
       pages: Math.ceil(count / limit),
@@ -232,12 +231,12 @@ router.get("/history", userIsCustomer, async (req, res, next) => {
   try {
     let page = req.query.page || 1;
     const limit = 25;
-    const offset = (page - 1) * limit;
+    const offset = page * limit;
 
     const { _total: count } = await db.get(COUNT_QUERY + " WHERE account_id = ?", [req.session.user.id]);
     const orders = await db.all(
       paginatedOrderQuery("WHERE account_id = ? AND status = ?"),
-      [req.session.user.id, 0, limit, offset] // 0 = finished status
+      [limit, offset, req.session.user.id, 0] // 0 = finished status
     );
 
     res.status(200).json({

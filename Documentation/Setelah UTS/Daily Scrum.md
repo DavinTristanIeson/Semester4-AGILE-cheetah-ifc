@@ -290,20 +290,42 @@ KENDALA: -
 
 # Sprint 3 (09/06/2023 s/d 15/06/2023)
 
-## Davin Tristan Ieson
+## 09/06/2023
+
+### Davin Tristan Ieson
 - SUDAH: Memperbaiki dialog filter dan detail pesanan agar tidak menutupi layar, membuat halaman transaksi [3]
 - AKAN: Lanjut membuat halaman menunggu pesanan
 - KENDALA: Query transaksi tidak benar-benar terurut, perlu diperbaiki
 
-## Jansen Loman
+### Jansen Loman
 - SUDAH: -
 - AKAN: membuat tampilan akun
 - KENDALA:- hari ini belum sempat rencananya malam ini
 
-## Vincent Tandera
+### Vincent Tandera
 - SUDAH: -
 - AKAN: -
 - KENDALA: -
 
 ### Sisa
 11 - 3 = 8
+
+## 10/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Membuat halaman menunggu [5]
+- AKAN: Mencoba memperbaiki masalah query untuk riwayat pemesanan
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: Membuat tampilan halaman akun [1]
+- AKAN: Menambahkan fungsi2 pada halaman akun
+- KENDALA: kurangnya waktu untuk mengerjakan
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Sisa
+8 - 5 - 1 = 2

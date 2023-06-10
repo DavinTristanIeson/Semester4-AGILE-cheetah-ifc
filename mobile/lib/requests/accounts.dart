@@ -49,5 +49,5 @@ Future<Response> register(
 Future<int> getMe() async {
   const String route = "$ACCOUNT_ROUTE/me";
   final Response res = await dio.get(route);
-  return res.data!["id"];
+  return res.data["id"];
 }
