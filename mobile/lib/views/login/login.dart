@@ -26,24 +26,27 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
     if (validated == null || !validated) return;
     final form = loginFormKey.currentState?.fields;
     try {
-       await login(
-        form?["email"]?.value as String,
-        form?["password"]?.value as String
-      );
+      await login(
+          form?["email"]?.value as String, form?["password"]?.value as String);
       // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => OrdersProvider()),
-          ChangeNotifierProvider(create: (context) => MenuParamsProvider()),
-        ],
-        child: const MainPage(),
-      )));
-    } catch (e){
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MultiProvider(
+                    providers: [
+                      ChangeNotifierProvider(
+                          create: (context) => OrdersProvider()),
+                      ChangeNotifierProvider(
+                          create: (context) => MenuParamsProvider()),
+                    ],
+                    child: const MainPage(),
+                  )));
+    } catch (e) {
       sendError(context, e.toString());
     }
   }
 
-  Widget buildLoginButton(BuildContext context){
+  Widget buildLoginButton(BuildContext context) {
     return Align(
       alignment: Alignment.center,
       child: SizedBox(
@@ -60,7 +63,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
     );
   }
 
-  Widget buildRegisterBeckon(){
+  Widget buildRegisterBeckon() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -86,7 +89,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
     );
   }
 
-  Widget buildForm(BuildContext context){
+  Widget buildForm(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,11 +106,10 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
         ),
         const SizedBox(height: 40),
         TextInputField(
-          name: "email",
-          validator: isNotEmpty("Email tidak boleh kosong"),
-          label: "Email",
-          hintText: "Masukkan email anda"
-        ),
+            name: "email",
+            validator: isNotEmpty("Email tidak boleh kosong"),
+            label: "Email",
+            hintText: "Masukkan email anda"),
         const SizedBox(height: 20),
         TextInputField(
           name: "password",
@@ -126,7 +128,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.transparent,
+      backgroundColor: Colors.transparent,
       body: Align(
         alignment: Alignment.center,
         child: ListView(
