@@ -17,7 +17,7 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
   final void Function() onSwitch;
   const RegisterForm({super.key, required this.onSwitch});
 
-  Widget buildRegisterButton(BuildContext context){
+  Widget buildRegisterButton(BuildContext context) {
     return FutureButton(
       style: BUTTON_PRIMARY,
       onPressed: () async {
@@ -40,13 +40,13 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
       child: const Text('Register'),
     );
   }
-  
-  Widget buildLoginBeckon(){
+
+  Widget buildLoginBeckon() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Already have an account?',
+          'Sudah punya akun?',
           style: TextStyle(
             color: COLOR_SECONDARY,
             fontSize: 16,
@@ -54,7 +54,7 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
         ),
         TextLink(
           onPressed: onSwitch,
-          label: "Login",
+          label: "Masuk",
         )
       ],
     );
@@ -65,81 +65,77 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 50),
-              const Text(
-                'Register',
-                style: TextStyle(
-                  fontFamily: 'Josefin Sans',
-                  color: Colors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50),
+            const Text(
+              'Register',
+              style: TextStyle(
+                fontFamily: 'Josefin Sans',
+                color: Colors.white,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 20),
-              FormBuilder(
-                key: registerFormKey,
-                child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.64),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const TextInputField(
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            FormBuilder(
+              key: registerFormKey,
+              child: Container(
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.64),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const TextInputField(
                         name: "email",
                         label: "Email",
-                        validator: validateEmail, 
-                        hintText: "Masukkan email anda"
-                      ),
-                      const SizedBox(height: 20),
-                      const TextInputField(
+                        validator: validateEmail,
+                        hintText: "Masukkan email anda"),
+                    const SizedBox(height: 20),
+                    const TextInputField(
                         name: "password",
                         label: "Kata Sandi",
                         validator: validatePassword,
-                        hintText: "Masukkan kata sandi anda"
-                      ),
-                      const SizedBox(height: 20),
-                      const TextInputField(
+                        hintText: "Masukkan kata sandi anda"),
+                    const SizedBox(height: 20),
+                    const TextInputField(
                         name: "name",
                         label: "Nama",
                         validator: validateName,
-                        hintText: "Masukkan nama anda"
-                      ),
-                      const SizedBox(height: 20),
-                      const RadioInputField(
-                        name: "gender",
-                        label: "Jenis Kelamin",
-                        options: [
-                          RadioOption(true, "Male"),
-                          RadioOption(false, "Female")
-                        ],
-                        textColor: COLOR_SECONDARY,
-                        validator: validateGender,
-                      ),
-                      const SizedBox(height: 20),
-                      const TextInputField(
+                        hintText: "Masukkan nama anda"),
+                    const SizedBox(height: 20),
+                    const RadioInputField(
+                      name: "gender",
+                      label: "Jenis Kelamin",
+                      options: [
+                        RadioOption(true, "Male"),
+                        RadioOption(false, "Female")
+                      ],
+                      textColor: COLOR_SECONDARY,
+                      validator: validateGender,
+                    ),
+                    const SizedBox(height: 20),
+                    const TextInputField(
                         name: "telp",
                         label: "No. Telp",
                         validator: validatePhone,
-                        hintText: "Masukkan nomor telepon anda"
-                      ),
-                      const SizedBox(height: 20),
-                      buildLoginBeckon(),
-                      const SizedBox(height: 20),
-                      buildRegisterButton(context),
-                    ],
-                  ),
+                        hintText: "Masukkan nomor telepon anda"),
+                    const SizedBox(height: 20),
+                    buildLoginBeckon(),
+                    const SizedBox(height: 20),
+                    buildRegisterButton(context),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }
