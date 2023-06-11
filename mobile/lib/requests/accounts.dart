@@ -1,4 +1,5 @@
 import 'package:cheetah_mobile/helpers/constants.dart';
+import 'package:cheetah_mobile/helpers/model.dart';
 import 'package:cheetah_mobile/requests/setup.dart';
 import 'package:dio/dio.dart';
 
@@ -34,12 +35,23 @@ Future<Response> register(String email, String password, String name,
   } catch (e) {
     const String ERROR =
         "Gagal mendaftarkan akun. Mohon dicoba pada waktu lain.";
-    if (e is DioError) {
-      if (e.response?.statusCode != 400 || e.response?.data == null) {
-        throw Exception(ERROR);
-      }
+    if (e is DioError && e.response?.data != null) {
       final resData = e.response?.data as Map<String, dynamic>;
-      throw Exception(resData["message"]);
+      throw Exception(resData["message"] ?? ERROR);
+    } else {
+      throw Exception(ERROR);
+    }
+  }
+}
+
+Future<UserAccount> getAccount() async {
+  try {
+    final Response<Map<String, dynamic>> res = await dio.get(ACCOUNT_ROUTE);
+    return UserAccount.fromJson(res.data!);
+  } catch (e){
+    const ERROR = "Gagal mengambil informasi akun. Mohon dicoba ulang pada waktu lain.";
+    if (e is DioError && e.response?.data != null) {
+      throw Exception((e.response?.data as Map<String, dynamic>)["message"] ?? ERROR);
     } else {
       throw Exception(ERROR);
     }
@@ -53,7 +65,6 @@ Future<Response> updateAccountInfo(
     String? telp,
     String? password,
     String? verify}) async {
-  const String route = "$ACCOUNT_ROUTE";
   try {
     final data = {
       if (email != null) 'email': email,
@@ -64,16 +75,13 @@ Future<Response> updateAccountInfo(
       if (verify != null) 'verify': verify,
     };
 
-    return await dio.put(route, data: data);
+    return await dio.put(ACCOUNT_ROUTE, data: data);
   } catch (e) {
     const String ERROR =
         "Gagal memperbarui informasi akun. Mohon dicoba pada waktu lain.";
-    if (e is DioError) {
-      if (e.response?.statusCode != 400 || e.response?.data == null) {
-        throw Exception(ERROR);
-      }
+    if (e is DioError && e.response?.data != null) {
       final resData = e.response?.data as Map<String, dynamic>;
-      throw Exception(resData["message"]);
+      throw Exception(resData["message"] ?? ERROR);
     } else {
       throw Exception(ERROR);
     }
@@ -84,4 +92,22 @@ Future<int> getMe() async {
   const String route = "$ACCOUNT_ROUTE/me";
   final Response res = await dio.get(route);
   return res.data["id"];
+}
+
+Future<void> logout() async {
+  try {
+    await dio.post("$ACCOUNT_ROUTE/logout");
+  } catch (e){
+    throw Exception("Gagal logout anda dari akun. Mohon dicoba ulang pada waktu lain.");
+  }
+}
+
+Future<void> deleteAccount(String password) async {
+  try {
+    await dio.delete(ACCOUNT_ROUTE, data: <String, String>{
+      "password": password,
+    });
+  } catch (e) {
+    throw Exception("Gagal menghapus akun anda. Mohon dicoba ulang pada waktu lain.");
+  }
 }

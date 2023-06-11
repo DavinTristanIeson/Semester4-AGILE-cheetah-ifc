@@ -2,12 +2,18 @@ import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+enum InputFieldTheme {
+  Light,
+  Dark,
+}
+
 class TextInputField extends StatelessWidget {
   final String name;
   final String? Function(String?) validator;
   final String label;
   final String? hintText;
-  final Color? backgroundColor;
+  final InputFieldTheme theme;
   final String? initialValue;
   const TextInputField({
     super.key,
@@ -15,7 +21,7 @@ class TextInputField extends StatelessWidget {
     required this.label,
     required this.validator,
     this.hintText,
-    this.backgroundColor,
+    this.theme = InputFieldTheme.Dark,
     this.initialValue,
   });
 
@@ -26,8 +32,8 @@ class TextInputField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: COLOR_SECONDARY,
+          style: TextStyle(
+            color: theme == InputFieldTheme.Dark ? COLOR_SECONDARY : COLOR_DARK,
             fontSize: FS_EMPHASIS,
             fontFamily: FONT,
           ),
@@ -38,8 +44,8 @@ class TextInputField extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: FormBuilderTextField(
-            decoration: InputDecoration(
-              fillColor: backgroundColor ?? COLOR_SECONDARY,
+            decoration: const InputDecoration(
+              fillColor: COLOR_SECONDARY,
               filled: true,
               errorStyle: TEXT_INPUT_ERROR,
             ),
@@ -65,8 +71,8 @@ class RadioInputField<T> extends StatelessWidget {
   final T? initialValue;
   final String label;
   final List<RadioOption<T>> options;
-  final Color? textColor;
   final OptionsOrientation orientation;
+  final InputFieldTheme theme;
 
   const RadioInputField({
     super.key,
@@ -75,7 +81,7 @@ class RadioInputField<T> extends StatelessWidget {
     required this.label,
     required this.options,
     this.initialValue,
-    this.textColor,
+    this.theme = InputFieldTheme.Dark,
     this.orientation = OptionsOrientation.vertical
   });
 
@@ -84,8 +90,8 @@ class RadioInputField<T> extends StatelessWidget {
     return Column(
       children: [
         Text(label,
-          style: const TextStyle(
-            color: COLOR_SECONDARY,
+          style: TextStyle(
+            color: theme == InputFieldTheme.Dark ? COLOR_SECONDARY : COLOR_DARK,
             fontSize: FS_EMPHASIS,
           ),
         ),
@@ -95,6 +101,7 @@ class RadioInputField<T> extends StatelessWidget {
           validator: validator,
           initialValue: initialValue,
           orientation: orientation,
+          activeColor: theme == InputFieldTheme.Dark ? COLOR_SECONDARY : COLOR_DARK,
           decoration: const InputDecoration(
             errorStyle: TEXT_INPUT_ERROR,
           ),
@@ -102,7 +109,7 @@ class RadioInputField<T> extends StatelessWidget {
             (opt) => FormBuilderFieldOption<T>(
               value: opt.value,
               child: Text(opt.label, style: TextStyle(
-                color: textColor
+                color: theme == InputFieldTheme.Dark ? COLOR_SECONDARY : COLOR_DARK
               )),
             )
           ).toList(),

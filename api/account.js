@@ -38,7 +38,7 @@ function validateAccountPayload(requireAllFields){
         errors.push("Nama harus terdiri dari minimal 5 karakter");
       else if (!name.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/))
         errors.push(
-          "Nama hanya boleh terdiri dari huruf alfabet dan angka 0-9 saja"
+          "Nama hanya boleh terdiri dari huruf alfabet dan satu spasi antar-kata"
         );
     }
 
@@ -67,7 +67,7 @@ function createUserObject(user) {
     id: user.id,
     email: user.email,
     name: user.name,
-    gender: user.gender == 1,
+    gender: user.gender,
     telp: user.telp,
     isAdmin: false,
   };
@@ -188,6 +188,10 @@ router.delete("", userIsCustomer, async (req, res) => {
   const user = await db.get("SELECT * FROM users WHERE id = ?", [
     req.session.user.id,
   ]);
+  if (!req.body.password){
+    res.status(400).json({message: "Password tidak diisi!"});
+    return;
+  }
   if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
     res.status(401).json({ message: "Password salah!" });
     return;
@@ -196,6 +200,9 @@ router.delete("", userIsCustomer, async (req, res) => {
   try {
     await db.run("DELETE FROM users WHERE id = ?", [user.id]);
     res.status(200).json({ message: "Berhasil menghapus akun" });
+    req.session.destroy((err) => {
+      if (err) console.error(err);
+    });
   } catch (err) {
     res
       .status(500)

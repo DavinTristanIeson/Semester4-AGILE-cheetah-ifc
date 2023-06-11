@@ -12,13 +12,18 @@ String? validatePassword(String? password){
     return "Kata sandi harus terdiri dari minimal 8 karakter";
   return null;
 }
+String? validateNewPassword(String? password){
+  if (password == null || password.isEmpty)
+    return null;
+  else return validatePassword(password);
+}
 String? validateName(String? name){
   if (name == null || name.isEmpty)
     return "Nama harus diisi";
   if (name.length < 5)
     return "Nama harus terdiri dari minimal 5 karakter";
-  if (RegExp("/^[a-zA-Z]+( [a-zA-Z]+)*\$/").hasMatch(name))
-    return "Nama hanya boleh terdiri dari huruf alfabet dan angka 0-9 saja.";
+  if (!RegExp("^[a-zA-Z]+( [a-zA-Z]+)*\$").hasMatch(name))
+    return "Nama hanya boleh terdiri dari huruf alfabet dan satu spasi antar-kata.";
   return null;
 }
 String? validateGender(bool? gender){
@@ -29,7 +34,7 @@ String? validateGender(bool? gender){
 String? validatePhone(String? telp){
   if (telp == null || telp.isEmpty)
     return "No. telp harus diisi";
-  if (RegExp("/^[0-9]{10,12}\$/").hasMatch(telp))
+  if (!RegExp("^[0-9]{10,12}\$").hasMatch(telp))
     return "No. telp harus terdiri dari 10-12 angka";
   return null;
 }

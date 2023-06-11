@@ -66,10 +66,12 @@ class TextLink extends StatelessWidget {
   final void Function() onPressed;
   final String label;
   final double fontSize;
+  final Color color;
   const TextLink({
     super.key,
     required this.onPressed,
     required this.label,
+    this.color =  Colors.blue,
     this.fontSize = FS_EMPHASIS});
 
   @override
@@ -79,7 +81,7 @@ class TextLink extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          color: Colors.blue,
+          color: color,
           decoration: TextDecoration.underline,
           fontSize: fontSize,
           fontFamily: FONT,

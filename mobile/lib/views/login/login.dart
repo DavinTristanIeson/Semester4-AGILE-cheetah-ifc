@@ -26,7 +26,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
         form?["email"]?.value as String,
         form?["password"]?.value as String
       );
-      loginKey.currentState!.refetch();
+      loginKey.currentState?.refetch();
     } catch (e){
       sendError(context, e.toString());
     }

@@ -1,4 +1,5 @@
 import 'package:cheetah_mobile/helpers/keys.dart';
+import 'package:cheetah_mobile/views/account/scaffold.dart';
 import 'package:cheetah_mobile/views/order/scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,8 @@ class _MainPageState extends State<MainPage> {
   PreferredSizeWidget? buildAppBar() {
     if (_view == 0){
       return const OrderViewAppBar();
+    } else if (_view == 2){
+      return const AccountViewAppBar();
     }
     return AppBar(
         title: const Text("The Savory Spoon",

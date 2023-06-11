@@ -271,7 +271,7 @@ KENDALA: -
 
 ### Davin Tristan Ieson
 SUDAH: -
-AKAN: Mencari dan mengetes package socket.io di flutter untuk sprint selanjutnya
+AKAN: -
 KENDALA: -
 
 ### Jansen Loman

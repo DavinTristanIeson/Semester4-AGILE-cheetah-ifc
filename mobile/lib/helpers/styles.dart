@@ -7,6 +7,7 @@ final BUTTON_PRIMARY = ElevatedButton.styleFrom(
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(15),
   ),
+  textStyle: TEXT_IMPORTANT,
   disabledBackgroundColor: COLOR_PRIMARY_DARK,
   disabledForegroundColor: COLOR_PRIMARY_DARK,
 );
@@ -66,6 +67,12 @@ const TEXT_SMALL_DETAIL = TextStyle(
 const TEXT_DETAIL = TextStyle(
   fontSize: FS_DEFAULT,
   fontWeight: FontWeight.w300,
+  color: COLOR_PRIMARY,
+);
+
+const TEXT_HIGHLIGHT = TextStyle(
+  fontSize: FS_EMPHASIS,
+  fontWeight: FontWeight.w500,
   color: COLOR_PRIMARY,
 );
 

@@ -46,6 +46,11 @@ TOTAL: 25 + 4 = 29
 
 # Sprint 2 (02/06/2023 s/d 08/06/2023)
 
+### Sprint Goal
+- Agar pengguna dapat melihat dan mencari menu
+- Agar pengguna dapat memesan makanan
+- Agar pengguna dapat masuk ke dalam aplikasi
+
 ### Sprint Backlog
 *Note: [STORY POINT/PRIORITY]*
 
@@ -77,10 +82,15 @@ TOTAL: 22
 
 # Sprint 3 (09/06/2023 s/d 15/06/2023)
 
+### Sprint Goal
+- Agar pengguna dapat diinformasikan atas status pesanan mereka
+- Agar pengguna dapat melihat dan mengubah data diri mereka
+- Agar pengguna dapat melihat riwayat pemesanan mereka
+
 ### Sprint Backlog
 *Note: [STORY POINT/PRIORITY]*
 
-1.Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa diambil [5/4]
+1. Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa diambil [5/4]
 - Tampilan halaman menunggu ketika loading
 - Tampilan halaman menunggu ketika sudah selesai
 - Komunikasi realtime dengan server melalui socket.io untuk menerima status pesanan

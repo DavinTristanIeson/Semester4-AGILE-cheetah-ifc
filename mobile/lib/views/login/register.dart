@@ -37,7 +37,7 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
           sendError(context, e.toString());
         }
       },
-      child: const Text('Register'),
+      child: const Text('Register', style: TEXT_IMPORTANT),
     );
   }
 
@@ -116,7 +116,7 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
                         RadioOption(true, "Male"),
                         RadioOption(false, "Female")
                       ],
-                      textColor: COLOR_SECONDARY,
+                      theme: InputFieldTheme.Dark,
                       validator: validateGender,
                     ),
                     const SizedBox(height: 20),

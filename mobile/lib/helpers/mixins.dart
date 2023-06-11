@@ -23,4 +23,18 @@ mixin SnackbarMessenger {
       ));
     });
   }
+  void sendSuccess(BuildContext context, String message){
+    ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      messenger.showSnackBar(SnackBar(
+        content: Text(message,
+          style: const TextStyle(
+            color: COLOR_SUCCESS,
+            fontWeight: FontWeight.bold,
+          )
+        ),
+        backgroundColor: COLOR_SUCCESS_CONTAINER,
+      ));
+    });
+  }
 }
