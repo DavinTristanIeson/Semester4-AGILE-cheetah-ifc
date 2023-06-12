@@ -329,3 +329,43 @@ KENDALA: -
 
 ### Sisa
 8 - 5 - 1 = 2
+
+## 11/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Memperbaiki masalah query untuk riwayat pemesanan, memperbaiki halaman akun [1]
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: Tampilan akun [1]
+- AKAN: -
+- KENDALA: Belum menguasai package dio
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Sisa
+2 - 1 - 1 = 0
+
+## 12/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: -
+- AKAN: Memperbaiki masalah yang ditemukan Product Owner
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH : Mengecek app mobile
+- AKAN : Memberi list problem/bug di trello
+- KENDALA : Mesti pinjam laptop
+
+### Sisa
+0

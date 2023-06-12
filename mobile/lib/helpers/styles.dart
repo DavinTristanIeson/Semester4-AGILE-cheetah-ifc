@@ -61,13 +61,13 @@ const TEXT_ITEM_TITLE = TextStyle(
 const TEXT_SMALL_DETAIL = TextStyle(
   fontSize: FS_SMALL,
   fontWeight: FontWeight.w300,
-  color: COLOR_PRIMARY,
+  color: COLOR_DARK,
 );
 
 const TEXT_DETAIL = TextStyle(
   fontSize: FS_DEFAULT,
-  fontWeight: FontWeight.w300,
-  color: COLOR_PRIMARY,
+  fontWeight: FontWeight.w400,
+  color: COLOR_DARK,
 );
 
 const TEXT_HIGHLIGHT = TextStyle(

@@ -38,6 +38,7 @@ class _RequirePasswordDialogState extends State<RequirePasswordDialog> {
               border: OutlineInputBorder(),
               hintText: 'Masukkan kata sandi sekarang',
             ),
+            obscureText: true,
           ),
         ],
       ),

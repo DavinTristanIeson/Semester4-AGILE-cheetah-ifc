@@ -114,6 +114,7 @@ class AccountForm extends StatelessWidget with SnackbarMessenger {
                 label: "Kata Sandi Baru",
                 validator: validateNewPassword,
                 theme: InputFieldTheme.Light,
+                obscureText: true,
                 hintText: "Kata sandi baru"),
               const SizedBox(height: 20),
               TextInputField(
@@ -128,8 +129,8 @@ class AccountForm extends StatelessWidget with SnackbarMessenger {
                 name: "gender",
                 label: "Jenis Kelamin",
                 options: const [
-                  RadioOption(true, "Male"),
-                  RadioOption(false, "Female")
+                  RadioOption(true, "Pria"),
+                  RadioOption(false, "Wanita")
                 ],
                 theme: InputFieldTheme.Light,
                 initialValue: account.gender == Gender.Male,

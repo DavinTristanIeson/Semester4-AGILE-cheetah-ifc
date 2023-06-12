@@ -15,12 +15,16 @@ class TextInputField extends StatelessWidget {
   final String? hintText;
   final InputFieldTheme theme;
   final String? initialValue;
+  final TextInputType? keyboardType;
+  final bool obscureText;
   const TextInputField({
     super.key,
     required this.name,
     required this.label,
     required this.validator,
     this.hintText,
+    this.keyboardType,
+    this.obscureText = false,
     this.theme = InputFieldTheme.Dark,
     this.initialValue,
   });
@@ -49,6 +53,8 @@ class TextInputField extends StatelessWidget {
               filled: true,
               errorStyle: TEXT_INPUT_ERROR,
             ),
+            keyboardType: keyboardType,
+            obscureText: obscureText,
             name: name,
             initialValue: initialValue,
             validator: validator,

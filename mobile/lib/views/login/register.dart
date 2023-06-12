@@ -101,6 +101,7 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
                         name: "password",
                         label: "Kata Sandi",
                         validator: validatePassword,
+                        obscureText: true,
                         hintText: "Masukkan kata sandi anda"),
                     const SizedBox(height: 20),
                     const TextInputField(
@@ -113,8 +114,8 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
                       name: "gender",
                       label: "Jenis Kelamin",
                       options: [
-                        RadioOption(true, "Male"),
-                        RadioOption(false, "Female")
+                        RadioOption(true, "Pria"),
+                        RadioOption(false, "Wanita")
                       ],
                       theme: InputFieldTheme.Dark,
                       validator: validateGender,

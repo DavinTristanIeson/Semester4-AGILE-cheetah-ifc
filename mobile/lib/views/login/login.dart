@@ -33,18 +33,11 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
   }
 
   Widget buildLoginButton(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: SizedBox(
-        height: 42,
-        width: 200,
-        child: FutureButton(
-          onPressed: () async => await handleLogin(context),
-          child: const Text(
-            'Login',
-            style: TEXT_IMPORTANT,
-          ),
-        ),
+    return FutureButton(
+      onPressed: () async => await handleLogin(context),
+      child: const Text(
+        'Login',
+        style: TEXT_IMPORTANT,
       ),
     );
   }
@@ -102,6 +95,7 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
           validator: isNotEmpty("Kata sandi tidak boleh kosong"),
           label: "Kata Sandi",
           hintText: "Masukkan kata sandi anda",
+          obscureText: true,
         ),
         const SizedBox(height: 20),
         buildRegisterBeckon(),
