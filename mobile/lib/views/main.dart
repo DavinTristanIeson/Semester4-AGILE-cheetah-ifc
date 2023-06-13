@@ -27,11 +27,13 @@ class _MainPageState extends State<MainPage> {
     }
     return AppBar(
         title: const Text("The Savory Spoon",
-            style: TextStyle(
-              fontFamily: "JosefinSans",
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            )));
+        style: TextStyle(
+          fontFamily: "JosefinSans",
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        )
+      )
+    );
   }
 
   Widget buildView() {

@@ -1,7 +1,9 @@
 import 'package:cheetah_mobile/components/display/fields.dart';
+import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
 import 'package:cheetah_mobile/helpers/validators.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
+import 'package:cheetah_mobile/views/login/carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -113,11 +115,15 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
         alignment: Alignment.center,
         child: ListView(
           children: [
-            const SizedBox(
-              height: 50,
-            ),
-            SvgPicture.asset(
-              'assets/images/logo.svg',
+            Stack(
+              children: [
+                const LoginViewCarousel(),
+                Positioned.fill(
+                  child: SvgPicture.asset(
+                    LOGO_PATH,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             FormBuilder(

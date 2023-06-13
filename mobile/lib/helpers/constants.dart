@@ -6,6 +6,7 @@ const String API = "http://localhost:3000/api";
 const String BACKGROUND_IMAGE_PATH =
     "assets/images/pexels-igor-starkov-1307698.jpg";
 const String FALLBACK_IMAGE_PATH = "assets/images/image-not-available.jpg";
+const String LOGO_PATH = "assets/images/logo.svg";
 
 // Errors
 const String CONNECTION_ERROR =

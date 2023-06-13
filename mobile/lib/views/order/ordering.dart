@@ -58,15 +58,15 @@ class _OrderingViewState extends State<OrderingView> {
 
   Widget buildList() {
     return PagedListView<int, MenuItem>(
-        pagingController: _pagination,
-        builderDelegate: PagedChildBuilderDelegate(
-            itemBuilder: (context, item, index) => Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: GAP_SM, horizontal: GAP_LG),
-                child: MenuItemComponent(
-                  item: item,
-                  isGridView: false,
-                ))));
+      pagingController: _pagination,
+      builderDelegate: PagedChildBuilderDelegate(
+        itemBuilder: (context, item, index) => Padding(
+          padding: const EdgeInsets.symmetric(
+              vertical: GAP_SM, horizontal: GAP_LG),
+          child: MenuItemComponent(
+            item: item,
+            isGridView: false,
+          ))));
   }
 
   Widget buildGrid(BuildContext context) {

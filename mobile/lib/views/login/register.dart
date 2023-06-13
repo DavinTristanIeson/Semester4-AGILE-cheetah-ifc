@@ -6,10 +6,12 @@ import 'package:cheetah_mobile/helpers/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../components/display/interaction.dart';
 import '../../components/function/future_input.dart';
 import '../../helpers/keys.dart';
+import 'carousel.dart';
 
 final registerFormKey = GlobalKey<FormBuilderState>();
 
@@ -69,7 +71,16 @@ class RegisterForm extends StatelessWidget with SnackbarMessenger {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
+            Stack(
+              children: [
+                const LoginViewCarousel(),
+                Positioned.fill(
+                  child: SvgPicture.asset(
+                    LOGO_PATH,
+                  ),
+                ),
+              ],
+            ),
             const Text(
               'Register',
               style: TextStyle(

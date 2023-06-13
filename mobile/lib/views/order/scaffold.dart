@@ -84,7 +84,7 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
       builder: (context, data) {
         if (data.hasData){
           provider.filterCategories = data.data!;
-          return button;
+          return Tooltip(message: "Filter berdasarkan kategori", child: button);
         } else if (data.hasError){
           sendError(context, data.error.toString());
           return disabledButton;
@@ -112,11 +112,14 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
       ),
       actions: [
         buildFilterButton(context),
-        IconButton(
-          icon: provider.isGridView ?
-            const Icon(Icons.grid_3x3, color: COLOR_SECONDARY) :
-            const Icon(Icons.list, color: COLOR_SECONDARY),
-          onPressed: provider.toggleGridView,
+        Tooltip(
+          message: provider.isGridView ? "Mode List" : "Mode Grid",
+          child: IconButton(
+            icon: provider.isGridView ?
+              const Icon(Icons.list, color: COLOR_SECONDARY) :
+              const Icon(Icons.grid_3x3, color: COLOR_SECONDARY),
+            onPressed: provider.toggleGridView,
+          ),
         ),
       ],
     );
@@ -127,17 +130,20 @@ class OrderViewFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      child: const Icon(Icons.list_alt),
-      onPressed: () {
-        showBottomSheet(
-          context: context,
-          builder: (context) => ChangeNotifierProvider.value(
-            value: context.read<OrdersProvider>(),
-            child: OngoingOrdersBottomSheet(key: ongoingOrdersBottomSheetKey)
-          )
-        );
-      }
+    return Tooltip(
+      message: "Buka Pesanan Sekarang",
+      child: FloatingActionButton(
+        child: const Icon(Icons.list_alt),
+        onPressed: () {
+          showBottomSheet(
+            context: context,
+            builder: (context) => ChangeNotifierProvider.value(
+              value: context.read<OrdersProvider>(),
+              child: OngoingOrdersBottomSheet(key: ongoingOrdersBottomSheetKey)
+            )
+          );
+        }
+      ),
     );
   }
 }

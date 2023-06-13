@@ -369,3 +369,24 @@ KENDALA: -
 
 ### Sisa
 0
+
+## 13/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Memperbaiki masalah yang ditemukan Product Owner
+- AKAN: Menambah Carousel pada halaman login dan tooltip pada komponen-komponen tertentu
+- KENDALA: Kami membuat keputusan untuk menggunakan projek ini untuk nilai tugas mata kuliah Pengembangan Aplikasi Mobil Front-End. Namun tidak bisa lagi tambah komponen tanpa harus mengubah bagian backend dan frontend web.
+- SOLUSI: Semua widget yang diajarkan di mata kuliah PAMFE, namun tidak sempat digunakan, akan dilemparkan dalam satu halaman easter egg
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH : Memberi list problem/bug di Trello
+- AKAN : -
+- KENDALA : -
+
+### Sisa
+0
