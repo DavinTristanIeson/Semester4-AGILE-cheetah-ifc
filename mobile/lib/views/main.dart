@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/components/function/appbar_brand.dart';
 import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/views/account/scaffold.dart';
 import 'package:cheetah_mobile/views/order/scaffold.dart';
@@ -26,13 +27,7 @@ class _MainPageState extends State<MainPage> {
       return const AccountViewAppBar();
     }
     return AppBar(
-        title: const Text("The Savory Spoon",
-        style: TextStyle(
-          fontFamily: "JosefinSans",
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        )
-      )
+      title: const TheSavorySpoonAppBarBrand(),
     );
   }
 

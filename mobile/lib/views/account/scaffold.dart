@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/components/function/appbar_brand.dart';
 import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
@@ -12,12 +13,7 @@ class AccountViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("The Savory Spoon",
-      style: TextStyle(
-        fontFamily: "JosefinSans",
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      )),
+      title: const TheSavorySpoonAppBarBrand(),
       actions: [
         TextButton(
           onPressed: () async {

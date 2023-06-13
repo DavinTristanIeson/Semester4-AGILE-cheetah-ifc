@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/components/function/appbar_brand.dart';
 import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/keys.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
@@ -20,15 +21,6 @@ class OrderViewAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenger {
   final TextEditingController _search = TextEditingController(text: "");
-
-  Widget buildRegularTitle(){
-    return const Text("The Savory Spoon",
-        style: TextStyle(
-        fontFamily: "JosefinSans",
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-    ));
-  }
   
   Widget buildSearchTitle(BuildContext context){
     final provider = context.watch<MenuParamsProvider>();
@@ -103,9 +95,9 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
       title: Row(
         children: [
           if (MediaQuery.of(context).size.width > 768)
-            Padding(
-              padding: const EdgeInsets.only(right: GAP_LG),
-              child: buildRegularTitle()
+            const Padding(
+              padding: EdgeInsets.only(right: GAP_LG),
+              child: TheSavorySpoonAppBarBrand()
             ),
           Expanded(child: buildSearchTitle(context))
         ]
