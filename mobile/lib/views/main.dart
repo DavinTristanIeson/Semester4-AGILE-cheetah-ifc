@@ -10,6 +10,9 @@ import 'account/main.dart';
 import 'history/main.dart';
 import 'order/main.dart';
 
+/* Pertemuan 7
+- App Bar
+- Bottom Navigation Bar */
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 

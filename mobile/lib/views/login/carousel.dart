@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../components/display/image.dart';
 
+/* Pertemuan 15
+- Carousel */
 class LoginViewCarousel extends StatefulWidget {
 
   const LoginViewCarousel({super.key});

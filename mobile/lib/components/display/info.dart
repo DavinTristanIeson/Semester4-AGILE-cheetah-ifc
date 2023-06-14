@@ -38,6 +38,8 @@ class EmptyComponent extends StatelessWidget {
   }
 }
 
+/* Pertemuan 13
+- Circular Progress Indicator */
 class LoadingComponent extends StatelessWidget {
   const LoadingComponent({super.key});
 

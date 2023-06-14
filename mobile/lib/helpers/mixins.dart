@@ -2,6 +2,8 @@ import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+/* Pertemuan 10
+Snackbar */
 mixin SnackbarMessenger {
   void sendMessage(BuildContext context, String message){
     ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);

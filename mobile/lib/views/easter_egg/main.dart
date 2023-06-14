@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../helpers/constants.dart';
 
+/* Pertemuan 9
+Navigation Drawer */
 class EasterEggPage extends StatelessWidget {
   const EasterEggPage({super.key});
 

@@ -117,6 +117,12 @@ class _OrderViewAppBarState extends State<OrderViewAppBar> with SnackbarMessenge
     );
   }
 }
+
+/* Pertemuan 7
+- Floating Action Button
+
+Pertemuan 13
+- Tooltip */
 class OrderViewFAB extends StatelessWidget {
   const OrderViewFAB({super.key});
 

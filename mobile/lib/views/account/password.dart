@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../helpers/constants.dart';
 
+/* Pertemuan 3
+- Text Button
+- Text Field */
 class RequirePasswordDialog extends StatefulWidget {
   final String title;
   final String? description;

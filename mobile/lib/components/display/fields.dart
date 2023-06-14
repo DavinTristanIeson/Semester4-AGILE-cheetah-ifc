@@ -8,6 +8,8 @@ enum InputFieldTheme {
   Dark,
 }
 
+/* Pertemuan 3
+- Text Field */
 class TextInputField extends StatelessWidget {
   final String name;
   final String? Function(String?) validator;
@@ -71,6 +73,8 @@ class RadioOption<T> {
   const RadioOption(this.value, this.label);
 }
 
+/* Pertemuan 5
+- Radio Button */
 class RadioInputField<T> extends StatelessWidget {
   final String name;
   final String? Function(T?) validator;

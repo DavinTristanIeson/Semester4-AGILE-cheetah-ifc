@@ -6,6 +6,8 @@ import '../../helpers/styles.dart';
 import 'image.dart';
 import 'interaction.dart';
 
+/* Pertemuan 12
+- Card */
 class MenuCard extends StatelessWidget {
   final MenuItem item;
   final void Function()? onTap;
@@ -62,6 +64,8 @@ class MenuCard extends StatelessWidget {
   }
 }
 
+/* Pertemuan 12
+- List Tile */
 class MenuListItem extends StatelessWidget {
   final MenuItem item;
   final void Function()? onTap;

@@ -13,6 +13,17 @@ import 'package:provider/provider.dart';
 import '../../helpers/model.dart';
 import '../../helpers/styles.dart';
 
+/* Pertemuan 2
+- Column
+- Row
+- Container
+- Navigator
+
+Pertemuan 9
+- Bottom Sheets
+
+Pertemuan 10
+- List View */
 class OngoingOrdersBottomSheet extends StatelessWidget with SnackbarMessenger {
   const OngoingOrdersBottomSheet({super.key});
 

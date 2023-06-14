@@ -1,6 +1,8 @@
 import 'package:cheetah_mobile/views/easter_egg/main.dart';
 import 'package:flutter/material.dart';
 
+/* Pertemuan 2
+- Navigator */
 class TheSavorySpoonAppBarBrand extends StatelessWidget {
   const TheSavorySpoonAppBarBrand({super.key});
 

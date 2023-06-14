@@ -64,3 +64,40 @@
 ### What to START doing?
 - Scrum Master mencoba konsisten dalam waktu daily scrum, kalau kelupaan tim boleh bantu mengingatkan
 - Sprint Review/Retrospective dan Sprint Planning dikerjakan dalam 2 hari, kalau tidak memakan waktu sampai malam
+
+# Sprint 5 (02/05/2023 s/d 08/06/2023)
+
+## Sprint Review
+
+### What went well?
+- Syukur ada library socket.io di Flutter, walaupun harus downgrade versi socket.io server agar compatible
+- Produk akhirnya berhasil di cek product owner
+
+### What could be improved?
+-
+
+### What to STOP doing?
+- Jangan buat komponen baru jika sudah ada komponen yang mengerjakan hal yang sama
+
+### What to KEEP doing?
+- Pakai laptop langsung tes di kuliah biar lebih cepat dapat feedback
+
+### What to START doing?
+- Vincent mulai membantu untuk sprint selanjutnya walaupun pakai web IDE
+
+## Sprint Retrospective
+
+### What went well?
+- Memperbaiki kode anggota yang kurang
+
+### What could be improved?
+-
+
+### What to STOP doing?
+-
+
+### What to KEEP doing?
+- Sprint Review/Retrospective dan Sprint Planning tetap di hari terpisah
+
+### What to START doing?
+-

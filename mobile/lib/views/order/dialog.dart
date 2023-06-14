@@ -11,6 +11,10 @@ import '../../helpers/model.dart';
 import '../../helpers/providers.dart';
 import '../../helpers/styles.dart';
 
+/* Pertemuan 5
+- Radio List Tile
+Pertemuan 10
+- Dialog */
 class OrderFilterPopup extends StatelessWidget {
   final String? category;
   final List<String> filterCategories;
@@ -60,6 +64,11 @@ class OrderFilterPopup extends StatelessWidget {
   }
 }
 
+/* Pertemuan 10
+- Dialog
+
+Pertemuan 11
+- Divider */
 class OrderEditDialog extends StatefulWidget {
   final MenuOrder item;
   const OrderEditDialog({super.key, required this.item});

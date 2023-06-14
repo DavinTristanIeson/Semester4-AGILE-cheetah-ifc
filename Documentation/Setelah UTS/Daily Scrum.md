@@ -390,3 +390,23 @@ KENDALA: -
 
 ### Sisa
 0
+
+## 13/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Menambah Carousel pada halaman login dan tooltip pada komponen-komponen tertentu
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH : -
+- AKAN : -
+- KENDALA : -
+
+### Sisa
+0

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'model.dart';
 
+/* Pertemuan 4
+State dan Provider */
 class MenuParamsProvider extends ChangeNotifier {
   List<String> filterCategories = [];
   bool isGridView = true;
