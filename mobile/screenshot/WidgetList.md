@@ -26,6 +26,14 @@
 - RadioListTile
 (Radio tadi sudah ada di minggu3.1.png)
 
+## Minggu 6
+
+### minggu6.1.png
+- Switch
+
+### minggu6.2.png
+- Dropdown
+
 ## Minggu 7
 
 ### minggu7.png
@@ -49,6 +57,9 @@
 ### minggu10.2.png
 - Dialog
 
+### minggu10.3.png
+- Banner
+
 ## Minggu 11
 
 ### minggu11.1
@@ -70,8 +81,19 @@
 ### minggu13.1.png
 - Tooltip
 
-### minggu13.1.png
+### minggu13.2.png
 - CircularProgressIndicator
+
+### minggu13.3.png
+- Slider
+
+## Minggu 14
+
+### minggu14.2.png
+- Date Picker
+
+### minggu 14.3.png
+- Time Picker
 
 ## Minggu 15
 
@@ -80,3 +102,7 @@
 
 ### minggu15.2.jpeg
 - WebView
+
+### minggu15.3.jpeg
+- ImagePicker
+- GestureDetector

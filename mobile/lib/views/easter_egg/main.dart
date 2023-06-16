@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cheetah_mobile/components/display/image.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
 import 'package:cheetah_mobile/views/easter_egg/menu.dart';
+import 'package:cheetah_mobile/views/easter_egg/page.dart';
 import 'package:cheetah_mobile/views/easter_egg/picker.dart';
 import 'package:cheetah_mobile/views/easter_egg/tab_bar.dart';
 import 'package:cheetah_mobile/views/easter_egg/webview.dart';
@@ -43,6 +44,16 @@ class EasterEggPage extends StatelessWidget {
             onTap: () => navigator.popUntil((route) => route.isFirst),
           ),
           ListTile(
+            title: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Minggu 6, 10 & 13", style: TEXT_DEFAULT),
+                Text("Switch, Dropdown, Banner, Slider", style: TEXT_DETAIL),
+              ],
+            ),
+            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const MyPage())),
+          ),
+          ListTile(
             title: const Text("Minggu 9: Tab Bar", style: TEXT_DEFAULT),
             onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const TabBarShowcasePage())),
           ),
@@ -74,6 +85,7 @@ class EasterEggPage extends StatelessWidget {
         decoration: const BoxDecoration(
           color: COLOR_PRIMARY_DARK,
         ),
+        width: double.maxFinite,
         padding: const EdgeInsets.all(GAP_LG),
         child: const Column(
           mainAxisSize: MainAxisSize.max,

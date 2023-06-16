@@ -1,3 +1,4 @@
+import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 class MyPage extends StatefulWidget {
@@ -144,13 +145,15 @@ class _MyPageState extends State<MyPage> {
 showBanner(BuildContext context) {
   return MaterialBanner(
     content: const Text('Ini adalah contoh banner'),
+    backgroundColor: COLOR_SECONDARY,
     leading: const Icon(
       Icons.info,
       color: Colors.orange,
     ),
     actions: [
       TextButton(
-        onPressed: () {},
+        onPressed: () =>
+            ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
         child: const Text('Agree'),
       ),
       TextButton(
