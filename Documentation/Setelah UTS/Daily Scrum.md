@@ -363,9 +363,9 @@ KENDALA: -
 - KENDALA: -
 
 ### Vincent Tandera
-- SUDAH : Mengecek app mobile
-- AKAN : Memberi list problem/bug di trello
-- KENDALA : Mesti pinjam laptop
+- SUDAH: Mengecek app mobile
+- AKAN: Memberi list problem/bug di trello
+- KENDALA: Mesti pinjam laptop
 
 ### Sisa
 0
@@ -384,14 +384,14 @@ KENDALA: -
 - KENDALA: -
 
 ### Vincent Tandera
-- SUDAH : Memberi list problem/bug di Trello
-- AKAN : -
-- KENDALA : -
+- SUDAH: Memberi list problem/bug di Trello
+- AKAN: -
+- KENDALA: -
 
 ### Sisa
 0
 
-## 13/06/2023
+## 14/06/2023
 
 ### Davin Tristan Ieson
 - SUDAH: Menambah Carousel pada halaman login dan tooltip pada komponen-komponen tertentu
@@ -404,9 +404,51 @@ KENDALA: -
 - KENDALA: -
 
 ### Vincent Tandera
-- SUDAH : -
-- AKAN : -
-- KENDALA : -
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
 
 ### Sisa
 0
+
+## 15/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: -
+- AKAN: Mulai mengerjakan sprint 4
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: Mulai mengerjakan sprint 4
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: Mulai mengerjakan sprint 4
+- KENDALA: -
+
+### Sisa
+0
+
+# Sprint 4 (16/06/2023 s/d 22/06/2023)
+
+## 16/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Mengimplementasikan tab bar dan menu [2]
+- AKAN: Lanjut mengimplementasikan date/time picker, image picker, dan webview
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: Membuat satu widget dari switch, dropdown, banner, dan slider [3]
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH : -
+- AKAN : Mengimplementasikan checkbox dan chips
+- KENDALA : -
+
+### Sisa
+11 - 5 = 7

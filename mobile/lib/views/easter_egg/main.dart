@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cheetah_mobile/components/display/image.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
 import 'package:cheetah_mobile/views/easter_egg/menu.dart';
 import 'package:cheetah_mobile/views/easter_egg/picker.dart';
 import 'package:cheetah_mobile/views/easter_egg/tab_bar.dart';
+import 'package:cheetah_mobile/views/easter_egg/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,6 +54,11 @@ class EasterEggPage extends StatelessWidget {
             title: const Text("Minggu 14 & 15: Date/Time/Image Picker", style: TEXT_DEFAULT),
             onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const DateTimePickerThemes(child: PickerShowcasePage()))),
           ),
+          if (Platform.isAndroid)
+            ListTile(
+              title: const Text("Minggu 15: Web View", style: TEXT_DEFAULT),
+              onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const WebviewShowcasePage())),
+            ),
           // Tambah list tile di bawah untuk ke halaman tersendiri
         ],
       )

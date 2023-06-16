@@ -126,3 +126,5 @@ TOTAL: 11
 - Minggu 13: Slider
 - Minggu 14: Date/Time Picker
 - Minggu 15: ImagePicker, WebView
+
+TOTAL: 11

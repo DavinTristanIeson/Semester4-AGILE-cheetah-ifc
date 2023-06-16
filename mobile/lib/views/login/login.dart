@@ -3,6 +3,7 @@ import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/mixins.dart';
 import 'package:cheetah_mobile/helpers/validators.dart';
 import 'package:cheetah_mobile/requests/accounts.dart';
+import 'package:cheetah_mobile/views/easter_egg/main.dart';
 import 'package:cheetah_mobile/views/login/carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -119,8 +120,11 @@ class LoginForm extends StatelessWidget with SnackbarMessenger {
               children: [
                 const LoginViewCarousel(),
                 Positioned.fill(
-                  child: SvgPicture.asset(
-                    LOGO_PATH,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EasterEggPage())),
+                    child: SvgPicture.asset(
+                      LOGO_PATH,
+                    ),
                   ),
                 ),
               ],
