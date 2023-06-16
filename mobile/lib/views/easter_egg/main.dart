@@ -1,5 +1,7 @@
 import 'package:cheetah_mobile/components/display/image.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
+import 'package:cheetah_mobile/views/easter_egg/menu.dart';
+import 'package:cheetah_mobile/views/easter_egg/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -36,6 +38,14 @@ class EasterEggPage extends StatelessWidget {
             title: const Text("Kembali ke Beranda", style: TEXT_DEFAULT),
             onTap: () => navigator.popUntil((route) => route.isFirst),
           ),
+          ListTile(
+            title: const Text("Minggu 9: Tab Bar", style: TEXT_DEFAULT),
+            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const TabBarShowcasePage())),
+          ),
+          ListTile(
+            title: const Text("Minggu 11: Menu", style: TEXT_DEFAULT),
+            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const MenuShowcasePage())),
+          ),
           // Tambah list tile di bawah untuk ke halaman tersendiri
         ],
       )
@@ -53,6 +63,7 @@ class EasterEggPage extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(GAP_LG),
         child: const Column(
+          mainAxisSize: MainAxisSize.max,
           children: [
             Text("Selamat!", style: TextStyle(
               fontSize: FS_LARGE,

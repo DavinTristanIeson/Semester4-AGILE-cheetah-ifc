@@ -110,3 +110,19 @@ TOTAL: 22
 - Request ke backend untuk menghapus/mengedit informasi akun
 
 TOTAL: 11
+
+# Sprint 4 (16/06/2023 s/d 22/06/2023)
+
+### Sprint Goal
+- Untuk memakai widget-widget yang dipelajari di pelajaran PAMFE namun tidak dipakai di projek
+
+### Sprint Planning
+1. Sebagai dosen mata kuliah PAMFE, saya ingin siswa saya memakai widget yang dipelajari di mata kuliah PAMFE [11/1]
+- Minggu 5: Chips, Checkbox
+- Minggu 6: Switch, Dropdown
+- Minggu 9: Tabs Bar
+- Minggu 10: Banner
+- Minggu 11: Menus
+- Minggu 13: Slider
+- Minggu 14: Date/Time Picker
+- Minggu 15: ImagePicker, WebView

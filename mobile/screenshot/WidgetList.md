@@ -12,11 +12,8 @@
 - TextField
 - Radio
 - ElevatedButton
-(walaupun sudah diganti pakai widget di package flutter_form_builder, tapi widget itu kurang lebih merupakan wrapper dari widget asalnya)
-
-### minggu3.2.png
-- TextField
 - TextButton
+(walaupun sudah diganti pakai widget di package flutter_form_builder, tapi widget itu kurang lebih merupakan wrapper dari widget asalnya)
 
 ## Minggu 4
 
