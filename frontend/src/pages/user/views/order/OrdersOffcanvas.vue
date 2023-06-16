@@ -30,7 +30,7 @@ async function sendOrder(){
 }
 const rupiahFmt = Intl.NumberFormat(undefined, {currency: "IDR"});
 const hargaTotal = computed(() => {
-    const price = current.orders.reduce((acc, cur) => acc + cur.price, 0);
+    const price = current.orders.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0);
     return rupiahFmt.format(price);
 });
 </script>

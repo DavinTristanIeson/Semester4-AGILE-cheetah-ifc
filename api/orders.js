@@ -154,7 +154,7 @@ router.get("/transactions", userIsAdmin, async (req, res, next) => {
   try {
     const { _total: count } = await db.get(COUNT_QUERY + " WHERE orders.status = ?", [0]);
     const orders = await db.all(
-      paginatedOrderQuery("WHERE orders.status = ?"),
+      paginatedOrderQuery("WHERE status = ?"),
       [limit, offset, 0]
     );
     res.status(200).json({

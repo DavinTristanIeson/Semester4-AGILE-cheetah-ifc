@@ -152,7 +152,7 @@ class MenuTransactionRecord {
       required this.quantity,
       required this.note});
   String get harga {
-    return formatRupiah(price);
+    return formatRupiah(price * quantity);
   }
   factory MenuTransactionRecord.fromJson(Map<String, dynamic> json) =>
       _$MenuTransactionRecordFromJson(json);
@@ -183,7 +183,7 @@ class MenuTransaction {
 
   int get totalPrice {
     return records
-        .map((x) => x.price)
+        .map((x) => x.price * x.quantity)
         .reduce((value, element) => value + element);
   }
 

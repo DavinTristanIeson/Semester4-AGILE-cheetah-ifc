@@ -20,9 +20,6 @@ onBeforeUnmount(() => {
     socket.off("newOrder");
 });
 
-
-
-
 </script>
 
 <template>

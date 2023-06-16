@@ -36,19 +36,24 @@ function isOverAnHour(time: Date) {
     return new Date().getTime() - time.getDate() > 1 * 60 * 60 * 1000;
 }
 const chefMode = computed(() => {
-    const uniques: { [key: number]: { earliest: Date, order: MenuOrder } } = {};
+    const uniques: { [key: string]: { earliest: Date, order: MenuOrder, recipients: string[] } } = {};
     for (let ord of state.data) {
         for (let item of ord.orders) {
-            if (uniques.hasOwnProperty(item.id)) {
-                uniques[item.id].order.quantity += item.quantity;
-                uniques[item.id].order.note += '\n' + `(oleh: ${ord.username}) ${item.note}`;
-                uniques[item.id].earliest = (uniques[item.id].earliest.getTime() <= ord.time.getTime() ? uniques[item.id].earliest : ord.time);
+            console.log(uniques, item.name);
+            if (uniques.hasOwnProperty(item.name)) {
+                uniques[item.name].order.quantity += item.quantity;
+                if (!uniques[item.name].recipients.includes(ord.username)){
+                    uniques[item.name].order.note += '\n' + `(oleh: ${ord.username}) ${item.note}`;
+                    uniques[item.name].recipients.push(ord.username);
+                }
+                uniques[item.name].earliest = (uniques[item.name].earliest.getTime() <= ord.time.getTime() ? uniques[item.name].earliest : ord.time);
             } else {
-                uniques[item.id] = {
+                uniques[item.name] = {
                     order: item.copy(),
                     earliest: ord.time,
+                    recipients: [ord.username],
                 };
-                uniques[item.id].order.note = `(oleh: ${ord.username}) ${item.note}`;
+                uniques[item.name].order.note = `(oleh: ${ord.username}) ${item.note}`;
             }
         }
     }
