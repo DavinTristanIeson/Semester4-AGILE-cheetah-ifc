@@ -452,3 +452,43 @@ KENDALA: -
 
 ### Sisa
 11 - 5 = 7
+
+## 17/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Menyelesaikan implementasi data/time picker, image picker, dan webview. [6]
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH : -
+- AKAN : Mengimplementasikan checkbox dan chips
+- KENDALA : Malam baru kerjain habisnya masih diluar.
+
+### Sisa
+7 - 6 = 1
+
+## 18/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH : Menyelesaikan bagian saya (chips and checkbox) [1]
+- AKAN : -
+- KENDALA : -
+
+### Sisa
+1 - 1 = 0

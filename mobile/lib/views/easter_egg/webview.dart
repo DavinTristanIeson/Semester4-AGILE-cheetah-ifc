@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+/* Pertemuan 15
+- Web View */
 class WebviewShowcasePage extends StatefulWidget {
   const WebviewShowcasePage({super.key});
 

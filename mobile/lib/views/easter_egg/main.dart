@@ -6,6 +6,7 @@ import 'package:cheetah_mobile/views/easter_egg/menu.dart';
 import 'package:cheetah_mobile/views/easter_egg/page.dart';
 import 'package:cheetah_mobile/views/easter_egg/picker.dart';
 import 'package:cheetah_mobile/views/easter_egg/tab_bar.dart';
+import 'package:cheetah_mobile/views/easter_egg/vincent.dart';
 import 'package:cheetah_mobile/views/easter_egg/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,6 +45,10 @@ class EasterEggPage extends StatelessWidget {
             onTap: () => navigator.popUntil((route) => route.isFirst),
           ),
           ListTile(
+            title: const Text("Minggu 5: Checkbox & Chips", style: TEXT_DEFAULT),
+            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const VincentPage())),
+          ),
+          ListTile(
             title: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,7 +56,7 @@ class EasterEggPage extends StatelessWidget {
                 Text("Switch, Dropdown, Banner, Slider", style: TEXT_DETAIL),
               ],
             ),
-            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const MyPage())),
+            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const JansenPage())),
           ),
           ListTile(
             title: const Text("Minggu 9: Tab Bar", style: TEXT_DEFAULT),

@@ -2,6 +2,8 @@ import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
 import 'package:flutter/material.dart';
 
+/* Pertemuan 7
+- Tab Bar */
 class TabBarShowcasePage extends StatefulWidget {
 
   const TabBarShowcasePage({super.key});

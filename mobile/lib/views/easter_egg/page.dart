@@ -1,14 +1,23 @@
 import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
-class MyPage extends StatefulWidget {
-  const MyPage({Key? key}) : super(key: key);
+class JansenPage extends StatefulWidget {
+  const JansenPage({Key? key}) : super(key: key);
 
   @override
-  State<MyPage> createState() => _MyPageState();
+  State<JansenPage> createState() => _JansenPageState();
 }
 
-class _MyPageState extends State<MyPage> {
+/* Pertemuan 6
+- Switch
+- DropdownButton
+
+Pertemuan 10
+- Banner
+
+Pertemuan 13
+- Slider */
+class _JansenPageState extends State<JansenPage> {
   late String _selectedOption = "Opsi 1";
   bool _switchValue = false;
   double _sliderValue = 0;

@@ -6,6 +6,13 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../helpers/constants.dart';
 
+/* Pertemuan 14
+- Date Picker
+- Time Picker
+
+Pertemuan 15
+- Image Picker
+*/
 class DateTimePickerThemes extends StatelessWidget {
   final Widget child;
   const DateTimePickerThemes({super.key, required this.child});

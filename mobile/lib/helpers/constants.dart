@@ -42,4 +42,4 @@ const double FS_DEFAULT = 13.0;
 const double FS_EMPHASIS = 16.0;
 const double FS_LARGE = 20.0;
 
-const String FONT = "Josefin Sans";
+const String FONT = "JosefinSans";

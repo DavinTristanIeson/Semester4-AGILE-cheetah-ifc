@@ -26,6 +26,10 @@
 - RadioListTile
 (Radio tadi sudah ada di minggu3.1.png)
 
+### minggu5.2.png
+- CheckboxListTile
+- InputChip
+
 ## Minggu 6
 
 ### minggu6.1.png
@@ -67,6 +71,9 @@
 
 ### minggu11.2
 - List/ListView
+
+### minggu11.3
+- Menu
 
 ## Minggu 12
 
