@@ -486,9 +486,52 @@ KENDALA: -
 - KENDALA: -
 
 ### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Sisa
+0
+
+## 19/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
 - SUDAH : Menyelesaikan bagian saya (chips and checkbox) [1]
 - AKAN : -
 - KENDALA : -
 
 ### Sisa
 1 - 1 = 0
+
+
+## 20/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA:
+    - Flutter tidak bekerja di tempat Vincent jadi dia terpaksa  harus pakai compiler versi web, yang tidak memungkinkan akses pada file-file kita. Jadi kontribusi Vincent hanya terbatas pada halaman terisolasi.
+    - Vincent sama sekali belum melakukan commit apapun padahal dalam tugas Agile perlu setiap anggota commit minimal 5x.
+    - Kita kurang 1 sprint lagi untuk memenuhi syarat tugas Agile
+- SOLUSI:
+    - Tambah 1 sprint lagi untuk membuat makalah dan dokumentasi (seperti rekaman video penggunaan aplikasi), dan memberi kesempatan bagi Vincent untuk melakukan commit tanpa harus menyentuh kode projek.
