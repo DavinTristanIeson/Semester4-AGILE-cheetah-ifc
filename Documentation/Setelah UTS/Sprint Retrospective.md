@@ -1,4 +1,4 @@
-# Sprint 3 (26/05/2023 s/d 01/06/2023)
+# Sprint 1 (26/05/2023 s/d 01/06/2023)
 
 ## Sprint Review
 
@@ -24,7 +24,7 @@
 ### What to START doing?
 - Perhatikan kualitas kode ketika mengembangkan projek
 
-# Sprint 4 (26/05/2023 s/d 01/06/2023)
+# Sprint 2 (02/06/2023 s/d 08/06/2023)
 
 ## Sprint Review
 
@@ -65,7 +65,7 @@
 - Scrum Master mencoba konsisten dalam waktu daily scrum, kalau kelupaan tim boleh bantu mengingatkan
 - Sprint Review/Retrospective dan Sprint Planning dikerjakan dalam 2 hari, kalau tidak memakan waktu sampai malam
 
-# Sprint 5 (02/05/2023 s/d 08/06/2023)
+# Sprint 3 (09/06/2023 s/d 15/06/2023)
 
 ## Sprint Review
 
@@ -101,3 +101,40 @@
 
 ### What to START doing?
 -
+
+# Sprint 4 (16/06/2023 s/d 22/06/2023)
+
+## Sprint Review
+
+### What went well?
+- Hanya sedikit saja widget yg perlu diimplementasi karena kebanyakan sudah terpakai di projek
+
+### What could be improved?
+- Ada beberapa komponen yang hanya untuk tampilan saja tapi tidak benar benar ada fungsinya
+
+### What to STOP doing?
+-
+
+### What to KEEP doing?
+- Tetap pakai sebanyak mungkin widget yang dipelajari di pelajaran PAMFE (jika sesuai)
+
+### What to START doing?
+-
+
+## Sprint Retrospective
+
+### What went well?
+- Pemisahan tugas pada awal sprint membuat semua anggota tahu tugas masing-masing
+
+### What could be improved?
+- Seharusnya Vincent yang commit bagian dia daripada anggota tim lain yang commit. Walaupun filenya terisolasi dari projek, paling tidak ada terlihat perannya, dan anggota lain bisa bantu mengintegrasikannya ke projek.
+- Vincent kurang peran yang dapat diukur. Peran sebagai Product Owner dan Quality Tester tidak tampil di dalam sejarah commit.
+
+### What to STOP doing?
+- Stop melupakan waktu daily scrum dan sprint planning.
+
+### What to KEEP doing?
+- Tetap menyelesaikan sprint pada akhir minggu
+
+### What to START doing?
+- Tumpukin tugas untuk Vincent

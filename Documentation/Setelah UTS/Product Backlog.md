@@ -27,3 +27,7 @@
 7. Sebagai pelanggan, saya ingin tahu apakah pesanan saya sudah siap atau belum, agar bisa diambil.
 
 8. Sebagai pelanggan, saya ingin lihat transaksi dan pesanan saya sebelumnya.
+
+9. (EDIT: 15/06/2023) Sebagai dosen mata kuliah PAMFE, saya ingin siswa saya memakai widget yang dipelajari di mata kuliah PAMFE
+
+10. (EDIT: 27/06/2023) Sebagai investor, saya ingin melihat demonstrasi produk agar tahu garisbesar kualitas dan cara menggunakannnya

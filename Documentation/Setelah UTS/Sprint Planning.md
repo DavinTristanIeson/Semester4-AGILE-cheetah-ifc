@@ -128,3 +128,19 @@ TOTAL: 11
 - Minggu 15: ImagePicker, WebView
 
 TOTAL: 11
+
+# Sprint 5 (28/06/2023 s/d 04/07/2023)
+
+### Sprint Goal
+- Agar Vincent dapat berkontribusi dalam bentuk yang dapat diukur
+- Melakukan demonstrasi cara penggunaan aplikasi
+- Mengimplementasi widget-widget yang masih belum dipakai untuk mata kuliah PAMFE
+
+### Sprint Planning
+1. Sebagai dosen mata kuliah PAMFE, saya ingin siswa saya memakai widget yang dipelajari di mata kuliah PAMFE [11/1]
+- Implementasi CircleAvatar
+- Implementasi LinearProgressIndicator
+
+2. Sebagai investor, saya ingin melihat demonstrasi produk agar tahu garisbesar kualitas dan cara menggunakannnya [3/2]
+- Rekam video demo program web
+- Rekam video demo program mobile

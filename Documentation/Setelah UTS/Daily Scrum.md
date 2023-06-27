@@ -535,3 +535,42 @@ KENDALA: -
     - Kita kurang 1 sprint lagi untuk memenuhi syarat tugas Agile
 - SOLUSI:
     - Tambah 1 sprint lagi untuk membuat makalah dan dokumentasi (seperti rekaman video penggunaan aplikasi), dan memberi kesempatan bagi Vincent untuk melakukan commit tanpa harus menyentuh kode projek.
+
+## 21/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA:
+    - Tidak diperbolehkan membuat sprint hanya untuk membuat makalah dan dokumentasi.
+    - Vincent sedang di luar kota
+- SOLUSI:
+    - Tambah 1 sprint khusus untuk Vincent implementasi widget-widget yang masih belum dipakai dalam projek.
+    - Sprint selanjutnya ditunda sampai ketika Vincent kembali ke Medan
+
+## 22/06/2023
+
+### Davin Tristan Ieson
+- SUDAH: Melacak widget-widget apa yang bisa diimplementasikan Vincent
+- AKAN: -
+- KENDALA: -
+
+### Jansen Loman
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
+
+### Vincent Tandera
+- SUDAH: -
+- AKAN: -
+- KENDALA: -
