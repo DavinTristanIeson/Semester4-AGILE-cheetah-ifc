@@ -115,6 +115,9 @@ TOTAL: 11
 
 ### Sprint Goal
 - Untuk memakai widget-widget yang dipelajari di pelajaran PAMFE namun tidak dipakai di projek
+(EDIT 28/06/2023)
+- Agar Vincent dapat berkontribusi dalam bentuk yang dapat diukur
+- Melakukan demonstrasi cara penggunaan aplikasi
 
 ### Sprint Planning
 1. Sebagai dosen mata kuliah PAMFE, saya ingin siswa saya memakai widget yang dipelajari di mata kuliah PAMFE [11/1]
@@ -127,20 +130,13 @@ TOTAL: 11
 - Minggu 14: Date/Time Picker
 - Minggu 15: ImagePicker, WebView
 
-TOTAL: 11
 
-# Sprint 5 (28/06/2023 s/d 04/07/2023)
-
-### Sprint Goal
-- Agar Vincent dapat berkontribusi dalam bentuk yang dapat diukur
-- Melakukan demonstrasi cara penggunaan aplikasi
-- Mengimplementasi widget-widget yang masih belum dipakai untuk mata kuliah PAMFE
-
-### Sprint Planning
-1. Sebagai dosen mata kuliah PAMFE, saya ingin siswa saya memakai widget yang dipelajari di mata kuliah PAMFE [11/1]
+2. (EDIT 28/06/2023) Sebagai dosen mata kuliah PAMFE, saya ingin siswa saya memakai widget yang dipelajari di mata kuliah PAMFE [3/1]
 - Implementasi CircleAvatar
 - Implementasi LinearProgressIndicator
 
-2. Sebagai investor, saya ingin melihat demonstrasi produk agar tahu garisbesar kualitas dan cara menggunakannnya [3/2]
+3. (EDIT 28/06/2023) Sebagai investor, saya ingin melihat demonstrasi produk agar tahu garisbesar kualitas dan cara menggunakannnya [3/2]
 - Rekam video demo program web
 - Rekam video demo program mobile
+
+TOTAL: 11 + 6 = 17

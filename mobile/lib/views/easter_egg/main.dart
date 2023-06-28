@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cheetah_mobile/components/display/image.dart';
 import 'package:cheetah_mobile/helpers/styles.dart';
+import 'package:cheetah_mobile/views/easter_egg/CircleAndLinear.dart';
 import 'package:cheetah_mobile/views/easter_egg/menu.dart';
 import 'package:cheetah_mobile/views/easter_egg/page.dart';
 import 'package:cheetah_mobile/views/easter_egg/picker.dart';
@@ -65,6 +66,10 @@ class EasterEggPage extends StatelessWidget {
           ListTile(
             title: const Text("Minggu 11: Menu", style: TEXT_DEFAULT),
             onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const MenuShowcasePage())),
+          ),
+          ListTile(
+            title: const Text("Minggu 13: CircleAvatar, LinearProgressIndicator", style: TEXT_DEFAULT),
+            onTap: () => navigator.push(MaterialPageRoute(builder: (context) => const DateTimePickerThemes(child: CircleAndLinearPage()))),
           ),
           ListTile(
             title: const Text("Minggu 14 & 15: Date/Time/Image Picker", style: TEXT_DEFAULT),

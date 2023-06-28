@@ -1,6 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,9 +14,9 @@ class MyHomePage extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perrell Laquarius Brown x Morbius'),
+          title: const Text('Perrell Laquarius Brown x Morbius'),
         ),
-        body: Center(
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -42,23 +46,6 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'CircleAvatar Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
     );
   }
 }

@@ -94,6 +94,10 @@
 ### minggu13.3.png
 - Slider
 
+### minggu13.4.png
+- LinearProgressIndicator
+- CircleAvatar
+
 ## Minggu 14
 
 ### minggu14.2.png

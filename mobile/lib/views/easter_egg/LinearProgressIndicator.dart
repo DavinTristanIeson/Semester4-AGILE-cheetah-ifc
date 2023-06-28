@@ -1,26 +1,14 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stateful Flutter Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyPage(),
-    );
-  }
-}
-
 class MyPage extends StatefulWidget {
+  const MyPage({super.key});
+
   @override
-  _MyPageState createState() => _MyPageState();
+  MyPageState createState() => MyPageState();
 }
 
-class _MyPageState extends State<MyPage> {
+class MyPageState extends State<MyPage> {
   double _progress = 0.0;
 
   void _incrementProgress() {
@@ -36,7 +24,7 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stateful Flutter Page'),
+        title: const Text('Stateful Flutter Page'),
       ),
       body: Center(
         child: Column(
@@ -48,10 +36,10 @@ class _MyPageState extends State<MyPage> {
                 value: _progress,
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
-              child: Text('Increment Progress'),
               onPressed: _incrementProgress,
+              child: const Text('Increment Progress'),
             ),
           ],
         ),

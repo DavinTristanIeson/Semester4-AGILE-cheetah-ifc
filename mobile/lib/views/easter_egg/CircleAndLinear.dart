@@ -1,26 +1,16 @@
+// ignore_for_file: file_names
+
+import 'package:cheetah_mobile/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+class CircleAndLinearPage extends StatefulWidget {
+  const CircleAndLinearPage({super.key});
 
-class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stateful Flutter Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyPage(),
-    );
-  }
+  CircleAndLinearPageState createState() => CircleAndLinearPageState();
 }
 
-class MyPage extends StatefulWidget {
-  @override
-  _MyPageState createState() => _MyPageState();
-}
-
-class _MyPageState extends State<MyPage> {
+class CircleAndLinearPageState extends State<CircleAndLinearPage> {
   double _progress = 0.0;
 
   void _incrementProgress() {
@@ -35,14 +25,15 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: COLOR_SECONDARY_DARK,
       appBar: AppBar(
-        title: Text('Ambatumorb Bar Progress'),
+        title: const Text('Ambatumorb Bar Progress'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(20.0),
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
@@ -56,10 +47,10 @@ class _MyPageState extends State<MyPage> {
                 value: _progress,
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
-              child: Text('Tambah'),
               onPressed: _incrementProgress,
+              child: const Text('Tambah'),
             ),
           ],
         ),
