@@ -39,7 +39,6 @@ const chefMode = computed(() => {
     const uniques: { [key: string]: { earliest: Date, order: MenuOrder, recipients: string[] } } = {};
     for (let ord of state.data) {
         for (let item of ord.orders) {
-            console.log(uniques, item.name);
             if (uniques.hasOwnProperty(item.name)) {
                 uniques[item.name].order.quantity += item.quantity;
                 if (!uniques[item.name].recipients.includes(ord.username)){

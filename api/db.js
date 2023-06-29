@@ -1,7 +1,5 @@
-const express = require("express");
-
 const { SQLitePromise } = require("./SQLitePromise");
-const router = express.Router();
+const fs = require("fs");
 const MENU = require("./free-food-menus-api.json");
 
 async function loadMenu(db) {
@@ -50,7 +48,11 @@ async function main(db) {
   await loadMenu(db);
 }
 
-const db = new SQLitePromise("./backend.db");
+const IS_TEST_MODE = process.argv.includes("--test");
+if (IS_TEST_MODE && fs.existsSync("./test-backend.db")){
+  fs.rmSync("./test-backend.db");
+}
+const db = new SQLitePromise(IS_TEST_MODE ? "./test-backend.db" : "./backend.db");
 main(db);
 
 module.exports = db;

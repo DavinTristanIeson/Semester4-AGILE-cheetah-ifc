@@ -14,10 +14,10 @@ router.get("/categories", async (req, res, next) => {
 });
 
 const MENU_LIMIT = 25;
-router.get("", async (req, res) => {
+router.get("", async (req, res, next) => {
   const { search, page: rawPage, category } = req.query;
 
-  let page = parseInt(rawPage);
+  let page = rawPage ? parseInt(rawPage) : 0;
   if (isNaN(page)){
     res.status(400).json({message: "Page harus merupakan angka"});
     return;
@@ -41,11 +41,11 @@ router.get("", async (req, res) => {
     
     res.status(200).json(paginate(rows, MENU_LIMIT));
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     const item = await db.get("SELECT * FROM menu WHERE id = ?", id);
@@ -55,11 +55,11 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "Item not found" });
     }
   } catch (err) {
-    res.status(500).json({ message: err });
+    next(err);
   }
 });
 
-router.post("", userIsAdmin, async (req, res) => {
+router.post("", userIsAdmin, async (req, res, next) => {
   const { name, category, description, img, price } = req.body;
 
   try {
@@ -74,23 +74,22 @@ router.post("", userIsAdmin, async (req, res) => {
       res.status(500).send("Gagal menambahkan menu baru");
     }
   } catch (error) {
-    res.status(500).send("Gagal menambahkan menu baru");
+    next(error);
   }
 });
 
-router.delete("/:id", userIsAdmin, async (req, res) => {
+router.delete("/:id", userIsAdmin, async (req, res, next) => {
   const menuId = req.params.id;
 
   try {
     await db.run("DELETE FROM menu WHERE id = ?", menuId);
     res.status(200).send(`Menu dengan ID ${menuId} berhasil dihapus`);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Gagal menghapus menu");
+    next(error);
   }
 });
 
-router.put("/:id", userIsAdmin, async (req, res) => {
+router.put("/:id", userIsAdmin, async (req, res, next) => {
   const menuId = req.params.id;
   const { name, category, description, img, price } = req.body;
   try {
@@ -99,6 +98,37 @@ router.put("/:id", userIsAdmin, async (req, res) => {
       "SELECT * FROM menu WHERE id = ?",
       menuId
     );
+
+    if (!existingMenu){
+      res.status(404).json({message: "Tidak dapat menemukan item menu dengan ID " + menuId});
+      return;
+    }
+
+    if (img){
+      let url;
+      try {
+        url = new URL(rawURL);
+      } catch (e){
+        res.status(400).json({message: "Bukan URL valid"});
+        return;
+      }
+      if (
+        (url.protocol != "http:" && url.protocol != "https:") ||
+        (url.username.length > 0 || url.password.length > 0)
+      ){
+        res.status(400).json({
+          message: "Bukan URL gambar valid. URL harus dimulai dengan protokol http atau https"
+        });
+        return;
+      }
+    }
+
+    if (price && price <= 0){
+      res.status(400).json({
+        message: "Harga tidak boleh dibawah 1"
+      });
+      return;
+    }
 
     const updatedName = name || existingMenu.name;
     const updatedCategory = category || existingMenu.category;
@@ -117,10 +147,10 @@ router.put("/:id", userIsAdmin, async (req, res) => {
         menuId,
       ]
     );
-
-    res.status(200).send("Menu berhasil diperbarui");
+    const menu = await db.get("SELECT * FROM menu WHERE id = ?", [existingMenu.id]);
+    res.status(200).json(menu);
   } catch (error) {
-    res.status(500).send("Gagal memperbarui menu");
+    next(error);
   }
 });
 

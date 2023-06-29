@@ -4,15 +4,20 @@
 	"main": "index.js",
 	"devDependencies": {
 		"bcrypt": "^5.1.0",
+		"chai": "^4.3.7",
+		"chai-http": "^4.4.0",
 		"connect-sqlite3": "^0.9.13",
 		"cors": "^2.8.5",
 		"express": "^4.18.2",
 		"express-session": "^1.17.3",
+		"mocha": "^10.2.0",
 		"socket.io": "^3.0.3",
 		"sqlite3": "^5.1.4"
 	},
 	"scripts": {
-		"dev": "node index"
+		"dev": "node index",
+		"devtest": "node index --test",
+		"test": "mocha --sort"
 	},
 	"keywords": [],
 	"contributors": [

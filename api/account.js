@@ -133,8 +133,12 @@ async function loginAdmin(req, res, next) {
 router.post("/login/admin", loginAdmin);
 
 router.post("/login", async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password){
+    res.status(400).json({ message: "Email dan password harus disediakan!" });
+    return;
+  }
   try {
-    const { email, password } = req.body;
     const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       res.status(401).json({ message: "Email atau password salah!" });
@@ -154,7 +158,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res) => {
-  if (req.session) {
+  if (req.session.user) {
     req.session.destroy((err) => {
       if (err) {
         console.error(err);
@@ -218,9 +222,13 @@ router.put(
   async (req, res, next) => {
     const { email, name, gender, telp, password, verify } = req.body;
     const userId = req.session.user.id;
-
     try {
       let isPasswordMatch = true;
+      const user = await db.get("SELECT * FROM users WHERE id = ?", [userId]);
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
       if (password) {
         if (!verify) {
           res
@@ -228,16 +236,9 @@ router.put(
             .json({ message: "Harap masukkan password lama untuk verifikasi" });
           return;
         }
-
-        const user = await db.get("SELECT * FROM users WHERE id = ?", [userId]);
-        if (!user) {
-          res.status(404).json({ message: "User not found" });
-          return;
-        }
-
         isPasswordMatch = await bcrypt.compare(verify, user.password);
         if (!isPasswordMatch) {
-          res.status(400).json({ message: "Password lama tidak sesuai" });
+          res.status(401).json({ message: "Password lama tidak sesuai" });
           return;
         }
       }
@@ -281,7 +282,8 @@ router.put(
         );
       }
 
-      res.status(200).json({ message: "Akun berhasil diperbarui" });
+      const updatedUser = await db.get("SELECT * FROM users WHERE id = ?", [userId]);
+      res.status(200).json(updatedUser);
     } catch (err) {
       next(err);
     }

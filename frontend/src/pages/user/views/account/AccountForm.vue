@@ -10,7 +10,6 @@ import StatefulForm from '@/components/input/StatefulForm.vue';
 import Alert from '@/components/display/Alert.vue';
 
 const user = inject(USER_KEY)!;
-console.log(user.value);
 const pageState = inject(PAGE_STATE_KEY)!;
 
 const state = reactive({
@@ -141,7 +140,7 @@ onBeforeUnmount(() => {
         <template v-slot:footer>
             <div class="mt-4 my-2">
                 <TextInput :input="passwordInput" v-if="state.requirePassword" shouldValidate/>
-                <button class="btn btn-danger w-100 fs-5" @click="deleteAccount">Delete Akun</button>
+                <button class="btn btn-danger w-100 fs-5" @click.prevent="deleteAccount">Delete Akun</button>
             </div>
         </template>
     </StatefulForm>

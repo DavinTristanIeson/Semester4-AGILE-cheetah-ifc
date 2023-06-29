@@ -5,6 +5,7 @@ const session = require("express-session");
 const cors = require("cors");
 const SQLiteStore = require("connect-sqlite3")(session);
 const path = require("path");
+const fs = require("fs");
 
 const AccountsRouter = require("./api/account");
 const MenuRouter = require("./api/menu");
@@ -14,6 +15,8 @@ const { initialize } = require("./api/io");
 const PORT = 3000;
 const WHITELISTED_SOURCE = "http://localhost:3000";
 
+const IS_TEST_MODE = process.argv.includes("--test");
+
 app.use(
   cors({
     origin: WHITELISTED_SOURCE,
@@ -22,8 +25,13 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+if (IS_TEST_MODE && fs.existsSync("./test-sessions.db")){
+  fs.rmSync("./test-sessions.db");
+}
 const sessionMiddleware = session({
-  store: new SQLiteStore(),
+  store: new SQLiteStore({db: IS_TEST_MODE ? 'test-sessions.db' : 'sessions.db'}),
   secret: "yoursecretkey",
   resave: false,
   saveUninitialized: false,

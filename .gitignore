@@ -1,6 +1,5 @@
 node_modules
 pnpm-lock.yaml
-README.md
 .vscode
-backend.db
-sessions
+*.db
+*.db-journal
