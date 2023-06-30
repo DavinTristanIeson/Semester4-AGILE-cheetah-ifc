@@ -88,6 +88,14 @@ ORDER BY order_time DESC`;
 const COUNT_QUERY = "SELECT COUNT(*) AS _total FROM orders";
 
 router.post("/", userIsCustomer, async (req, res, next) => {
+  if (!req.body.length){
+    await res.status(400).json({message: "Pesanan harus meliputi minimal satu item makanan."});
+    return;
+  }
+  if (!req.body.every(x => x.name && x.price && x.quantity)){
+    await res.status(400).json({message: "Item pesanan harus meliputi name, price, quantity, dan note."});
+    return;
+  }
   try {
     const changed = await db.run(
       "INSERT INTO orders (account_id, order_time, status) VALUES (?, ?, 2)",
@@ -102,7 +110,7 @@ router.post("/", userIsCustomer, async (req, res, next) => {
         item.name,
         item.price,
         item.quantity,
-        item.note,
+        item.note || '',
       ]);
     }
     await stmt.finalize();
